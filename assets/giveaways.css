@@ -1,0 +1,100 @@
+.giveaway-section {
+  padding: 50px 0; }
+  .giveaway-section .giveaway-section-title {
+    text-align: center; }
+    .giveaway-section .giveaway-section-title img {
+      width: 800px;
+      margin: 0 0 25px; }
+  .giveaway-section .giveaway-intro {
+    text-align: center; }
+    .giveaway-section .giveaway-intro p {
+      font-size: 18px; }
+
+.cta-section {
+  padding: 100px 0;
+  background-size: cover;
+  background-position: center; }
+  .cta-section .cta-wrap {
+    text-align: center; }
+    .cta-section .cta-wrap img {
+      margin: 0 0 30px;
+      max-height: 200px; }
+    .cta-section .cta-wrap .extra-entries {
+      max-width: 360px;
+      display: block;
+      width: 100%;
+      margin: 20px auto 0; }
+  @media (min-width: 768px) {
+    .cta-section .cta-wrap img {
+      max-height: 300px; } }
+.collection-products .product-wrap {
+  background-color: #BCDC4F;
+  text-align: center;
+  display: block;
+  color: white;
+  padding: 5px 5px 25px;
+  margin: 2.5px; }
+  .collection-products .product-wrap h3 {
+    color: white;
+    font-weight: bold; }
+  .collection-products .product-wrap .available-flavors {
+    margin: 0 0 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px; }
+  .collection-products .product-wrap.bg-color-pre-workout {
+    background-color: #069fd6; }
+  .collection-products .product-wrap.bg-color-whey-protein {
+    background-color: #a06f46; }
+  .collection-products .product-wrap .mtnops-btn-sm {
+    background-color: rgba(255, 255, 255, 0.15); }
+  .collection-products .product-wrap:hover {
+    text-decoration: none; }
+    .collection-products .product-wrap:hover .mtnops-btn-sm {
+      background-color: rgba(255, 255, 255, 0.25); }
+
+@media (min-width: 768px) {
+  .collection-products {
+    display: flex;
+    align-items: center; } }
+
+.boundary-limit-section {
+  overflow: hidden; }
+  .boundary-limit-section .boundary-breakout {
+    margin: 0 -100px; }
+  @media (min-width: 768px) {
+    .boundary-limit-section .boundary-breakout {
+      margin: 0; } }
+.keep-hammering-truck-page .video_hero_wrap {
+  margin: 0; }
+  .keep-hammering-truck-page .video_hero_wrap .video_hero .hero-logo {
+    max-height: 275px; }
+    @media (min-width: 768px) {
+      .keep-hammering-truck-page .video_hero_wrap .video_hero .hero-logo {
+        max-height: 325px; } }
+  @media (min-width: 768px) {
+    .keep-hammering-truck-page .video_hero_wrap {
+      height: 525px; } }
+.keep-hammering-truck-page .truck-intro-wrap {
+  margin: 50px 0; }
+  .keep-hammering-truck-page .truck-intro-wrap .truck-intro {
+    text-align: center; }
+    .keep-hammering-truck-page .truck-intro-wrap .truck-intro p {
+      font-size: 19px; }
+
+.keep-hammering-truck-page .truck-entries-wrap {
+  position: relative;
+  padding: 0;
+  background-size: cover;
+  margin: 0 0 5px; }
+  .keep-hammering-truck-page .truck-entries-wrap .truck-entry-options {
+    padding: 100px 15px 50px; }
+
+.keep-hammering-truck-page .terms-section {
+  background-color: white;
+  padding: 50px 0; }
+  .keep-hammering-truck-page .terms-section .buttons-wrap .terms-conditions-trigger {
+    background-color: #ff5100; }
+  .keep-hammering-truck-page .terms-section .terms-conditions-wrap header {
+    text-align: center; }
+  .keep-hammering-truck-page .terms-section .terms-conditions-wrap h2, .keep-hammering-truck-page .terms-section .terms-conditions-wrap h3, .keep-hammering-truck-page .terms-section .terms-conditions-wrap h4, .keep-hammering-truck-page .terms-section .terms-conditions-wrap p, .keep-hammering-truck-page .terms-section .terms-conditions-wrap a {
+    color: black; }

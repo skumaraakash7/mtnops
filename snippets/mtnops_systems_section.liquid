@@ -1,0 +1,59 @@
+<div class="all-systems-section">
+	{% assign multiVars = false %}
+	{% for product in collections['systems'].products %}
+		{% if product.available %}
+
+			{% if product.variants.size > 1 %}
+				{% assign multiVars = true %}
+			{% endif %}
+      <div class="system-wrap">
+      	{% if multiVars %}
+      		<a class="link-to-system" href="https://mtnops.com/products/{{ product.handle }}">
+      	{% else %}
+        	<a class="add-system-to-cart" href="#" data-variant-id="{{ product.variants[0].id }}">
+        {% endif %}
+        	<img class="product-featured-image" src="{{ product.featured_image.src | img_url: '800x800' }}">
+        	<div>
+        		<h3>{{ product.title}}</h3>
+        		<span>{{product.price | money}}</span>
+        		<button class="mtnops-btn-sm">{% if multiVars %}View Options{% else %}Add To Cart{% endif %}</button>
+        	</div>
+        </a>
+      </div>
+    {% endif %}
+    {% assign multiVars = false %}
+  {% endfor %}
+</div>
+<script type="text/javascript">
+	  $('.add-system-to-cart').on('click', function(e) {
+	  	var id = $(this).data('variant-id');
+	  	e.preventDefault();
+	  	addItToCart(id, 1);
+	  });
+
+	  function addItToCart(product_id, quantity) {
+	    data = {
+	      "quantity": quantity,
+	      "id": product_id
+	    }
+	    jQuery.ajax({
+	      type: 'POST',
+	      url: '/cart/add.js',
+	      data: data,
+	      dataType: 'json',
+	      success: function() { 
+	        //alert('Added to cart successfully');
+	        window.location.replace("/cart");
+	      },
+	      error: function (request, status, error) {
+	        console.log(request.responseText);
+	        var code = request.responseJSON.status;
+	        //if (code == 422 ) {
+	          //$('.message').text();
+	        //}
+	        console.log("<p>" + request.responseJSON.description + "</p>");
+	        alert('Error Adding to cart');
+	      }
+	    });
+	  }
+</script>

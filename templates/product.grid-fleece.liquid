@@ -1,0 +1,305 @@
+{% include 'mtnops_tag_checker' %}
+
+{% comment %}{% if customer.email == 'jake.shaw@me.com' or customer.email == 'chris@mtnops.com' %}
+{% else %}
+
+  <p>{{product.title}} page is coming. Check back soon!</p>
+  
+{% endif %}
+{% endcomment %}
+<div class="main-page-wrapper">
+
+{% if product.metafields.meta.slim_title != blank %}
+  <div class="mtnops-slim-page-title"><h1>{{ product.metafields.meta.slim_title }}</h1></div>
+{% else %}
+  <div class="mtnops-slim-page-title"><h1>ALL-NEW {{ product.title }}!</h1></div>
+{% endif %}
+
+  <header class="product-header">
+    <div class="product-header-inner" style="background-image: url('https://cdn.shopify.com/s/files/1/2786/4584/files/Grid-Fleece-Stone-Lifestyle-Running-2-LR.jpg?v=1628631169');">
+
+      <div class="product-intro">
+        <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/grid-fleece-title.svg?v=1628634989">
+        <p><b>Introducing the MTN OPS Mid-Mountain Grid Fleece.</b> And the crowd goes wild! For good reason too. This bad to the stitch, Fleece-Masterpiece has been a top priority of ours over the past year. Rendition after rendition, and rigourous tests have got us off the bottom, now we're here. This fleece will help you buzz on past infinity and beyond, while keeping you toasty along the way. We are absolutely stoked for you to slip into one of these bad boys, flip the hood over that noggin and zip in all that glorious body heat. Like the sleeve on a hot pocket, your new Grid Fleece will trap in warmth right where it's needed most.</p>
+        <p>The All-New Grid Fleece was designed with versatility in mind. Add it to your current layering system, slip it on for a hike or trail run, pair it with your favorite skin-tight jeans for a date night with your better half. Warning you now... it will become your go-to piece in no time. Get yours today. We guarantee you'll love it.</p>
+
+        {% comment %}<div>
+          {% if isTagged %}
+            <div class="special-pricing">
+              <span id="product-price">{{ product.variants[0].price | times: discountPercentage | round: 2 | money }}</span> <del id="old-product-price">{{product.variants[0].price | money }}</del>
+            </div>
+          {% else %}
+            <span class="product-price">{{product.variants[0].price | money}}</span>
+          {% endif %}
+
+          {% if product.available %}
+            <a class="ajax_add_to_cart add-to-cart-cta add-greens" href="#" data-pid="{{ product.variants[0].id }}">Add to Cart</a>
+          {% else %}
+            <p class="coming-soon"><b>{{product.title}} IS CURRENTLY OUT OF STOCK</b></p>
+          {% endif %}
+        </div>{% endcomment %}
+      </div>
+      
+    </div>
+    <div class="product-featured-image">
+      <img class="featured_image" src="{{ product.featured_image.src | img_url: 'master' }}">
+    </div>
+  </header>
+
+  <div class="product-section">
+    {% comment %}<header>
+      <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/grid-fleece-not-just-a-hoodie.svg?v=1628638490">
+    </header>{% endcomment %}
+    <div class="product-features">
+      <ul>
+        <li>
+          <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/grid-fleece-feature-1.png?v=1628639208">
+        </li>
+        <li>
+          <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/grid-fleece-feature-2.png?v=1628639208">
+        </li>
+        <li>
+          <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/grid-fleece-feature-3-1.png?v=1628723240">
+        </li>
+        <li>
+          <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/grid-fleece-feature-4.png?v=1628639208">
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="gallery-section">
+    <div class="owl-carousel owl-theme" id="product-gallery">
+
+      <div class="item">
+        <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/grid-fleece-gallery-7.jpg?v=1628637811">
+      </div>
+      <div class="item">
+        <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/grid-fleece-gallery-6.jpg?v=1628637811">
+      </div>
+      <div class="item">
+        <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/grid-fleece-gallery-10.jpg?v=1628637811">
+      </div>
+      <div class="item">
+        <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/grid-fleece-gallery-23.jpg?v=1628637811">
+      </div>
+      <div class="item">
+        <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/grid-fleece-gallery-11.jpg?v=1628637811">
+      </div>
+      <div class="item">
+        <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/grid-fleece-gallery-13.jpg?v=1628637811">
+      </div>
+      <div class="item">
+        <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/grid-fleece-gallery-14.jpg?v=1628637811">
+      </div>
+      <div class="item">
+        <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/grid-fleece-gallery-22.jpg?v=1628637811">
+      </div>
+      <div class="item">
+        <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/grid-fleece-gallery-3.jpg?v=1628637811">
+      </div>
+      <div class="item">
+        <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/grid-fleece-gallery-15.jpg?v=1628637811">
+      </div>
+      <div class="item">
+        <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/grid-fleece-gallery-9.jpg?v=1628637811">
+      </div>
+      <div class="item">
+        <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/grid-fleece-gallery-16.jpg?v=1628637811">
+      </div>
+      <div class="item">
+        <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/grid-fleece-gallery-8.jpg?v=1628637811">
+      </div>
+      <div class="item">
+        <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/grid-fleece-gallery-5.jpg?v=1628637811">
+      </div>
+      <div class="item">
+        <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/grid-fleece-gallery-17.jpg?v=1628637811">
+      </div>
+      <div class="item">
+        <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/grid-fleece-gallery-2.jpg?v=1628637811">
+      </div>
+      <div class="item">
+        <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/grid-fleece-gallery-18.jpg?v=1628637811">
+      </div>
+      <div class="item">
+        <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/grid-fleece-gallery-19.jpg?v=1628637811">
+      </div>
+      <div class="item">
+        <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/grid-fleece-gallery-1.jpg?v=1628637811">
+      </div>
+      <div class="item">
+        <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/grid-fleece-gallery-20.jpg?v=1628637811">
+      </div>
+      <div class="item">
+        <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/grid-fleece-gallery-12.jpg?v=1628637811">
+      </div>
+      <div class="item">
+        <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/grid-fleece-gallery-4.jpg?v=1628637811">
+      </div>
+      <div class="item">
+        <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/grid-fleece-gallery-21.jpg?v=1628637811">
+      </div>
+      
+      
+    </div>
+  </div>
+
+  <div class="video-section">
+    <video poster="https://cdn.shopify.com/s/files/1/2786/4584/files/grid-fleece-vid-thumb.jpg?v=1628651866" class="vid_trailer" playsinline autoplay muted loop>
+      <source src="https://cdn.shopify.com/s/files/1/2786/4584/files/grid-fleece-vid.mp4?v=1628651866" type="video/mp4">
+      <source src="https://cdn.shopify.com/s/files/1/2786/4584/files/grid-fleece-vid.webm?v=1628651866" type="video/webm">
+      <source src="https://cdn.shopify.com/s/files/1/2786/4584/files/grid-fleece-vid.ogv?v=1628651867" type="video/ogv">
+    </video>
+    {% comment %}<div class="section-overlay">
+      <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/greens-mean-go.svg?v=1621370351">
+    </div>{% endcomment %}
+  </div>
+
+  <div class="product-section">
+    <header>
+      <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/grid-fleece-not-just-a-hoodie.svg?v=1628638490">
+    </header>
+    <img class="feature-callouts" src="https://cdn.shopify.com/s/files/1/2786/4584/files/grid-fleece-feature-callouts.png?v=1628657097">
+  </div>
+  
+  
+
+  <div class="container-fluid">
+     <div class="row">
+        <div class="site-content col-sm-12" role="main">
+          {%- include 'product_page_area' -%}
+          {% comment %}<h1>{{ product.title }}</h1>{% endcomment %}
+
+          {% comment %}<div class="product-heading">
+            {% if product.metafields.meta.product_intro != blank %}
+              <img src="{{ product.metafields.meta.product_intro }}">
+            {% endif %}
+            <p>{{ product.metafields.meta.description_excerpt }}</p>
+          </div>{% endcomment %}
+
+        </div> <!-- .site-content -->
+    </div> <!-- end row -->
+  </div> <!-- end container -->
+
+  <!-- end container -->
+
+{% comment %}  <div class="product-variations-wrap">
+  {% for v in product.variants %}
+    
+      <div class="outer-product-section product-{{ v.title | handleize }}">
+        {% if v.metafields.meta.lifestyle != blank %}
+          <div class="lifestyle-section">
+            <img src="{{ v.metafields.meta.lifestyle }}">
+          </div>
+        {% endif %}
+        <div id="buy-{{ v.title | handleize }}" class="product-section{% if v.metafields.meta.section_color == 'light' %} section-light{% endif %}">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="product-inner-wrap">
+                  <div class="featured-image-wrap">
+                    <img class="product-featured" src="{{ v.image.src | img_url: 'master' }}">
+                  </div>
+                  <div class="product-meta-wrap">
+                    {% if v.title == "IGNITE" %}
+                      {% if v.metafields.meta.section_color == 'light' %}
+                        {% assign igniteurl = 'https://cdn.shopify.com/s/files/1/2786/4584/files/IGNITE-ProductHighlight-White-Web.svg?v=1617556293' %}
+                      {% else %}
+                        {% assign igniteurl = 'https://cdn.shopify.com/s/files/1/2786/4584/files/IGNITE-ProductHighlight-Grey-Web.svg?v=1617556293' %}
+                      {% endif %}
+                      
+                      <img class="product-benefits" src="{{igniteurl}}">
+                    {% elsif v.title == "YETI" %}
+                      {% if v.metafields.meta.section_color == 'light' %}
+                        {% assign yetiurl = 'https://cdn.shopify.com/s/files/1/2786/4584/files/YETI-ProductHighlight-White-Web.svg?v=1617556294' %}
+                      {% else %}
+                        {% assign yetiurl = 'https://cdn.shopify.com/s/files/1/2786/4584/files/YETI-ProductHighlight-Grey-Web.svg?v=1617556293' %}
+                      {% endif %}
+                      <img class="product-benefits" src="{{yetiurl}}">
+                    {% elsif v.title == "ENDURO" %}
+                      {% if v.metafields.meta.section_color == 'light' %}
+                        {% assign endurourl = 'https://cdn.shopify.com/s/files/1/2786/4584/files/ENDURO-ProductHighlight-White-Web.svg?v=1617556293' %}
+                      {% else %}
+                        {% assign endurourl = 'https://cdn.shopify.com/s/files/1/2786/4584/files/ENDURO-ProductHighlight-Grey-Web.svg?v=1617556293' %}
+                      {% endif %}
+                      <img class="product-benefits" src="{{endurourl}}">
+                      
+                    {% endif %}
+                    <div>
+                      {% if isTagged %}
+                        <div class="special-pricing">
+                          <span id="product-price">{{ v.price | times: discountPercentage | round: 2 | money }}</span> <del id="old-product-price">{{v.price | money }}</del>
+                        </div>
+                      {% else %}
+                        <span class="product-price">{{v.price | money}}</span>
+                      {% endif %}
+                      {% if v.available %}
+                      <a class="ajax_add_to_cart add_to_cart_button add-to-cart-cta" href="#" data-pid="{{ v.id }}">Add to Cart</a>
+                      {% else %}
+                      <p class="coming-soon"><b>{{v.title}} IS CURRENTLY OUT OF STOCK</b></p>
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    
+  {% endfor %}
+  </div>{% endcomment %}
+
+
+  {% comment %}<div id="shopify-product-reviews" data-id="{{product.id}}">{{ product.metafields.spr.reviews }}</div>{% endcomment %}
+
+  {% comment %}<div class="extra-entries-wrap">
+    <div class="container">
+      <div class="col-xs-12">
+        <div class="bonus-entry-wrap">
+          <h3>PICK UP AN ENTRY!</h3>
+          <h4>FILL OUT THE FORM BELOW AND SIGN UP FOR OUR EMAILS</h4>
+          <div style="margin:0 auto;" class="pxFormGenerator" id="4FAmtAOPNCl-I9XhnIxYTQ"></div>
+        </div>
+      </div>
+    </div>
+  </div>{% endcomment %}
+</div><!-- .main-page-wrapper -->
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("#product-gallery").owlCarousel({
+      loop: true,
+      nav: false,
+      dots: false,
+      stagePadding: 0,
+      margin: 0,
+      autoplay: true,
+      autoplayTimeout: 4000,
+      responsive: {
+        0: {
+          items: 2
+        },
+        900: {
+          items: 4
+        },
+      }
+    });
+  }); 
+
+</script>
+
+{% comment %}<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.4/gsap.min.js"></script>
+<script type="text/javascript">
+  gsap.fromTo('.floating-fruit', 4, {scale: 1, rotation: -5}, {scale: 1.12, rotation: 5, transformOrigin:"center center", repeat: -1, yoyo: true, ease: Power1.easeInOut});
+  gsap.fromTo('.product-intro-image', 2, {scale: 1}, {scale: 1.04, transformOrigin:"center center", repeat: -1, yoyo: true, ease: Power1.easeInOut});
+  gsap.fromTo('.product-featured', 2.5, {scale: 1}, {scale: 1.02, transformOrigin:"center center", repeat: -1, yoyo: true, ease: Power1.easeInOut});
+</script>
+{% endcomment %}
+
+
+
+
+

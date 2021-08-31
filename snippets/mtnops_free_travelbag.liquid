@@ -1,0 +1,103 @@
+{% assign subscriptionCheckout = false %}
+
+{% comment %}
+  FREE TRAVEL BAG
+{% endcomment %}
+{% assign freeBag = false %}
+{% assign freeBagId = 31545007603754 %}
+{% assign travelBagAddedFromCart = false %}
+
+{% comment %}
+  GIFT CARD VARIABLES
+{% endcomment %}
+{% assign giftCard = false %}
+{% assign onlyGiftCardInCart = false %}
+
+
+{% comment %}
+  OTHER PRODUCTS
+{% endcomment %}
+{% assign otherProductsInCart = false %}
+
+
+{% for item in cart.items %}
+	{% unless item.properties == empty %}
+      {% for property in item.properties %}
+        {% if property.first == "subscription_id" %}
+          {% assign subscriptionCheckout = true %}
+        {% endif %}
+      {% endfor %}
+  {% endunless %}
+
+  {% if item.gift_card %}
+    {% assign giftCard = true %}
+
+    {% if cart.items.size == 1 %}
+      {% assign onlyGiftCardInCart = true %}
+    {% endif %}
+  {% endif %}
+
+  {% if item.variant_id == freeBagId %}
+    {% assign freeBag = true %}
+
+  {% else %}
+    {% assign otherProductsInCart = true %}
+
+  {% endif %}
+
+  {% unless item.properties == empty %}
+    {% for property in item.properties %}
+      {% if property.second == "travelbag" %}
+        {% assign travelBagAddedFromCart = true %}
+      {% endif %}
+    {% endfor %}
+  {% endunless %}
+
+{% endfor %}
+
+
+
+{% if subscriptionCheckout == false and travelBagAddedFromCart == false and otherProductsInCart and onlyGiftCardInCart == false and cart.total_price > 12500 and freeBag == false %}
+	<div class="free-travelbag-prompt">
+	  <a href="#" class="add-travelbag-to-cart">
+	  	<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/free-travel-bag-prompt.png?v=1594252202">
+	  </a>
+	</div>
+
+	<script type="text/javascript">
+
+		  $('.add-travelbag-to-cart').on('click', function(e) {
+		  	e.preventDefault();
+		  	addBagToCart('{{freeBagId}}', 1);
+		  });
+		  function addBagToCart(product_id, quantity) {
+		    data = {
+		      "quantity": quantity,
+		      "id": product_id,
+		    	properties: {
+            'gift': 'travelbag'
+          }
+		    }
+		    jQuery.ajax({
+		      type: 'POST',
+		      url: '/cart/add.js',
+		      data: data,
+		      dataType: 'json',
+		      success: function() { 
+		        //Cookies.set('freegift', true);
+		        $('.update-cart').trigger('click');
+		      },
+		      error: function (request, status, error) {
+		        console.log(request.responseText);
+		        var code = request.responseJSON.status;
+		        //if (code == 422 ) {
+		          //$('.message').text();
+		        //}
+		        console.log("<p>" + request.responseJSON.description + "</p>");
+		      }
+		    });
+		  }
+	</script>
+
+{% endif %}
+

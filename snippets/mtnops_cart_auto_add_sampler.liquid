@@ -1,0 +1,246 @@
+
+{% comment %}
+  GIFT CARD VARIABLES
+{% endcomment %}
+{% assign giftCard = false %}
+{% assign onlyGiftCardInCart = false %}
+
+{% comment %}
+  MARKETING INSERT VARIABLES
+{% endcomment %}
+
+{% assign autoAdd = false %} {% comment %}Automatically add insert/sampler to cart{% endcomment %}
+
+{% assign addInsert = false %} {% comment %}This is the switch to add the order insert or not{% endcomment %}
+{% assign insert = all_products['order-insert'] %}
+{% assign insertInCart = false %}
+{% assign insertQty = 0 %}
+
+{% comment %}
+  YETI MANGO MAYAN SAMPLER
+{% endcomment %}
+{% assign addSampler = true %}
+{% assign sampler = all_products['tiki-island-punch-ignite-sampler'] %}
+{% assign samplerInCart = false %}
+{% assign samplerQty = 0 %}
+
+
+{% comment %}
+  OTHER PRODUCTS
+{% endcomment %}
+{% assign otherProductsInCart = false %}
+
+
+{% comment %}
+  CART ITEMS LOOP
+{% endcomment %}
+
+{% for item in cart.items %}
+
+
+  {% if item.product_id == insert.id %}
+    {% assign insertInCart = true %}
+    {% assign insertQty = item.quantity %}
+
+  {% elsif item.product_id == sampler.id %}
+    {% assign samplerInCart = true %}
+    {% assign samplerQty = item.quantity %}
+
+  {% else %}
+    {% assign otherProductsInCart = true %}
+  {% endif %}
+
+
+  {% if item.gift_card %}
+    {% assign giftCard = true %}
+    {% if cart.item_count == 1 %}
+      {% assign onlyGiftCardInCart = true %}
+    {% endif %}
+  {% endif %}
+
+{% endfor %}
+
+
+
+<script type="text/javascript">
+  // INSERT AND SAMPLE
+
+  
+
+    {% if addSampler or addInsert %}
+
+      function addSampler() {
+
+        data = {
+          items: [
+            {% if insert.available and addInsert %}
+              {
+                quantity: 1,
+                id: '{{insert.variants[0].id}}',
+                properties: {
+                  'insert': 'PRODUCT EDUCATION'
+                }
+              },
+            {% endif %}
+            {% if sampler.available and addSampler %}
+              {
+                quantity: 1,
+                id: '{{sampler.variants[0].id}}',
+                properties: {
+                  'sampler': 'SAMPLE OF OUR LATEST FLAVOR!',
+                }
+              }
+            {% endif %}
+          ]
+        }
+        $.ajax({
+          type: 'POST',
+          url: '/cart/add.js',
+          data: data,
+          dataType: 'json',
+          success: function(request) {
+            console.log('added sampler to cart');
+            //var code = request.responseJSON.status;
+            //console.log(request.responseJSON.description);
+            console.log(request);
+
+              //$('.add-drinkware-to-cart').hide();
+              //$('.free-drinkware-item').not('.selected-item').hide();
+              $('.add-crush-pineapple').hide();
+              $('.add--new-product h3').html('Adding to Cart...');
+              $('.add--new-product p').html('<p class="added-success-message">Awesome! We will add it to your cart right now.</p>');
+              setTimeout(function () {
+                $('.update-cart').trigger('click');
+              }, 1800);
+
+          },
+          error: function (request, status, error) {
+            // console.log(request.responseText);
+            // var code = request.responseJSON.status;
+            // console.log(request.responseJSON.description);
+            alert('error on adding insert and sampler to your cart.');
+          }
+        });
+
+      }
+
+      
+    {% endif %}
+
+</script>
+
+{% if autoAdd %}
+
+  {% if onlyGiftCardInCart == false and sampler != empty and sampler.available and cart.item_count > 0 and cart.total_price > 200 %}
+
+    {% comment %}<script type="text/javascript">
+      console.log('availability', '{{insert.available}}', '{{sampler.available}}');
+    </script>{% endcomment %}
+
+    {% comment %}<div class="cart-banner">
+      <img class="image-show-mobile" src="https://cdn.shopify.com/s/files/1/2786/4584/files/ignite-mayan-mango-insert-sampler-cart-m.png?v=1600380351">
+      <img class="image-show-desktop" src="https://cdn.shopify.com/s/files/1/2786/4584/files/ignite-mayan-mango-insert-sampler-cart.png?v=1600380352">
+    </div>{% endcomment %}
+
+    <script type="text/javascript">
+
+      {% if insertInCart == false and samplerInCart == false %}
+        addSampler();
+      {% else %}
+        {% if insertQty > 1 %}
+          $.post('/cart/update.js', 'updates[{{insert.variants[0].id}}]=1');
+        {% endif %}
+        {% if samplerQty > 1 %}
+          $.post('/cart/update.js', 'updates[{{sampler.variants[0].id}}]=1');
+        {% endif %}
+      {% endif %}
+
+      $(document).ready(function(){
+        $('.cart_item_{{insert.variants[0].id}} a, .cart_item_{{sampler.variants[0].id}} a').removeAttr('href');
+        //$('.cart_item_{{insertId}} .shopify-Price-amount.amount').empty().append('FREE');
+        $('.cart_item_{{insert.variants[0].id}} .quantity, .cart_item_{{insert.variants[0].id}} .product-remove, .cart_item_{{sampler.variants[0].id}} .quantity, .cart_item_{{sampler.variants[0].id}} .product-remove').empty();
+        //$('.cart_item_{{insertId}}', '.cart_item_{{freeSamplerId}}').remove();  
+      });
+      
+      // {% if slumberInCart == false and addedFromCart %}
+      //   $.post('/cart/update.js', 'updates[{{freeItemVariantId}}]=0');
+      //   setTimeout(function() {
+      //     $('.update-cart').trigger('click');
+      //   }, 1000);
+      // {% endif %}
+
+    </script>
+
+    {% comment %}<style type="text/css">
+      .cart_item_{{insert.variants[0].id}}, .cart_item_{{sampler.variants[0].id}} {
+        display: none;
+      }
+    </style>{% endcomment %}
+
+
+  {% elsif samplerInCart or insertInCart and otherProductsInCart == false %}
+
+    <script type="text/javascript">
+      $.post('/cart/update.js', { 
+        updates: {
+          {% if insertInCart %}
+            '{{insert.variants[0].id}}': 0,
+          {% endif %}
+          {% if samplerInCart %}
+            '{{sampler.variants[0].id}}': 0
+          {% endif %}
+        }
+      });
+      setTimeout(function () {
+        $('.update-cart').trigger('click');
+      }, 1000);
+    </script>
+
+  {% endif %}
+
+
+{% else %}
+  {% comment %}
+
+    Ask to Add Sampler to Cart
+
+  {% endcomment %}
+
+  {% if onlyGiftCardInCart == false and sampler != empty and sampler.available and cart.item_count > 0 and cart.total_price > 200 %}
+
+    {% if insertInCart == false and samplerInCart == false %}
+
+    <a class="new--product-sampler add-new-sampler" href="#">
+      <img class="product-featured" src="{{ sampler.featured_image.src | img_url: '600x' }}">
+      <div class="add--new-product">
+        <h3>NEW FLAVOR COMING SOON!</h3>
+        <p>Try our All-New flavor of IGNITE... <b>{{sampler.title | remove: 'SAMPLER' }}</b>  is coming soon! Get your <b>Free</b> Sampler with your order!</p>
+        <button>Add To Cart</button>
+      </div>
+    </a>
+
+    <script type="text/javascript">
+      $('.add-new-sampler').on('click', function(e) {
+        e.preventDefault();
+        addSampler();
+      });
+    </script>
+
+    {% comment %}{% else %}
+
+      <script type="text/javascript">
+        {% if insertQty > 1 %}
+          $.post('/cart/update.js', 'updates[{{insert.variants[0].id}}]=1');
+        {% endif %}
+        {% if samplerQty > 1 %}
+          $.post('/cart/update.js', 'updates[{{sampler.variants[0].id}}]=1');
+        {% endif %}
+      </script>{% endcomment %}
+
+    {% endif %}
+
+  {% endif %}
+
+{% endif %}
+
+

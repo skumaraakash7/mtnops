@@ -1,0 +1,27 @@
+{% include 'mtnops_tag_checker' %}
+
+{%- case settings.design_products -%}
+   {%- when '1' -%}
+      {%- assign design_products_page = "product-design-default" -%}
+   {%- when '2' -%}
+      {%- assign design_products_page = "product-design-alt" -%}
+   {%- when '3' -%}
+      {%- assign design_products_page = "product-design-sticky" -%}
+   {%- when '4' -%}
+      {%- assign design_products_page = "product-design-compact" -%}
+   {%- endcase -%}
+
+
+<div class="main-page-wrapper">
+    <!-- MAIN CONTENT AREA -->
+      <div class="container-fluid">
+         <div class="row">
+            <div class="site-content col-sm-12" role="main">
+              {%- include 'mtnops_payload_duffel_description_area' -%}
+            </div><!-- .site-content -->
+            <div class="clearfix"></div>
+         </div><!-- end row -->
+      </div><!-- end container -->
+      <!-- end container -->
+</div><!-- .main-page-wrapper -->
+

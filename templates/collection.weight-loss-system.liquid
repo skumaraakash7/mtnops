@@ -1,0 +1,647 @@
+{% if customer.email == 'jake.shaw@me.com' or customer.email == "chris@mtnops.com" or customer.email == "mlloyd@mtnops.com" %}
+{% endif %}
+
+<script src="https://kit.fontawesome.com/87fe852ab0.js" crossorigin="anonymous"></script>
+
+{% assign crusherId = 1933082918954 %}
+{% assign crusherAvailable = false %}
+{% assign booklet = all_products['weight-loss-booklet'] %}
+
+<div class="collection-page-wrapper">
+	<div class="mtnops-slim-page-title"><h1>BUILD YOUR WEIGHT-LOSS SYSTEM</h1></div>
+	{% comment %}<div class="landing-hero" style="background-image: url('https://cdn.shopify.com/s/files/1/2786/4584/files/Weight_Loss_System-Lifestyle-Trevor--2.jpg?v=1608157410');">
+		
+		<div class="hero-overlay">
+			{%- if collection.metafields.meta.logo != blank -%}
+	      <img class="collection-logo" src="{{ collection.metafields.meta.logo }}">  
+	    {%- else -%}
+	      <h1>{{ collection.title }}</h1>
+	      {%- if collection.metafields.meta.subtitle != blank -%}
+	        <span class="h1-subtitle">{{ collection.metafields.meta.subtitle }}</span>
+	      {%- endif -%}
+	    {%- endif -%}
+		</div>
+
+	</div>{% endcomment %}
+
+	<div class="custom-collection-builder">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 col-md-6 make_it_stick">
+					<div class="system-image-wrap">
+						<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/full-wls-system.png?v=1610055008">
+						<img class="system-benefit-icons" src="https://cdn.shopify.com/s/files/1/2786/4584/files/wls-benefit-icons.svg?v=1611016925">
+					</div>
+				</div>
+				<div class="col-xs-12 col-md-6">
+					<div class="collection-form">
+
+						{% comment %}<img class="section-title" src="https://cdn.shopify.com/s/files/1/2786/4584/files/performance-fitness-intro.svg?v=1606247935">{% endcomment %}
+
+						{% comment %}{%- if collection.description != blank -%}
+				      <p>{{ collection.description }}</p>
+				    {%- endif -%}{% endcomment %}
+				    <div class="purchase-perks">
+				    	Free Shaker Bottle | Free Shipping | Free Health Consultation
+				    </div>
+				    <div class="collection-selection-wrap systems-panel">
+
+				    	<ul class="system-products">
+
+								{% for product in collection.products %}
+
+									{% assign allSystemsGo = true %}
+									{% unless product.available %}
+										{% assign allSystemsGo = false %}
+									{% endunless %}
+
+									{% if product.variants.size > 1 %}
+
+										{% unless product.id == crusherId %}
+
+											{% if product.type == 'Supplements' %}
+												{% assign label = 'Flavor' %}
+											{% else %}
+												{% assign label = 'Color' %}
+											{% endif %}
+											<li class="product-variant" data-variant-id="{{ product.id }}">
+												<img src="{{ product | img_url: '100x' }}">
+
+												<div class="product-details">
+													{%- if product.metafields.meta.titlesvg != blank -%}
+										        <img class="title-svg" src="{{ product.metafields.meta.titlesvg }}">
+										      {%- else -%}
+										      	<h3>{{ product.title }}</h3>
+										      	<span class="subtitle-h3">{{ product.metafields.meta.subtitle }}</span>
+										      {%- endif -%}
+									     	</div>
+
+									     	<div class="select-dropdown-wrap">
+										     	<a class="select-dropdown">
+										     		<span>Select {{ label }}</span>
+										     		<div class="select-icon">
+										     			<i class="fas fa-caret-down"></i>
+										     		</div>
+										     	</a>
+										     	<div class="dropdown-variants">
+										     		<ul>
+										     		{% for variant in product.variants %}
+										     			{% if variant.available %}
+										    			<li data-variant-id="{{ variant.id }}">
+										    				<a class="flavor-variant" href="#">
+										    					<span class="select-flavor bg_color_{{variant.title | handleize }}"></span>
+										    					{{ variant.title }}
+										    				</a>
+										    			</li>
+										    			{% endif %}
+										    		{% endfor %}
+										    		</ul>
+										     	</div>
+									    	</div>
+
+									     	{% comment %}<select id="product-select" name="id">
+									     		<option value="default">Select Flavor</option>
+										    	{% for variant in product.variants %}
+										    		<option value="{{ variant.id }}"><span class="swatch-on-grid bg_color_{{v.title | handleize }}"></span>{{ variant.title }}</option>
+										    	{% endfor %}
+										    </select>{% endcomment %}
+
+												{% comment %}<a class="" data-selector="{{v.title | handleize }}" data-variant-id="{{ v.id }}"></a>{% endcomment %}
+									      <i class="fad fa-spinner-third toggle-icon"></i>
+									    </li>
+
+								    {% endunless %}
+
+								  {% else %}
+
+								  	<li class="base-product" data-variant-id="{{ product.variants[0].id }}">
+								  		<img src="{{ product | img_url: '100x' }}">
+								  		
+								  		<div class="product-details">
+												{%- if product.metafields.meta.titlesvg != blank -%}
+									        <img class="title-svg" src="{{ product.metafields.meta.titlesvg }}">
+									      {%- else -%}
+									      	<h3>{{ product.title }}</h3>
+									      	<span class="subtitle-h3">{{ product.metafields.meta.subtitle }}</span>
+									      {%- endif -%}
+								     	</div>
+
+								      <i class="fas fa-check-circle toggle-icon"></i>
+										</li>
+										
+								  {% endif %}
+
+								  {% comment %}
+								  	THIS IS FOR THE OPTIONAL FREE CRUSHER BOTTLE
+								  {% endcomment %}
+
+								  {% if product.id == crusherId and product.available %}
+									  {% assign crusherVarId = 14768306946090 %}
+									  {% assign crusherAvailable = true %}
+
+										<li class="base-product" data-variant-id="{{ crusherVarId }}">
+								  		<img src="{{ product.images[0] | img_url: '100x' }}">
+								  		
+								  		<div class="product-details">
+												<h3>{{ product.title }}</h3>
+								     	</div>
+								     	<i class="fas fa-check-circle toggle-icon"></i>
+										</li>
+									{% else %}
+										{% assign allSystemsGo = false %}
+									{% endif %}
+
+									{% comment %}
+								  	END FREE CRUSHER BOTTLE
+								  {% endcomment %}
+
+								{% endfor %}
+
+							</ul>
+						</div>
+
+						<div class="optional-booklet-wrap systems-panel">
+							<div class="optional-booklet">
+								{% comment %}<img src="{{ booklet.images[1] | img_url: '100x' }}">{% endcomment %}
+					  		<div class="product-details">
+									<span>Add a free weight-loss booklet?</span>
+					     	</div>
+
+					     	<a class="add-booklet" data-variant-id="{{ booklet.variants[0].id }}">
+					     		<i class="fas fa-check-circle"></i>
+					     	</a>
+					     	<i class="fad fa-spinner-third toggle-icon"></i>
+				     </div>
+						</div>
+
+						{% comment %}{% endcomment %}
+
+						{% if allSystemsGo %}
+							<div class="system-quantity-selection systems-panel">
+								<div class="quantity-select">
+									<div class="change-supply selected" data-quantity="1">
+										<span class="saving">10% off</span>
+										<div class="supply">
+											<span>30 Day</span>
+											Supply
+										</div>
+										<small class="limited-time">LIMITED TIME SAVINGS</small>
+									</div>
+									<div class="change-supply" data-quantity="2">
+										<span class="saving">15% off</span>
+										<div class="supply">
+											<span>60 Day</span>
+											Supply
+										</div>
+									</div>
+									<div class="change-supply" data-quantity="3">
+										<span class="saving">20% off</span>
+										<div class="supply">
+											<span>90 Day</span>
+											Supply
+										</div>
+									</div>
+								</div>
+							</div>
+
+							{% comment %}{% for product in collection.products %}
+								{% unless product.id == crusherId %}
+									{{product.price | money }}
+								{% endunless %}
+							{% endfor %}{% endcomment %}
+
+
+							<div class="system-cart-actions systems-panel">
+								<div class="system-meta-wrap">
+									<div class="system-pricing">
+										<span class="sale"></span>
+										<span class="original"></span>
+									</div>
+									<div class="mo-badges">
+										<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/MoneyBackGuarantee-Blackout.png?v=1586474113">
+										<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/MadeinUSA-Dark.png?v=1586474062">
+									</div>
+								</div>
+
+								<button class="add-system-btn" disabled>Add to cart</button>
+								<span class="purchase-guarantee">Your purchase is backed by a 30-Day Satisfaction Guarantee.</span>
+								
+								
+								<div class="purchase-meta">
+									<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/conquer-hunger-sq.svg?v=1610731814">
+									<span>Your order also provides one meal for those in need through the MTN OPS Conquer Hunger Initiative.</span>
+								</div>
+							</div>
+
+						{% else %}
+							<div class="out-of-stock-message">
+								<span>{% if crusherAvailable == false %}Crusher Bottle not available.{% else %}Insufficient Stock available.{% endif %} Check back soon!</span>
+							</div>
+						{% endif %}
+						
+					</div>
+
+				</div>
+			</div>
+		</div>
+		
+{% comment %}<div class="shaker-included">
+	<img src="{{ 'fanatic-crusher-crop.png' | file_img_url: '100x' }}">
+	<span>Free Shaker Bottle with System Purchase!</span>
+</div>{% endcomment %}
+			{% comment %}{% assign productImagesArray = '' | split: '' %}
+			{% if product.variants.size == 1 %}
+				{% assign productSingleImage = product.featured_image | split: '' %}
+	    	{% assign productImagesArray = productImagesArray | concat: productSingleImage %}
+			{% endif %}
+			{{productImagesArray}}
+			{% for singleImage in productImagesArray %}
+				<li>
+					<img src="{{ singleImage | img_url: '200x' }}">
+				</li>
+			{% endfor %}{% endcomment %}
+
+	</div>
+
+	{%- include 'mtnops-reviews-weight-loss' -%}
+
+	<section class="benefit-icons-section">
+		<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/weight-loss-system-dark.svg?v=1612810914">
+		<p>{{ collection.description }}</p>
+		<img class="benefits-icons" src="https://cdn.shopify.com/s/files/1/2786/4584/files/wls-benefit-icons.svg?v=1611016925">
+	</section>
+
+	<section class="product-highlights-section">
+		<div class="product-highlights">
+			{% for product in collection.products %}
+				{% unless product.id == 1933082918954 %}
+					<div class="product-highlight {% cycle 'product-left', 'product-right' %}">
+						<div>
+							<img src="{{product.featured_image | img_url: 'master'}}">
+						</div>
+						<div>
+							<p>{{ product.metafields.meta.description_excerpt }}</p>
+						</div>
+					</div>
+				{% endunless %}
+			{% endfor %}
+		</div>
+	</section>
+
+	<div class="lifestyle-section">
+		<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/ammo-ammo_smoothie-051019_AMMO_Choc_mint-08062_6ef34c03-1e73-41e7-a393-c0afd17ef9e8.jpg?v=1608096999">
+	</div>
+
+</div>
+
+
+
+	<script type="text/javascript">
+
+		{% assign price = 0 %}
+		Shopify.queue = [];
+
+
+		{% for product in collection.products %}
+			{% assign price = price | plus: product.price %}
+			{% if product.id == crusherId %}
+				{% assign crusherPrice = product.price %}
+				// {% assign crusherId = product.variants[0].id %}
+			{% endif %}
+		{% endfor %}
+
+		var cartButton = $('.add-system-btn'),
+		totalValue = '{{ price }}',
+		totalPrice = '{{ price | minus: crusherPrice }}',
+		crusherPrice = '{{ crusherPrice }}',
+		//crusherId = {{crusherId}},
+		bookletVarId = '{{booklet.variants[0].id}}',
+		crusher = $('.crusher-addon'),
+		crusherVarId = crusher.data('variantId'),
+		bookletOption = $('.optional-booklet-wrap'),
+		bookletParent = $('.optional-booklet'),
+		collectionCount = '{{ collection.products_count }}',
+		originalEl = $('.system-cart-actions .original'),
+		saleEl = $('.system-cart-actions .sale'),
+		qtySelector = $('.system-quantity-selection .quantity-select .selected'),
+		pct = qtySelector.data('quantity') * 10,
+
+		totalValuePrice = 'a total value of $'+(totalValue/100).toFixed(2),
+		saleRaw = totalPrice * (1 - (pct/100)),
+		salePrice = '$'+(saleRaw/100).toFixed(2);
+
+		console.log(totalValue/100, totalPrice/100);
+
+		// const formatter = new Intl.NumberFormat('en-US', {
+		// 	style: 'currency',
+		// 	currency: 'USD',
+		// 	minimumFractionDigits: 2,      
+		// 	maximumFractionDigits: 2,
+		// });
+
+		//console.log(formatter.format());
+		//console.log(formatter.format(1.345));
+		
+		originalEl.html(totalValuePrice);
+		saleEl.html(salePrice);
+
+		// Base products that dont require a selection. Add to queue on page load :)
+		addBaseSystem();
+
+		function addBaseSystem() {
+			$('.base-product').each(function() {
+				var variantId = $(this).data('variant-id'),
+				qtySelector = $('.system-quantity-selection .quantity-select .selected'),
+				qty = qtySelector.data('quantity');
+
+		  	push_to_queue(variantId, qty);
+		  	$(this).addClass('ready-to-add');
+			});
+		}
+
+		function precise_round(num, decimals) {
+		  var t = Math.pow(10, decimals);   
+		   return (Math.round((num * t) + (decimals>0?1:0)*(Math.sign(num) * (10 / Math.pow(100, decimals)))) / t).toFixed(decimals);
+		}
+
+		$('.select-dropdown').on('click touchstart', function(e) {
+			e.preventDefault();
+			$(this).parent('.select-dropdown-wrap').addClass('active');
+		});
+
+		$('.dropdown-variants').hover (
+		  function() {
+		  }, function() {
+		  	$('.select-dropdown-wrap').removeClass('active');
+		  }
+		);
+
+		// selecting variants
+
+		$('.dropdown-variants ul li a').on('click', function(e) {
+			e.preventDefault();
+			var esto = $(this),
+			parentVariant = $(this).parents('.product-variant'),
+			variantId = esto.parent('li').data('variant-id'),
+			qtySelector = $('.system-quantity-selection .quantity-select .selected'),
+			qty = qtySelector.data('quantity'),
+			content = $(this).html();
+
+			push_to_queue(variantId, qty);
+
+			parentVariant.addClass('adding');
+			esto.parents('.select-dropdown-wrap').hide();
+			
+			setTimeout(function(){
+	  		parentVariant.removeClass('adding').addClass('ready-to-add');
+	  		parentVariant.append('<div class="selection-success">'+ content +'</i>');
+	  	}, 700);
+
+			if(Shopify.queue.length >= collectionCount) {
+      	cartButton.attr('disabled', false);
+      	//bookletOption.slideDown();
+      }
+		});
+
+		// booklet
+		$('.add-booklet').one('click', function(e) {
+			e.preventDefault();
+			var esto = $(this),
+			id = esto.data('variant-id');
+			//$(this).addClass('ready-to-add');
+			// $.getJSON('/cart.js', function(data) {       
+   //      console.log(data);
+   //      //openWidget();
+   //    });
+			push_to_queue(id, 1);
+			esto.hide();
+			bookletParent.addClass('adding');
+			
+			setTimeout(function(){
+	  		bookletParent.removeClass('adding');
+	  		esto.addClass('added').show();
+	  	}, 700);
+
+		});
+
+		// Changing 30-60-90 Day Supply
+
+		$('.change-supply').on('click', function(e) {
+			var quantity = $(this).data('quantity');
+			$('.change-supply').removeClass('selected');
+			$(this).addClass('selected');
+			changeQuantity(quantity);
+		});
+		function changeQuantity(qty) {
+			// Crusher in Queue Check
+			// var i = Shopify.queue.findIndex( products=> products['variantId'] === 14768306978858);
+			// crusherArray =[];
+			// crusherArray.push(i);
+			//if($.inArray(index, crusherArray) != 0) { // not found
+			//}
+
+			// Booklet in Queue check
+			var bookletIndex = Shopify.queue.findIndex( products=> products['variantId'] === bookletVarId);
+			//console.log(bookletVarId, ' in queue', bookletIndex);
+
+			$.each(Shopify.queue, function( index, value ) {
+				if(index != bookletIndex) {
+					Shopify.queue[index].quantity = qty;	
+				}
+			});
+			if (qty == 1) {
+				mathQty = 1;
+			} else if (qty == 2) {
+				mathQty = 1.5;
+			} else if (qty == 3) {
+				mathQty = 2;
+			}
+			var pct = mathQty * 10,
+			saleRaw = totalPrice * (qty * (1 - (pct/100))),
+			salePrice = '$'+(saleRaw/100).toFixed(2),
+			totalValuePriceRaw = (qty * (totalValue/100)).toFixed(2),
+			totalValuePrice = 'a total value of $'+ totalValuePriceRaw;
+
+			saleEl.html(salePrice);
+			originalEl.html(totalValuePrice);
+		}
+
+		// add to cart button
+		cartButton.on('click', function(e) {
+			e.preventDefault();
+			// add items to cart
+			if(Shopify.queue.length >= collectionCount) {
+        Shopify.moveAlong();
+      }
+		});
+
+    Shopify.moveAlong = function() {
+
+      if (Shopify.queue.length) {
+        var request = Shopify.queue.shift();
+        Shopify.addItem(request.variantId, request.quantity, Shopify.moveAlong);
+      
+      } else {
+
+      	// resetting system/collection order form
+
+      	cartButton.attr('disabled', true);
+      	$('.product-variant').removeClass('ready-to-add');
+      	$('.select-dropdown-wrap').show();
+      	$('.selection-success').remove();
+      	addBaseSystem();
+       	//console.log('added all queued items to cart');
+        $.get('/cart?view=json', function(data) {       
+          $('.widget_shopping_cart_content').html(data);
+          $('.cart-contents').html(data);
+          //openWidget();
+        });
+        $.getJSON('/cart.js', function(cart) {
+          $(".cartCount").html(cart.item_count);
+          $(".basel-cart-subtotal >span").html(Shopify.formatMoney(cart.total_price, theme.moneyFormat));
+        }).always(function() {baselThemeModule.gl_currency() });
+
+        // var openWidget = function() {
+        //   $('.website-wrapper').addClass('basel-wrapper-shifted');
+        //   $('body').addClass('basel-cart-opened');
+        // };
+
+        baselThemeModule.addToCart();
+        console.log('added all to cart!');
+      }
+    };
+    Shopify.addItem = function(id, qty, callback) {
+    	// if (id == crusherId) {
+    	// 	qty = 1;
+    	// }
+      var params = {
+        quantity: qty,
+        id: id
+        // properties: {
+        //   'offer': id
+        // }
+      };
+      $.ajax({
+        type: 'POST',
+        url: '/cart/add.js',
+        dataType: 'json',
+        data: params,
+        success: function(){
+          if(typeof callback === 'function'){
+            callback();
+          }
+          console.log(id + ' added to cart successfully.');
+        },
+        error: function(data){
+        	console.log(data.responseJSON.description);
+        	if (data.responseJSON.status == 422) {
+        		alert(data.responseJSON.description);
+        	}
+        }
+      });
+    }
+
+    function push_to_queue(variantID, quantity) {
+      Shopify.queue.push({
+        variantId: variantID,
+        quantity: quantity
+      });
+    }
+
+
+    // var image = $('.collection-image'),
+    // imageOffset = image.offset().top;
+    
+    // $(window).on('scroll', function(e) {
+    	
+    // 	var scrollPos = $(this).scrollTop();
+    // 	if(scrollPos > imageOffset) {
+    // 		//if (!image.hasClass('make_it_stick')) {
+    // 			image.parent().addClass('make_it_stick');
+    // 		//}
+    // 	} else {
+    // 		//if (image.hasClass('freeze_it')) {
+    // 			image.parent().removeClass('make_it_stick');
+    // 		//}
+    // 	}
+    // });
+
+    // $('.swatch-on-grid').on('click', function(e) {
+		//   e.preventDefault();
+		//   $(this).addClass('selected');
+		//   var variant = $(this).data('variant-id');
+		//   push_to_queue(variant, 1);
+
+		  //if ($('.merino-item').hasClass('selected')) {
+		  	//addMerinoToCart(variant, 1);
+		  // } else {
+		  // 	alert('Select a size');
+		  // }
+		  // var slang = new Array("BOOYAH", "WAMMY", "AWESOME SAUCE", "PERFECTO", "YOU GOT IT", "AH YEAH");
+		  // var title = slang[Math.floor( Math.random() * slang.length )];
+		  // var variant = $(this).data('variant-id');
+		  // $('.add-sample-to-cart').removeClass('active-sample');
+		  // $('.added-success-message').remove();
+		  // $('.add-sample-to-cart').not(this).css({opacity:.05});
+		  // $(this).addClass('active-sample');
+		  // $(this).prepend('<p class="added-success-message"><span>'+title+'!</span><br>WE WILL ADD IT TO YOUR CART.</p>');
+
+		//});
+
+		// function addMerinoToCart(product_id, quantity) {
+		//   data = {
+		//     "quantity": quantity,
+		//     "id": product_id,
+		//     properties: {
+		//       'bar': 'offer'
+		//     }
+		//   }
+		//   jQuery.ajax({
+		//     type: 'POST',
+		//     url: '/cart/add.js',
+		//     data: data,
+		//     dataType: 'json',
+		//     success: function() {
+		//       console.log('added free bar item to cart');
+		//       $('.update-cart').trigger('click');  
+		//     },
+		//     error: function (request, status, error) {
+		//       console.log(request.responseText);
+		//       var code = request.responseJSON.status;
+		//       console.log("<p>" + request.responseJSON.description + "</p>");
+		//       alert('error on adding product to cart.');
+		//     }
+		//   });
+		// }
+
+
+    // {% if insert == false %}
+    //   push_to_queue('{{insertId}}', 1);
+    // {% endif %}
+
+    // {% if sampler == false %}
+    //   push_to_queue('{{freeSamplerId}}', 1);
+    // {% endif %}
+
+
+		// $('.weight-loss-system-products select').change( function() {
+		// 	var variant = $(this).val();
+		//  	push_to_queue(variant, 1);
+		//  	$(this).hide();
+		//  	$(this).parent('li').addClass('adding');
+		//  	//$(this).before('<div class=""></div>');
+		//  	setTimeout(function(){
+		//  		console.log("added to array that will be added to cart!");
+		//  		$(this).parent('li').removeClass('adding');
+		//  		//$(this).next().hide();
+		//  		//$(this).parent('li').removeClass('adding').addClass('ready-to-add').append('<i class="fas fa-check-circle"></i>');
+		//  	}, 1500);
+		// });
+
+	</script>
+
+
+
+
+
+

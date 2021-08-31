@@ -1,0 +1,383 @@
+{% assign blockRewards = true %}
+{% include 'mtnops_rewards_checker' %}
+
+{% comment %}{% if customer.email == 'jake.shaw@me.com' %}
+  {% assign blockRewards = true %}
+{% endif %}{% endcomment %}
+
+{% if customer.tags contains "Family" or customer.tags contains "Industry" or customer.tags contains "Guide/Outfitter" or customer.tags contains "Military" or customer.tags contains "Law Enforcement" or customer.tags contains "Serviceman" or customer.tags contains "First Responder" or customer.tags contains "Firefighter" or customer.tags contains "Government" or customer.tags contains "Medical" or customer.tags contains "Teacher" or customer.tags contains "Ambassador" or customer.tags contains "ExpertVoice" or customer.tags contains "Dealer" or customer.tags contains "OpsFriend" or customer.tags contains "Trucking & Distribution" %}
+  {% assign blockRewards = true %}
+{% endif %}
+
+{% if disqualifyCart %}
+  {% assign blockRewards = true %}
+{% endif %}
+
+{% unless blockRewards %}
+
+  <script src="https://kit.fontawesome.com/87fe852ab0.js" crossorigin="anonymous"></script>
+
+  
+  {% assign rewardTiers = "" | split: " " %}
+
+  <div class="rewards-widget">
+    <header>
+      
+      {% if rewardInCart %}
+        <h3>NICE! YOUR SPEND REWARD HAS BEEN ADDED TO YOUR CART.</h3>
+      {% else %}
+        <h3>SPEND REWARDS</h3>
+        <p>ADD ITEMS TO YOUR CART TO UNLOCK THESE FREEBIES!</p>
+      {% endif %}
+      {% if widgetClass == 'cart-rewards-widget' and rewardInCart == false %}
+        <button class="rewards-toggle-btn mtnops-btn">CLAIM YOUR REWARD</button>
+      {% endif %}
+    </header>
+    
+    <div class="rewards-wrap {{widgetClass}}">
+      <ul class="rewards-list">
+      {% for product in rewardCollection %}
+
+        {% if product.available and product.metafields.meta.unlock_reward != blank %}
+
+          {% assign tier = product.metafields.meta.unlock_reward | split: " " %}
+          {% assign rewardTiers = rewardTiers | concat: tier %}
+
+          {% assign rewardUnlock = false %}
+          {% if cart.total_price > product.metafields.meta.unlock_reward %}
+            {% assign rewardUnlock = true %}
+          {% endif %}
+
+          {% capture rewardMessage %}
+            {% if rewardUnlock %}
+              {% if rewardInCart and product.id == rewardProductId %}
+                <i class="fas fa-check-circle reward--icon"></i>
+                <div class="reward-message">
+                  NICE! YOU SELECTED
+                  <span>{{product.title}}</span>
+                </div>
+              {% else %}
+                <i class="fas fa-lock-open reward--icon"></i>
+                <div class="reward-message">
+                  YOU UNLOCKED
+                  <span>{{product.title}}</span>
+                </div>
+              {% endif %}
+              
+            {% else %}
+              <i class="fas fa-lock reward--icon"></i>
+              <div class="reward-message">
+                REWARD LOCKED
+                <span>{{product.title}}</span>
+              </div>
+            {% endif %}
+
+          {% endcapture %}
+
+          {% capture spend %}
+            <div class="reward-spend"><b>SPEND {{ product.metafields.meta.unlock_reward | money_without_trailing_zeros }}+</b><br>TO UNLOCK THIS REWARD</div>
+          {% endcapture %}
+
+          {% if product.variants.size > 1 %}
+
+            <li class="product{% if rewardUnlock %} reward-unlocked{% else %} reward-locked{% endif %}{% if rewardInCart and product.id == rewardProductId %} reward-selected{% endif %}">
+              <a class="reward-item{% if rewardUnlock %} claim-reward-trigger{% endif %}" data-product-id="{{product.id}}"{% if rewardInCart %} data-variant-to-remove="{{rewardVariantId}}"{% endif %} data-index="{{forloop.index0}}">
+                
+                <div class="reward-meta">
+                  {{ rewardMessage }}
+                  <img class="reward-image" src="{{ product.images[0].src | img_url: 'master' }}">
+                  <div class="reward-value">
+                    <span>{{product.price_max | money_without_trailing_zeros }}</span> Value
+                  </div>
+                  {% if rewardUnlock %}
+                    <div class="reward-popup-{{product.id}} reward-popup-item basel-hover-quick mfp-hide">
+                      <img src="{{ product.images[0].src | img_url: 'master' }}">
+                      <div id="product-form-{{product.id}}" class="product-form">
+                        {% include 'mtnops-reward-json' %}
+                      </div>
+                    </div>
+                  {% endif %}
+                </div>
+
+                {% if rewardUnlock %}
+                  <div class="reward-hover">
+                    <span>CLAIM REWARD!</span>
+                  </div>
+                {% endif %}
+                  {{ spend }}
+              </a>
+
+              <script type="text/javascript">
+                
+                //////////////////////////////////////////////////////
+                ///////// FOR QUICK ADD OPTION
+                //////////////////////////////////////////////////////
+
+                $( document ).on('click', '#shopify_add_to_cart_quick_{{product.id}}', function(e) {
+                  e.preventDefault();
+                  var $this = $(this);
+                  $(this).attr('disabled', 'disabled').css('pointer-events', 'none').addClass('loading');
+                  
+                  var $variation_form = $('#callBackVariant_quick_{{product.id}} .variations_form');
+                  var $thisValue = $variation_form.find('#product-select-{{product.id}}').val();
+
+                  data = {
+                    "id": $thisValue,
+                    properties: {
+                      'reward': 'Free Reward Unlocked! Thank you!'
+                    }
+                  }
+
+                  $.ajax({
+                      type: 'POST',
+                      url: '/cart/add.js',
+                      data: data,
+                      //data: $this.closest('form').serialize(),
+                      dataType: 'json',
+                      success:function( cart ) {
+
+                        // This removes the previos reward from cart
+                        {% if rewardInCart %}
+                          $.post('/cart/update.js', {updates: {'{{rewardVariantId}}': 0}});
+                        {% endif %}
+
+                        reloadPage();
+                      },
+                      error: function(XMLHttpRequest, textStatus) {
+                        //baselThemeModule.onError(XMLHttpRequest, textStatus);
+                      },
+                      complete: function() {
+                        //$this.removeAttr("disabled").css('pointer-events', 'auto').removeClass("loading");
+                      }
+                  });
+                });
+
+                // reward with multi-variant
+                // $('.claim-reward-trigger-{{product.id}}').on('click', function(e) {
+                //     e.preventDefault();
+                //     btn = $(this);
+                //     //btn.addClass('loading');
+                //     //let productId = $(this).data('product-id');
+                //     //console.log(productId);
+                //     $.magnificPopup.open({
+                //       items: {
+                //         src: '.reward-popup-{{product.id}}', // can be a HTML string, jQuery object, or CSS selector
+                //         type: 'inline'
+                //       }
+                //     });
+
+                // });
+            </script>
+
+            </li>
+
+          {% else %}
+            <li class="product{% if rewardUnlock %} reward-unlocked{% else %} reward-locked{% endif %}{% if rewardInCart and product.id == rewardProductId %} reward-selected{% endif %}">
+              <a class="reward-item{% if rewardUnlock and product.id != rewardProductId %} reward-claim-single-item{% endif %}" data-product-id="{{product.id}}" data-variant-id="{{product.variants[0].id}}" data-index="{{forloop.index0}}">
+                <div class="reward-meta">
+                  {{ rewardMessage }}
+                  <img class="reward-image" src="{{ product.images[0].src | img_url: 'master' }}">
+                  <div class="reward-value">
+                    <span>{{product.price_max | money_without_trailing_zeros }}</span> Value
+                  </div>
+                </div>
+                {% if rewardUnlock and product.id != rewardProductId %}
+                  <div class="reward-hover">
+                    <span>CLAIM REWARD!</span>
+                  </div>
+                {% endif %}
+                {{ spend }}
+              </a>
+            </li>
+
+          {% endif %}
+
+        {% endif %}
+
+      {% endfor %}
+      </ul>
+    </div>
+  </div>
+
+
+    <script type="text/javascript">
+      let rewardTiers = {{ rewardTiers | split: " " }};
+
+      var reloadPage = function() {
+        setTimeout(function(){
+          {% if widgetClass == 'mini-cart-rewards-widget' %}
+            var currentValue = window.location.hash.substr(1);
+            if (currentValue != 'rewards') {
+              window.location.href += "#rewards";
+            }
+          {% endif %}
+          location.reload(true);
+        }, 500);
+      }
+
+      function removeRewardFromCart() {
+        $.post('/cart/update.js', {updates: {'{{rewardVariantId}}': 0}});
+        {% if widgetClass == 'mini-cart-rewards-widget' %}
+         
+        {% endif %}
+       var currentValue = window.location.hash.substr(1);
+        location.reload(true);
+      }
+      {% if rewardInCart and cart.total_price < rewardUnlockAmount %}
+        removeRewardFromCart();
+      {% endif %}
+
+      setTimeout(function() {
+        $('.claim-reward-trigger').on('click', function(e) {
+          e.preventDefault();
+          btn = $(this);
+          btn.addClass('loading');
+          let productId = $(this).data('product-id');
+          //console.log(productId);
+          $.magnificPopup.open({
+            items: {
+              src: '.reward-popup-'+productId, // can be a HTML string, jQuery object, or CSS selector
+              type: 'inline'
+            }
+          });
+        });
+      }, 1000);
+      // reward simple
+      $('.reward-claim-single-item').on('click', function(e) {
+        var varId = $(this).data('variant-id');
+        e.preventDefault();
+        addRewardToCart(varId, 1);
+        $(this).addClass('active');
+      });
+      function addRewardToCart(var_id, quantity) {
+        data = {
+          "quantity": quantity,
+          "id": var_id,
+          properties: {
+            'reward': 'Free Reward Unlocked! Thank you!'
+          }
+        }
+        jQuery.ajax({
+          type: 'POST',
+          url: '/cart/add.js',
+          data: data,
+          dataType: 'json',
+          success: function() { 
+
+            // This removes the previous reward from cart
+            {% if rewardInCart %}
+              $.post('/cart/update.js', {updates: {'{{rewardVariantId}}': 0}});
+            {% endif %}
+
+            reloadPage();
+
+            // $('#promo-cart-popup img, #promo-cart-popup .add-promo-item-to-cart, #promo-cart-popup p, #promo-cart-popup .cart-upsell-tier, #promo-cart-popup .prize-clause, .no-thanks, .promo-product-add-to-cart-wrap').hide();
+            // $('#promo-cart-popup h3').replaceWith('<h3>AWESOME!<br>WE ARE ADDING IT TO YOUR CART.</h3><br><h4>JUST A SEC.</h4>');
+            // //setTimeout(function(){
+            // $('.update-cart').trigger('click');  
+            // //}, 1000);
+            
+          },
+          error: function (request, status, error) {
+            console.log(request.responseText);
+            var code = request.responseJSON.status;
+            //if (code == 422 ) {
+              //$('.message').text();
+            //}
+            console.log("<p>" + request.responseJSON.description + "</p>");
+            alert('error on adding product to cart.');
+          }
+        });
+      }
+
+      {% if widgetClass == 'cart-rewards-widget' %}
+        $('.rewards-toggle-btn').on('click', function(e) {
+          $('.rewards-wrap').slideToggle();
+        });
+      {% endif %}
+      {% if widgetClass == 'mini-cart-rewards-widget' or widgetClass == 'upsell-rewards-widget' %}
+        var rewardUnlockAmount = 0,
+            rewardProductId = 0,
+            index = 0,
+            rewardVariantId = 0;
+
+        {% if rewardInCart %}
+          var rewardUnlockAmount = {{rewardUnlockAmount}},
+              rewardProductId = {{rewardProductId}},
+              rewardVariantId = {{rewardVariantId}};
+
+          $('.reward-item').each( function() {
+           if($(this).data('product-id') == rewardProductId) {
+              index = $(this).data('index') + 1;
+           }
+          });
+        {% endif %}
+        //console.log('Current reward amount:', rewardUnlockAmount);
+        var currentValue = window.location.hash.substr(1);
+        if(currentValue == 'rewards') {
+          setTimeout( function() {
+            openMiniCartWidget();
+          }, 250);
+        }
+        var openMiniCartWidget = function() {
+          $('.website-wrapper').addClass('basel-wrapper-shifted');
+          $('body').addClass('basel-cart-opened');
+          var scrollTo = $('.total').offset().top;
+          $('.cart-widget-side').scrollTop(scrollTo);
+          // setTimeout( function() {
+          //   //$('.cart-widget-side').animate({ scrollTop: 0 });
+          //   closeMiniCartWidget();
+          // }, 5000);
+          
+        };
+        var closeMiniCartWidget = function() {
+          $('.website-wrapper').removeClass('basel-wrapper-shifted');
+          $('body').removeClass('basel-cart-opened');
+        };
+
+
+        var variantInCart = false;
+        $( document ).on( 'change keyup click', '.custom-qty, .cart__popup-qty--input, .remove', function() {
+          //console.log('changes in mini cart');
+          setTimeout( function() {
+            // if(rewardUnlockAmount != 0) {
+            //   $.post('/cart/update.js', {updates: {'{{rewardVariantId}}': 0}});  
+            // }
+            $.getJSON("/cart.js", function(cart) {
+
+              // {% if customer.email == 'jake.shaw@me.com' %}
+              //   console.log('mini cart changes from cart.js', cart);
+              // {% endif %}
+
+              // if cart is less than tier, remove from cart
+              if(cart.total_price < rewardUnlockAmount) {
+                removeRewardFromCart();
+              }
+
+              //Cart price greater than next tier total, so reload page
+              if(cart.total_price > rewardTiers[index]) {
+                reloadPage();
+              }
+              
+              // checking to see if variant is still in cart after cart changes
+              for (var i = 0; i < cart.items.length; i++) {
+                if(cart.items[i].variant_id == rewardVariantId) {
+                  variantInCart = true;
+                }
+              };
+              // if variant isn't in cart, reload page
+              if(variantInCart == false) {
+                reloadPage();
+              }
+
+            });
+          }, 500);
+
+        });
+
+      {% endif %}
+
+    </script>
+
+{% endunless %}
+

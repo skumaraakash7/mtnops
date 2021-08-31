@@ -1,0 +1,75 @@
+
+{% comment %}
+  ADD BLAZE TO CART
+{% endcomment %}
+
+{% assign blazeProductId = 12612054122538 %}
+
+
+<div class="main-page-wrapper">
+	<div class="bogo-landing-wrap blaze-bogo-landing">
+
+		<div class="landing-hero-container">
+			<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/topo-orange-bg.jpg?v=1584658950">
+		</div>
+
+		<div class="landing-main-wrap">
+			<div class="container">
+			  <div class="row">
+			    <div class="col-sm-12" role="main">
+
+			    	<div class="landing-main-content">
+				    	<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/blaze-bogo-text.png?v=1584658949">
+							<h1>BLAZE™</h1>
+							<span class="h1-subtitle">BUY ONE, GET ONE FREE BLAZE!</span>
+							<p>Kickstart your metabolism and start burning more fat with <b>MTN OPS BLAZE</b>. Each capsule is packed with healthy natural ingredients that have been used for centuries. African Mango, Green Tea Extract, Caralluma Fimbriata, Raspberry Ketone and more create a unique and powerful thermogenic fat burning result to help reduce body fat and weight. If you’re looking to curb your appetite and starting losing weight, look no further than BLAZE.</p>
+							<div class="landing-offer-wrap">
+								<a href="#" class="btn mtnops-btn add-offer-to-cart">ADD BOTH TO CART</a>
+								<small>This offer is ONLY for first time customers. If you have never purchased from us before, you are golden!</small>
+							</div>
+						</div>
+
+			    </div>
+			  </div>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+
+<script type="text/javascript">
+
+	  $('.add-offer-to-cart').on('click', function(e) {
+	  	e.preventDefault();
+	  	addItToCart('{{blazeProductId}}', 2);
+	  });
+
+	  function addItToCart(product_id, quantity) {
+	    data = {
+	      "quantity": quantity,
+	      "id": product_id
+	    }
+	    jQuery.ajax({
+	      type: 'POST',
+	      url: '/cart/add.js',
+	      data: data,
+	      dataType: 'json',
+	      success: function() { 
+	        //alert('Added to cart successfully');
+	        window.location.replace("/cart");
+	      },
+	      error: function (request, status, error) {
+	        console.log(request.responseText);
+	        var code = request.responseJSON.status;
+	        //if (code == 422 ) {
+	          //$('.message').text();
+	        //}
+	        console.log("<p>" + request.responseJSON.description + "</p>");
+	        alert('Error Adding to cart');
+	      }
+	    });
+	  }
+</script>
+
+

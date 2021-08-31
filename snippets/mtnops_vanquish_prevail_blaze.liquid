@@ -1,0 +1,93 @@
+{% comment %}
+  FREE BLAZE
+{% endcomment %}
+{% assign blazeInCart = false %}
+{% assign blazeVariantId = 12612054122538 %}
+
+{% comment %}
+  GIFT CARD VARIABLES
+{% endcomment %}
+{% assign giftCard = false %}
+{% assign onlyGiftCardInCart = false %}
+
+
+{% comment %}
+  TRIGGERING PRODUCT ID's
+{% endcomment %}
+{% assign triggerProductInCart = false %}
+{% assign vanquishSolid = 4361252012074 %}
+{% assign vanquishCamo = 4361253191722 %}
+{% assign prevailZip = 4361272557610 %}
+
+{% for item in cart.items %}
+
+  {% if item.gift_card %}
+    {% assign giftCard = true %}
+
+    {% if cart.items.size == 1 %}
+      {% assign onlyGiftCardInCart = true %}
+    {% endif %}
+  {% endif %}
+
+
+  {% if item.variant_id == blazeVariantId %}
+    {% assign blazeInCart = true %}
+
+  {% elsif item.product_id == vanquishSolid or item.product_id == vanquishCamo or item.product_id == prevailZip %}
+    {% assign triggerProductInCart = true %}
+  {% endif %}
+
+{% endfor %}
+
+{% if triggerProductInCart %}
+	<div class="free-promo-message">
+	  <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/VanquishPrevailBlazePromo-HomePush-Text.png?v=1585780662">
+	</div>
+{% else %}
+	{% include 'mtnops_free_ignite_sampler_kit' %}
+{% endif %}
+
+{% if onlyGiftCardInCart == false and blazeInCart == false and triggerProductInCart %}
+
+
+	<script type="text/javascript">
+			//console.log('Free Ignite Sampler Kit in cart?','{{freeIgniteSamplerInCart}}');
+
+			addBlazeToCart('{{blazeVariantId}}', 1);
+
+		  // $('.add-blaze-to-cart').on('click', function(e) {
+		  // 	e.preventDefault();
+		  // 	addBlazeToCart('{{blazeId}}', 1);
+		  // });
+
+		  function addBlazeToCart(product_id, quantity) {
+		    data = {
+		      "quantity": quantity,
+		      "id": product_id
+		    //   properties: {
+						// 'freeDecal': 'Received'
+				  // }
+		    }
+		    jQuery.ajax({
+		      type: 'POST',
+		      url: '/cart/add.js',
+		      data: data,
+		      dataType: 'json',
+		      success: function() { 
+		        //Cookies.set('freegift', true);
+		        $('.update-cart').trigger('click');
+		      },
+		      error: function (request, status, error) {
+		        console.log(request.responseText);
+		        var code = request.responseJSON.status;
+		        //if (code == 422 ) {
+		          //$('.message').text();
+		        //}
+		        console.log("<p>" + request.responseJSON.description + "</p>");
+		      }
+		    });
+		  }
+	</script>
+
+{% endif %}
+

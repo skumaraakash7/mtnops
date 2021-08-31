@@ -1,0 +1,43 @@
+
+
+{% comment %}
+  BUY IGNITE, GET $25 OFF MOTHER'S DAY GIFT
+{% endcomment %}
+
+{% assign triggerProductHandle = 'ignite' %}
+{% assign triggerProduct = all_products[triggerProductHandle] %}
+{% assign cartQualifies = false %}
+
+{% assign momHandle = 'gifts-for-mom' %}
+{% assign inMomCollection = false %}
+
+
+{% comment %}
+  CART LOOP
+{% endcomment %}
+{% for item in cart.items %}
+  {% if item.product_id == triggerProduct.id %}
+    {% assign cartQualifies = true %}
+  {% endif %}
+
+  {% for c in item.product.collections %}
+
+    {% if inMomCollection == false and c.handle == momHandle %}
+      {% assign inMomCollection = true %}
+    {% endif %}
+
+  {% endfor %}
+
+{% endfor %}
+
+{% if inMomCollection %}
+  <a class="cart-banner spend-reward-banner" href="/discount/MOM25?redirect=%2Fcheckout">
+    <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/4-30-21-MothersDayGiftGuideLaunch-CartBannerB.jpg?v=1619737761">
+  </a>
+{% elsif cartQualifies %}
+  <a class="cart-banner spend-reward-banner" href="/discount/MOM25?redirect=%2Fcollections%2Fgifts-for-mom">
+    {% comment %}<img class="image-show-mobile" src="https://cdn.shopify.com/s/files/1/2786/4584/files/Opstober-CartUpsell-MobileBanner.png?v=1601423972">
+    <img class="image-show-desktop" src="https://cdn.shopify.com/s/files/1/2786/4584/files/Opstober-CartUpsell-Banner.png?v=1601423689">{% endcomment %}
+    <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/4-30-21-MothersDayGiftGuideLaunch-CartBannerA.jpg?v=1619737761">
+  </a>
+{% endif %}

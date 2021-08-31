@@ -1,0 +1,158 @@
+{% if customer.email == 'jake.shaw@me.com' %} 
+{% endif %}
+
+  <div class="conquer-hunger-widget {{widgetClass}}">
+
+    <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/ch-logo-square-white-icon-white.svg?v=1626726476">
+
+    {% if widgetClass == 'mini-cart-view' %}
+
+      <ul class="conquer-hunger-tiers">
+        <li>
+          Spend over $125
+          <span>We'll Donate 10 Meals</span>
+        </li>
+        <li>
+          Spend over $150
+          <span>We'll Donate 20 Meals</span>
+        </li>
+        <li>
+          Spend over $175
+          <span>We'll Donate 30 Meals</span>
+        </li>
+        <li>
+          Spend over $200
+          <span>We'll Donate 40 Meals</span>
+        </li>
+        <li>
+          Spend over $250
+          <span>We'll Donate 50 Meals</span>
+        </li>
+        <li>
+          Spend over $300
+          <span>We'll Donate 75 Meals</span>
+        </li>
+        <li>
+          Spend over $350
+          <span>We'll Donate 100 Meals</span>
+        </li>
+        <li>
+          Spend over $400
+          <span>We'll Donate 200 Meals</span>
+        </li>
+        <li>
+          Spend over $500
+          <span>We'll Donate 300 Meals</span>
+        </li>
+      </ul>
+
+    {% elsif widgetClass == 'cart-view' %}
+
+      <div class="mealsWidget">
+        Your order will donate <b><span></span> meals</b> to children in need!
+        <img class="ch-thankyou" src="https://cdn.shopify.com/s/files/1/2786/4584/files/thankyou.svg?v=1626375019">
+      </div>
+
+    {% endif %}
+
+  </div>
+
+  <script type="text/javascript">
+    
+    var chMeals = [
+      {
+       spend: 12500,
+       meals: 10
+      },
+      {
+       spend: 15000,
+       meals: 20
+      },
+      {
+       spend: 17500,
+       meals: 30
+      },
+      {
+       spend: 20000,
+       meals: 40
+      },
+      {
+       spend: 25000,
+       meals: 50
+      },
+      {
+       spend: 30000,
+       meals: 75
+      },
+      {
+       spend: 35000,
+       meals: 100
+      },
+      {
+       spend: 40000,
+       meals: 200
+      },
+      {
+       spend: 50000,
+       meals: 300
+      },
+    ];
+
+  
+    // $('.conquer-hunger-tiers li').each(function(i) {
+    //   chTiers.push($(this).data('spend'));
+    // });
+
+
+    {% if widgetClass == 'mini-cart-view' %}
+
+      $.getJSON("/cart.js", function(cart) {
+        // if(cart.total_price > 10) {
+        //   console.log('working'+ cart.total_price);
+        // }
+        for (var i = 0; i < chMeals.length; i++) {
+          if(cart.total_price > chMeals[i].spend) {
+            var index = i;
+            //console.log(index);
+          }
+        };
+
+
+        $('.conquer-hunger-tiers li').eq(index).addClass('active-tier');
+        $('<img class="ch-thankyou" src="https://cdn.shopify.com/s/files/1/2786/4584/files/thankyou.svg?v=1626375019">').appendTo('.active-tier');
+        
+      });
+
+    {% else %}
+
+      var cartTotal = {{cart.total_price}};
+
+      console.log(cartTotal);
+
+      for (var i = 0; i < chMeals.length; i++) {
+        if(cartTotal > chMeals[i].spend) {
+          var index = i;
+          //console.log(chMeals[i].spend);
+          //console.log(index);
+        }
+      };
+
+      if(typeof index != undefined) {
+        $('.mealsWidget').show();
+        $('.mealsWidget span').text(chMeals[index].meals);
+      }
+
+      //$('.conquer-hunger-tiers li').eq(index).addClass('active-tier');
+      //$('').appendTo('.active-tier');
+
+    {% endif %}
+
+
+    
+  </script>
+
+  
+
+
+
+

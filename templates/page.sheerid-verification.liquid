@@ -1,0 +1,61 @@
+
+<div class="main-page-wrapper pro-program-verification">
+   <!-- MAIN CONTENT AREA -->
+   <div class="mtnops-slim-page-title"><h1>{{page.title}} VERIFICATION</h1></div>
+   <div class="landing-hero" style="background-image: url('{{page.metafields.meta.image}}');">
+		<div class="hero-overlay">
+			{% if page.metafields.meta.titlesvg %}
+				<img src="{{page.metafields.meta.titlesvg}}">	
+			{% endif %}
+			<p>Who doesn't love a discount?! Sign up to verify you qualify and unlock your discount at MTN OPS today!</p>
+			<div>
+				<a onclick="displayVerification()" class="mtnops-btn verify-btn" data-program="{{page.handle}}">SIGN UP</a>
+			</div>
+		</div>
+	</div>
+  
+  <div class="discount-bundle">
+	  <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/ProPageProductStack.png?v=1625071890">
+	</div>
+   {% comment %}<div class="container">
+      <div class="row">
+         <div class="site-content col-sm-12" role="main">
+            {{ page.content }}
+         </div>
+      </div>
+   </div>{% endcomment %}
+</div>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sheerid/jslib@1/sheerid.css" type="text/css"/>
+<script src="https://cdn.jsdelivr.net/npm/@sheerid/jslib@1/sheerid.js"></script>
+
+<script>
+	
+  function displayVerification(event) {
+
+  	var handle = document.querySelector('.verify-btn').getAttribute("data-program");
+  	var verificationUrl = '';
+  	if(handle == 'student-discount') {
+  		var verificationUrl = 'https://services.sheerid.com/verify/60da3b817008006d99fb2971/';
+  	} else if (handle == 'military-discount') {
+  		var verificationUrl = 'https://services.sheerid.com/verify/60da48547008006d99fc1ecd/';
+  	} else if (handle == 'medical-discount') {
+  		var verificationUrl = 'https://services.sheerid.com/verify/60da54457008006d99fceca5/';
+  	} else if (handle == 'teacher-discount') {
+  		var verificationUrl = 'https://services.sheerid.com/verify/60da54137008006d99fce9d9/';
+  	} else if (handle == 'first-responders-discount') {
+  		var verificationUrl = 'https://services.sheerid.com/verify/60da53d97008006d99fce71b/';
+  	}
+    
+
+    sheerId.loadInModal(
+        verificationUrl, {
+        mobileRedirect: true
+      });
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@sheerid/jslib@1/sheerid.js"></script>
+<script>
+    sheerId.conversion.listenForVerificationId();
+</script>

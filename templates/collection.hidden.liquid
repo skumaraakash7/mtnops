@@ -1,0 +1,32 @@
+{% if customer.email == 'jake.shaw@me.com' %}
+{% endif %}
+
+<header class="collection-hero merino-collection{% if collection.metafields.meta.image != blank %} has-collection-image{% endif %}"{%- if collection.metafields.meta.image != blank -%} style="background-image: url('{{ collection.metafields.meta.image }}');"{%- endif -%}>
+  <div class="collection-hero-text">
+
+    {%- if collection.metafields.meta.logo != blank -%}
+      <img class="collection-logo" src="{{ collection.metafields.meta.logo }}">
+      {%- if collection.metafields.meta.discountCode != blank -%}
+        <div class="apply-code">Apply code <span class="discount-code">[{{collection.metafields.meta.discountCode}}]</span> at Checkout</div>
+      {%- endif -%}        
+    {%- else -%}
+
+      <h1>{{ collection.title }}</h1>
+      {%- if collection.metafields.meta.subtitle != blank -%}
+        <span class="h1-subtitle">{{ collection.metafields.meta.subtitle }}</span>
+      {%- endif -%}
+
+    {%- endif -%}
+    {%- if collection.metafields.meta.description != blank and collection.metafields.meta.image != blank -%}
+      <p>{{ collection.metafields.meta.description }}</p>
+    {%- endif -%}
+  </div>
+  
+</header>
+
+<div class="collection-of-products collection-section">
+	
+	<h3>Thanks for visiting. These products are not for purchase. Sorry about that! If you have questions, please contact our customer service <a href="/contact-us">HERE</a></h3>
+</div>
+
+

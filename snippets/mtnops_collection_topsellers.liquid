@@ -1,0 +1,56 @@
+<section class="mtnops-top-sellers-section mtnops-section">
+  <header>
+    <h2>OUR TOP SELLING PRODUCTS</h2>
+    <span class="h2-subtitle">CUSTOMER FAVORITES</span>
+    <img class="five-stars" src="https://cdn.shopify.com/s/files/1/2786/4584/files/5stars.svg?20934">
+  </header>
+
+  <div class="owl-carousel owl-theme top-products-carousel product-carousel" id="top-sellers-carousel">
+    {% for product in collections['top-sellers'].products %}
+      <div class="item">
+        <a href="{{product.url}}">
+          <img src="{{ product | img_url: '600x' }}">
+          <h3>{{ product.title }}</h3>
+          <span>{{ product.metafields.meta.subtitle }}</span>
+          {% comment %}<div>{{ product.price  | money }}</div>
+          {% if product.compare_at_price != blank %}
+            <div>{{ product.compare_at_price  | money }}</div>
+          {% endif %}{% endcomment %}
+          <div class="swatches-wrap">
+            {% for color in product.options_by_name['Flavor'].values %}
+              <div class="bg_color bg_color_{{ color | handleize }}"></div>
+            {% endfor %}
+          </div>
+          <button class="mtnops-btn-sm">BUY NOW</button>
+        </a> 
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha256-pTxD+DSzIwmwhOqTFN+DB+nHjO4iAsbgfyFq5K5bcE0=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+	$("#top-sellers-carousel").owlCarousel({
+    loop: true,
+    nav: false,
+    dots: false,
+    autoplay: true,
+    autoplayTimeout: 6000,
+    autoplayHoverPause: true,
+    responsive: {
+      0: {
+        items: 2
+      },
+      600: {
+        items: 3
+      },
+      800: {
+        items: 4
+      },
+      1000: {
+        items: 5
+      }
+    }
+  });
+</script>

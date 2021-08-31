@@ -1,0 +1,76 @@
+{% comment %}{% if customer.email == 'jake.shaw@me.com' %}
+{% else %}
+  <p>Not found</p>
+{% endif %}
+{% endcomment %}
+<div class="main-page-wrapper">
+  <div class="mtnops-slim-page-title"><h1>{% if product.metafields.meta.slim_title != blank %}{{ product.metafields.meta.slim_title }}{% else %}ALL-NEW {{ product.title }}!{% endif %}</h1></div>
+
+  {% comment %}<img class="floating-fruit fruit-one" src="https://cdn.shopify.com/s/files/1/2786/4584/files/pineapple-slice.png?v=1590688818">
+  <img class="floating-fruit fruit-two" src="https://cdn.shopify.com/s/files/1/2786/4584/files/pineapple-full.png?v=1590688819">
+  <img class="floating-fruit fruit-three" src="https://cdn.shopify.com/s/files/1/2786/4584/files/coconut.png?v=1590688818">{% endcomment %}
+
+  <section class="product-header-section">
+    <div class="container-fluid">
+       <div class="row">
+          <div class="site-content col-sm-12" role="main">
+            {% comment %}{%- include 'product_page_area' -%}{% endcomment %}
+            <header>
+              <img class="product-intro-image" src="https://cdn.shopify.com/s/files/1/2786/4584/files/crush-pineapple-title.svg?v=1629085583">
+              <p><b>PINEAPPLE IS BACK AND BROUGHT SOME FRIENDS!</b> PINEAPPLE CRUSH IGNITE was such a huge hit back in March that it was a no-brainer to bring it back! This time we added ENDURO & YETI to the mix so now you can pick up this delicious tropical flavor in whatever version of energy you need to CONQUER THE SUMMER!</p>
+
+              <p>Last time this flavor SOLD OUT IN A MATTER OF DAYS so don’t wait! Pick up a tub (or 2) while supplies last!</p>
+              {% comment %}<img class="product-lineup-image" src="">{% endcomment %}
+            </header>
+          </div> <!-- .site-content -->
+      </div> <!-- end row -->
+    </div> <!-- end container -->
+  </section>
+
+  <section class="lifestyle-section">
+    <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/Crush_Pineapple-Studio_Lifestyle-8-11-21-LR-8.jpg?v=1629085870">
+  </section>
+  <section class="products-wrap">
+    <div class="product-variations-wrap">
+      {% for v in product.variants %}
+        
+          <div class="product-var-section" id="section-{{ v.title | downcase | handleize }}">
+            <div class="featured-image-wrap">
+              <img class="product-featured" src="{{ v.image.src | img_url: '1000x1000' }}">
+            </div>
+            <div class="product-meta-wrap">
+              {% include 'mtnops_product_callout_svgs' %}
+              <div>
+                <span class="product-price">{{ v.price | money }}</span>
+                {% if v.available %}
+                  <a class="ajax_add_to_cart add_to_cart_button add-to-cart-btn" href="#" data-pid="{{ v.id }}">Add to Cart</a>
+                {% else %}
+                  <p>Bummer. This is currently out of stock. Check back soon!</p>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+          {% if v.metafields.meta.lifestyle != blank %}
+            <div class="lifestyle-section">
+              <img src="{{ v.metafields.meta.lifestyle }}">
+            </div>
+          {% endif %}
+        
+      {% endfor %}
+      </div>
+  </section>
+
+  <section class="lifestyle-section full-width">
+    <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/Crush_Pineapple-Studio_Lifestyle-8-11-21-LR-1.jpg?v=1629085976">
+  </section>
+  
+</div><!-- .main-page-wrapper -->
+
+
+{% comment %}<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.4/gsap.min.js"></script>
+<script type="text/javascript">
+  //gsap.fromTo('.floating-fruit', 4, {scale: 1, rotation: -5}, {scale: 1.12, rotation: 5, transformOrigin:"center center", repeat: -1, yoyo: true, ease: Power1.easeInOut});
+  gsap.fromTo('.product-intro-image', 2, {scale: 1}, {scale: 1.04, transformOrigin:"center center", repeat: -1, yoyo: true, ease: Power1.easeInOut});
+  gsap.fromTo('.product-featured', 2.5, {scale: 1}, {scale: 1.02, transformOrigin:"center center", repeat: -1, yoyo: true, ease: Power1.easeInOut});
+</script>{% endcomment %}
+

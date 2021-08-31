@@ -1,0 +1,105 @@
+
+<a id="pause-button" class="close_trigger"><i class="fa fa-times" aria-hidden="true"></i>Close</a>
+
+<div class="video_screen">
+    <div id="featured_video"></div>
+</div>
+
+{% if template contains "article" %}
+    {% assign hero = 'rally-hero hero-overlay-centered' %}
+{% else %}
+    {% assign hero = 'page-hero hero-overlay-centered' %}
+{% endif %}
+
+{% if article.metafields.youtube.video %}
+    {% assign vidID = article.metafields.youtube.video %}
+{% endif %}
+{% if page.metafields.youtube.video %}
+    {% assign vidID = page.metafields.youtube.video %}
+{% endif %}
+
+
+{% comment %}{{ article.metafields.youtube.video }}{% endcomment %}
+
+<script>
+    var tag = document.createElement('script');
+
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    var player;
+    function onYouTubeIframeAPIReady() {
+        player = new YT.Player('featured_video', {
+            height: '100%',
+            width: '100%',
+            videoId: '{{ vidID }}', // Youtube video ID #
+            playerVars: { 'showinfo': 0, 'controls': 1, rel: 0 },
+            events: {
+                'onReady': onPlayerReady,
+                'onStateChange': onPlayerStateChange
+            }
+        });
+    }
+    function onPlayerReady(event) {
+        // bind events
+        var playButton =document.querySelector('.play_trigger'); // document.getElementById("play-button"); 
+
+        playButton.addEventListener("click", function(e) {
+            e.preventDefault();
+            player.playVideo();
+            document.querySelector('.video_hero_wrap').className = "video_hero_wrap user_watching";
+        });
+
+        var pauseButton = document.querySelector(".close_trigger");
+        pauseButton.addEventListener("click", function(e) {
+            e.preventDefault();
+            document.querySelector('.video_hero_wrap').className = "video_hero_wrap user_paused";
+            player.pauseVideo();
+            //player.stopVideo();
+        });
+
+
+        document.onkeyup = function keyPress(e) {
+            if (e.keyCode == 27) { // escape key maps to keycode `27`
+                document.querySelector('.video_hero_wrap').className = "video_hero_wrap";
+                player.pauseVideo();
+                //player.stopVideo();
+            }
+        }
+
+    }
+    // 5. The API calls this function when the player's state changes.
+    //    The function indicates that when playing a video (state=1),
+    //    the player should play for six seconds and then stop.
+    var done = false;
+    function onPlayerStateChange(event) {
+        if (event.data == YT.PlayerState.PLAYING && !done) {
+        // setTimeout(stopVideo, 6000);
+        // done = true;
+
+   		//  var specifiedElement = document.querySelector(".video__wrap");
+
+			// document.addEventListener('click', function(event) {
+			//   var isClickInside = specifiedElement.contains(event.target);
+
+			//   if (!isClickInside) {
+			//   	document.querySelector(".video__wrap").className = "video__wrap";
+		 //        document.querySelector('.banner').className = "banner center page_banner rally-hero dark-overlay-false";
+		 //        player.pauseVideo();
+			//   }
+			// });
+        }
+        if(event.data === 0){
+            document.querySelector('.video_hero_wrap').className = "video_hero_wrap";
+        }
+    }
+    function stopVideo() {
+        player.stopVideo();
+    }
+
+
+</script>
+
+
+

@@ -1,0 +1,94 @@
+{% comment %}
+  FREE IGNITE SAMPLER
+{% endcomment %}
+{% assign freeIgniteSamplerInCart = false %}
+{% assign freeIgniteSamplerId = 31322869071914 %}
+
+{% comment %}
+  GIFT CARD VARIABLES
+{% endcomment %}
+{% assign giftCard = false %}
+{% assign onlyGiftCardInCart = false %}
+
+
+{% comment %}
+  OTHER PRODUCTS
+{% endcomment %}
+{% assign otherProductsInCart = false %}
+
+
+{% for item in cart.items %}
+
+  {% if item.gift_card %}
+    {% assign giftCard = true %}
+
+    {% if cart.items.size == 1 %}
+      {% assign onlyGiftCardInCart = true %}
+    {% endif %}
+  {% endif %}
+
+  {% if item.variant_id == freeIgniteSamplerId %}
+    {% assign freeIgniteSamplerInCart = true %}
+
+  {% else %}
+    {% assign otherProductsInCart = true %}
+
+  {% endif %}
+
+{% endfor %}
+
+
+
+{% if onlyGiftCardInCart == false and cart.total_price > 10000 and freeIgniteSamplerInCart == false %}
+	<div class="free-ignite-sampler-kit">
+	  <img src="https://cdn.shopify.com/s/files/1/2786/4584/products/SportshakerIgniteCombo-web_350x350.png?v=1582063872">
+	  <span>Your cart qualifies for a free Ignite Sampler! A $35 value.</span>
+	  <a href="" class="mtnops-btn-sm add-samplerkit-to-cart">Add To Cart</a>
+	</div>
+
+	<script type="text/javascript">
+			//console.log('Free Ignite Sampler Kit in cart?','{{freeIgniteSamplerInCart}}');
+
+		  $('.add-samplerkit-to-cart').on('click', function(e) {
+		  	e.preventDefault();
+		  	addSamplerKitToCart('{{freeIgniteSamplerId}}', 1);
+		  });
+		  function addSamplerKitToCart(product_id, quantity) {
+		    data = {
+		      "quantity": quantity,
+		      "id": product_id
+		    //   properties: {
+						// 'freeDecal': 'Received'
+				  // }
+		    }
+		    jQuery.ajax({
+		      type: 'POST',
+		      url: '/cart/add.js',
+		      data: data,
+		      dataType: 'json',
+		      success: function() { 
+		        //Cookies.set('freegift', true);
+		        $('.update-cart').trigger('click');
+		      },
+		      error: function (request, status, error) {
+		        console.log(request.responseText);
+		        var code = request.responseJSON.status;
+		        //if (code == 422 ) {
+		          //$('.message').text();
+		        //}
+		        console.log("<p>" + request.responseJSON.description + "</p>");
+		      }
+		    });
+		  }
+	</script>
+
+{% elsif cart.total_price > 0 and cart.total_price < 10000 %}
+	
+	<div class="free-ignite-sampler-upsell-message">
+	  <img src="https://cdn.shopify.com/s/files/1/2786/4584/products/SportshakerIgniteCombo-web_350x350.png?v=1582063872">
+	  <h3>FREE IGNITE SAMPLER!</h3>
+	  <span>SPEND {{ 10000 | minus: cart.total_price | money }} MORE AND GET IT FOR FREE! A VALUE OF $35.</span>
+	</div>
+
+{% endif %}
+

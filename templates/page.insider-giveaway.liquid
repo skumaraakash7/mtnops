@@ -1,0 +1,363 @@
+{% if customer.email == 'jake@mtnops.com' %}{% endif %}
+
+
+<div class="main-page-wrapper">
+
+	<div class="giveaway-landing-wrap">
+		<div class="mtnops-slim-page-title"><h1>MTN OPS INSIDER SMOKIN' SUMMER GIVEAWAY</h1></div>
+
+
+		
+
+		<header class="video_hero_wrap">
+
+	    <img class="video_hero_banner" src="https://cdn.shopify.com/s/files/1/2786/4584/files/smokin-summer-bg.jpg?v=1588894408">
+	    
+	    <div class="video_hero">
+
+	        <img class="hero-logo" src="https://cdn.shopify.com/s/files/1/2786/4584/files/InsiderSmokinSummerGiveaway-Homepush-Text2.png?v=1589225390"/>
+					{% comment %}<span class="subtitle">OVER $1500 VALUE IN CAMP CHEF GEAR</span>{% endcomment %}
+
+	        <a id="play-button" class="play_trigger watch_video2" href="#"><i class="fa fa-play-circle" aria-hidden="true"></i>Play</a>
+	    </div>
+	    
+			<a id="pause-button" class="close_trigger"><i class="fa fa-times" aria-hidden="true"></i>Close</a>
+
+			<div class="video_screen">
+			    <div id="featured_video"></div>
+			</div>
+
+	  </header>
+	  <script>
+		  var tag = document.createElement('script');
+
+		  tag.src = "https://www.youtube.com/iframe_api";
+		  var firstScriptTag = document.getElementsByTagName('script')[0];
+		  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+		  var player;
+		  function onYouTubeIframeAPIReady() {
+		      player = new YT.Player('featured_video', {
+		          height: '100%',
+		          width: '100%',
+		          videoId: 'dtt_3bgW7x4',
+		          playerVars: { 'showinfo': 0, 'controls': 1, rel: 0 },
+		          events: {
+		              'onReady': onPlayerReady,
+		              'onStateChange': onPlayerStateChange
+		          }
+		      });
+		  }
+		  function onPlayerReady(event) {
+		      // bind events
+		      var playButton =document.querySelector('.play_trigger'); // document.getElementById("play-button"); 
+
+		      setTimeout( function() {
+		      	player.playVideo();
+		        document.querySelector('.video_hero_wrap').className = "video_hero_wrap user_watching";
+		    	}, 3500);
+
+		      playButton.addEventListener("click", function(e) {
+		          e.preventDefault();
+		          player.playVideo();
+		          document.querySelector('.video_hero_wrap').className = "video_hero_wrap user_watching";
+		      });
+
+		      var pauseButton = document.querySelector(".close_trigger");
+		      pauseButton.addEventListener("click", function(e) {
+		          e.preventDefault();
+		          document.querySelector('.video_hero_wrap').className = "video_hero_wrap user_paused";
+		          player.pauseVideo();
+		          //player.stopVideo();
+		      });
+
+
+		      document.onkeyup = function keyPress(e) {
+		          if (e.keyCode == 27) { // escape key maps to keycode `27`
+		              document.querySelector('.video_hero_wrap').className = "video_hero_wrap";
+		              player.pauseVideo();
+		              //player.stopVideo();
+		          }
+		      }
+
+		  }
+		  // 5. The API calls this function when the player's state changes.
+		  //    The function indicates that when playing a video (state=1),
+		  //    the player should play for six seconds and then stop.
+		  var done = false;
+		  function onPlayerStateChange(event) {
+		      if (event.data == YT.PlayerState.PLAYING && !done) {
+		      // setTimeout(stopVideo, 6000);
+		      // done = true;
+
+		 		//  var specifiedElement = document.querySelector(".video__wrap");
+
+				// document.addEventListener('click', function(event) {
+				//   var isClickInside = specifiedElement.contains(event.target);
+
+				//   if (!isClickInside) {
+				//   	document.querySelector(".video__wrap").className = "video__wrap";
+			 //        document.querySelector('.banner').className = "banner center page_banner rally-hero dark-overlay-false";
+			 //        player.pauseVideo();
+				//   }
+				// });
+		      }
+		      if(event.data === 0){
+		          document.querySelector('.video_hero_wrap').className = "video_hero_wrap";
+		      }
+		  }
+		  function stopVideo() {
+		      player.stopVideo();
+		  }
+
+		</script>
+
+
+
+		{% comment %}<div class="landing-hero" style="background-image: url('https://cdn.shopify.com/s/files/1/2786/4584/files/smokin-summer-bg.jpg?v=1588894408');">
+			
+			<div class="hero-overlay">
+				<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/InsiderSmokinSummerGiveaway-Homepush-Text2.png?v=1589225390">	
+				<h2>OVER $1500 VALUE IN CAMP CHEF GEAR</h2>
+			</div>
+		</div>{% endcomment %}
+
+
+
+		<div class="landing-main-wrap">
+
+			<div class="container">
+			  <div class="row giveaway-packages">
+			    <div class="col-xs-12 col-md-6">
+			    	<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/PelletGrillPackage2.png?v=1589928316">
+			    </div>
+			    <div class="col-xs-12 col-md-6">
+			    	<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/CampStovePackage.png?v=1589927630">
+			    </div>
+			    	{% comment %}<div class="giveaway-package-wrap">
+
+			    		<div class="giveaway-featured">
+			    			<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/camp-chef-package.png?v=1588894757">
+			    		</div>
+
+			    		<div class="package-details">
+								<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/camp-chef-logo.png?v=1588894753">
+								<h3>Package Includes:</h3>
+								<ul>
+									<li>SMOKEPRO SG 24 WIFI PELLET GRILL</li>
+									<li>GRILL COVER</li>
+									<li>JERKEY RACK SYSTEM</li>
+									<li>FRONT FOLDABLE SHELF</li>
+									<li>20LB COMPETITION BLEND PELLETS</li>
+									<li>20LB CHERRY PELLETS</li>
+								</ul>
+							</div>
+			    	</div>{% endcomment %}
+
+		  	</div>
+			</div>
+	  </div>
+
+	  <div class="owl-carousel owl-theme" id="lifestyle-gallery">
+		  <div class="item text-center">
+		    <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/smokin-summer-campchef-lifestyle-1.jpg?v=1588895938">
+		  </div>
+		  <div class="item text-center">
+		    <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/smokin-summer-campchef-lifestyle-2.jpg?v=1588895938">
+		  </div>
+		  <div class="item text-center">
+		    <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/smokin-summer-campchef-lifestyle-3.jpg?v=1588895938">
+		  </div>
+		  <div class="item text-center">
+		    <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/smokin-summer-campchef-lifestyle-4.jpg?v=1588895938">
+		  </div>
+		  <div class="item text-center">
+		    <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/smokin-summer-campchef-lifestyle-5.jpg?v=1588895938">
+		  </div>
+		  <div class="item text-center">
+		    <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/smokin-summer-campchef-lifestyle-6.jpg?v=1588895938">
+		  </div>
+		  <div class="item text-center">
+		    <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/smokin-summer-campchef-lifestyle-7.jpg?v=1588895938">
+		  </div>
+		  <div class="item text-center">
+		    <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/smokin-summer-campchef-lifestyle-8.jpg?v=1588895938">
+		  </div>
+		  <div class="item text-center">
+		    <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/smokin-summer-campchef-lifestyle-9.jpg?v=1588895938">
+		  </div>
+		  <div class="item text-center">
+		    <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/smokin-summer-campchef-lifestyle-10.jpg?v=1588895938">
+		  </div>
+		  
+		</div>
+
+
+		<div class="insider-benefits-wrap">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="insider-heading">
+							<h2>BECOME AN INSIDER TO BE ENTERED</h2>
+							<h3>WHY SHOULD YOU SUBSCRIBE?</h3>	
+						</div>
+					</div>
+				</div>
+			  <div class="row row-flex">
+			    <div class="col-xs-6 col-md-3">
+			    	<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/insider-benefits-4.png?v=1589200837">
+			    	<p>Investing in your health should always be a priority. Find the products that fit your lifestyle and Save 10% + Free Shipping on every autoship order.</p>
+			    </div>
+			    <div class="col-xs-6 col-md-3">
+			    	<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/insider-benefits-1.png?v=1589200837">
+			    	<p>Don't worry about adding your next Mtn Ops order on your already mile long list of to-do's. Simply sign up and let us take care of the rest.</p>
+			    </div>
+			    <div class="col-xs-6 col-md-3">
+			    	<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/insider-benefits-2.png?v=1589200837">
+			    	<p>Our Insiders are the core of Mtn Ops. Enjoy free gifts, help with product R&D and be entered to win exclusive giveaways for insiders only.</p>
+			    </div>
+			    <div class="col-xs-6 col-md-3">
+			    	<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/insider-benefits-3.png?v=1589200837">
+			    	<p>Every single order through MtnOps.com donates a vitamin nutritious meal to a child in need through the Mtn Ops Conquer Hunger initiative.</p>
+			    </div>
+			  </div>
+			  <div class="row">
+					<div class="col-xs-12">
+						<div class="insider-cta">
+							<a href="https://mtnops.com/pages/autoship" class="button mtnops-btn">Learn More</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+
+		{% comment %}<div class="bonus-entry-section">
+			<div class="container">
+			  <div class="row">
+			    <div class="col-xs-12">
+			    	<h3>PICK UP AN ENTRY!</h3>
+			    	<h4>FILL OUT THE FORM BELOW</h4>
+						<div style="margin:0 auto;" class="pxFormGenerator" id="l-SJumzAr4B3Wp1htTJazw"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="giveaway-terms-wrap">
+			<div class="container">
+			  <div class="row">
+			    <div class="col-xs-12">
+						
+			    	<div class="buttons-wrap" style="text-align: center;">
+						  <h3>FINE PRINT AND DETAILS</h3>
+						  <a href="#" class="btn terms-conditions-trigger">TERMS &amp; CONDITIONS</a>
+						</div>
+
+						<div class="terms-conditions-wrap">
+							TERMS AND CONDITIONS
+
+							NO PURCHASE NECESSARY TO ENTER OR WIN THIS PROMOTIONAL GIVEAWAY.
+							GRITTY OFFROAD RETURNS POLICY
+							Items may not be returned during the Gritty Offroad promotional period.
+
+							An exchange of product may be accepted. Please contact customer support at support@mtnops.com. To be eligible for an exchange, your item must be unused and in the same condition that you received it. It must also be in the original packaging. You will be responsible for paying for your own shipping costs for exchanging your item. Shipping costs are non-refundable.
+
+							GRITTY OFFROAD RULES
+
+							Eligibility To Enter: Brian Call, host of the Gritty Podcast, has partnered with MTN OPS, LLC (“MTN OPS”) for this promotion. The Gritty Offroad Promotion (the “Promotion”) is open only to legal residents of the 50 United States and the District of Columbia and Canada* (excluding Quebec), who are 18 years of age or older and located in the U.S. or Canada at the time of entry. MTN OPS (“Administrator”) and its respective partners, subsidiaries and affiliated companies, retailers, sales representatives, dealers, distributors, licensees and the advertising, fulfillment, judging and promotion agencies involved in the development and administration of this Promotion and each of their officers, directors, employees and agents (collectively, “Promotion Parties”), and their immediate family members (parent, child, sibling and spouse of each) and those living in the same households of each are not eligible to participate. Void elsewhere and where prohibited by law.
+
+							Promotion Period: The Promotion begins at 12:00 a.m. Mountain Standard Time on March 18, 2020 and ends at 11:59 p.m. Mountain Standard Time on May 18, 2020 (the “Promotion Period”).
+
+							HOW TO ENTER:
+
+							Online Entry: During the Promotion Period, go to the following website: www.mtnops.com (“Website”) and purchase one or more products during the Promotion Period (“Purchase Entry”). Entrants must complete their purchase with all required information, and submit payment (including shipping) to Mtn Ops. You will receive ONE ENTRY FOR EVERY $5 dollars spent on qualifying Purchases.
+
+							Retail Store Purchase: During the Promotion Period, go to one of our MTN OPS official dealers and purchase one or more products during the Promotion Period (“Purchase Entry”). ONE ENTRY FOR EVERY $5 dollars spent during Purchase Entry. After purchase, click here to complete the form with all required information. Entrant must then mail official purchase receipt, or copy, to the following address:
+
+							MTN OPS LLC
+							251 S. Mountain Rd
+							Fruit Heights, Utah 84037
+
+							By entering via online or through a dealer, you consent to receive email announcements from MTN OPS, in accordance with its Privacy Policy, available here.
+
+							No Purchase necessary, Mail-in Entry: To obtain one entry by mail-in entry, send a postcard or letter in a #10 business envelope with your contact information (first name, last name, home address, phone number, a good email address). Send your postcard or letter to the following mailing address via First Class U.S. mail to:
+
+							MTN OPS LLC
+							Attn: Gritty Offroad
+							251 S. Mountain Rd
+							Fruit Heights, Utah 84037
+
+							Entry must be postmarked by May 18, 2020 and received by May 22, 2020.
+
+							Drawing: No purchase of any kind is necessary to enter or win. You have not yet won. On or between May 24th - June 4th, 2020, in Fruit Heights, Utah, the Promotion Administrator will conduct a random drawing from among all eligible entries received during the entire Promotion Period.
+
+							Grand Prize: (1) Opportunity for individual to buy the prize for $1. No substitution, cash redemption or transfer of prize is permitted except at Administrator’s sole discretion. If prize, or any portion thereof cannot be awarded for any reason, Administrator, in its sole discretion, reserves the right to substitute a prize of equal or greater value. All federal, state, provincial and local taxes, and all other costs associated with acceptance or use of the prize, are the sole responsibility of the winner. Administrator will determine all detail of the Promotion prize including, but not limited to, dates and location. Arrangements for delivery of prize will be made after winner is validated and confirmed.
+
+							Odds of winning: Odds of winning this or any other Promotional prize depends on the number of entries received by Administrator. At the discretion of Administrator, unclaimed prizes will result in either a redraw or may not be awarded. Limit: One prize per person or household. Family of those employed by MTN OPS or Gritty Podcast are not eligible to win.
+
+							Promotion General Rules: By participating in this Promotion, you (i) agree to be bound by these official rules, including all eligibility requirements, and (ii) agree to be bound by the decisions of Administrator, which are final and binding in all matters relating to the Promotion. All federal, state and local laws apply. All potential winners (and/or their parent/legal guardian if a minor) will each be notified by telephone, email, or direct message on social media and may be required to show proof of identity. The return of any notification as undeliverable or failure to respond within 14 days to such notices or return any documents in a timely manner or if a potential winner is found to be ineligible or not in compliance with these Official Rules, as determined by the Administrator, may result in disqualification and an alternate winner may be chosen. By participating, participants agree to release, discharge and hold harmless Administrator and Promotion Parties from and against any and all actions, causes of action, suits, debts, dues, sums of money, accounts, reckonings, bonds, bills, specialties, covenants, contracts, controversies, agreements, promises, variances, trespasses, lost profits, indirect or direct damages, consequential damages, incidental damages, punitive or exemplary damages, judgments, extent, executions, claims and demands whatsoever, in law, admiralty or equity, whether known or unknown, foreseen or unforeseen, associated with this Promotion or acceptance, use or misuse of any prize received in this Promotion, including property damage, personal injury, or death. In order to receive the prize, each potential winner will be required to complete an Affidavit of Eligibility and Release of Liability. Promotion Parties are not responsible for any typographical or other error in the printing of the offer or administration of the Promotion or inability to implement the Promotion or award the prizes as contemplated herein due to any event beyond its control, including delays or interruptions caused by acts of God, acts of war, natural disasters, weather, utility outages, acts of terrorism or any federal, state, or local government law, order, or regulation, order of any court or regulator. Acceptance of prize constitutes permission for the Sponsor and its agencies to use winners’ names and likenesses for purposes of advertising and publicity without further compensation, unless prohibited by law. By participating in this Promotion, participants agree to be bound by the Official Rules and decisions of the Administrator, which shall be final in all matters relating to the Promotion. The winner bears all risk of loss or damage. Neither Administrator nor Promotion Parties are responsible for lost, late, misdirected, stolen, illegible, inaccurate, damaged, incomplete, non-delivered or postage-due mail; or for printing, distribution or production errors or for technical, hardware, software, or telephone malfunctions of any kind, lost or unavailable network connections, or failed, incorrect, incomplete, inaccurate, garbled or delayed electronic communications caused by the user or by any of the equipment or programming associated with or utilized in this Promotion, or by any human, or other error, which may occur in this Promotion. If, in the Administrator’s sole opinion, there is any suspected or actual evidence of tampering with any portion of the Promotion or Website or if technical difficulties compromise the integrity of the Promotion, the Administrator reserves the right to void suspect entries and/or modify and/or terminate the Promotion and/or conduct a random drawing to award the prizes using all known eligible non-suspect entries received. The Administrator reserves the right to disqualify any individual who tampers with the Promotion or Website or acts in a disruptive or unfair manner. In the event of a dispute regarding the identity of the person submitting an entry, entries will be declared by the person’s name submitted at time of entry. Winner is solely responsible for all taxes on prize and other expenses not specifically set forth herein, including but not limited to registration, sales tax, license fees, insurance, and optional equipment, and all other unspecified costs associated with claiming, registering and/or using the corresponding prize. Winners acknowledge the Administrator and the Promotion Parties do not make, nor are in any manner responsible for any warranty, representations, expressed or implied, in fact or in law, relative to the quality, conditions, fitness or merchantability of any aspect of any prize, except that prizes will be subject to the corresponding manufacturer’s stated warranty, if any.
+
+							Choice of Law and Jurisdiction: This Promotion is offered only in the United States and Canada (excluding Quebec) and is governed by the laws of the State of Utah. By entering, entrants irrevocably consent to the sole and exclusive jurisdiction of the courts of the State of Utah located in the county of Davis for any action, suit or proceeding arising out of or relating to this Promotion.
+
+							Privacy & Security Policy: The personal information collected through this Promotion is subject to Administrator’s Privacy & Security Policy here. By entering this Promotion, you agree to the use of your personal information as described in the above Privacy Policy.
+
+							Waiver: Any and all disputes, claims, and causes of action arising out of or in connection with this Promotion, shall be resolved individually, without resort to any form of class action. ANY CLAIMS, JUDGMENTS AND/OR AWARDS SHALL BE LIMITED TO THE ACTUAL OUT-OF-POCKET COSTS ASSOCIATED WITH ENTERING THIS PROMOTION. ENTRANT HEREBY WAIVES ANY RIGHTS OR CLAIMS TO ATTORNEY’S FEES, INDIRECT, SPECIAL, PUNITIVE, INCIDENTAL OR CONSEQUENTIAL DAMAGES OF ENTRANT, WHETHER FORESEEABLE OR NOT AND WHETHER BASED ON NEGLIGENCE OR OTHERWISE.
+
+							Winners’ List: We will announce the winners via email and our social media channels – Winner will receive Grand Prize on or between June 10, 2020 – June 30, 2020. Must be willing to travel to pick up the RZR at MTN OPS headquarters, Fruit Height, Utah. Travel to pick up and take home the RZR is not covered in the grand prize. Winner will be responsible for their own travel and expenses to and from MTN OPS headquarters.
+
+							All trademarks used herein are the property of their respective owners. Manufacturers of the prizes offered in this Promotion do not sponsor or endorse this Promotion and are not affiliated with the Sponsor or Administrator in any way.
+						</div>
+
+					</div>
+				</div>
+			</div>
+			
+		</div>{% endcomment %}
+
+
+	</div>
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha256-pTxD+DSzIwmwhOqTFN+DB+nHjO4iAsbgfyFq5K5bcE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.4/gsap.min.js"></script>
+
+<script type="text/javascript">
+
+	$(document).ready(function(){
+    $("#lifestyle-gallery").owlCarousel({
+      loop: true,
+      nav: false,
+      dots: false,
+      margin: 5,
+      autoplay: true,
+      autoplayTimeout: 4000,
+      responsive: {
+        0: {
+          items: 1
+        },
+        700: {
+          items: 2
+        },
+        950: {
+        	items: 3
+        }
+      }
+    });
+  });
+
+
+  $('.terms-conditions-wrap').hide();
+  $('.terms-conditions-trigger').on('click', function(e) {
+    e.preventDefault();
+    $('.terms-conditions-wrap').slideToggle();
+  });
+	
+
+</script>
+
+
+
+

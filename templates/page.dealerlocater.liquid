@@ -1,0 +1,262 @@
+{% comment %}
+  The Dealer Locator by Jake Shaw of MTN OPS
+{% endcomment %}
+
+
+<div class="main-page-wrapper">
+   <!-- MAIN CONTENT AREA -->
+   {%- include 'page_heading', page_title:page.title -%}
+   <div class="container dealer-logos">
+      <div class="row">
+        <div class="col-xs-4">
+          <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/cabelas-logo.jpg?9054">
+        </div>
+        <div class="col-xs-4">
+          <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/scheels-logo.jpg?9054">
+        </div>
+        <div class="col-xs-4">
+          <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/sportsmans-logo.jpg?9054">
+        </div>
+      </div>
+
+
+        <div class="row dealer-locator">
+
+          <div class="search-locations-filter">
+            <input id="address" type="textbox" placeholder="Search a Location">
+            <select id="radiusSelect" label="Radius">
+              <option value="null" selected>Search Radius</option>
+              <option value="150">150 miles</option>
+              <option value="100">100 miles</option>
+              <option value="50">50 miles</option>
+              <option value="20">20 miles</option>
+            </select>
+
+            <button id="submit">Search</button>
+            <a id="mapReset">Reset Map</a>
+          </div>
+
+          <div class="map-wrapper">
+            <div class="search-main">
+              <div id="map"></div>
+            </div>
+            <div class="search-sidebar">
+              <ul id="mtnops-dealers" class="dealers-list"></ul>
+            </div>
+          </div>
+
+        </div>
+
+          <script>
+
+            var map;
+            var dealers = [];
+            var markers = [];
+            var locationsList = [];
+            var infoWindow;
+            var locationSelect;
+            var markerCluster;
+
+            function initMap() {
+
+              map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 4,
+                center: {lat: 39.7853296, lng: -101.3781167},
+                mapTypeControl: false,
+                fullscreenControl: false,
+                streetViewControl: false,
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                styles: [{"featureType":"all","elementType":"labels.text.fill","stylers":[{"saturation":36},{"color":"#000000"},{"lightness":40}]},{"featureType":"all","elementType":"labels.text.stroke","stylers":[{"visibility":"on"},{"color":"#000000"},{"lightness":16}]},{"featureType":"all","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"administrative","elementType":"geometry.fill","stylers":[{"color":"#000000"},{"lightness":20}]},{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#000000"},{"lightness":17},{"weight":1.2}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":20}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":21}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#000000"},{"lightness":17}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#000000"},{"lightness":29},{"weight":0.2}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":18}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":16}]},{"featureType":"transit","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":19}]},{"featureType":"water","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":17}]}]
+              });
+
+              infoWindow = new google.maps.InfoWindow({});
+
+
+
+              searchButton = document.getElementById("submit").onclick = searchLocations;
+              // Get the input field
+              var input = document.getElementById("address");
+
+              input.addEventListener("keyup", function(event) {
+                if (event.keyCode === 13) {
+                  searchLocations();
+                }
+              });
+
+              resetButton = document.getElementById("mapReset").onclick = showAllMarkers;
+
+
+
+              showAllMarkers();
+
+
+              // Try HTML5 geolocation.
+              // if (navigator.geolocation) {
+              //   navigator.geolocation.getCurrentPosition(function(position) {
+              //     var pos = {
+              //       lat: position.coords.latitude,
+              //       lng: position.coords.longitude
+              //     };
+
+              //     //infoWindow.setPosition(pos);
+              //     //infoWindow.setContent('Location found.');
+              //     //infoWindow.open(map);
+              //     map.setCenter(pos);
+              //     map.setZoom(11);
+              //   }, function() {
+              //     handleLocationError(true, infoWindow, map.getCenter());
+              //   });
+              // } else {
+              //   // Browser doesn't support Geolocation
+              //   handleLocationError(false, infoWindow, map.getCenter());
+              // }
+
+            }
+
+            function showAllMarkers() {
+              searchLocationsNear(null);
+            }
+            function triggerWindow() {
+              console.log('clicked');
+            }
+
+            function searchLocations() {
+
+              var address = document.getElementById("address").value;
+              var geocoder = new google.maps.Geocoder();
+              geocoder.geocode({address: address}, function(results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+
+                  searchLocationsNear(results[0].geometry.location);
+
+                } else {
+                  alert('Result was not successful for the following reason: ' + status);
+                }
+              });
+            }
+            function searchLocationsNear(center) {
+
+              clearLocations();
+            
+              map.setCenter(center);
+
+              var radius = document.getElementById('radiusSelect').value;
+              var bounds = new google.maps.LatLngBounds();
+              
+              if(radius == "null") {
+                radius = 250;
+              }
+
+                for (var i = 0; i < dealers.length; i++) {
+                  var name = dealers[i]['title'];
+                  var address = dealers[i]['address'];
+                  var distance_from_location;
+                  
+                  var latlng = new google.maps.LatLng(parseFloat(dealers[i]['lat']), parseFloat(dealers[i]['lng']));
+
+                  if(center != null) {
+
+                    var queryLatLng = new google.maps.LatLng(center.lat(), center.lng());
+                    var distance_from_location = calcDistance(center.lat(), center.lng(), parseFloat(dealers[i]['lat']), parseFloat(dealers[i]['lng']));
+                    if (distance_from_location < radius) {
+                      //console.log(name + " is within " + distance_from_location);
+                      createMarker(latlng, name, address, distance_from_location, i);
+                      bounds.extend(latlng);
+                    }
+                  } else {
+                    createMarker(latlng, name, address, distance_from_location, i);
+                    bounds.extend(latlng);
+                  }
+                }
+
+                map.fitBounds(bounds);
+                markerCluster = new MarkerClusterer(map, markers, {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+            }
+
+            function clearLocations() {
+              infoWindow.close();
+              for (var i = 0; i < markers.length; i++) {
+                markers[i].setMap(null);
+              }
+              document.getElementById('mtnops-dealers').innerHTML = "";
+              markers.length = 0;
+              locationsList.length = 0;
+            }
+
+            function createMarker(latlng, name, address, distance, i) {
+              var html = "<p><b>" + name + "</b> <br>" + address;
+              var searchInput = document.getElementById("address").value;
+              if(distance) {
+                html += '<br><span>'+Math.round(distance)+' miles from '+searchInput+'</span>';
+              }
+              html += '</p>';
+
+              var marker = new google.maps.Marker({
+                map: map,
+                position: latlng,
+                icon: 'https://cdn.shopify.com/s/files/1/2786/4584/files/deaker-marker.png?13797560475300520639'
+              });
+              google.maps.event.addListener(marker, 'click', function() {
+                infoWindow.setContent(html);
+                infoWindow.open(map, marker);
+              });
+              markers.push(marker);
+              createListItems(marker, name, address, distance, searchInput, i);
+            }
+
+            function calcDistance(fromLat, fromLng, toLat, toLng) {
+              return convertMetersToMiles(google.maps.geometry.spherical.computeDistanceBetween(new google.maps.LatLng(fromLat, fromLng), new google.maps.LatLng(toLat, toLng)));
+            }
+
+            function convertMetersToMiles(meters) {
+              return (meters * 0.000621371);
+            }
+
+            function createListItems(marker, title, address, distance, input, i) {
+              locationsList.push(marker);
+              var dealersList = document.getElementById('mtnops-dealers');
+              var dealer = '<li><a class="dealer-marker"  data-markerid="' + i + '" data-lat="'+marker.position.lat()+'" data-lng="'+marker.position.lng()+'"><h4>'+title+'</h4><address>'+address+'</address>';
+              if(distance) {
+                dealer += '<span>'+Math.round(distance)+' miles from ' + input + '</span>';
+              }
+              dealer += '</a></li>';
+
+              dealersList.innerHTML += dealer;
+            }   
+            
+            // function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+            //   infoWindow.setPosition(pos);
+            //   infoWindow.setContent(browserHasGeolocation ?
+            //     'Error: The Geolocation service failed.' :
+            //     'Error: Your browser doesn\'t support geolocation.');
+            //   infoWindow.open(map);
+            // }
+
+            jQuery(document).ready(function ($) {
+                
+                $('.dealer-marker').on('click', function() {
+                  var newlat = $(this).data('lat');
+                  var newlng = $(this).data('lng');
+                  var id = $(this).data('markerid');
+                  map.setCenter({lat:newlat, lng:newlng});
+                  map.setZoom(12);
+                  google.maps.event.trigger(markers[id], 'click');
+                  //gmap = $('html,body');
+                  //gmap.animate({scrollTop: 0}, 500);
+
+                });
+
+            });
+
+        </script>
+
+
+
+
+        {{ 'dealers.js' | asset_url | script_tag }}
+        <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAV22nogQPS2RDQYbKdALYYuA_CuBRn3Xc&libraries=geometry&callback=initMap"></script>
+
+   </div>
+</div>
+

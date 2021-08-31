@@ -1,0 +1,103 @@
+<script type="text/javascript">
+
+$(document).ready(function () {
+  const audienceBg = $('.landing-hero');
+  audienceBg.css("background-image", "url('https://cdn.shopify.com/s/files/1/2786/4584/files/Weight_Loss_System-Lifestyle-Trevor--2.jpg?v=1608157410')");
+
+
+  //setTimeout(function() {
+  	// $( ".pros-label" ).animate({
+   //    opacity: 1,
+   //  }, 2000, function() {
+      
+   //  });
+  //}, 50);
+
+  //gsap.fromTo('.floating-kit', 1, {rotation: -3}, {rotation: 3, repeat: -1, yoyo: true, ease: Power1.easeInOut});
+  var samplerId = '{{ sampler.variants[0].id }}';
+
+  var cta = $('.add-product-to-cart');
+  var clicked = false;
+  cta.on('click', function(e) {
+  	var varId = $(this).data('variant-id');
+  	e.preventDefault();
+  	// if(clicked == false) {
+  	// 	$(this).html('Adding...');
+  	// 	clicked = true;
+  	// }
+  	addItToCart(varId, 1);
+  });
+
+  function addItToCart(var_id, quantity) {
+
+    data = {
+      "quantity": quantity,
+      "id": var_id
+    }
+    
+   //  if(var_id == samplerId) {
+   //  	data = {
+   //      "quantity": quantity,
+   //      "id": var_id,
+  	// 		properties: {
+  	// 		'samplerOffer': 'Enjoy!'
+  	// 		}
+   //  	}
+  	// } else {
+  	// 	data = {
+   //      "quantity": quantity,
+   //      "id": var_id
+   //  	}
+  	// }
+
+    jQuery.ajax({
+      type: 'POST',
+      url: '/cart/add.js',
+      data: data,
+      dataType: 'json',
+      success: function() { 
+        //Cookies.set('freegift', true);
+        //$('.update-cart').trigger('click');
+        //console.log('Item added to your cart!');
+
+        if(var_id == samplerId) {
+          setTimeout(function() {
+          	$('.cta-sampler .add-product-to-cart').hide();
+          	$('<a href="/cart" class="mtnops-btn">VIEW CART</a>').appendTo('.cta-sampler');
+          }, 1000);
+      	}
+        console.log('adding to cart was a success!');
+        $.get('/cart?view=json', function(data) {
+        	/*optional stuff to do after success */
+        	$('.widget_shopping_cart_content').html(data);
+  			}).always(function() {
+          baselThemeModule.gl_currency();
+        	if (window.Shopify && Shopify.StorefrontExpressButtons && nathan_settings.use_additional_checkout_buttons) {Shopify.StorefrontExpressButtons.initialize()}
+        });
+      	$.getJSON('/cart.js', function(cart) {
+        	$(".cartCount").html(cart.item_count);
+        	$(".basel-cart-subtotal >span").html(Shopify.formatMoney(cart.total_price, theme.moneyFormat));
+      	}).always(function() {baselThemeModule.gl_currency() });
+      	baselThemeModule.addToCart();
+      },
+      error: function (request, status, error) {
+        console.log(request.responseText);
+        var code = request.responseJSON.status;
+
+        console.log(request.responseJSON.description);
+      }
+    });
+  }
+  $("#reviews-carousel").owlCarousel({
+    loop: true,
+    nav: false,
+    navText: ['<i class="far fa-arrow-square-left"></i>','<i class="far fa-arrow-square-right"></i>'],
+    dots: false,
+    autoplay: true,
+    autoplayTimeout: 10000,
+    autoplayHoverPause: true,
+    items: 1
+  });
+
+});
+</script>

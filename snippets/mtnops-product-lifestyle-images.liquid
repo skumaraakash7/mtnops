@@ -1,0 +1,36 @@
+
+{% comment %}Testing the lifestyle images here {% if customer.email == "jake.shaw@me.com" %}{% endif %}{% endcomment %}
+{% unless product.metafields.meta.lifestyle == blank %}
+{% assign images = product.metafields.meta.lifestyle | split: ','  %}
+
+  <div class="owl-carousel owl-theme lifestyle-carousel" id="owl-lifestyle-carousel">
+    {% for url in images %}
+        {% assign clean url = url | strip %}
+        <div class="item">            	
+		    <img src="{{url}}" />				
+        </div>
+    {% endfor %}
+  </div>
+
+  <script>
+		$(document).ready(function() {
+		    $("#owl-lifestyle-carousel").owlCarousel({
+				loop: true,
+				nav: true,
+				dots: false,
+				navText: ["",""],
+				autoplay: true,
+				autoplayTimeout: 6000,
+				responsive: {
+					0: {
+						items: 1
+					}
+				}
+		    });
+		});
+	</script>
+
+{% endunless %}
+
+
+

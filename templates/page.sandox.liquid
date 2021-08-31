@@ -1,0 +1,502 @@
+{% if customer.email == "jake.shaw@me.com" %}
+	{% include 'mtnops_tag_checker' %}
+
+
+<div class="hero-pushes full-width">
+	<a class="hero-main-push" href="/pages/pro-energy">
+		<img class="hero-main-push-image" src="https://cdn.shopify.com/s/files/1/2786/4584/files/colby_kendell-shed_hunt-lifestyle-outdoor-renegade_hoodie-_Q5A3238_1.JPG?v=1554182040">
+		<div class="main-push-message wide-max650">
+			<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/SamplerProDiscountPage-Text2.png?v=1586473569">
+			<button class="mtnops-btn">CLAIM YOURS</button>
+		</div>
+	</a>
+	<div class="secondary-pushes">
+		<a class="push-item" href="/pages/covid-19">
+			<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/covid19-push.jpg?v=1584637729">
+			<h2>STAYING HEALTHY</h2>
+			<span>A MESSAGE FROM OUR CEO</span>
+			<button class="ghost-btn">READ NOW</button>
+		</a>
+		<a class="push-item" href="/pages/autoship">
+			<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/stag-hunt-core-push-plain-image.jpg?v=1583781404">
+			<h2>WIN A STAG HUNT</h2>
+			<span>$15,000 VALUE</span>
+			<button class="ghost-btn">LEARN MORE</button>
+		</a>
+		<a class="push-item" href="/products/immune">
+			<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/immune-sticker-push.jpg?v=1582739425">
+			<h2>ALL-NEW IMMUNE</h2>
+			<span>DAILY IMMUNE BOOSTER</span>
+			<button class="ghost-btn">BUY NOW</button>
+		</a>
+	</div>
+</div>
+
+
+
+{% comment %}
+
+THIS IS FOR THE EXPERTVOICE TAGGING
+
+{% endcomment %}
+
+
+<div class="u-column2 col-2 col-register">
+ <h2>{{ 'customer.register.title' | t }}</h2>
+ {%- form 'create_customer',class:'register' -%}
+    {%- if form.errors -%}
+       {%- assign gl_shopify_error = true -%}
+       {%- for field in form.errors -%}
+          {%- if field == 'form' -%}
+             {%- assign error_html = form.errors.messages[field] -%}
+          {%- else -%}
+             {%- assign error_html = form.errors.translated_fields[field] | append:form.errors.messages[field] -%}
+          {%- endif -%}
+       {%- endfor -%}
+    {%- endif -%}
+
+    <p class="shopify-FormRow shopify-FormRow--wide form-row form-row-wide">
+       <label for="FirstName">{{ 'customer.register.first_name' | t }}</label>
+       <input type="text" name="customer[first_name]" id="FirstName"{%- if form.first_name %} value="{{ form.first_name }}"{%- endif %} autofocus>
+    </p>
+    <p class="shopify-FormRow shopify-FormRow--wide form-row form-row-wide">
+       <label for="LastName">{{ 'customer.register.last_name' | t }}</label>
+       <input type="text" name="customer[last_name]" id="LastName"{%- if form.last_name %} value="{{ form.last_name }}"{%- endif -%}>
+    </p>
+    <p class="shopify-FormRow shopify-FormRow--wide form-row form-row-wide">
+       <label for="reg_email">{{ 'customer.register.email' | t }} <span class="required">*</span></label>
+       <input type="email" class="shopify-Input shopify-Input--text input-text{%- if form.errors contains 'email' %} input--error{%- endif -%}" name="customer[email]" id="reg_email"{%- if form.email %} value="{{ form.email }}"{%- endif -%}>
+    </p>
+    <p class="shopify-FormRow shopify-FormRow--wide form-row form-row-wide">
+       <label for="reg_password">{{ 'customer.register.password' | t }} <span class="required">*</span></label>
+       <input type="password" class="shopify-Input shopify-Input--text input-text{%- if form.errors contains 'password' %} input--error{%- endif -%}" name="customer[password]" id="reg_password" required="required">
+    <div class="shopify-password-strength" aria-live="polite"></div>
+    </p>
+    <p class="shopify-FormRow form-row">          
+       <input type="submit" class="shopify-Button button" name="register" value="{{ 'customer.register.submit' | t }}">
+    </p>
+ {%- endform -%}
+</div>
+
+
+<script type="text/javascript">
+	const queryString = window.location.search;
+	const urlParams = new URLSearchParams(queryString);
+	const tag = urlParams.get('tag');
+	// function getUrlParam(name) {
+	//     var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(window.location.href);
+	//     return (results && results[1]) || undefined;
+	// }
+	// var tag = getUrlParam('tag');
+
+	if (tag == 'expertVoice') {
+		var inputField = '<input type="hidden" id="customer_tags" name="customer[tags]" value="'+ tag +'"/>';
+		console.log(tag + ' tag will be used in customer tag registration.');
+		$('#create_customer').append(inputField);
+	} else {
+	    console.log('Not a valid/approved customer tag used in url tag parameter.');
+	}
+</script>
+
+{% comment %}
+
+
+
+
+
+<script type="text/javascript">
+//https://mtnops.com/pages/sandbox?tag=expertVoice
+	var url_string = window.location.href;
+	var url = new URL(url_string);
+	var tag = url.searchParams.get("tag");
+	
+
+	if(tag != null && tag == "expertVoice") {
+		console.log('This tag is for Expert Voice! Yay it is working:)');
+		//{% assign evTag = true %}
+		//{% assign tagName = tag %}
+	}
+	
+
+	$.urlParam = function (name) {
+    var results = new RegExp('[\?&]' + name + '=([^&#]*)')
+    .exec(window.location.search);
+
+    	return (results !== null) ? results[1] || 0 : false;
+	}
+	$.fn.grabbit = function( urlParam ){
+		function getParameterByName(name) {
+    		name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    		var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+    		results = regex.exec(location.search);
+    		
+    		return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+		}
+
+		return this.val(getParameterByName(urlParam));
+	};
+	//$(".age").val('hey there');
+	$("input.name").grabbit('name');
+	$("input.last").grabbit('last');
+	$("input.age").grabbit('age');
+
+
+	$("button.submit").on('click',function(){ 
+		if($(this).val()){
+			$.post({
+	        url: "",
+	        data: { "name": $('.name').val(), "last": $('.last').val(), "age": $('.age').val() },
+	        success: function(data){//make sure the server sends only the required data
+	          console.log(data);
+	        }
+	      });
+	    } 
+	});
+
+	var myRedirect = function(redirectUrl, arg, value) {
+	  var form = $('<form action="' + redirectUrl + '" method="post">' +
+	  '<input type="hidden" name="'+ arg +'" value="' + value + '"></input>' + '</form>');
+	  $('body').append(form);
+	  $(form).submit();
+	};
+
+	myRedirect("https://mtnops.com/pages/sandbox", "tag", "testTag");
+</script>{% endcomment %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	{% if isTagged %}
+		<h1>Hey there, {{customer.first_name}}!</h1>
+
+		<p>Here are all your tags:</p>
+		<ul>
+			{% for tag in customer.tags %}
+				<li>{{ tag }}</li>
+			{% endfor %}
+		</ul>
+		<p>You discount is {{ discountPercent }}% off! Enjoy:)</p>
+	{% endif %}
+
+
+{% comment %}<div class="mtnops-intro">
+<h1>OUTDOOR ENERGY AND PERFORMANCE NUTRITION</h1>
+</div>
+<div class="hero-pushes full-width giveback-sale-push">
+	<div class="hero-notice">
+		Help us reach our goal of 400,000 meals donated! We are donating 20 meals with each order this week.
+	</div>
+	<div class="hero-main-push">
+		<img class="hero-main-push-image" src="https://cdn.shopify.com/s/files/1/2786/4584/files/GivebackSale-BG.jpg?v=1587057515">
+		<div class="main-push-message wide-max550">
+			<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/GivebackSale-HomePush-Text.svg?v=1587057317">
+			<a class="mtnops-btn" href="/collections/all-products">SHOP SUPPS</a>
+			<a class="mtnops-btn" href="/collections/gear">SHOP GEAR</a>
+		</div>
+	</div>
+	<div class="secondary-pushes">
+		<a class="push-item" href="/pages/covid-19">
+			<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/covid19-push.jpg?v=1584637729">
+			<h2>STAYING HEALTHY</h2>
+			<span>A MESSAGE FROM OUR CEO</span>
+			<button class="ghost-btn">READ NOW</button>
+		</a>
+		<a class="push-item" href="/pages/pro-energy">
+			<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/ignite-sampler-kit-push.jpg?v=1584638775">
+			<h2>FREE IGNITE SAMPLER</h2>
+			<span>ONLY PAY SHIPPING</span>
+			<button class="ghost-btn">SHOP NOW</button>
+		</a>
+		<a class="push-item" href="/pages/autoship">
+			<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/stag-hunt-core-push-plain-image.jpg?v=1583781404">
+			<h2>WIN A STAG HUNT</h2>
+			<span>$15,000 VALUE</span>
+			<button class="ghost-btn">LEARN MORE</button>
+		</a>
+	</div>
+</div>{% endcomment %}
+
+	{% comment %}{% for product in collections['mtn-ops-samplers'].products %}
+     HOT IGNITE SAMPLER 
+{% if product.id == freeProductId %}{% endif %}
+        <div class="sampler-addon-wrap">
+          <h2>Want a <b>Free Sample</b> of {{product.title | remove: "SAMPLER" | strip }}?</h2>
+          <p>Choose your sample flavor below</p>
+          <ul>
+            {% for v in product.variants %}
+              {% if v.available %}
+                <li><a class="add-sample-to-cart" href="#" data-variant-id="{{ v.id }}"><img src="{{ v.image.src | img_url: '200x200' }}"><div><h6>{{ v.title}}</h6><span>{{v.price | money}}</span></div></a></li>
+              {% endif %}
+            {% endfor %}
+        </ul>
+        </div>
+      
+    {% endfor %}
+{% endcomment %}
+
+{% comment %}		<a href="#" class="testevent">Tsting Event</a>
+
+<script type="text/javascript">
+	$('.testevent').on('click', function(e) {
+		sendCustomEvent();
+	});
+
+      function sendCustomEvent() {
+        const headers = new Headers();
+        headers.append("Content-Type", "application/json");
+
+        const body = { event: "button-click", name: '{{customer.first_name}}'};
+        const options = {
+          method: "POST",
+          headers,
+          mode: "cors",
+          body: JSON.stringify(body)
+        };
+
+        fetch("https://eniyzjsut234.x.pipedream.net/", options);
+      }
+
+    </script>
+{% endcomment %}
+
+
+
+
+{% comment %}<div class="video_html5_wrap">
+  <div class="video_overlay">
+    <img class="video_logo" src="https://cdn.shopify.com/s/files/1/2786/4584/files/elk101-truck-logo.png?8758"/>
+    <h1>MTN OPS & ELK 101 TRUCK</h1>
+    <span class="subtitle">YOUR ELK HUNTING CHARIOT AWAITS</span>
+    <a id="click-play" class="play_trigger watch_video2" href="#"><i class="fa fa-play-circle" aria-hidden="true"></i>Play</a>
+  </div>
+ 
+  <a id="click-stop" class="close_trigger"><i class="fa fa-times" aria-hidden="true"></i>Close</a>
+
+  <div class="video-screen">
+    <video id="el-video" poster="https://cdn.shopify.com/s/files/1/2786/4584/files/elk101-truck-image-11.jpg?8764" class="el-video">
+		  <source src="https://cdn.shopify.com/s/files/1/2786/4584/files/elk101-truck-trailer.mp4?9145" type="video/mp4">
+			<source src="https://cdn.shopify.com/s/files/1/2786/4584/files/elk101-truck-trailer.webm?9145" type="video/webm">
+			<source src="https://cdn.shopify.com/s/files/1/2786/4584/files/elk101-truck-trailer.ogv?9145" type="video/ogg">
+		</video>
+  </div>
+</div>
+
+
+<style>
+  .video_hero_wrap {
+    margin: 0;
+    border-bottom: 5px solid black;
+  }
+  .video_hero_wrap .video_hero h1 {
+    display: none;
+  }
+  .video_hero_wrap .video_hero span {
+    letter-spacing: 5px;
+  }
+</style>
+
+<script type="text/javascript">
+
+	var vid = $("#el-video");
+	var play = $("#click-play");
+	var stop = $("#click-stop");
+
+	play.on('click', function(e) {
+		playVid();
+	});
+	stop.on('click', function(e) {
+		pauseVid();
+	});
+
+	function playVid() {
+	  vid.get(0).play();
+	} 
+
+	function pauseVid() { 
+	  vid.get(0).pause(); 
+	}
+
+	setTimeout( function() {
+		$('.hero-notice').addClass('active');
+	}, 3000);
+</script>{% endcomment %}
+
+
+
+{% comment %}<script>
+    var tag = document.createElement('script');
+
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    var player;
+    function onYouTubeIframeAPIReady() {
+        player = new YT.Player('featured_video', {
+            height: '100%',
+            width: '100%',
+            videoId: 'kLmhg2xV3bE', // Youtube video ID #
+            playerVars: { 'showinfo': 0, 'controls': 1, rel: 0 },
+            events: {
+                'onReady': onPlayerReady,
+                'onStateChange': onPlayerStateChange
+            }
+        });
+    }
+    function onPlayerReady(event) {
+        // bind events
+        var playButton =document.querySelector('.play_trigger'); // document.getElementById("play-button"); 
+
+        playButton.addEventListener("click", function(e) {
+            e.preventDefault();
+            player.playVideo();
+            document.querySelector('.video_hero_wrap').className = "video_hero_wrap user_watching";
+        });
+
+        var pauseButton = document.querySelector(".close_trigger");
+        pauseButton.addEventListener("click", function(e) {
+            e.preventDefault();
+            document.querySelector('.video_hero_wrap').className = "video_hero_wrap user_paused";
+            player.pauseVideo();
+            //player.stopVideo();
+        });
+
+
+        document.onkeyup = function keyPress(e) {
+            if (e.keyCode == 27) { // escape key maps to keycode `27`
+                document.querySelector('.video_hero_wrap').className = "video_hero_wrap";
+                player.pauseVideo();
+                //player.stopVideo();
+            }
+        }
+
+    }
+    // 5. The API calls this function when the player's state changes.
+    //    The function indicates that when playing a video (state=1),
+    //    the player should play for six seconds and then stop.
+    var done = false;
+    function onPlayerStateChange(event) {
+        if (event.data == YT.PlayerState.PLAYING && !done) {
+        // setTimeout(stopVideo, 6000);
+        // done = true;
+
+   		//  var specifiedElement = document.querySelector(".video__wrap");
+
+			// document.addEventListener('click', function(event) {
+			//   var isClickInside = specifiedElement.contains(event.target);
+
+			//   if (!isClickInside) {
+			//   	document.querySelector(".video__wrap").className = "video__wrap";
+		 //        document.querySelector('.banner').className = "banner center page_banner rally-hero dark-overlay-false";
+		 //        player.pauseVideo();
+			//   }
+			// });
+        }
+        if(event.data === 0){
+            document.querySelector('.video_hero_wrap').className = "video_hero_wrap";
+        }
+    }
+    function stopVideo() {
+        player.stopVideo();
+    }
+
+
+</script>{% endcomment %}
+
+
+{% comment %}<div class="sampler-menu-wrap">
+	<ul class="mtnops-samplers-list">
+	{% for product in collections['mtn-ops-samplers'].products %}
+    <li>
+    	<a href="{{product.url}}">
+    		<img src="{{ product | img_url: '600x' }}">
+    		<h3>{{product.title}}</h3>
+    		<div class="swatches-wrap">
+			    {% for color in product.options_by_name['Flavor'].values %}
+			      <div class="bg_color bg_color_{{ color | handleize }}"></div>
+			    {% endfor %}
+			  </div>
+    	</a>
+    </li>
+  {% endfor %}
+  </ul>
+</div>{% endcomment %}
+
+
+	{% comment %}
+	{% assign dev = "challenge" %}
+	{% if dev == "training" %}
+	{% elsif dev == "challenge" %}
+	{% endif %}
+	{% endcomment %}
+
+
+
+
+{% comment %}{% assign insider = false %}
+{% assign prodPurchased = false %}
+
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12">
+			<ul>
+				{% for order in customer.orders %}
+					<li>{{ order.name }}
+						<ul>
+							{% for item in order.line_items %}
+								<li>{{ item.product.title }} (id: {{item.product.id}})</li>
+
+
+								{% if item.product.id == 3952054665258 %}
+									{% assign insider = true %}
+									{% assign prodPurchased = item.product.title %}
+								{% endif %}
+								{% unless item.properties == empty %}
+									<ul>
+									  {% for property in item.properties %}
+									  <li>{{ property.first }}: {{ property.last }}</li>
+									  {% endfor %}
+									</ul>
+								{% endunless %}
+							{% endfor %}
+						</ul>
+					</li>
+				{% endfor %}
+			</ul>
+			{% if insider == true %}
+				<div class="">
+					<h3>{{ customer.first_name }} is an Insider and has purchased a {{ prodPurchased }} before.</h3>
+				</div>
+			{% else %}
+				<h3>Not an insider.</h3>
+			{% endif %}
+		</div>
+	</div>
+</div>{% endcomment %}
+
+
+
+
+
+
+	
+
+{% else %}
+	<h3>This is a sandbox for development purposes. Email <a href="mailto:dev@mtnops.com">dev@mtnops.com</a> if you have any questions about this.</h3>
+{% endif %}
+

@@ -1,0 +1,141 @@
+
+
+{% comment %}
+  SPEND OVER $20
+{% endcomment %}
+
+{% assign spendTotal = 0 %}
+{% assign productHandle = 'blaze' %}
+{% assign freeProduct2 = all_products[productHandle] %}
+{% assign cartQualifies2 = false %}
+{% assign freeProductInCart2 = false %}
+{% assign otherProductsInCart = false %}
+{% assign addedFromCart2 = false %}
+
+{% if cart.total_price > 2000 %}
+  {% assign cartQualifies2 = true %}
+{% endif %}
+
+{% comment %}
+  CART LOOP
+{% endcomment %}
+{% for item in cart.items %}
+
+  {% if item.product_id == freeProduct2.id %}
+    {% assign freeProductInCart2 = true %}
+    {% assign freeProductQty = item.quantity %}
+  {% else %}
+    {% assign otherProductsInCart = true %}
+  {% endif %}
+
+  {% unless item.properties == empty %}
+    {% for property in item.properties %}
+      {% if property.first == "reward" %}
+        {% assign addedFromCart2 = true %} 
+      {% endif %}
+    {% endfor %}
+  {% endunless %}
+
+{% endfor %}
+
+
+{% if freeProduct2 != empty and freeProduct2.available and cartQualifies2 and freeProductInCart2 == false and addedFromCart2 == false %}
+  
+  <div class="spend-reward-wrap">
+    <h3><span>You Qualify for a</span><br>FREE {{freeProduct2.title}} for spending over $20!</h3>
+      
+    {% if freeProduct2.variants.size > 1 %}
+      <p>Thank you for supporting us. Select your free {{freeProduct2.title}} below.</p>
+      <ul class="rewards-list">
+        {% for var in freeProduct2.variants %}
+          {% if var.available %}
+            <li><a class="add-free-product-to-cart freeProduct-add-to-cart" data-product-id="{{var.id}}" href="#"><img class="promo-item-image" src="{{ var.featured_media | img_url: '250x' }}"><span>{{var.title}}</span></a></li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    {% else %}
+      <a class="add-free-product-to-cart freeProduct-add-to-cart" data-product-id="{{freeProduct2.variants[0].id}}" href="#">
+        <img class="promo-item-image" src="{{ freeProduct2.images[0].src | img_url: 'master' }}">
+        <span>ADD TO CART</span>
+      </a>
+    {% endif %}
+    {% comment %}<small>*THE SPECIAL OFFER INSIDE THIS SAMPLER IS SINGLE USE ONLY. IF YOU’VE ALREADY PURCHASED THIS SAMPLER AND HAVE USED THE OFFER INSIDE THIS ONE WILL NOT WORK. INSTEAD, GIVE IT TO A BUDDY!*</small>{% endcomment %}
+  </div>
+  
+  <script type="text/javascript">
+
+      console.log('reward: ','{{freeProduct2.available}}');
+
+
+      //add item to cart
+      function addfreeProductToCart(product_id, quantity) {
+        data = {
+          "quantity": quantity,
+          "id": product_id,
+          properties: {
+            'reward': 'Thank you!'
+          }
+        }
+        jQuery.ajax({
+          type: 'POST',
+          url: '/cart/add.js',
+          data: data,
+          dataType: 'json',
+          success: function() { 
+            console.log('{{freeProduct2.title}} has been added to cart.');
+
+
+            $('#promo-cart-popup img, #promo-cart-popup .add-promo-item-to-cart, #promo-cart-popup p, #promo-cart-popup .cart-upsell-tier, #promo-cart-popup .prize-clause, .no-thanks, .promo-product-add-to-cart-wrap').hide();
+            $('#promo-cart-popup h3').replaceWith('<h3>AWESOME!<br>WE ARE ADDING IT TO YOUR CART.</h3><br><h4>JUST A SEC.</h4>');
+            //setTimeout(function(){
+            $('.update-cart').trigger('click');  
+            //}, 1000);
+            
+          },
+          error: function (request, status, error) {
+            console.log(request.responseText);
+            var code = request.responseJSON.status;
+            //if (code == 422 ) {
+              //$('.message').text();
+            //}
+            console.log("<p>" + request.responseJSON.description + "</p>");
+            alert('error on adding product to cart.');
+          }
+        });
+      }
+
+      //promo item add to cart
+      $('.add-free-product-to-cart').on('click', function(e) {
+        var promoItemId = $(this).data('product-id');
+        e.preventDefault();
+        addfreeProductToCart(promoItemId, 1);
+        $(this).addClass('active');
+      });
+
+  </script>
+
+{% endif %}
+
+{% comment %}{% if freeProduct != empty and freeProduct.available and cartQualifies == false %}
+  <div class="cart-banner spend-reward-banner">
+    <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/6-11-21---FathersDayPromoLaunch-CartBanner.jpg?v=1623346289">
+    <img class="image-show-mobile" src="https://cdn.shopify.com/s/files/1/2786/4584/files/primal-banner-mobile.png?v=1604444815">
+    <img class="image-show-desktop" src="https://cdn.shopify.com/s/files/1/2786/4584/files/primal-banner-dt.png?v=1604444815">
+  </div>
+{% endif %}{% endcomment %}
+
+
+{% if freeProductInCart2 and cart.total_price < 2000 %}
+  <script type="text/javascript">
+    $.post('/cart/update.js', {
+      updates: {
+        '{{freeProduct2.variants[0].id}}': 0
+      }
+    });
+    setTimeout(function(){
+      location.reload(true);
+    }, 500);
+  </script>
+  
+{% endif %}
+

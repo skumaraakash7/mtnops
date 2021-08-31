@@ -1,0 +1,380 @@
+
+	<header class="video_hero_wrap video_collection_hero">
+		<video autoplay playsinline muted loop poster="https://cdn.shopify.com/s/files/1/2786/4584/files/fitness-bg-placeholder.jpg?v=1606247935" class="vid_trailer">
+			<source src="https://cdn.shopify.com/s/files/1/2786/4584/files/fitness-apparel-trailer.mp4?v=1606261887" type="video/mp4">
+			<source src="https://cdn.shopify.com/s/files/1/2786/4584/files/fitness-apparel-trailer.webm?v=1606261886" type="video/webm">
+			<source src="https://cdn.shopify.com/s/files/1/2786/4584/files/fitness-apparel-trailer.ogv?v=1606261888" type="video/ogg">	
+	  </video>
+	  <div class="video_hero">
+
+	      {%- if collection.metafields.meta.logo != blank -%}
+		      <img class="collection-logo" src="{{ collection.metafields.meta.logo }}">
+		      {% comment %}{%- if collection.metafields.meta.discountCode != blank -%}
+		        <div class="apply-code">Apply code <span class="discount-code">[{{collection.metafields.meta.discountCode}}]</span> at Checkout</div>
+		      {%- endif -%}  {% endcomment %}      
+		    {%- else -%}
+
+		      <h1>{{ collection.title }}</h1>
+		      {%- if collection.metafields.meta.subtitle != blank -%}
+		        <span class="h1-subtitle">{{ collection.metafields.meta.subtitle }}</span>
+		      {%- endif -%}
+
+		    {%- endif -%}
+				{%- if collection.metafields.meta.description != blank and collection.metafields.meta.image != blank -%}
+		      <p>{{ collection.metafields.meta.description }}</p>
+		    {%- endif -%}
+
+	      <a id="play-button" class="play_trigger watch_video2" href="#"><i class="fa fa-play-circle" aria-hidden="true"></i>Play</a>
+	  </div>
+		<a id="pause-button" class="close_trigger"><i class="fa fa-times" aria-hidden="true"></i>Close</a>
+		<div class="video_screen">
+		    <div id="featured_video"></div>
+		</div>
+
+	</header>
+
+	<div class="collection-section">
+		<img class="section-title" src="https://cdn.shopify.com/s/files/1/2786/4584/files/performance-fitness-intro.svg?v=1606247935">
+		{%- if collection.metafields.meta.description != blank and collection.metafields.meta.image != blank -%}
+      <p>{{ collection.metafields.meta.description }}</p>
+    {%- endif -%}
+		<div class="fitness-apparel-icons">
+			<ul>
+				<li>
+					<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/highlight-stretch.svg?v=1606247935">
+				</li>
+				<li>
+					<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/highlight-soft.svg?v=1606247935">
+				</li>
+				<li>
+					<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/highlight-fibers.svg?v=1606247935">
+				</li>
+				<li>
+					<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/highlight-wick.svg?v=1606247935">
+				</li>
+				<li>
+					<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/highlight-breathable.svg?v=1606247935">
+				</li>
+			</ul>
+		</div>
+		
+	</div>
+
+	{% comment %}<div class="collection-section">
+		<div class="fitness-apparel-filters">
+			<a href="">
+				<span>TOPS</span>
+			</a>
+			<a href="">
+				<span>BOTTOMS</span>
+			</a>
+		</div>	
+	</div>{% endcomment %}
+
+	{% comment %}<div class="collection-of-products collection-section">
+		{% for product in collection.products %}
+			{% if product.type == "Jacket" or product.type == "Hoodie" or product.type == "Shirt" or product.type == "Tank" %}
+				<div class="product-item-merino">
+					<a class="product-link" href="{{ product.url }}">
+						
+						<img src="{{ product | img_url: '600x' }}">
+
+						{% for color_option in product.options_by_name['Color'].values %}
+				      <div class="colored-swatch bg_color_{{color_option | handleize }}"></div>
+				    {% endfor %}
+
+				    <span class="product-price">{{ product.price | money }}</span>
+						
+						{%- if product.metafields.meta.titlesvg != blank -%}
+			        <img class="title-svg" src="{{ product.metafields.meta.titlesvg }}">
+
+			      {%- else -%}
+			      	<h3>{{ product.title }}</h3>
+			      {%- endif -%}
+						<ul>
+				      {% for v in product.variants %}
+				        {% if v.available and v.title contains "Single" %}{% endif %}
+				          <li><a class="merino-item merino-{{v.title | remove: 'Single' | handleize }}" data-selector="{{v.title | remove: 'Single' | handleize }}" data-pid="{{ v.id }}"><div><h6>{{ v.title}}</h6><span>{{v.price | money}}</span></div></a></li>
+				        
+				      {% endfor %}
+				    </ul>
+						<button class="add-merino-to-cart mtnops-btn">
+							BUY NOW
+						</button>
+					</a>
+				</div>
+			{% endif %}
+		{% endfor %}
+	</div>{% endcomment %}
+	
+	<div class="collection-of-products collection-section">
+		
+		
+		{% for product in collection.products %}
+				<div class="collection-product-item">
+					{% if customer.email == 'jake.shaw@me.com' %}{% endif %}
+
+					{% if product.available %}
+						{% if product.metafields.meta.noticia == 'new' %}
+							<div class="product-notice new-product"><img src="https://cdn.shopify.com/s/files/1/2786/4584/files/product-notice-new.svg?v=1617822467"></div>
+						{% elsif product.metafields.meta.noticia == 'restock' %}
+							<div class="product-notice restocked"><img src="https://cdn.shopify.com/s/files/1/2786/4584/files/product-notice-back-in-stock.svg?v=1617822467"></div>
+						{% elsif product.metafields.meta.noticia == 'soon' %}
+							<div class="product-notice coming-soon"><img src="https://cdn.shopify.com/s/files/1/2786/4584/files/product-notice-coming-soon.svg?v=1617822467"></div>
+						{% endif %}
+					{% else %}
+						{% if product.metafields.meta.noticia == 'soon' %}
+							<div class="product-notice coming-soon"><img src="https://cdn.shopify.com/s/files/1/2786/4584/files/product-notice-coming-soon.svg?v=1617822467"></div>
+						{% else %}
+							<div class="product-notice out-of-stock"><img src="https://cdn.shopify.com/s/files/1/2786/4584/files/product-notice-out-of-stock.svg?v=1617822467"></div>
+						{% endif %}
+					{% endif %}
+
+					
+					<a class="product-link" href="{{ product.url }}">
+						
+						<img src="{{ product | img_url: '600x' }}">
+
+						{% for color_option in product.options_by_name['Color'].values %}
+				      <div class="colored-swatch bg_color_{{color_option | handleize }}"></div>
+				    {% endfor %}
+						
+						{%- if product.metafields.meta.titlesvg != blank -%}
+			        <img class="title-svg" src="{{ product.metafields.meta.titlesvg }}">
+
+			      {%- else -%}
+			      	<h3>{{ product.title }}</h3>
+			      {%- endif -%}
+
+			      <span class="product-price">{{ product.price | money }}</span>
+						{% comment %}<ul>
+				      {% for v in product.variants %}
+				        {% if v.available and v.title contains "Single" %}{% endif %}
+				          <li><a class="merino-item merino-{{v.title | remove: 'Single' | handleize }}" data-selector="{{v.title | remove: 'Single' | handleize }}" data-pid="{{ v.id }}"><div><h6>{{ v.title}}</h6><span>{{v.price | money}}</span></div></a></li>
+				        
+				      {% endfor %}
+				    </ul>{% endcomment %}
+				    {% if product.available %}
+							<button class="add-merino-to-cart mtnops-btn">
+								BUY NOW
+							</button>
+						{% endif %}
+					</a>
+					{% comment %}{% if product.metafields.meta.description_excerpt != blank %}
+						<div class="merino-benefits">
+							{{ product.metafields.meta.benefits }}
+							{{ product.metafields.meta.description_excerpt }}
+						</div>
+					{% endif %}{% endcomment %}
+				</div>
+		{% endfor %}
+	</div>
+
+	<div class="collection-lifestyle-section">
+		<img class="image-cover" src="https://cdn.shopify.com/s/files/1/2786/4584/files/Tytos-LS-Lifestlye-Schafer-11.11.20-4.jpg?v=1606798671">
+	</div>
+	{% comment %}<div class="collection-section best-results-section">
+		<h4>FOR BEST RESULTS</h4>
+		<p>Battleground Merino Baselayers naturally perform best when worn next to skin by managing body heat and wicking moisture. Merino wool is a soft yarn and performs best as a baselayer. To prevent damage and avoid abrasion, it is not recommended to be worn as an outer layer.</p>
+	</div>{% endcomment %}
+
+	<div class="collection-lifestyle-section">
+		<img class="image-cover" src="https://cdn.shopify.com/s/files/1/2786/4584/files/Apollo-jogger-Lifestyle.jpg?v=1606798962">
+	</div>
+
+	{% comment %}<div class="collection-section fitness-benefits-section">
+		<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/merino-product-benefits.svg?v=1596247752">
+		<div class="row">
+			<div class="col-sm-12 col-md-6">
+				<div class="merino-benefit">
+					<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/merino-benefit-4.svg?v=1596247752">
+					<p>95% Merino Wool and 5% Spandex for a superior fit and function. Wool is also naturally odor resistant and moisture wicking.</p>
+				</div>
+			</div>
+			<div class="col-sm-12 col-md-6">
+				<div class="merino-benefit">
+					<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/merino-benefit-2.svg?v=1596247752">
+					<p>Merino wool is the ultimate fabric in body temperature management. Designed to keep you comfortable in warm or cold conditions.</p>
+				</div>
+			</div>
+			<div class="col-sm-12 col-md-6">
+				<div class="merino-benefit">
+					<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/merino-benefit-3.svg?v=1596247752">
+					<p>Premium Superfine 17.5 micron merino wool fibers deliver a non-itch experience while being incredibly soft, smooth and comfortable on your skin.</p>
+				</div>
+			</div>
+			<div class="col-sm-12 col-md-6">
+				<div class="merino-benefit">
+					<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/merino-benefit-1.svg?v=1596247752">
+					<p>Engineered to be the perfect baselayer & leverages wools attributes. Designed for function & performance fit with increased length, contoured shape, hidden thumb holes & more.</p>
+				</div>
+			</div>
+		</div>
+	</div>{% endcomment %}
+
+
+{% comment %}{% for product in collections['jackets'].products %}
+      {% if product.id == freeProductId %}{% endif %}
+        <div class="bar-addon-wrap">
+          <h2><b>Claim your Free Sample</b> of<br>our all-new {{product.title | strip }}!</h2>
+          <p>Choose your Bar Flavor below</p>
+
+          <ul>
+            {% for v in product.variants %}
+              {% if v.available %}
+                <li>
+
+                	<a class="add-sample-to-cart bar-{{v.title | remove: 'Single' | handleize }} {% if v.id = product.selected_or_first_available_variant %} selected{%endif %}" data-selector="{{v.title | remove: 'Single' | handleize }}" data-variant-id="{{ v.id }}"><img src="{{ v.image.src | img_url: '600x600' }}"><div><h6>{{ v.title}}</h6><span>{{v.price | money}}</span></div></a>
+                </li>
+              {% endif %}
+            {% endfor %}
+        </ul>
+        </div>
+      
+    {% endfor %}{% endcomment %}
+
+<script type="text/javascript">
+
+	// $('.merino-item').on('click', function(e) {
+	// 	$('.merino-item').removeClass('selected');
+	// 	$(this).addClass('selected');
+	// });
+	
+	// $('.add-merino-to-cart').on('click', function(e) {
+	//   e.preventDefault();
+	//   var variant = $('.merino-item.selected').data('pid');
+
+	//   //if ($('.merino-item').hasClass('selected')) {
+	//   	addMerinoToCart(variant, 1);
+	//   // } else {
+	//   // 	alert('Select a size');
+	//   // }
+	//   // var slang = new Array("BOOYAH", "WAMMY", "AWESOME SAUCE", "PERFECTO", "YOU GOT IT", "AH YEAH");
+	//   // var title = slang[Math.floor( Math.random() * slang.length )];
+	//   // var variant = $(this).data('variant-id');
+	//   // $('.add-sample-to-cart').removeClass('active-sample');
+	//   // $('.added-success-message').remove();
+	//   // $('.add-sample-to-cart').not(this).css({opacity:.05});
+	//   // $(this).addClass('active-sample');
+	//   // $(this).prepend('<p class="added-success-message"><span>'+title+'!</span><br>WE WILL ADD IT TO YOUR CART.</p>');
+
+	// });
+	// function addMerinoToCart(product_id, quantity) {
+	//   data = {
+	//     "quantity": quantity,
+	//     "id": product_id,
+	//     properties: {
+	//       'bar': 'offer'
+	//     }
+	//   }
+	//   jQuery.ajax({
+	//     type: 'POST',
+	//     url: '/cart/add.js',
+	//     data: data,
+	//     dataType: 'json',
+	//     success: function() {
+	//       console.log('added free bar item to cart');
+	//       $('.update-cart').trigger('click');  
+	//     },
+	//     error: function (request, status, error) {
+	//       console.log(request.responseText);
+	//       var code = request.responseJSON.status;
+	//       console.log("<p>" + request.responseJSON.description + "</p>");
+	//       alert('error on adding product to cart.');
+	//     }
+	//   });
+	// }
+
+
+
+</script>
+
+<script>
+  var tag = document.createElement('script');
+
+  tag.src = "https://www.youtube.com/iframe_api";
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+  var player;
+  function onYouTubeIframeAPIReady() {
+      player = new YT.Player('featured_video', {
+          height: '100%',
+          width: '100%',
+          videoId: 'KDOPDEbscNk',
+          playerVars: { 'showinfo': 0, 'controls': 1, rel: 0 },
+          events: {
+              'onReady': onPlayerReady,
+              'onStateChange': onPlayerStateChange
+          }
+      });
+  }
+  function onPlayerReady(event) {
+      // bind events
+      var playButton =document.querySelector('.play_trigger'); // document.getElementById("play-button"); 
+
+     //  setTimeout( function() {
+     //  	player.playVideo();
+     //    document.querySelector('.video_hero_wrap').className = "video_hero_wrap user_watching";
+    	// }, 3500);
+
+      playButton.addEventListener("click", function(e) {
+          e.preventDefault();
+          player.playVideo();
+          document.querySelector('.video_hero_wrap').className = "video_hero_wrap user_watching";
+      });
+
+      var pauseButton = document.querySelector(".close_trigger");
+      pauseButton.addEventListener("click", function(e) {
+          e.preventDefault();
+          document.querySelector('.video_hero_wrap').className = "video_hero_wrap user_paused";
+          player.pauseVideo();
+          //player.stopVideo();
+      });
+
+
+      document.onkeyup = function keyPress(e) {
+          if (e.keyCode == 27) { // escape key maps to keycode `27`
+              document.querySelector('.video_hero_wrap').className = "video_hero_wrap";
+              player.pauseVideo();
+              //player.stopVideo();
+          }
+      }
+
+  }
+  // 5. The API calls this function when the player's state changes.
+  //    The function indicates that when playing a video (state=1),
+  //    the player should play for six seconds and then stop.
+  var done = false;
+  function onPlayerStateChange(event) {
+      if (event.data == YT.PlayerState.PLAYING && !done) {
+      // setTimeout(stopVideo, 6000);
+      // done = true;
+
+ 		//  var specifiedElement = document.querySelector(".video__wrap");
+
+		// document.addEventListener('click', function(event) {
+		//   var isClickInside = specifiedElement.contains(event.target);
+
+		//   if (!isClickInside) {
+		//   	document.querySelector(".video__wrap").className = "video__wrap";
+	 //        document.querySelector('.banner').className = "banner center page_banner rally-hero dark-overlay-false";
+	 //        player.pauseVideo();
+		//   }
+		// });
+      }
+      if(event.data === 0){
+          document.querySelector('.video_hero_wrap').className = "video_hero_wrap";
+      }
+  }
+  function stopVideo() {
+      player.stopVideo();
+  }
+
+</script>
+
+
+
+
+
+

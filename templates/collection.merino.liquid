@@ -1,0 +1,186 @@
+
+
+<header class="collection-hero merino-collection{% if collection.metafields.meta.image != blank %} has-collection-image{% endif %}"{%- if collection.metafields.meta.image != blank -%} style="background-image: url('{{ collection.metafields.meta.image }}');"{%- endif -%}>
+  <div class="collection-hero-text">
+
+    {%- if collection.metafields.meta.logo != blank -%}
+      <img class="collection-logo" src="{{ collection.metafields.meta.logo }}">
+      {%- if collection.metafields.meta.discountCode != blank -%}
+        <div class="apply-code">Apply code <span class="discount-code">[{{collection.metafields.meta.discountCode}}]</span> at Checkout</div>
+      {%- endif -%}        
+    {%- else -%}
+
+      <h1>{{ collection.title }}</h1>
+      {%- if collection.metafields.meta.subtitle != blank -%}
+        <span class="h1-subtitle">{{ collection.metafields.meta.subtitle }}</span>
+      {%- endif -%}
+
+    {%- endif -%}
+    {%- if collection.metafields.meta.description != blank and collection.metafields.meta.image != blank -%}
+      <p>{{ collection.metafields.meta.description }}</p>
+    {%- endif -%}
+  </div>
+  <img class="brush-border-bottom" src="https://cdn.shopify.com/s/files/1/2786/4584/files/hero-brush-border.svg?v=1596247752">
+</header>
+
+<div class="collection-section">
+	<img class="section-title" src="https://cdn.shopify.com/s/files/1/2786/4584/files/merino-wool-systems-title.svg?v=1617225528">
+</div>
+<div class="collection-of-products collection-section">
+	
+	{% for product in collection.products %}
+		<div class="product-item-merino">
+			<a class="product-link" href="{{ product.url }}">
+				
+				<img src="{{ product | img_url: '600x' }}">
+
+				{% for color_option in product.options_by_name['Color'].values %}
+		      <div class="colored-swatch bg_color_{{color_option | handleize }}"></div>
+		    {% endfor %}
+
+		    <span class="product-price">{{ product.price | money }}</span>
+				
+				{%- if product.metafields.meta.titlesvg != blank -%}
+	        <img class="title-svg" src="{{ product.metafields.meta.titlesvg }}">
+
+	      {%- else -%}
+	      	<h3>{{ product.title }}</h3>
+	      {%- endif -%}
+				{% comment %}<ul>
+		      {% for v in product.variants %}
+		        {% if v.available and v.title contains "Single" %}{% endif %}
+		          <li><a class="merino-item merino-{{v.title | remove: 'Single' | handleize }}" data-selector="{{v.title | remove: 'Single' | handleize }}" data-pid="{{ v.id }}"><div><h6>{{ v.title}}</h6><span>{{v.price | money}}</span></div></a></li>
+		        
+		      {% endfor %}
+		    </ul>{% endcomment %}
+				<button class="add-merino-to-cart mtnops-btn">
+					BUY NOW
+				</button>
+			</a>
+			{% if product.metafields.meta.description_excerpt != blank %}
+				<div class="merino-benefits">
+					{% comment %}{{ product.metafields.meta.benefits }}{% endcomment %}
+					{{ product.metafields.meta.description_excerpt }}
+				</div>
+			{% endif %}
+		</div>
+	{% endfor %}
+</div>
+<div class="collection-section best-results-section">
+	<h4>FOR BEST RESULTS</h4>
+	<p>Battleground Merino Baselayers naturally perform best when worn next to skin by managing body heat and wicking moisture. Merino wool is a soft yarn and performs best as a baselayer. To prevent damage and avoid abrasion, it is not recommended to be worn as an outer layer.</p>
+</div>
+
+<div class="merino-lifestyle-section">
+	<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/Merino-Lifestyle-8.jpg?v=1596687216">
+</div>
+
+<div class="merino-benefits-section collection-section">
+	<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/merino-product-benefits.svg?v=1596247752">
+	<div class="row">
+		<div class="col-sm-12 col-md-6">
+			<div class="merino-benefit">
+				<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/merino-benefit-4.svg?v=1596247752">
+				<p>95% Merino Wool and 5% Spandex for a superior fit and function. Wool is also naturally odor resistant and moisture wicking.</p>
+			</div>
+		</div>
+		<div class="col-sm-12 col-md-6">
+			<div class="merino-benefit">
+				<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/merino-benefit-2.svg?v=1596247752">
+				<p>Merino wool is the ultimate fabric in body temperature management. Designed to keep you comfortable in warm or cold conditions.</p>
+			</div>
+		</div>
+		<div class="col-sm-12 col-md-6">
+			<div class="merino-benefit">
+				<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/merino-benefit-3.svg?v=1596247752">
+				<p>Premium Superfine 17.5 micron merino wool fibers deliver a non-itch experience while being incredibly soft, smooth and comfortable on your skin.</p>
+			</div>
+		</div>
+		<div class="col-sm-12 col-md-6">
+			<div class="merino-benefit">
+				<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/merino-benefit-1.svg?v=1596247752">
+				<p>Engineered to be the perfect baselayer & leverages wools attributes. Designed for function & performance fit with increased length, contoured shape, hidden thumb holes & more.</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+{% if customer.email == 'jake.shaw@me.com' %}
+
+
+	{% comment %}{% for product in collections['jackets'].products %}
+	      {% if product.id == freeProductId %}{% endif %}
+	        <div class="bar-addon-wrap">
+	          <h2><b>Claim your Free Sample</b> of<br>our all-new {{product.title | strip }}!</h2>
+	          <p>Choose your Bar Flavor below</p>
+
+	          <ul>
+	            {% for v in product.variants %}
+	              {% if v.available %}
+	                <li>
+
+	                	<a class="add-sample-to-cart bar-{{v.title | remove: 'Single' | handleize }} {% if v.id = product.selected_or_first_available_variant %} selected{%endif %}" data-selector="{{v.title | remove: 'Single' | handleize }}" data-variant-id="{{ v.id }}"><img src="{{ v.image.src | img_url: '600x600' }}"><div><h6>{{ v.title}}</h6><span>{{v.price | money}}</span></div></a>
+	                </li>
+	              {% endif %}
+	            {% endfor %}
+	        </ul>
+	        </div>
+	      
+	    {% endfor %}{% endcomment %}
+
+
+
+		{% comment %}$('.merino-item').on('click', function(e) {
+			$('.merino-item').removeClass('selected');
+			$(this).addClass('selected');
+		});
+		
+		$('.add-merino-to-cart').on('click', function(e) {
+		  e.preventDefault();
+		  var variant = $('.merino-item.selected').data('pid');
+
+		  if ($('.merino-item').hasClass('selected')) {
+		  	addMerinoToCart(variant, 1);
+		  } else {
+		  	alert('Select a size');
+		  }
+		  var slang = new Array("BOOYAH", "WAMMY", "AWESOME SAUCE", "PERFECTO", "YOU GOT IT", "AH YEAH");
+		  var title = slang[Math.floor( Math.random() * slang.length )];
+		  var variant = $(this).data('variant-id');
+		  $('.add-sample-to-cart').removeClass('active-sample');
+		  $('.added-success-message').remove();
+		  $('.add-sample-to-cart').not(this).css({opacity:.05});
+		  $(this).addClass('active-sample');
+		  $(this).prepend('<p class="added-success-message"><span>'+title+'!</span><br>WE WILL ADD IT TO YOUR CART.</p>');
+
+		});
+		function addMerinoToCart(product_id, quantity) {
+		  data = {
+		    "quantity": quantity,
+		    "id": product_id,
+		    properties: {
+		      'bar': 'offer'
+		    }
+		  }
+		  jQuery.ajax({
+		    type: 'POST',
+		    url: '/cart/add.js',
+		    data: data,
+		    dataType: 'json',
+		    success: function() {
+		      console.log('added free bar item to cart');
+		      $('.update-cart').trigger('click');  
+		    },
+		    error: function (request, status, error) {
+		      console.log(request.responseText);
+		      var code = request.responseJSON.status;
+		      console.log("<p>" + request.responseJSON.description + "</p>");
+		      alert('error on adding product to cart.');
+		    }
+		  });
+		}{% endcomment %}
+
+{% endif %}
+
+

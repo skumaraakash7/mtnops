@@ -1,0 +1,109 @@
+{% comment %}
+
+	MTN OPS SIZE CHARTS FOR APPAREL
+
+{% endcomment %}
+
+
+{% assign type = product.type %}
+{% assign sizeChart = "" %}
+
+{% case type %}
+
+  {% when "Shirt" %}
+
+  	{% if product.tags contains "MENS" %}
+  		{% assign sizeChartTitle = "Mens Tee" %}
+  		{% assign sizeChart = "https://cdn.shopify.com/s/files/1/2786/4584/files/size-chart-mens-tee.svg?v=1612218989" %}
+  	{% elsif product.tags contains "WOMENS" %}
+  		{% assign sizeChartTitle = "Womens Tee" %}
+  		{% assign sizeChart = "https://cdn.shopify.com/s/files/1/2786/4584/files/size-chart-womens-tee.svg?v=1612218979" %}
+  	{% endif %}
+
+  {% when "Long Sleeve" %}
+
+  	{% if product.tags contains "MENS" %}
+  		{% assign sizeChartTitle = "Mens Long Sleeve" %}
+  		{% assign sizeChart = "https://cdn.shopify.com/s/files/1/2786/4584/files/size-chart-mens-ls.svg?v=1612218989" %}
+  	{% elsif product.tags contains "WOMENS" %}
+  		{% assign sizeChartTitle = "Womens Long Sleeve" %}
+  		{% assign sizeChart = "https://cdn.shopify.com/s/files/1/2786/4584/files/size-chart-womens-ls.svg?v=1612218979" %}
+  	{% endif %}
+
+  {% when "Hoodie" or "Sweatshirt" %}
+
+  	{% if product.tags contains "MENS" %}
+  		{% assign sizeChartTitle = "Mens Hoodie" %}
+  		{% assign sizeChart = "https://cdn.shopify.com/s/files/1/2786/4584/files/size-chart-mens-hoodie.svg?v=1612218989" %}
+  	{% elsif product.tags contains "WOMENS" %}
+  		{% assign sizeChartTitle = "Womens Hoodie" %}
+  		{% assign sizeChart = "https://cdn.shopify.com/s/files/1/2786/4584/files/size-chart-womens-hoodie.svg?v=1612218980" %}
+  	{% elsif product.tags contains "YOUTH" %}
+  		{% assign sizeChartTitle = "Youth Hoodie" %}
+  		{% assign sizeChart = "https://cdn.shopify.com/s/files/1/2786/4584/files/size-chart-youth-hoodie.svg?v=1612218969" %}
+  	{% endif %}
+
+  {% when "Jacket" or "Windbreaker" %}
+
+  	{% if product.tags contains "MENS" %}
+  		{% assign sizeChartTitle = "Mens Jacket" %}
+  		{% assign sizeChart = "https://cdn.shopify.com/s/files/1/2786/4584/files/size-chart-mens-jacket.svg?v=1612218989" %}
+  	{% endif %}
+
+  {% when "Merino" %}
+
+  	{% if product.tags contains "MENS" %}
+  		{% assign sizeChartTitle = "Mens Merino" %}
+  		{% assign sizeChart = "https://cdn.shopify.com/s/files/1/2786/4584/files/size-chart-mens-merino.svg?v=1612218989" %}
+  	{% endif %}
+
+  {% when "Youth Hoodie" %}
+
+  	{% if product.title contains "CHILD" %}
+  		{% assign sizeChartTitle = "Child Hoodie" %}
+  		{% assign sizeChart = "https://cdn.shopify.com/s/files/1/2786/4584/files/size-chart-child-hoodie.svg?v=1612218970" %}
+  	{% else %}
+  		{% assign sizeChartTitle = "Youth Hoodie" %}
+  		{% assign sizeChart = "https://cdn.shopify.com/s/files/1/2786/4584/files/size-chart-youth-hoodie.svg?v=1612218969" %}
+  	{% endif %}
+
+  {% when "Youth Tee" %}
+
+  	{% if product.title contains "GIRL" %}
+  		{% assign sizeChartTitle = "Girls Tee" %}
+  		{% assign sizeChart = "https://cdn.shopify.com/s/files/1/2786/4584/files/size-chart-youth-girls-tee.svg?v=1612218969" %}
+  	{% else %}
+  		{% assign sizeChartTitle = "Youth Tee" %}
+  		{% assign sizeChart = "https://cdn.shopify.com/s/files/1/2786/4584/files/size-chart-youth-tee.svg?v=1612219333" %}
+  	{% endif %}
+
+{% endcase %}
+
+{% unless sizeChart == "" %}
+
+	<a href="#" class="size-chart-trigger btn mtnops-btn-sm">Size Chart</a>
+
+	<div id="size-chart-popup" class="iziModal custom-modal sizing-chart-popup">
+	  <a data-izimodal-close="" class="icon-close"><i class="fa fa-times" aria-hidden="true"></i></a>
+
+	  <h3>{{ sizeChartTitle }} Sizing Chart</h3>
+	  <img src="{{ sizeChart }}">
+
+	</div>
+
+	<script type="text/javascript">
+	  $('#size-chart-popup').iziModal({
+	    padding: 20,
+	    overlayColor: 'rgba(0, 0, 0, 0.8)',
+	    width: 400,
+	    closeButton: false,
+	    autoOpen: false
+	  });
+	  $('.size-chart-trigger').on('click', function(e) {
+	  	e.preventDefault();
+	  	$('#size-chart-popup').iziModal('open');
+	  });
+
+	</script>
+
+{% endunless %}

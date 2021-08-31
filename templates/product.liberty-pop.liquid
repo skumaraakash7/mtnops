@@ -1,0 +1,109 @@
+
+<div class="main-page-wrapper">
+    <!-- MAIN CONTENT AREA -->
+
+    <img class="comic-quote comic-one" src="https://cdn.shopify.com/s/files/1/2786/4584/files/liberty-pop-callout-1.svg?v=1593040497">
+    <img class="comic-quote comic-two" src="https://cdn.shopify.com/s/files/1/2786/4584/files/liberty-pop-callout-2.svg?v=1593040497">
+    <img class="comic-quote comic-three" src="https://cdn.shopify.com/s/files/1/2786/4584/files/liberty-pop-callout-3.svg?v=1593040497">
+    <img class="comic-quote comic-four" src="https://cdn.shopify.com/s/files/1/2786/4584/files/liberty-pop-callout-4.svg?v=1593040497">
+    
+    <div class="mtnops-slim-page-title"><h1>{{product.title}} - THE TASTE OF FREEDOM!</h1></div>
+     <div class="landing-hero" style="background-image: url('https://cdn.shopify.com/s/files/1/2786/4584/files/liberty-pop-hero-bg.jpg?v=1625103043');">
+      <div class="hero-overlay">
+        <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/libertypop-logo.svg?v=1625103144">
+      </div>
+    </div>
+
+    <div class="liberty-pop-band">
+      <div class="bottle">
+        <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/liberty-pop-bottle.png?v=1593016691">
+      </div>
+      <div class="callout">
+        <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/liberty-pop-ignite-supercharged-energy.svg?v=1593018073">
+      </div>
+      
+    </div>
+
+      <div class="container-fluid">
+         <div class="row">
+            <div class="site-content col-sm-12" role="main">
+              <div class="product-launch-wrap">
+                {% comment %}{%- include 'product_page_area' -%}{% endcomment %}
+                
+
+                {% comment %}<h1>{{ product.title }}</h1>{% endcomment %}
+
+
+                    {% comment %}<div class="featured-image-wrap">
+                      <img class="product-featured" src="{{ product.featured_image | img_url: '600x600' }}">
+                    </div>{% endcomment %}
+                    <div class="product-meta-wrap">
+
+                      <div>
+                        <img class="peoples-drink-title" src="https://cdn.shopify.com/s/files/1/2786/4584/files/a-drink-for-the-people.svg?v=1593016689">
+                        <p>{{ product.metafields.meta.description_excerpt }}</p>
+
+                        <span class="product-price">{{product.price | money}}</span>
+                        <a class="ajax_add_to_cart add_to_cart_button add-product-to-cart" href="#" data-pid="{{ product.variants[0].id }}"><img src="https://cdn.shopify.com/s/files/1/2786/4584/files/liberty-pop-buy-now.svg?v=1593016689"></a>
+                       
+
+                        {% comment %}{% include 'mtnops_supp_facts' %}{% endcomment %}
+
+                        <div>
+                          {% unless product.metafields.meta.supfacts == blank %}
+                          {% assign images = product.metafields.meta.supfacts | split: ','  %}
+                          
+                            <div id="supp-facts" class="iziModal supp-modal custom-modal" data-izimodal-transitionin="fadeInDown">
+                              <a data-izimodal-close="" class="icon-close"><i class="fa fa-times" aria-hidden="true"></i></a>
+                              <div class="supp-facts-gallery">
+                                {% for url in images %}
+                                    {% assign clean url = url | strip %}
+                                    <div class="item">
+                                  <img src="{{url}}" />
+                                    </div>
+                                {% endfor %}
+                              </div>
+                              
+                            </div>
+                          <a class="btn-link" data-izimodal-open="#supp-facts" data-izimodal-transitionin="fadeInDown">SUPP FACTS</a>
+                          
+                        {% endunless %}
+
+                        {% unless product.metafields.global.science == blank %}
+                          <a class="btn-link" href="{{ product.metafields.global.science }}" target="_blank" >SCIENCE RULES</a>
+                        {% endunless %}
+                        </div>
+
+                      </div>
+                    </div>
+
+
+                  
+
+                {% comment %}{% else %}
+                  <div class="featured-image-wrap">
+                    <img class="product-featured" src="{{ v.image.src | img_url: '1000x1000' }}">
+                  </div>
+                  <div class="product-meta-wrap">
+                    <span class="product-price">{{product.price | money}}</span>
+                    <a class="ajax_add_to_cart add_to_cart_button add-to-cart-watermelon" href="#" data-pid="{{ product.variants[0] }}">Add to Cart</a>
+
+                  </div>
+                {% endif %}{% endcomment %}
+              </div>
+
+            </div> <!-- .site-content -->
+        </div> <!-- end row -->
+      </div> <!-- end container -->
+      <!-- end container -->
+
+      
+</div><!-- .main-page-wrapper -->
+
+<div class="lifestyle-banner-section">
+  <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/liberty-pop-pitcher.jpg?v=1625103374">
+  <div class="lifestyle-overlay-text">
+    <span><b>IGNITE LIBERTY POP</b> is available at most local Sportsman’s Warehouse locations.</span>
+  </div>
+</div>
+

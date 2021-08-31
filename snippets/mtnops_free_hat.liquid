@@ -1,0 +1,106 @@
+{% assign subscriptionCheckout = false %}
+
+{% comment %}
+  FREE SHOOTER HAT
+{% endcomment %}
+{% assign freeHat = false %}
+{% assign freeHatId = 31820259295274 %}
+{% assign hatAddedFromCart = false %}
+
+{% comment %}
+  GIFT CARD VARIABLES
+{% endcomment %}
+{% assign giftCard = false %}
+{% assign onlyGiftCardInCart = false %}
+
+
+{% comment %}
+  OTHER PRODUCTS
+{% endcomment %}
+{% assign otherProductsInCart = false %}
+
+
+{% for item in cart.items %}
+	{% unless item.properties == empty %}
+      {% for property in item.properties %}
+        {% if property.first == "subscription_id" %}
+          {% assign subscriptionCheckout = true %}
+        {% endif %}
+      {% endfor %}
+  {% endunless %}
+
+  {% if item.gift_card %}
+    {% assign giftCard = true %}
+
+    {% if cart.items.size == 1 %}
+      {% assign onlyGiftCardInCart = true %}
+    {% endif %}
+  {% endif %}
+
+  {% if item.variant_id == freeHatId %}
+    {% assign freeHat = true %}
+
+  {% else %}
+    {% assign otherProductsInCart = true %}
+
+  {% endif %}
+
+  {% unless item.properties == empty %}
+    {% for property in item.properties %}
+      {% if property.second == "hat" %}
+        {% assign hatAddedFromCart = true %}
+      {% endif %}
+    {% endfor %}
+  {% endunless %}
+
+{% endfor %}
+
+
+
+{% if subscriptionCheckout == false and hatAddedFromCart == false and otherProductsInCart and onlyGiftCardInCart == false and cart.total_price > 12500 and freeHat == false %}
+	<div class="free-hat-prompt">
+  	<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/free-shooter-hat.png?v=1594847603">
+  	<div class="free-item-meta">
+	  	<h3>FREE SHOOTER HAT!</h3>
+	  	<h4>A $24.95 value and it's all yours.</h4>
+	  	<a href="#" class="add-hat-to-cart mtnops-btn-sm">Add To Cart</a>
+  	</div>
+	</div>
+
+	<script type="text/javascript">
+
+		  $('.add-hat-to-cart').on('click', function(e) {
+		  	e.preventDefault();
+		  	addBagToCart('{{freeHatId}}', 1);
+		  });
+		  function addBagToCart(product_id, quantity) {
+		    data = {
+		      "quantity": quantity,
+		      "id": product_id,
+		    	properties: {
+            'gift': 'hat'
+          }
+		    }
+		    jQuery.ajax({
+		      type: 'POST',
+		      url: '/cart/add.js',
+		      data: data,
+		      dataType: 'json',
+		      success: function() { 
+		        //Cookies.set('freegift', true);
+		        $('.update-cart').trigger('click');
+		      },
+		      error: function (request, status, error) {
+		        console.log(request.responseText);
+		        var code = request.responseJSON.status;
+		        //if (code == 422 ) {
+		          //$('.message').text();
+		        //}
+		        console.log("<p>" + request.responseJSON.description + "</p>");
+		      }
+		    });
+		  }
+	</script>
+
+{% endif %}
+

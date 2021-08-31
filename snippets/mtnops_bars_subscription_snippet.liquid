@@ -1,0 +1,24 @@
+<div class="bars-subscriptions-wrap">
+
+  <div class="subscribe-step-1">
+    <span>Subscribe and Save 10% off + Free Shipping!</span>
+    <a href="#" class="subscribe-trigger-btn">Subscribe Here</a>
+  </div>
+
+  <div class="subscribe-step-2">
+    <p><b>Awesome!</b> You will <b>Save 10%</b> on your box subscription, as well as <b>Free Shipping</b> on your order. Choose how often you would like to receive your box of Performance Bars.</p>
+    {% assign frequencies = product.metafields.subscriptions.shipping_interval_frequency | split: "," %}
+
+    <ul class="frequency-picker">
+    {% for frequency in frequencies %}
+      <li><a class="frequency-option" href="#" data-frequency="{{ frequency }}">{{ frequency | append: " Days" }}</a></li>
+    {% endfor %}
+    </ul>
+    
+  </div>
+
+  <div class="subscribe-step-last">
+    <a class="add-subscription-to-cart" href="#" data-discount-variant-id="{{ discount_variant_id }}" data-frequency-selected="not-selected">Add Subscription</a>
+  </div>
+
+</div>

@@ -1,0 +1,931 @@
+<div class="cf-inner-wrap {{ programClass }}">
+	<div class="program-overview">
+		<img class="program-section-title" src="https://cdn.shopify.com/s/files/1/2786/4584/files/lets-get-started.svg?v=1611853788">
+		<p>Welcome to the first round of our women’s specific training. This is our entry level workout for beginners and can be done form the comfort of your home with our MTN OPS Resistance Band or bands of your own, a set of dumbbells, an exercise ball and a set of booty bands. This is a 6 week program to help jump start that beach body you’ve been looking for with the extra emphasis on that booty!</p>
+
+		<img class="program-icons" src="https://cdn.shopify.com/s/files/1/2786/4584/files/wwc-program-icons.svg?v=1611853788">
+
+		<div class="buttons-wrap">
+			<button class="btn wwc-btn commit-now tab-trigger" data-tab='ctc'>COMMIT TO CONQUER</button>
+			<button class="btn wwc-btn nutrition-now tab-trigger" data-tab='nuto'>NUTRITION OVERVIEW</button>
+		</div>
+
+		<div id="ctc" class="commit-to-conquer tab-panel">
+			<img class="program-section-title" src="https://cdn.shopify.com/s/files/1/2786/4584/files/commit-to-conquer.svg?v=1611853788">
+			<p>You’re here because you’re ready to make a change and we’re here to help. However. you’re the only one that can hold yourself accountable. Start this program with the mindset of signing an agreement to “COMMIT TO CONQUER”. What does that mean? It means that you’ll put in 100% of the effort and mindset to working towards your goal of crushing your fitness goals. Make it official and sign your name below to prove to yourself that you’re agreeing to see this program all the way through for the next 42 days.</p>
+			<p>We believe in you — <b>YOU SHOULD TOO!</b></p>
+
+			<img class="sm-title" src="https://cdn.shopify.com/s/files/1/2786/4584/files/the-six-rules.svg?v=1611853788">
+			<ul class="the-rules">
+				<li>GET TO THE GYM/WORKOUT 5 DAYS A WEEK</li>
+				<li>DRINK A GALLON OF WATER EACH DAY</li>
+				<li>GET 8 HOURS OF SLEEP EACH NIGHT</li>
+				<li>STRETCH. STRETCH. STRETCH.</li>
+				<li>DIET IS A KEY TO SUCCESS. LISTEN TO YOUR BODY & FUEL IT.</li>
+				<li>BREATHE THROUGHOUT EXERCISE & KEEP CORE ENGAGED</li>
+			</ul>
+			<div class="buttons-wrap">
+				<a class="btn button" href="https://cdn.shopify.com/s/files/1/2786/4584/files/WomenWhoConquer-FitnessProgram-Web.pdf?v=1611793404" target="_blank"><i class="far fa-arrow-circle-down"></i> PROGRAM PDF</a>
+				<a class="btn button" href="https://cdn.shopify.com/s/files/1/2786/4584/files/WomenWhoConquer-CommitmentAgreement-Web.pdf?v=1611793401" target="_blank"><i class="far fa-arrow-circle-down"></i> CONQUER CHART</a>
+			</div>
+		</div>
+		<div id="nuto" class="nutrition-overview tab-panel">
+			<img class="sm-title" src="https://cdn.shopify.com/s/files/1/2786/4584/files/nutrition-title.svg?v=1611854935">
+			<p>Nutrition is a critical component to your success when working to loose weight and get into shape. It’s also misunderstood and widely failed misconceptions. It doesn’t matter how hard you train, if your diet and nutrition aren’t in check, you’ll be spinning your wheels. Below we’ve laid out a simple guide that you can add to your routine but for a more in- depth personalized nutrition plan schedule a consultation with one of our certified Conquer Fitness Specialists today by <a href="/consultation" target="_blank">clicking here.</a></p>
+
+			<ul class="nutrition-list">
+				<li><b>MORNING</b> Mix a scoop of <b>IGNITE</b> + Eva Shockey <b>COLLAGEN PEPTIDES</b> with 10-16 ounces of water.</li>
+				<li><b>DURING WORKOUT</b> Mix a scoop of <b>BCAA’s</b> with 10-16 ounces of water and drink throughout your workout. You can also add 1/2 scoop of YETI on leg days but don’t take any later than 3PM.</li>
+				<li><b>POST WORKOUT SHAKE</b> Blend a scoop of our <b>MAGNUM</b> protein, 1/4 cup of Half & Half, 1 cup of water, 1/2 cup of ice, a sprinkle of chai seeds and a scoop of Almond Butter. Add more water to reach desired consistency. Enjoy!</li>
+				<li><b>AFTERNOON</b> Take a full serving (2 capsules) of PHENIX with a scoop of <b>ENDURO</b> in 10-16 ounces of water. Sip throughout the afternoon to speed up your recovery time.</li>
+				<li><b>BEFORE BED</b> Take a 1-2 capsules of <b>RENU</b> two or three times a week before bed.</li>
+			</ul>
+
+
+	    <section class="mtnops-samplers-section mtnops-section">
+			  <header>
+			    <h2>{{ collections['rihanas-go-to-products'].title }}</h2>
+			    <span class="h2-subtitle">PRODUCTS TO SUPPORT YOU IN CONQUERING!</span>
+			  </header>
+
+			  <div class="owl-carousel owl-theme product-carousel" id="suggested-products">
+			    {% for product in collections['rihanas-go-to-products'].products %}
+			      <div class="item">
+			        <a href="{{product.url}}" target="_blank">
+			          <img src="{{ product | img_url: '600x' }}">
+			          <h3>{{ product.title }}</h3>
+			          <span>{{ product.metafields.meta.subtitle }}</span>
+			          {% comment %}<div>{{ product.price  | money }}</div>
+			          {% if product.compare_at_price != blank %}
+			            <div>{{ product.compare_at_price  | money }}</div>
+			          {% endif %}{% endcomment %}
+			          <div class="swatches-wrap">
+			            {% for color in product.options_by_name['Flavor'].values %}
+			              <div class="bg_color bg_color_{{ color | handleize }}"></div>
+			            {% endfor %}
+			          </div>
+			          <button class="mtnops-btn-sm">BUY NOW</button>
+			        </a> 
+			      </div>
+			    {% endfor %}
+			  </div>
+			</section>
+
+		</div>
+
+	  <header>
+	    <h2>A 6 WEEK PROGRAM</h2>
+	    <span class="h2-subtitle">JUMP IN AND LET'S GET STARTED!</span>
+	  </header>
+
+		<ul class="program-section-buttons">
+			<li><a class="button" href="#week1">WEEK 1</a></li>
+			<li><a class="button" href="#week2">WEEK 2</a></li>
+			<li><a class="button" href="#week3">WEEK 3</a></li>
+			<li><a class="button" href="#week4">WEEK 4</a></li>
+			<li><a class="button" href="#week5">WEEK 5</a></li>
+			<li><a class="button" href="#week6">WEEK 6</a></li>
+		</ul>
+	</div>
+
+	{% comment %}
+
+		WEEK 1
+
+	{% endcomment %}
+
+	<div class="row">
+		<div class="col-xs-12">
+
+			<div id="week1" class="week-wrap">
+
+				<div class="week-title-section">
+					<h2>Week 1</h2>
+					<div class="week-intro"></div>
+				</div>
+				<div class="weekday-wrap">
+					
+					<div id="week1-day1" class="day-wrap">
+						<div class="day-title-section launch-workout">
+							<div class="day-title">
+								<h3>Day 1</h3>
+								<span>GLUTES & HAMSTRINGS</span>
+							</div>
+							<div class="day-intro">
+								WARM UP: Start with 10 minutes of cardio and stretching
+							</div>
+						</div>
+						<div class="week1-day1-movements daily-movements-wrap">
+							<ul class="week1-day1 daily-movements owl-carousel"></ul>
+						</div>
+					</div>
+
+					<div id="week1-day2" class="day-wrap">
+						<div class="day-title-section launch-workout">
+							<div class="day-title">
+								<h3>Day 2</h3>
+								<span class="day-meta">UPPER BODY</span>
+							</div>
+							<div class="day-intro">
+								WARM UP: Start with 10 minutes of cardio and stretching
+							</div>
+						</div>
+						<div class="week1-day2-movements daily-movements-wrap">
+							<ul class="week1-day2 daily-movements owl-carousel"></ul>
+						</div>
+					</div>
+					<div id="week1-day3" class="day-wrap">
+						<div class="day-title-section launch-workout">
+							<div class="day-title">
+								<h3>Day 3</h3>
+								<span class="day-meta">GLUTES, QUADS & CALVES</span>
+							</div>
+							<div class="day-intro">
+								WARM UP: Start with 10 minutes of cardio and stretching
+							</div>
+						</div>
+						<div class="week1-day3-movements daily-movements-wrap">
+							<ul class="week1-day3 daily-movements owl-carousel"></ul>
+						</div>
+					</div>
+					<div id="week1-day4" class="day-wrap">
+						<div class="day-title-section launch-workout">
+							<div class="day-title">
+								<h3>Day 4</h3>
+								<span class="day-meta">FULL BODY</span>
+							</div>
+							<div class="day-intro">
+								WARM UP: Start with 10 minutes of cardio and stretching
+							</div>
+						</div>
+						<div class="week1-day4-movements daily-movements-wrap">
+							<ul class="week1-day4 daily-movements owl-carousel"></ul>
+						</div>
+					</div>
+					<div id="week1-day5" class="day-wrap">
+						<div class="day-title-section launch-workout">
+							<div class="day-title">
+								<h3>Day 5</h3>
+								<span class="day-meta">CARDIO</span>
+							</div>
+							<div class="day-intro">
+								WARM UP: Start with 10 minutes of cardio and stretching
+							</div>
+						</div>
+						<div class="week1-day5-movements daily-movements-wrap">
+							<ul class="week1-day5 daily-movements owl-carousel"></ul>
+						</div>
+					</div>
+
+
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	{% comment %}
+
+		WEEK 2
+
+	{% endcomment %}
+
+	<div class="row">
+		<div class="col-xs-12">
+			
+			<div id="week2" class="week-wrap">
+
+				<div class="week-title-section">
+					<h2>Week 2</h2>
+					<div class="week-intro"></div>
+				</div>
+
+				<div class="weekday-wrap">
+					
+					<div id="week2-day1" class="day-wrap">
+						<div class="day-title-section launch-workout">
+							<div class="day-title">
+								<h3>Day 1</h3>
+								<span class="day-meta">GLUTES & HAMSTRINGS</span>
+							</div>
+							<div class="day-intro">
+								WARM UP: Start with 10 minutes of cardio and stretching
+							</div>
+						</div>
+						<div class="week2-day1-movements daily-movements-wrap">
+							<ul class="week2-day1 daily-movements owl-carousel"></ul>
+						</div>
+					</div>
+					<div id="week2-day2" class="day-wrap">
+						<div class="day-title-section launch-workout">
+							<div class="day-title">
+								<h3>Day 2</h3>
+								<span class="day-meta">UPPER BODY</span>
+							</div>
+							<div class="day-intro">
+								WARM UP: Start with 10 minutes of cardio and stretching
+							</div>
+						</div>
+						<div class="week2-day2-movements daily-movements-wrap">
+							<ul class="week2-day2 daily-movements owl-carousel"></ul>
+						</div>
+					</div>
+					<div id="week2-day3" class="day-wrap">
+						<div class="day-title-section launch-workout">
+							<div class="day-title">
+								<h3>Day 3</h3>
+								<span class="day-meta">FULL BODY</span>
+							</div>
+							<div class="day-intro">
+								WARM UP: Start with 10 minutes of cardio and stretching
+							</div>
+						</div>
+						<div class="week2-day3-movements daily-movements-wrap">
+							<ul class="week2-day3 daily-movements owl-carousel"></ul>
+						</div>
+					</div>
+					<div id="week2-day4" class="day-wrap">
+						<div class="day-title-section launch-workout">
+							<div class="day-title">
+								<h3>Day 4</h3>
+								<span class="day-meta">GLUTES, QUADS & CALVES</span>
+							</div>
+							<div class="day-intro">
+								WARM UP: Start with 10 minutes of cardio and stretching
+							</div>
+						</div>
+						<div class="week2-day4-movements daily-movements-wrap">
+							<ul class="week2-day4 daily-movements owl-carousel"></ul>
+						</div>
+					</div>
+					<div id="week2-day5" class="day-wrap">
+						<div class="day-title-section launch-workout">
+							<div class="day-title">
+								<h3>Day 5</h3>
+								<span class="day-meta">CARDIO</span>
+							</div>
+							<div class="day-intro">
+								WARM UP: Start with 10 minutes of cardio and stretching
+							</div>
+						</div>
+						<div class="week2-day5-movements daily-movements-wrap">
+							<ul class="week2-day5 daily-movements owl-carousel"></ul>
+						</div>
+					</div>
+
+
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	{% comment %}
+
+		WEEK 3
+
+	{% endcomment %}
+
+	<div class="row">
+		<div class="col-xs-12">
+			
+			<div id="week3" class="week-wrap">
+
+				<div class="week-title-section">
+					<h2>Week 3</h2>
+					<div class="week-intro"></div>
+				</div>
+				<div class="weekday-wrap">
+					
+					<div id="week3-day1" class="day-wrap">
+						<div class="day-title-section launch-workout">
+							<div class="day-title">
+								<h3>Day 1</h3>
+								<span class="day-meta">GLUTES, HAMSTRINGS & CORE</span>
+							</div>
+							<div class="day-intro">
+								WARM UP: Start with 10 minutes of cardio and stretching
+							</div>
+						</div>
+						<div class="week3-day1-movements daily-movements-wrap">
+							<ul class="week3-day1 daily-movements owl-carousel"></ul>
+						</div>
+					</div>
+
+					<div id="week3-day2" class="day-wrap">
+						<div class="day-title-section launch-workout">
+							<div class="day-title">
+								<h3>Day 2</h3>
+								<span class="day-meta">UPPER BODY</span>
+							</div>
+							<div class="day-intro">
+								WARM UP: Start with 10 minutes of cardio and stretching
+							</div>
+						</div>
+						<div class="week3-day2-movements daily-movements-wrap">
+							<ul class="week3-day2 daily-movements owl-carousel"></ul>
+						</div>
+					</div>
+					<div id="week3-day3" class="day-wrap">
+						<div class="day-title-section launch-workout">
+							<div class="day-title">
+								<h3>Day 3</h3>
+								<span class="day-meta">FULL BODY</span>
+							</div>
+							<div class="day-intro">
+								WARM UP: Start with 10 minutes of cardio and stretching
+							</div>
+						</div>
+						<div class="week3-day3-movements daily-movements-wrap">
+							<ul class="week3-day3 daily-movements owl-carousel"></ul>
+						</div>
+					</div>
+					<div id="week3-day4" class="day-wrap">
+						<div class="day-title-section launch-workout">
+							<div class="day-title">
+								<h3>Day 4</h3>
+								<span class="day-meta">GLUTES, QUADS & CALVES</span>
+							</div>
+							<div class="day-intro">
+								WARM UP: Start with 10 minutes of cardio and stretching
+							</div>
+						</div>
+						<div class="week3-day4-movements daily-movements-wrap">
+							<ul class="week3-day4 daily-movements owl-carousel"></ul>
+						</div>
+					</div>
+					<div id="week3-day5" class="day-wrap">
+						<div class="day-title-section launch-workout">
+							<div class="day-title">
+								<h3>Day 5</h3>
+								<span class="day-meta">CARDIO</span>
+							</div>
+							<div class="day-intro">
+								WARM UP: Start with 10 minutes of cardio and stretching
+							</div>
+						</div>
+						<div class="week3-day5-movements daily-movements-wrap">
+							<ul class="week3-day5 daily-movements owl-carousel"></ul>
+						</div>
+					</div>
+
+
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+
+	{% comment %}
+
+		WEEK 4
+
+	{% endcomment %}
+
+	<div class="row">
+		<div class="col-xs-12">
+			
+			<div id="week4" class="week-wrap">
+
+				<div class="week-title-section">
+					<h2>Week 4</h2>
+					<div class="week-intro"></div>
+				</div>
+				<div class="weekday-wrap">
+					
+					<div id="week4-day1" class="day-wrap">
+						<div class="day-title-section launch-workout">
+							<div class="day-title">
+								<h3>Day 1</h3>
+								<span class="day-meta">GLUTES, HAMSTRINGS & CORE</span>
+							</div>
+							<div class="day-intro">
+								WARM UP: Start with 10 minutes of cardio and stretching
+							</div>
+						</div>
+						<div class="week4-day1-movements daily-movements-wrap">
+							<ul class="week4-day1 daily-movements owl-carousel"></ul>
+						</div>
+					</div>
+
+					<div id="week4-day2" class="day-wrap">
+						<div class="day-title-section launch-workout">
+							<div class="day-title">
+								<h3>Day 2</h3>
+								<span class="day-meta">UPPER BODY</span>
+							</div>
+							<div class="day-intro">
+								WARM UP: Start with 10 minutes of cardio and stretching
+							</div>
+						</div>
+						<div class="week4-day2-movements daily-movements-wrap">
+							<ul class="week4-day2 daily-movements owl-carousel"></ul>
+						</div>
+					</div>
+					<div id="week4-day3" class="day-wrap">
+						<div class="day-title-section launch-workout">
+							<div class="day-title">
+								<h3>Day 3</h3>
+								<span class="day-meta">FULL BODY</span>
+							</div>
+							<div class="day-intro">
+								WARM UP: Start with 10 minutes of cardio and stretching
+							</div>
+						</div>
+						<div class="week4-day3-movements daily-movements-wrap">
+							<ul class="week4-day3 daily-movements owl-carousel"></ul>
+						</div>
+					</div>
+					<div id="week4-day4" class="day-wrap">
+						<div class="day-title-section launch-workout">
+							<div class="day-title">
+								<h3>Day 4</h3>
+								<span class="day-meta">GLUTES, QUADS & CALVES</span>
+							</div>
+							<div class="day-intro">
+								WARM UP: Start with 10 minutes of cardio and stretching
+							</div>
+						</div>
+						<div class="week4-day4-movements daily-movements-wrap">
+							<ul class="week4-day4 daily-movements owl-carousel"></ul>
+						</div>
+					</div>
+					<div id="week4-day5" class="day-wrap">
+						<div class="day-title-section launch-workout">
+							<div class="day-title">
+								<h3>Day 5</h3>
+								<span class="day-meta">CARDIO</span>
+							</div>
+							<div class="day-intro">
+								WARM UP: Start with 10 minutes of cardio and stretching
+							</div>
+						</div>
+						<div class="week4-day5-movements daily-movements-wrap">
+							<ul class="week4-day5 daily-movements owl-carousel"></ul>
+						</div>
+					</div>
+
+
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+
+	{% comment %}
+
+		WEEK 5
+
+	{% endcomment %}
+
+	<div class="row">
+		<div class="col-xs-12">
+			
+			<div id="week5" class="week-wrap">
+
+				<div class="week-title-section">
+					<h2>Week 5</h2>
+					<div class="week-intro"></div>
+				</div>
+				<div class="weekday-wrap">
+					
+					<div id="week5-day1" class="day-wrap">
+						<div class="day-title-section launch-workout">
+							<div class="day-title">
+								<h3>Day 1</h3>
+								<span class="day-meta">GLUTES, HAMSTRINGS & CORE</span>
+							</div>
+							<div class="day-intro">
+								WARM UP: Start with 10 minutes of cardio and stretching
+							</div>
+						</div>
+						<div class="week5-day1-movements daily-movements-wrap">
+							<ul class="week5-day1 daily-movements owl-carousel"></ul>
+						</div>
+					</div>
+
+					<div id="week5-day2" class="day-wrap">
+						<div class="day-title-section launch-workout">
+							<div class="day-title">
+								<h3>Day 2</h3>
+								<span class="day-meta">UPPER BODY</span>
+							</div>
+							<div class="day-intro">
+								WARM UP: Start with 10 minutes of cardio and stretching
+							</div>
+						</div>
+						<div class="week5-day2-movements daily-movements-wrap">
+							<ul class="week5-day2 daily-movements owl-carousel"></ul>
+						</div>
+					</div>
+					<div id="week5-day3" class="day-wrap">
+						<div class="day-title-section launch-workout">
+							<div class="day-title">
+								<h3>Day 3</h3>
+								<span class="day-meta">FULL BODY</span>
+							</div>
+							<div class="day-intro">
+								WARM UP: Start with 10 minutes of cardio and stretching
+							</div>
+						</div>
+						<div class="week5-day3-movements daily-movements-wrap">
+							<ul class="week5-day3 daily-movements owl-carousel"></ul>
+						</div>
+					</div>
+					<div id="week5-day4" class="day-wrap">
+						<div class="day-title-section launch-workout">
+							<div class="day-title">
+								<h3>Day 4</h3>
+								<span class="day-meta">GLUTES, QUADS & CALVES</span>
+							</div>
+							<div class="day-intro">
+								WARM UP: Start with 10 minutes of cardio and stretching
+							</div>
+						</div>
+						<div class="week5-day4-movements daily-movements-wrap">
+							<ul class="week5-day4 daily-movements owl-carousel"></ul>
+						</div>
+					</div>
+					<div id="week5-day5" class="day-wrap">
+						<div class="day-title-section launch-workout">
+							<div class="day-title">
+								<h3>Day 5</h3>
+								<span class="day-meta">CARDIO</span>
+							</div>
+							<div class="day-intro">
+								WARM UP: Start with 10 minutes of cardio and stretching
+							</div>
+						</div>
+						<div class="week5-day5-movements daily-movements-wrap">
+							<ul class="week5-day5 daily-movements owl-carousel"></ul>
+						</div>
+					</div>
+
+
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+
+	{% comment %}
+
+		WEEK 6
+
+	{% endcomment %}
+
+	<div class="row">
+		<div class="col-xs-12">
+			
+			<div id="week6" class="week-wrap">
+
+				<div class="week-title-section">
+					<h2>Week 6</h2>
+					<div class="week-intro"></div>
+				</div>
+				<div class="weekday-wrap">
+					
+					<div id="week6-day1" class="day-wrap">
+						<div class="day-title-section launch-workout">
+							<div class="day-title">
+								<h3>Day 1</h3>
+								<span class="day-meta">GLUTES, HAMSTRING & CORE</span>
+							</div>
+							<div class="day-intro">
+								WARM UP: Start with 10 minutes of cardio and stretching
+							</div>
+						</div>
+						<div class="week6-day1-movements daily-movements-wrap">
+							<ul class="week6-day1 daily-movements owl-carousel"></ul>
+						</div>
+					</div>
+
+					<div id="week6-day2" class="day-wrap">
+						<div class="day-title-section launch-workout">
+							<div class="day-title">
+								<h3>Day 2</h3>
+								<span class="day-meta">UPPER BODY</span>
+							</div>
+							<div class="day-intro">
+								WARM UP: Start with 10 minutes of cardio and stretching
+							</div>
+						</div>
+						<div class="week6-day2-movements daily-movements-wrap">
+							<ul class="week6-day2 daily-movements owl-carousel"></ul>
+						</div>
+					</div>
+					<div id="week6-day3" class="day-wrap">
+						<div class="day-title-section launch-workout">
+							<div class="day-title">
+								<h3>Day 3</h3>
+								<span class="day-meta">FULL BODY</span>
+							</div>
+							<div class="day-intro">
+								WARM UP: Start with 10 minutes of cardio and stretching
+							</div>
+						</div>
+						<div class="week6-day3-movements daily-movements-wrap">
+							<ul class="week6-day3 daily-movements owl-carousel"></ul>
+						</div>
+					</div>
+					<div id="week6-day4" class="day-wrap">
+						<div class="day-title-section launch-workout">
+							<div class="day-title">
+								<h3>Day 4</h3>
+								<span class="day-meta">GLUTES, QUADS & CALVES</span>
+							</div>
+							<div class="day-intro">
+								WARM UP: Start with 10 minutes of cardio and stretching
+							</div>
+						</div>
+						<div class="week6-day4-movements daily-movements-wrap">
+							<ul class="week6-day4 daily-movements owl-carousel"></ul>
+						</div>
+					</div>
+					<div id="week6-day5" class="day-wrap">
+						<div class="day-title-section launch-workout">
+							<div class="day-title">
+								<h3>Day 5</h3>
+								<span class="day-meta">CARDIO</span>
+							</div>
+							<div class="day-intro">
+								WARM UP: Start with 10 minutes of cardio and stretching
+							</div>
+						</div>
+						<div class="week6-day5-movements daily-movements-wrap">
+							<ul class="week6-day5 daily-movements owl-carousel"></ul>
+						</div>
+					</div>
+
+
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+{{ 'cf-wwc-movements.js' | asset_url | script_tag }}
+<script type="text/javascript">
+
+	count = 0;
+
+	for (i = 0; i < movements.length; i++) {
+		count++;
+		//&&
+		if(movements[i].title != '') {
+
+
+			if(movements[i].display != undefined && movements[i].display.length > 0) {
+				//console.log(movements[i].display.length);
+
+				for (m = 0; m < movements[i].display.length; m++) {
+
+					var movement = '<li class="cf-movement',
+					sets = movements[i].sets,
+					reps = movements[i].reps,
+					week = movements[i].display[m].week,
+					day = movements[i].display[m].day;
+					//console.log('Week: '+week, 'Day: '+day);
+
+					if(movements[i].display[m].sets != undefined) {
+						sets = movements[i].display[m].sets;
+						//console.log(sets);
+					}
+					if(movements[i].display[m].reps != undefined) {
+						reps = movements[i].display[m].reps;
+						//console.log(reps);
+					}
+
+					if(movements[i].video == '') {
+						movement += ' no-video';
+					}
+					movement += '">';
+					
+					
+					movement += '<h3 class="movement-title">' + movements[i].title + '</h3><div class="movement-meta">';
+
+
+					if(sets) {
+						movement += '<div class="sets"><span>' + sets + '</span> SETS</div>';
+					}
+					if($.isNumeric(reps)) {
+						movement += '<div class="reps"><span>' + reps + '</span> REPS</div>';
+					} else {
+						movement += '<div class="reps-blurp">' + reps + '</div>';
+					}
+
+					//<div class="rest">REST 20 SEC. BETWEEN</div>
+					movement += '</div>';
+
+
+					if(movements[i].video != '') {
+						movement += '<video playsinline loop muted class="video-'+count+'" preload="none"><source src="'+movements[i].video+'" type="video/mp4"></video>';
+					}
+					
+					movement += '</li>';
+			
+
+
+					
+
+					if (week != 0) {
+						document.querySelector('.week'+week+'-day'+day).innerHTML += movement;
+					}
+				}
+
+			}
+
+		}
+	}
+	count = 0;
+
+	//<span class="movement-counter">Movement '+count+'</span><div class="video-controls"><a class="pause-control" href="#" data-video="video-'+count+'"><i class="fal fa-pause-circle"></i></a><a class="play-control" href="#" data-video="video-'+count+'"><i class="fal fa-play-circle"></i></a></div>
+	//movement += '<div class=""><a class="play-movement-video" href="#" data-play-video="'+count+'">Play Video</a></div>';
+
+	
+
+	var warmup = 'Stretching is so important. Take extra time each day to stretch where you are sore and tight. Post workout sauna or stretch can aid in recovery time. Foam rolling can be highly effective for tight or sore muscles. Download the <b>RAD app</b> on your smart device for specific techniques and information on targeting sore areas.';
+
+	$('.week-intro').html(warmup);
+
+	var chev = '<i class="fas fa-chevron-down"></i>';
+	$('.day-title-section').append(chev);
+	// Play Individual Videos
+	// $('.play-movement-video').on('click', function(e) {
+	// 	e.preventDefault();
+	// 	var vid = $(this).data('play-video');
+	// 	$('.video-'+vid).get(0).play();
+	// });
+
+	function loadVideos(elem) {
+		elem.addClass('loaded');
+		elem.each(function(){
+			$(this)[0].play();
+	  });
+	}
+
+	// LOAD DAY VIDEOS SECTION
+	$('.launch-workout').on('click', function(e) {
+		e.preventDefault();
+		var esto = $(this),
+		videos = esto.parent('.day-wrap').find('.cf-movement video');
+
+		if (!esto.parent().hasClass('active')) {
+			$('.day-wrap.active .daily-movements-wrap').slideUp();
+			$('.day-wrap.active').removeClass('active');
+		}
+
+		loadVideos(videos);
+		esto.parent('.day-wrap').toggleClass('active');
+		//setTimeout(function() {
+		esto.next().slideToggle("slow");
+		//}, 100);
+	});
+
+	$('.tab-trigger').on('click', function(e) {
+		e.preventDefault();
+		var tab = $(this).data('tab');
+		if($('#'+tab).hasClass('active')) {
+			$('.tab-panel').removeClass('active').slideUp();	
+		} else {
+			$('#'+tab).addClass('active').slideToggle();
+		}
+	});
+
+	//document.querySelector('#day-1 .day-title-section span').innerHTML =  day1Counter + " Total Movements";
+
+	// var playButtons = document.querySelectorAll(".play-control");
+	// var pauseButtons = document.querySelectorAll(".pause-control");
+
+	// for ( var counter = 0; counter < playButtons.length; counter++) {
+ //  	playButtons[counter].addEventListener("click", function(e){
+ //  		e.preventDefault();
+ //      var videoId = this.dataset.video,
+	// 		vid = document.querySelector('.'+videoId);
+	//   	playVid(vid);
+ //  	});
+	// }
+	// for ( var counter = 0; counter < pauseButtons.length; counter++) {
+ //    pauseButtons[counter].addEventListener("click", function(e){
+ //    	e.preventDefault();
+ //      var videoId = this.dataset.video,
+	// 		vid = document.querySelector('.'+videoId);
+	//   	pauseVid(vid);
+ //   });
+	// }
+		
+
+	// function playVid(vid) {
+	// 	vid.play();
+	// }
+
+	// function pauseVid(vid) {
+	// 	vid.pause();
+	// }
+
+  jQuery(document).ready(function($) {
+
+  	$('.program-section-buttons li a').on('click', function(e) {
+			e.preventDefault();
+			var scroller = $(this).attr('href');
+			$("html, body").animate({scrollTop: $(scroller).offset().top -100}, 500);
+		});
+
+	  $(".daily-movements").owlCarousel({
+			responsive:{
+				0:{
+					items:2
+				},
+				700:{
+					items:3
+				},
+				1000:{
+					items:4
+				}
+			},
+			nav: true,
+			//center:true,
+			dots: true,
+			navText: ['<i class="far fa-chevron-left"></i>', '<i class="far fa-chevron-right"></i>'],
+			navElement: 'div',
+			margin: 5,
+	  });
+
+	  $("#suggested-products").owlCarousel({
+	    loop: true,
+	    nav: false,
+	    dots: false,
+	    autoplay: true,
+	    autoplayTimeout: 6000,
+	    autoplayHoverPause: true,
+	    responsive: {
+	      0: {
+	        items: 2
+	      },
+	      600: {
+	        items: 3
+	      },
+	      800: {
+	        items: 4
+	      },
+	      1000: {
+	        items: 5
+	      }
+	    }
+	  });
+	 //  $(window).scroll(function(e) {
+		// 	$('.day-wrap').each(function(e) {
+		// 		if(!$(this).hasClass("loaded") && $(this).has('video').length) {
+		// 			isOnScreen('.'+$(this).attr('id'));	
+		// 		}
+		// 	});
+			
+		// 	//if(scrollCheck == false) {
+				
+		// 	//}
+		// });
+
+
+		var scrollCheck = false;
+		
+		function isOnScreen(elem) {
+			if( elem.length == 0 ) {
+				return;
+			}
+			$window = $(window),
+			top_of_screen = $window.scrollTop(),
+			screen_height = $window.innerHeight(),
+			bottom_of_screen = top_of_screen + screen_height,
+			$elem = $(elem),
+			top_of_element = $elem.offset().top,
+			height = $elem.height(),
+			bottom_of_element = top_of_element + height;
+
+			if(bottom_of_screen > top_of_element) {
+				scrollCheck = true;
+				console.log($elem);
+				loadVideos($elem);
+			}
+		}
+
+
+		// $( window ).on('load', function() {
+  //   	loadVideos($('.day-movements'));
+		// });
+
+
+		// $('.play-videos-btn').on('click', function(e){
+		// 	e.preventDefault();
+		// 	var daysVids = $(this).data('day');
+		// 	$('#day-'+daysVids+' video').each( function(){
+		// 		$(this)[0].play();
+		//   });
+		// });
+		
+	});
+
+</script>

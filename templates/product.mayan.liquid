@@ -1,0 +1,129 @@
+{% include 'mtnops_tag_checker' %}
+{% comment %}
+{% if customer.email == 'jake.shaw@me.com' or customer.email contains '@mtnops.com' %}
+{% else %}
+  <p>{{product.title}} is coming. Check back soon!</p>
+{% endif %}
+{% endcomment %}
+
+
+{% if product.metafields.meta.slim_title != blank %}
+  <div class="mtnops-slim-page-title"><h1>{{ product.metafields.meta.slim_title }}</h1></div>
+{% endif %}
+<div class="main-page-wrapper">
+  <!-- MAIN CONTENT AREA -->
+
+  <header class="product-header"{% if product.metafields.meta.product_image != blank %} style="background-image: url('{{ product.metafields.meta.product_image }}');"{% endif %}>
+    {% if product.metafields.meta.product_logo != blank %}
+      <img src="{{ product.metafields.meta.product_logo }}">
+    {% endif %}
+
+    {% if product.metafields.meta.product_lineup != blank %}
+      <div class="product-lineup">
+        <img src="{{ product.metafields.meta.product_lineup }}">
+      </div>
+    {% endif %}
+    <div class="product-heading">
+      {% if product.metafields.meta.product_intro != blank %}
+        <img src="{{ product.metafields.meta.product_intro }}">
+      {% endif %}
+    </div>
+  </header>
+
+  {% comment %}<div class="container-fluid">
+     <div class="row">
+        <div class="site-content col-sm-12" role="main">
+          {%- include 'product_page_area' -%}
+          <h1>{{ product.title }}</h1>
+
+          
+
+        </div> <!-- .site-content -->
+    </div> <!-- end row -->
+  </div> <!-- end container -->
+  <!-- end container -->{% endcomment %}
+
+  {% comment %}{% if product.metafields.meta.giveaway_entries != blank %}
+    <div class="product-entries">
+      <img src="{{ product.metafields.meta.giveaway_entries }}">
+    </div>
+  {% endif %}{% endcomment %}
+  <div class="product-variations-wrap">
+  {% for v in product.variants %}
+    
+      <div class="outer-product-section product-{{ v.title | handleize }}">
+        <div class="product-section">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="product-inner-wrap">
+                  <div class="featured-image-wrap">
+                    <img class="product-featured" src="{{ v.image.src | img_url: 'master' }}">
+                  </div>
+                  <div class="product-meta-wrap">
+                    {% if v.id == 31998167777322 %}
+                      <img class="product-benefits" src="https://cdn.shopify.com/s/files/1/2786/4584/files/ignite-benefits-callout-white.svg?v=1602021199">
+                    {% elsif v.id == 31998167810090 %}
+                      <img class="product-benefits" src="https://cdn.shopify.com/s/files/1/2786/4584/files/yeti-benefits-callout-white.svg?v=1602021200">
+                    {% elsif v.id == 31998167842858 %}
+                      <img class="product-benefits" src="https://cdn.shopify.com/s/files/1/2786/4584/files/enduro-benefits-callout-white.svg?v=1602021200">
+                    {% endif %}
+                    <div>
+                      {% if isTagged %}
+                        <div class="special-pricing">
+                          <span id="product-price">{{ v.price | times: discountPercentage | round: 2 | money }}</span> <del id="old-product-price">{{v.price | money }}</del>
+                        </div>
+                      {% else %}
+                        <span class="product-price">{{v.price | money}}</span>
+                      {% endif %}
+                      {% if v.available %}
+                      <a class="ajax_add_to_cart add_to_cart_button add-to-cart-cta" href="#" data-pid="{{ v.id }}">Add to Cart</a>
+                      {% else %}
+                      <p class="coming-soon"><b>{{v.title}} COMING SOON!</b></p>
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% if v.metafields.meta.lifestyle != blank %}
+          <div class="lifestyle-section">
+            <img src="{{ v.metafields.meta.lifestyle }}">
+          </div>
+        {% endif %}
+      </div>
+    
+  {% endfor %}
+  </div>
+
+  
+  <div id="shopify-product-reviews" data-id="{{product.id}}">{{ product.metafields.spr.reviews }}</div>
+
+  {% comment %}<div class="extra-entries-wrap">
+    <div class="container">
+      <div class="col-xs-12">
+        <div class="bonus-entry-wrap">
+          <h3>PICK UP AN ENTRY!</h3>
+          <h4>FILL OUT THE FORM BELOW AND SIGN UP FOR OUR EMAILS</h4>
+          <div style="margin:0 auto;" class="pxFormGenerator" id="4FAmtAOPNCl-I9XhnIxYTQ"></div>
+        </div>
+      </div>
+    </div>
+  </div>{% endcomment %}
+</div><!-- .main-page-wrapper -->
+
+
+
+{% comment %}<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.4/gsap.min.js"></script>
+<script type="text/javascript">
+  gsap.fromTo('.floating-fruit', 4, {scale: 1, rotation: -5}, {scale: 1.12, rotation: 5, transformOrigin:"center center", repeat: -1, yoyo: true, ease: Power1.easeInOut});
+  gsap.fromTo('.product-intro-image', 2, {scale: 1}, {scale: 1.04, transformOrigin:"center center", repeat: -1, yoyo: true, ease: Power1.easeInOut});
+  gsap.fromTo('.product-featured', 2.5, {scale: 1}, {scale: 1.02, transformOrigin:"center center", repeat: -1, yoyo: true, ease: Power1.easeInOut});
+</script>
+{% endcomment %}
+
+
+
+

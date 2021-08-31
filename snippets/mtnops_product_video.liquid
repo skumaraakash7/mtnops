@@ -1,0 +1,37 @@
+{% assign videoId = product.metafields.meta.videoId %}
+
+{% if videoId != nil %}
+	<div class="featured-product-video" data-izimodal-transitionin="fadeInDown">
+		<a data-izimodal-close="" class="icon-close"><i class="fa fa-times" aria-hidden="true"></i></a>
+	</div>
+
+	<div class="featured-product-video-wrap">
+		<a class="featured-product-video-trigger">
+		  <i class="fa fa-play-circle" aria-hidden="true"></i> Learn about {{product.title | remove: "TRAIL PACKS" }}
+		</a>
+	</div>
+
+	<script type="text/javascript">
+		$('.featured-product-video').iziModal( {
+			overlayColor: 'rgba(0, 0, 0, 0.9)',
+			width: 700,
+			closeButton: true,
+			autoOpen: false,
+			iframe: true,
+			iframeURL: "https://www.youtube.com/embed/{{videoId}}?autoplay=1&rel=0"
+		});
+
+		$('.featured-product-video-trigger').on('click', function(e) {
+			e.preventDefault();
+			$('.featured-product-video').iziModal('open');
+			$(this).removeClass('active');
+		});
+
+		setTimeout(function(){
+		  $('.featured-product-video-trigger').addClass('active');
+		}, 4000);
+
+
+	</script>
+
+{% endif %}

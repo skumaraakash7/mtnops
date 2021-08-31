@@ -1,0 +1,198 @@
+{% assign productOffer = all_products['yeti-energy-sampler'] %}
+{% unless customer.email == 'jake.shaw@me.com' %}
+{% assign hasPurchased = false %}
+{% assign orderNumber = 0 %}
+{% for order in customer.orders %}
+  {% for line in order.line_items %}
+    {% if line.product_id == productOffer.id %}
+      {% assign hasPurchased = true %}
+      {% assign orderNumber = order.order_number %}
+    {% endif %}
+  {% endfor %}  
+{% endfor %}
+{% endunless %}
+
+<div class="main-page-wrapper">
+
+	<div class="offer-landing-wrap {{productOffer.handle}}">
+		<div class="mtnops-slim-page-title"><h1>GET AN ENERGY SAMPLER PACK</h1></div>
+		<div class="landing-hero">
+			
+			<div class="hero-overlay">
+				<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/yeti-sampler-intro.svg?v=1612915803">	
+
+			</div>
+			<div class="mo-badges">
+				<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/MoneyBackGuarantee-Blackout.png?v=1586474113">
+				<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/MadeinUSA-Dark.png?v=1586474062">
+			</div>
+		</div>
+
+		<div class="landing-main-wrap">
+
+			<div class="container">
+			  <div class="row">
+			    <div class="col-sm-12" role="main">
+			    	<div class="landing-main-content">
+
+			    		<div class="layout-switcher">
+			    			<div class="floating-kit">
+			    				<img src="{{ productOffer | img_url: 'master' }}">
+			    			</div>
+				    		<div class="benefits-callout">
+					    		<img class="product-benefits" src="https://cdn.shopify.com/s/files/1/2786/4584/files/yeti-benefits-callout.svg?v=1599085732">
+					    		<div class="cta-wrap">
+					    			{% if hasPurchased %}
+											<p>Hi there <b>{{customer.first_name}}</b>! Based on your order history, you have already claimed this on order number {{orderNumber}}. Be sure to take advantage of the offer card included with your {{productOffer.title}}!</p>
+										{% else %}
+						    			<p>Try out <b>MTN OPS YETI Pre-Workout</b>! This offer includes five <b>YETI Trail Packs</b> in five different flavors; Green Apple, Peach, Tiger's Blood, Strawberry Banana, and Blue Raspberry. Also included is a MTN OPS Shaker Bottle and a special offer card once your ready to buy the full product!</p>
+
+						    			{% if productOffer.available %}
+						    				<a href="#" class="button mtnops-btn add-sampler-to-cart" data-variant-id="{{ productOffer.variants[0].id }}">ADD TO CART - {{productOffer.price | money_without_trailing_zeros }}</a>
+						    			{% else %}
+						    				<p>{{ productOffer.title }} is currently sold out. Check back soon!</p>
+						    			{% endif %}
+						    			<div>
+						    				<small>*Free Shipping is only offered to shipping addresses located in the lower 48 U.S. states.</small>
+						    			</div>
+					    			{% endif %}
+					    		</div>
+					    	</div>
+			    		</div>
+						</div>
+					</div>
+		  	</div>
+			</div>
+
+			<section class="ignite-graph-bg mtnops-section dark-section">
+				<div class="container">
+				  <div class="row">
+				    <div class="col-sm-12">
+				    	<div class="audience-message">
+					    	<h2>GET YOUR {{productOffer.title}}</h2>
+					    	<span class="h2-subtitle">MTN OPS' EXPLOSIVE PRE-WORKOUT</span>
+
+								{% comment %}<p>{{ productOffer.metafields.meta.description_excerpt }}</p>{% endcomment %}
+
+								<div class="offer-includes">
+									<h3>SAMPLER INCLUDES</h3>
+									<ul>
+										<li>5 x YETI ASSORTED TRAIL PACKS</li>
+										<li>MTN OPS SHAKER BOTTLE</li>
+										<li>SPECIAL OFFER CARD</li>
+									</ul>
+								</div>
+
+							</div>
+				    	
+				    </div>
+				  </div>
+				</div>
+			</section>
+
+
+			{%- include 'mtnops_collection_sampler' -%}
+
+		  <section class="mtnops-section dark-section">
+		  	<h2>MTN OPS CORE VALUES</h2>
+				<span class="h2-subtitle">OUR MISSION &amp; PURPOSE</span>
+				<p>In everything we do, we improve the lives of individuals and families by inspiring them to achieve their ultimate level of performance through the highest quality energy and nutritional products, backed by science and a community that is both united and supportive of each other, to Conquer More each day.</p>
+				<a class="mtnops-btn" href="https://mtnops.com/pages/core-values" target="_blank">LEARN MORE</a>
+		  </section>
+
+			{%- include 'mtnops_collection_topsellers' -%}
+
+	  </div>
+	</div>
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha256-pTxD+DSzIwmwhOqTFN+DB+nHjO4iAsbgfyFq5K5bcE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.4/gsap.min.js"></script>
+
+<script type="text/javascript">
+
+	const queryString = window.location.search;
+	const urlParams = new URLSearchParams(queryString);
+	const audience = urlParams.get('utm_term');
+	
+	const audienceBg = $('.landing-hero');
+	//const proLabel = $('.pros-label span');
+	//const audienceImage = $('.main-push-message img');
+
+	audienceBg.css("background-image", "url('https://cdn.shopify.com/s/files/1/2786/4584/files/yeti-sampler-offer-bg.jpg?v=1612915283')");
+	
+
+	//setTimeout(function() {
+		// $( ".pros-label" ).animate({
+	 //    opacity: 1,
+	 //  }, 2000, function() {
+	    
+	 //  });
+	//}, 50);
+
+	gsap.fromTo('.floating-kit', 1, {rotation: -3}, {rotation: 3, repeat: -1, yoyo: true, ease: Power1.easeInOut});
+
+
+  var cta = $('.add-sampler-to-cart');
+  var clicked = false;
+  cta.on('click', function(e) {
+  	var varId = $(this).data('variant-id');
+  	e.preventDefault();
+  	if(clicked == false) {
+  		//$(this).html('Adding...');
+  		//clicked = true;
+  		addSamplerToCart(varId, 1);
+  	}
+  });
+
+  function addSamplerToCart(product_id, quantity) {
+    data = {
+      "quantity": quantity,
+      "id": product_id
+			// properties: {
+			// 	'energySampler': 'Enjoy!'
+			// }
+    }
+    jQuery.ajax({
+      type: 'POST',
+      url: '/cart/add.js',
+      data: data,
+      dataType: 'json',
+      success: function() { 
+        //Cookies.set('freegift', true);
+        //$('.update-cart').trigger('click');
+        //console.log('Ignite Sampler Kit added to your cart!');
+
+        // $(this).html('');
+        // setTimeout(function() {
+        // 	cta.hide();
+        // 	$('<a href="https://mtnops.com/cart" class="mtnops-btn">VIEW CART</a>').prependTo('.cta-wrap');
+        // }, 1000);
+        console.log('adding to cart was a success!');
+        $.get('/cart?view=json', function(data) {
+        	/*optional stuff to do after success */
+        	$('.widget_shopping_cart_content').html(data);
+  			}).always(function() {
+          baselThemeModule.gl_currency();
+        	if (window.Shopify && Shopify.StorefrontExpressButtons && nathan_settings.use_additional_checkout_buttons) {Shopify.StorefrontExpressButtons.initialize()}
+        });
+      	$.getJSON('/cart.js', function(cart) {
+        	$(".cartCount").html(cart.item_count);
+        	$(".basel-cart-subtotal >span").html(Shopify.formatMoney(cart.total_price, theme.moneyFormat));
+      	}).always(function() {baselThemeModule.gl_currency() });
+      	baselThemeModule.addToCart();
+      },
+      error: function (request, status, error) {
+        console.log(request.responseText);
+        var code = request.responseJSON.status;
+
+        console.log("<p>" + request.responseJSON.description + "</p>");
+      }
+    });
+  }
+
+</script>
+
+
+

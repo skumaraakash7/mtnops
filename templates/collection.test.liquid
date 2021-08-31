@@ -1,0 +1,351 @@
+{%- layout none -%}
+
+{% assign rewardCollection = collection.products %}
+{% assign rewardInCart = false %}
+{% assign addedFromCart = false %}
+
+{% comment %}
+  CART LOOP CHECK
+{% endcomment %}
+{% for item in cart.items %}
+
+  {% comment %}{% if item.product_id == freeProduct.id %}
+    
+  {% endif %}{% endcomment %}
+
+  {% unless item.properties == empty %}
+    {% for property in item.properties %}
+      {% if property.first == "blackfriday" %}
+        {% assign addedFromCart = true %}
+        {% assign rewardInCart = true %}
+        {% assign freeProductQty = item.quantity %}
+        {% if rewardInCart %}
+          {% assign rewardProductId = item.product_id %}
+          {% assign rewardUnlockAmount = item.product.metafields.meta.unlock_reward %}
+          {% assign rewardVariantId = item.variant_id %}
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+  {% endunless %}
+
+{% endfor %}
+
+{% capture returnHTML %}
+	
+
+
+
+	<div class="rewards-widget">
+	  <h3>BLACK FRIDAY REWARDS!</h3>
+	  <p>ADD ITEMS TO YOUR CART TO UNLOCK THESE FREEBIES!</p>
+	  <div class="rewards-wrap {{widgetClass}}">
+	    <ul class="rewards-list">
+	    {% for product in rewardCollection %}
+	      {% assign rewardUnlock = false %}
+	      {% if cart.total_price > product.metafields.meta.unlock_reward %}
+	        {% assign rewardUnlock = true %}
+	      {% endif %}
+
+	      {% capture rewardMessage %}
+	        {% if rewardUnlock %}
+	          {% if rewardInCart and product.id == rewardProductId %}
+	            <i class="fas fa-check-circle reward--icon"></i>
+	            <div class="reward-message">
+	              NICE! YOU SELECTED
+	              <span>{{product.title}}</span>
+	            </div>
+	          {% else %}
+	            <i class="fas fa-lock-open reward--icon"></i>
+	            <div class="reward-message">
+	              YOU UNLOCKED
+	              <span>{{product.title}}</span>
+	            </div>
+	          {% endif %}
+	          
+	        {% else %}
+	          <i class="fas fa-lock reward--icon"></i>
+	          <div class="reward-message">
+	            REWARD LOCKED
+	            <span>{{product.title}}</span>
+	          </div>
+	        {% endif %}
+
+	      {% endcapture %}
+
+	      {% capture spend %}
+	        <div class="reward-spend"><b>SPEND {{ product.metafields.meta.unlock_reward | money_without_trailing_zeros }}+</b><br>TO UNLOCK THIS REWARD</div>
+	      {% endcapture %}
+
+	      {% if product.variants.size > 1 %}
+
+	        <li class="product{% if rewardUnlock %} reward-unlocked{% else %} reward-locked{% endif %}{% if rewardInCart and product.id == rewardProductId %} reward-selected{% endif %}">
+	          <a class="reward-item{% if rewardUnlock %} claim-reward-trigger{% endif %}" data-product-id="{{product.id}}"{% if rewardInCart %} data-variant-to-remove="{{rewardVariantId}}"{% endif %}>
+	            
+	            <div class="reward-meta">
+	              {{ rewardMessage }}
+	              <img class="reward-image" src="{{ product.images[0].src | img_url: 'master' }}">
+	              <div class="reward-value">
+	                <span>{{product.price_max | money_without_trailing_zeros }}</span> Value
+	              </div>
+	              {% if rewardUnlock and widgetClass != 'upsell-rewards-widget' %}
+	                <div class="reward-popup-{{product.id}} reward-popup-item basel-hover-quick mfp-hide">
+	                  <img src="{{ product.images[0].src | img_url: 'master' }}">
+	                  <div id="product-form-{{product.id}}" class="product-form">
+	                    {% include 'mtnops-reward-json' %}
+	                  </div>
+	                </div>
+	              {% endif %}
+	            </div>
+
+	            {% if rewardUnlock %}
+	              <div class="reward-hover">
+	                <span>CLAIM REWARD!</span>
+	              </div>
+	            {% endif %}
+	              {{ spend }}
+	          </a>
+
+	          <script type="text/javascript">
+	            var reloadPage = function() {
+	              setTimeout(function(){
+	                {% if widgetClass == 'mini-cart-rewards-widget' %}
+	                  var currentValue = window.location.hash.substr(1);
+	                  if (currentValue != 'rewards') {
+	                    window.location.href += "#rewards";
+	                  }
+	                {% endif %}
+	                location.reload(true);
+	              }, 500);
+	            }
+
+	            //////////////////////////////////////////////////////
+	            ///////// FOR QUICK ADD OPTION
+	            //////////////////////////////////////////////////////
+
+	            $( document ).on('click', '#shopify_add_to_cart_quick_{{product.id}}', function(e) {
+	              e.preventDefault();
+	              var $this = $(this);
+	              $(this).attr('disabled', 'disabled').css('pointer-events', 'none').addClass('loading');
+	              
+	              var $variation_form = $('#callBackVariant_quick_{{product.id}} .variations_form');
+	              var $thisValue = $variation_form.find('#product-select-{{product.id}}').val();
+
+	              data = {
+	                "id": $thisValue,
+	                properties: {
+	                  'blackfriday': 'Black Friday!'
+	                }
+	              }
+
+	              $.ajax({
+	                  type: 'POST',
+	                  url: '/cart/add.js',
+	                  data: data,
+	                  //data: $this.closest('form').serialize(),
+	                  dataType: 'json',
+	                  success:function( cart ) {
+
+	                    // This removes the previos reward from cart
+	                    {% if rewardInCart %}
+	                      $.post('/cart/update.js', {updates: {'{{rewardVariantId}}': 0}});
+	                    {% endif %}
+
+	                    reloadPage();
+	                  },
+	                  error: function(XMLHttpRequest, textStatus) {
+	                    //baselThemeModule.onError(XMLHttpRequest, textStatus);
+	                  },
+	                  complete: function() {
+	                    //$this.removeAttr("disabled").css('pointer-events', 'auto').removeClass("loading");
+	                  }
+	              });
+	            });
+
+
+	        </script>
+
+	        </li>
+
+	      {% else %}
+	        <li class="product{% if rewardUnlock %} reward-unlocked{% else %} reward-locked{% endif %}{% if rewardInCart and product.id == rewardProductId %} reward-selected{% endif %}">
+	          <a class="reward-item{% if rewardUnlock and product.id != rewardProductId %} reward-claim-single-item{% endif %}" data-product-id="{{product.variants[0].id}}">
+	            <div class="reward-meta">
+	              {{ rewardMessage }}
+	              <img class="reward-image" src="{{ product.images[0].src | img_url: 'master' }}">
+	              <div class="reward-value">
+	                <span>{{product.price_max | money_without_trailing_zeros }}</span> Value
+	              </div>
+	            </div>
+	            {% if rewardUnlock and product.id != rewardProductId %}
+	              <div class="reward-hover">
+	                <span>CLAIM REWARD!</span>
+	              </div>
+	            {% endif %}
+	            {{ spend }}
+	          </a>
+	        </li>
+
+	      {% endif %}
+
+
+	    {% endfor %}
+	    </ul>
+	  </div>
+	</div>
+
+
+  <script type="text/javascript">
+
+    {% if widgetClass == 'upsell-rewards-widget' %}
+      $(".upsell-rewards-widget .reward-item").attr("href", "/cart");
+    {% endif %}
+
+
+    // Check reward vs total cart spend
+
+    function removeRewardFromCart() {
+      $.post('/cart/update.js', {updates: {'{{rewardVariantId}}': 0}});
+      {% if widgetClass == 'mini-cart-rewards-widget' %}
+       
+      {% endif %}
+     var currentValue = window.location.hash.substr(1);
+      location.reload(true);
+    }
+    {% if rewardInCart and cart.total_price < rewardUnlockAmount %}
+      removeRewardFromCart();
+    {% endif %}
+
+    //////////////////////////////////////////////////////
+    ///////// FOR POPUP OPTION
+    //////////////////////////////////////////////////////
+
+
+    // reward with multi-variant
+    $('.claim-reward-trigger').on('click', function(e) {
+        e.preventDefault();
+        btn = $(this);
+        btn.addClass('loading');
+        let productId = $(this).data('product-id');
+        //console.log(productId);
+        $.magnificPopup.open({
+          items: {
+            src: '.reward-popup-'+productId, // can be a HTML string, jQuery object, or CSS selector
+            type: 'inline'
+          }
+        });
+
+    });
+    // reward simple
+    $('.reward-claim-single-item').on('click', function(e) {
+      var prodId = $(this).data('product-id');
+      e.preventDefault();
+      addRewardToCart(prodId, 1);
+      $(this).addClass('active');
+    });
+    function addRewardToCart(product_id, quantity) {
+      data = {
+        "quantity": quantity,
+        "id": product_id,
+        properties: {
+          'blackfriday': 'Black Friday Reward!'
+        }
+      }
+      jQuery.ajax({
+        type: 'POST',
+        url: '/cart/add.js',
+        data: data,
+        dataType: 'json',
+        success: function() { 
+
+          // This removes the previous reward from cart
+          {% if rewardInCart %}
+            $.post('/cart/update.js', {updates: {'{{rewardVariantId}}': 0}});
+          {% endif %}
+
+          reloadPage();
+
+          // $('#promo-cart-popup img, #promo-cart-popup .add-promo-item-to-cart, #promo-cart-popup p, #promo-cart-popup .cart-upsell-tier, #promo-cart-popup .prize-clause, .no-thanks, .promo-product-add-to-cart-wrap').hide();
+          // $('#promo-cart-popup h3').replaceWith('<h3>AWESOME!<br>WE ARE ADDING IT TO YOUR CART.</h3><br><h4>JUST A SEC.</h4>');
+          // //setTimeout(function(){
+          // $('.update-cart').trigger('click');  
+          // //}, 1000);
+          
+        },
+        error: function (request, status, error) {
+          console.log(request.responseText);
+          var code = request.responseJSON.status;
+          //if (code == 422 ) {
+            //$('.message').text();
+          //}
+          console.log("<p>" + request.responseJSON.description + "</p>");
+          alert('error on adding product to cart.');
+        }
+      });
+    }
+
+
+/////////////////////////////////////////////////////////////////
+/////////////////// ONLY FOR THE MINI CART //////////////////////
+/////////////////////////////////////////////////////////////////
+
+    {% if widgetClass == 'mini-cart-rewards-widget' %}
+
+      var rewardUnlockAmount = 0;
+      {% if rewardUnlockAmount != blank %}
+        var rewardUnlockAmount = {{rewardUnlockAmount}};
+      {% endif %}
+
+      //console.log('Current reward amount:', rewardUnlockAmount);
+      var currentValue = window.location.hash.substr(1);
+      if(currentValue == 'rewards') {
+        setTimeout( function() {
+          openMiniCartWidget();
+        }, 250);
+      }
+
+      var openMiniCartWidget = function() {
+        $('.website-wrapper').addClass('basel-wrapper-shifted');
+        $('body').addClass('basel-cart-opened');
+        var scrollTo = $('.total').offset().top;
+        $('.cart-widget-side').scrollTop(scrollTo);
+        // setTimeout( function() {
+        //   //$('.cart-widget-side').animate({ scrollTop: 0 });
+        //   closeMiniCartWidget();
+        // }, 5000);
+        
+      };
+      var closeMiniCartWidget = function() {
+        $('.website-wrapper').removeClass('basel-wrapper-shifted');
+        $('body').removeClass('basel-cart-opened');
+      };
+
+
+      $( document ).on( 'change keyup click', '.custom-qty, .cart__popup-qty--input', '.widget_shopping_cart .remove', function() {
+
+        setTimeout( function() {
+          // if(rewardUnlockAmount != 0) {
+          //   $.post('/cart/update.js', {updates: {'{{rewardVariantId}}': 0}});  
+          // }
+          $.getJSON("/cart.js", function(cart) {
+
+            if(cart.total_price < rewardUnlockAmount) {
+              removeRewardFromCart();
+            }
+            
+          });
+        }, 500);
+      });
+
+
+    {% endif %}
+
+
+  </script>
+{% endcapture %}
+
+
+
+{{returnHTML | strip_newlines | remove: "  "}}
+
+
+

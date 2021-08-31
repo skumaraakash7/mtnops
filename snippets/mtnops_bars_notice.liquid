@@ -1,0 +1,16 @@
+{% comment %}
+  BARS NOTICE
+{% endcomment %}
+
+{% assign barsInCart = false %}
+
+{% for item in cart.items %}
+  {% comment %}{% if item.variant_id == 31630614986794 or item.variant_id == 31630615052330 or item.variant_id == 31630615117866 %}{% endif %}{% endcomment %}
+  {% if item.product_id == 4472536694826 or item.product_id == 4632742789162 %}
+    {% assign barsInCart = true %}
+  {% endif %}
+{% endfor %}
+
+{% if barsInCart %}
+  <p><b>HEADS UP:</b> Your Performance Bar(s) do not come in cold packaging. Although they are super amazing, they will melt in the hot sun. We recommend getting them inside (even the fridge) as soon as your MTN OPS package arrives on your doorstep. Sign up for text alerts at checkout to know when your package arrives. 👊🏽</b></p>
+{% endif %}

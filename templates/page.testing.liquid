@@ -1,0 +1,312 @@
+{% if customer.email == 'jake.shaw@me.com' %}
+<div class="main-page-wrapper">
+
+
+
+{% comment %}  <div class="hero-takeover-wrap full-width">
+
+    <a class="hero-section video-trigger" style="background-image: url('https://cdn.shopify.com/s/files/1/2786/4584/files/mayanmango-win-mexico-trip-bg.jpg?v=1620169888');">
+      <video poster="https://cdn.shopify.com/s/files/1/2786/4584/files/mayanmango-win-mexico-trip-bg.jpg?v=1620169888" class="vid_trailer" playsinline autoplay muted loop>
+        <source src="https://cdn.shopify.com/s/files/1/2786/4584/files/keep-hammering-truck-video-trailer.mp4?v=1619119781" type="video/mp4">
+        <source src="https://cdn.shopify.com/s/files/1/2786/4584/files/keep-hammering-truck-video-trailer.webm?v=1619119781" type="video/webm">
+        <source src="https://cdn.shopify.com/s/files/1/2786/4584/files/keep-hammering-truck-video-trailer.ogv?v=1619119783" type="video/ogg">
+      </video>
+      <div class="section-message width-md">
+        <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/cinco-de-mango-with-play.svg?v=1620173864">
+      </div>
+    </a>
+
+    <div class="hero-section-split">
+      <a href="/products/mayan-mango" class="section-slice section-color-1" style="background-image: url('https://cdn.shopify.com/s/files/1/2786/4584/files/mayan-mango-pool-in-stock-bg.jpg?v=1620170815');">  
+        <div class="section-message width-md">
+          <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/cinco-de-mango-entries.svg?v=1620173293">
+        </div>
+      </a>
+      <a href="/products/mayan-mango" class="section-slice section-color-2" style="background-image: url('https://cdn.shopify.com/s/files/1/2786/4584/files/mayan-mango-poolside-video-bg.jpg?v=1620172474');">
+        <div class="section-message width-sm">
+          <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/mayan-mango-madness-2-day.svg?v=1620169888">
+          <button class="mtnops-btn">SHOP NOW!</button>
+        </div>
+      </a>
+    </div>
+
+    <div class="home_video_screen">
+      <a id="pause-button" class="close_trigger"><i class="fa fa-times" aria-hidden="true"></i>Close</a>
+      <div id="featured_video"></div>
+      <div class="video-footer-message">
+        <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/mtnops-stretch-logo-white.svg?v=1620175734">
+      </div>
+    </div>
+
+
+    <div class="hero-section back-in-stock" style="background-image: url('https://cdn.shopify.com/s/files/1/2786/4584/files/mayan-mango-pool-in-stock-bg.jpg?v=1620170815');">
+      <div class="section-message width-sm">
+        <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/mayan-mango-madness-2-day.svg?v=1620169888">
+        <a href="/products/mayan-mango" class="mtnops-btn">SHOP NOW!</a>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <script>
+    var tag = document.createElement('script');
+
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    var player;
+    function onYouTubeIframeAPIReady() {
+        player = new YT.Player('featured_video', {
+            height: '100%',
+            width: '100%',
+            videoId: 'FOJCNsAAq98', // Youtube video ID #
+            playerVars: { 'showinfo': 0, 'controls': 1, rel: 0 },
+            events: {
+                'onReady': onPlayerReady,
+                'onStateChange': onPlayerStateChange
+            }
+        });
+    }
+    function onPlayerReady(event) {
+        // bind events
+        var playButton = document.querySelector('.video-trigger'); // document.getElementById("play-button"); 
+
+        playButton.addEventListener("click", function(e) {
+            e.preventDefault();
+            player.playVideo();
+            document.querySelector('.hero-takeover-wrap').className = "hero-takeover-wrap full-width user_watching";
+        });
+
+        var pauseButton = document.querySelector(".close_trigger");
+        pauseButton.addEventListener("click", function(e) {
+            e.preventDefault();
+            document.querySelector('.hero-takeover-wrap').className = "hero-takeover-wrap full-width user_paused";
+            player.pauseVideo();
+            //player.stopVideo();
+        });
+
+
+        document.onkeyup = function keyPress(e) {
+            if (e.keyCode == 27) { // escape key maps to keycode `27`
+                document.querySelector('.hero-takeover-wrap').className = "hero-takeover-wrap full-width";
+                player.pauseVideo();
+                //player.stopVideo();
+            }
+        }
+
+    }
+    // 5. The API calls this function when the player's state changes.
+    //    The function indicates that when playing a video (state=1),
+    //    the player should play for six seconds and then stop.
+    var done = false;
+    function onPlayerStateChange(event) {
+        if (event.data == YT.PlayerState.PLAYING && !done) {
+        // setTimeout(stopVideo, 6000);
+        // done = true;
+        }
+        if(event.data === 0){
+            document.querySelector('.hero-takeover-wrap').className = "hero-takeover-wrap full-width";
+        }
+    }
+    function stopVideo() {
+        player.stopVideo();
+    }
+    
+    //const vidHero = document.querySelector('.hero-takeover-wrap');
+    //const vidBtn = document.querySelector('.video-trigger');
+
+    // document.addEventListener( 'click', function( event ) {
+    //   // if(event.target != vidBtn && vidHero.classList.contains('user_watching') ) {
+    //   //   document.querySelector('.hero-takeover-wrap').className = "hero-takeover-wrap";
+    //   //   player.pauseVideo();
+    //   // }
+
+    //   let vidEl = document.querySelector('.video-trigger');
+    //   let targetEl = event.target;
+    //   // if(vidHero.classList.contains('user_watching') ) {
+    //   //   document.querySelector('.hero-takeover-wrap').className = "hero-takeover-wrap";
+    //   //   player.pauseVideo();
+    //   // }
+    //   if(vidEl.classList.contains('user_watching')) {
+    //     console.log('has class list');
+    //   }
+    // });
+
+    document.addEventListener("click", (evt) => {
+      const vidScreen = document.querySelector(".home_video_screen");
+      let targetElement = evt.target; // clicked element
+
+      if (targetElement != vidScreen) {
+        console.log("Clicked outside!");
+      }
+
+    });
+
+  </script>{% endcomment %}
+
+
+    {% comment %}<div class="hero-pushes full-width split-hero-push">
+      <div class="hero-main-push">
+        <div class="hero-main-split" style="background-image: url('https://cdn.shopify.com/s/files/1/2786/4584/files/SlumberMugPromo-HomePush-BG.jpg?v=1608053275');">
+          <div class="main-push-message">
+            <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/SlumberMugPromo-HomePush-BG.svg?v=1608053275">
+            <a href="/products/slumber" class="mtnops-btn">BUY NOW</a>
+          </div>
+        </div>
+        <div class="hero-main-split" style="background-image: url('https://cdn.shopify.com/s/files/1/2786/4584/files/HotIgniteTPPromo-HomePush-BG.jpg?v=1608053366');">
+          <div class="main-push-message">
+            <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/HotIgniteTPPromo-HomePush-Text.svg?v=1608053339">
+            <a href="/products/hot-ignite" class="mtnops-btn">BUY NOW</a>
+          </div>
+        </div>
+      </div>
+      <div class="secondary-pushes">
+        <a class="push-item" href="/collections/fitness-apparel">
+          <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/fitness-apparel-sec-07.jpg?v=1606809247">
+          <h2>ALL-NEW FITNESS APPAREL</h2>
+          <span>PERFORMANCE IS KEY</span>
+          <button class="ghost-btn">SHOP NOW</button>
+        </a>
+        <a class="push-item" href="/products/immune">
+          <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/immune-sticker-push.jpg?v=1582739425">
+          <h2>MTN OPS IMMUNE</h2>
+          <span>A DAILY IMMUNE BOOSTER</span>
+          <button class="ghost-btn">BUY NOW</button>
+        </a>
+        <a class="push-item" href="/products/ignite">
+          <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/ignite--push.png?v=1601575548">
+          <h2>MTN OPS IGNITE</h2>
+          <span>SUPERCHARGED ENERGY &amp; FOCUS</span>
+          <button class="ghost-btn">BUY NOW</button>
+        </a>
+      </div>
+    </div>{% endcomment %}
+
+
+    {% comment %}<a class="click-test" data-ajax-url="https://mtnops.com/collections/rewards?view=rewards">Click</a>
+    <div class="append-here"></div>
+
+    <script type="text/javascript">
+      $('.click-test').on('click', function(e) {
+        var $this = $(this),
+        $content = $('.append-here'),
+        ajaxurl = $this.data('ajax-url');
+
+
+        $content.empty();
+        $.ajax({
+          url: ajaxurl,
+          dataType: 'html',
+          type: 'GET',
+          success: function(data) {
+            //console.log(data);
+            // insert variations form
+            $content.append(data);
+            
+          },
+          complete: function() {
+            //alert('success');
+          },
+          error: function() {
+            //alert('errorr');
+          },
+        });
+      });
+    </script>{% endcomment %}
+
+
+  	{% comment %}<div class="main-page-wrapper">
+  	   <div class="container">
+  	      <div class="row">
+  	         <div class="site-content col-sm-12" role="main">
+  	            
+  	         		{% assign testProduct = all_products['focus-tee'] %}
+
+  	         		<div id="price-field">{{testProduct.price}}</div>
+
+  	            <form method="post" action="/cart/add">
+  	            	<select id="product-selector" name="id">
+  	            		{% for test in testProduct.variants %}
+  	            			<option value="{{ test.id }}">{{ test.title }}</option>
+  	            		{% endfor %}
+  	            	</select>
+  	            	<input type="submit" name="add" value="Purchase" id="purchase" />
+  	            </form>
+  	         </div>
+  	      </div>
+  	   </div>
+  	</div>
+
+
+  	<script>
+  	  var selectCallback = function(variant, selector) {
+    if (variant) {
+      if (variant.available) {
+        // Selected a valid variant that is available.
+        $('#add')
+          .removeClass('disabled')
+          .removeAttr('disabled')
+          .val('Add to Cart')
+          .fadeTo(200, 1);
+      } else {
+        // Variant is sold out.
+        $('#add')
+          .val('Sold Out')
+          .addClass('disabled')
+          .attr('disabled', 'disabled')
+          .fadeTo(200, 0.5);
+      }
+      // Whether the variant is in stock or not, we can update the price and compare at price.
+      if (variant.compare_at_price > variant.price) {
+        $('#price-field').html(
+          '<span class="product-price on-sale">' +
+            Shopify.formatMoney(variant.price, '') +
+            '</span>' +
+            '&nbsp;<s class="product-compare-price">' +
+            Shopify.formatMoney(
+              variant.compare_at_price,
+              ''
+            ) +
+            '</s>'
+        );
+      } else {
+        $('#price-field').html(
+          '<span class="product-price">' +
+            Shopify.formatMoney(variant.price, '') +
+            '</span>'
+        );
+      }
+    } else {
+      // variant doesn't exist.
+      $('#add')
+        .val('Unavailable')
+        .addClass('disabled')
+        .attr('disabled', 'disabled')
+        .fadeTo(200, 0.5);
+    }
+  };
+  	  // initialize multi selector for product
+  	  jQuery(function($) {
+  	    new Shopify.OptionSelectors("product-selector", { product: {{testProduct}}, onVariantSelected: selectCallback });
+  	  });
+  	  // ]]>
+  	</script>
+
+  {% else %}
+  	
+  	<div class="main-page-wrapper">
+  	   <!-- MAIN CONTENT AREA -->
+  	   {%- include 'page_heading', page_title:page.title -%}
+  	   <div class="container">
+  	      <div class="row">
+  	         <div class="site-content col-sm-12" role="main">
+  	         		<p>This page is for testing purposes only. Contact <a href="mailto:jake@mtnops.com">jake@mtnops.com</a> if you have questions.</p>
+  	         </div>
+  	      </div>
+  	   </div>
+  	</div>{% endcomment %}
+</div>
+{% endif %}

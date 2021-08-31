@@ -1,0 +1,112 @@
+<div id="shipping-notice" class="iziModal custom-modal shipping-notice">
+  <div data-izimodal-close="" class="icon-close"><i class="fa fa-times" aria-hidden="true"></i></div>
+  <h3>FREE SHIPPING ON ALL ORDERS OVER $99<i>*</i></h3>
+  <p>Thanks for shopping MTN OPS Products and Gear. When your order is over $99, the shipping is on us!</p>
+
+  <h4>Important Shipping Info:</h4>
+  <ul>
+    <li>Orders placed before 11am MST will ship the same day.</li>
+    <li>Orders placed over the weekend or on recognized holidays will ship the next business day.</li>
+    <li>Eligible orders will arrive within 3-5 business days from the date of shipment.</li>
+  </ul>
+    <h4>Restrictions:</h4>
+  <ul>
+    <li>Available for orders shipped to the continental United States only (excludes AK, HI, Canada, and international orders).</li>
+  </ul>
+  <p><b>Have questions? Contact MTN OPS Support at <a href="tel:888-760-3393">1-888-760-3393.</a></b></p>
+</div>
+
+{% comment %}<div id="shipping-notice" class="iziModal custom-modal shipping-notice">
+  <div data-izimodal-close="" class="icon-close"><i class="fa fa-times" aria-hidden="true"></i></div>
+  <h3>FREE SHIPPING LABOR DAY WEEKEND! USE CODE <b>LABORDAY</b> AT CHECKOUT*</h3>
+  <p>Thanks for shopping MTN OPS Products and Gear. When your order is over $99, the shipping is on us!</p>
+
+  <h4>Important Shipping Info:</h4>
+  <ul>
+    <li>Orders placed before 11am MST will ship the same day.</li>
+    <li>Orders placed over the weekend or on recognized holidays will ship the next business day.</li>
+    <li>Eligible orders will arrive within 3-5 business days from the date of shipment.</li>
+  </ul>
+    <h4>Restrictions:</h4>
+  <ul>
+    <li>Available for orders shipped to the continental United States only (excludes AK, HI, Canada, and international orders).</li>
+    <li>Free Shipping discount codes only applies to orders over a $10 value. Free Shipping discount code will not work with Free Samplers.</li>
+  </ul>
+  <p><b>Have questions? Contact MTN OPS Support at <a href="tel:888-760-3393">1-888-760-3393.</a></b></p>
+</div>{% endcomment %}
+
+
+<div id="topbar-notice" class="iziModal custom-modal">
+  <div data-izimodal-close="" class="icon-close"><i class="fa fa-times" aria-hidden="true"></i></div>
+  <h3>SHIPPING DELAY NOTICE</h3>
+  <p>Orders placed later in the afternoon on the September 11th - September 13th will not ship out until Monday the 16th.</p>
+  <p><b>Have questions? Contact MTN OPS Support at <a href="tel:888-760-3393">1-888-760-3393.</a></b></p>
+</div>
+
+{% comment %}{% if template contains 'product' %}
+
+    {% if product.id == 798593777706 %}
+      <div id="dealer-exclusives" class="iziModal custom-modal" style="text-align: center;">
+        <a data-izimodal-close="" class="icon-close"><i class="fa fa-times" aria-hidden="true"></i></a>
+        <img src="https://cdn.shopify.com/s/files/1/2786/4584/products/ignite-charlie-sportsmans-exclusive_720x.jpg?v=1571860782" style="margin-bottom: 20px;">
+        <a class="mtnops-btn" href="https://www.sportsmans.com/camping-gear-supplies/food-nutrition/performance-nutrition/mtn-ops-liberty-pop-ignite-supercharged-energy-focus/p/1539350" target="_blank" style="margin-bottom: 20px;">SHOP NOW</a>
+      </div>
+    {% endif %}
+
+{% endif %}{% endcomment %}
+
+<div id="prop65-modal" class="iziModal custom-modal">
+  <a data-izimodal-close="" class="icon-close"><i class="fa fa-times" aria-hidden="true"></i></a>
+  <p class="prop-warning" style="font-size: 13px; line-height: 1.5; margin: 0 0 10px;"><img alt="⚠" src="//www.p65warnings.ca.gov/sites/default/files/warning.svg" style="width: 20px; height: 18px; margin-bottom: 6px;"><strong>WARNING</strong>: Consuming this product can expose you to lead, which is known to the State of California to cause birth defects or other reproductive harm. For more information go to <a href="https://www.P65Warnings.ca.gov" target="_blank">www.P65Warnings.ca.gov</a>.</p>
+</div>
+
+
+{% if template contains 'page' %}
+
+  {% comment %}INSIDER PAGE POPUP{% endcomment %}
+    {% comment %}{% if page.id == 42999840810 %} 
+      
+      <div id="insider-popup" class="iziModal custom-modal">
+        <a data-izimodal-close="" class="icon-close"><i class="fa fa-times" aria-hidden="true"></i></a>
+        <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/AugustInsiderIncentivePage-POPUP-Text.jpg?v=1596774584">
+      </div>
+
+      <script type="text/javascript">
+        $('#insider-popup').iziModal({
+          padding: 0,
+          overlayColor: 'rgba(0, 0, 0, 0.9)',
+          width: 600,
+          closeButton: false,
+          autoOpen: false
+        });
+
+        var scrolled = false;
+
+        $(window).scroll(function() {
+          if($(window).scrollTop() > 250 && scrolled == false){
+            
+            $('#insider-popup').iziModal('open');
+            scrolled = true;
+          }
+        });
+      </script>
+    {% endif %}{% endcomment %}
+
+{% endif %}
+
+{% comment %}{% if page.id == 43244224554 %}
+<div id="dialed-modal">
+  <a data-izimodal-close="" class="icon-close"><i class="fa fa-times" aria-hidden="true"></i></a>
+  <h3>Choose your Flavor!</h3>
+    <div class="col-sm-6">
+      <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/DIALED-Pouch-CherryLimeade-1200.png?14287">
+      <h3>CHERRY LIMEADE</h3>
+      <button class="addToCartBtn" data-product="632096590372">ADD TO CART</button>
+    </div>
+    <div class="col-sm-6">
+      <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/DIALED-Pouch-RaspberryWatermelon-1200.png?14287">
+      <h3>RASPBERRY WATERMELON</h3>
+      <button class="addToCartBtn" data-product="632096590389">ADD TO CART</button>
+    </div>
+</div>
+{% endif %}{% endcomment %}

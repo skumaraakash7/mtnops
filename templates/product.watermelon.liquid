@@ -1,0 +1,58 @@
+
+<div class="main-page-wrapper">
+    <!-- MAIN CONTENT AREA -->
+
+    <img class="floating-fruit fruit-one" src="https://cdn.shopify.com/s/files/1/2786/4584/files/watermelon-piece1.png?v=1585765419">
+    <img class="floating-fruit fruit-two" src="https://cdn.shopify.com/s/files/1/2786/4584/files/watermelon-piece2.png?v=1585765419">
+    <img class="floating-fruit fruit-three" src="https://cdn.shopify.com/s/files/1/2786/4584/files/watermelon-piece3.png?v=1585765419">
+    <img class="floating-fruit fruit-four" src="https://cdn.shopify.com/s/files/1/2786/4584/files/watermelon-piece2.png?v=1585765419">
+
+      <div class="container-fluid">
+         <div class="row">
+            <div class="site-content col-sm-12" role="main">
+              <div class="product-launch-wrap">
+                {% comment %}{%- include 'product_page_area' -%}{% endcomment %}
+                <header>
+                  <img class="product-intro-image" src="https://cdn.shopify.com/s/files/1/2786/4584/files/watermelon-launch-heading.png?v=1585762470">
+                  <p>Whether you're working from home or trying to stay energized with all the kids home, we have the answer. Try our All-New Watermelon flavor today!</p>
+                  <img class="product-lineup-image" src="https://cdn.shopify.com/s/files/1/2786/4584/files/watermelon-product-line.png?v=1585762064">
+                </header>
+
+                {% comment %}<h1>{{ product.title }}</h1>{% endcomment %}
+
+                <div class="product-headline">
+                  <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/healthy-energy-headline.png?v=1585763249">
+                </div>
+                <ul class="product-variations-wrap">
+                {% for v in product.variants %}
+                  {% if v.available %}
+                    <li>
+                      <div class="featured-image-wrap">
+                        <img class="product-featured" src="{{ v.image.src | img_url: '1000x1000' }}">
+                      </div>
+                      <div class="product-meta-wrap">
+                        {% include 'mtnops_product_callout_svgs' %}
+                        <div>
+                          <span class="product-price">{{v.price | money}}</span>
+                          <a class="ajax_add_to_cart add_to_cart_button add-to-cart-watermelon" href="#" data-pid="{{ v.id }}">Add to Cart</a>
+                        </div>
+                      </div>
+                    </li>
+                  {% endif %}
+                {% endfor %}
+                </ul>
+              </div>
+
+            </div> <!-- .site-content -->
+        </div> <!-- end row -->
+      </div> <!-- end container -->
+      <!-- end container -->
+</div><!-- .main-page-wrapper -->
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.4/gsap.min.js"></script>
+<script type="text/javascript">
+  gsap.fromTo('.floating-fruit', 4, {scale: 1, rotation: -5}, {scale: 1.12, rotation: 5, transformOrigin:"center center", repeat: -1, yoyo: true, ease: Power1.easeInOut});
+  gsap.fromTo('.product-intro-image', 2, {scale: 1}, {scale: 1.04, transformOrigin:"center center", repeat: -1, yoyo: true, ease: Power1.easeInOut});
+  gsap.fromTo('.product-featured', 2.5, {scale: 1}, {scale: 1.02, transformOrigin:"center center", repeat: -1, yoyo: true, ease: Power1.easeInOut});
+</script>

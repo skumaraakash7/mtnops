@@ -1,0 +1,36 @@
+{% assign show_hat_profile = false %}
+{% for collection in product.collections %}
+  {% if show_hat_profile == false and collection.title == 'HEADWEAR' %}
+    {% assign show_hat_profile = true %}
+  {% endif %}
+{% endfor %}
+
+{% if show_hat_profile %}
+
+  {% if product.metafields.meta.description_excerpt contains 'High' %}
+    {% assign profileAsset = 'https://cdn.shopify.com/s/files/1/2786/4584/files/high-profile.svg?v=1592521548' %}
+  {% elsif product.metafields.meta.description_excerpt contains 'Mid' %}
+    {% assign profileAsset = 'https://cdn.shopify.com/s/files/1/2786/4584/files/mid-profile.svg?v=1592521548' %}
+  {% elsif product.metafields.meta.description_excerpt contains 'Low' %}
+    {% assign profileAsset = 'https://cdn.shopify.com/s/files/1/2786/4584/files/low-profile.svg?v=1592521548' %}
+  {% else %}
+    {% assign profileAsset = 'check' %}
+  {% endif %}
+
+  {% comment %}{% if product.metafields.meta.hat-profile == 'high' %}
+    {% assign profileAsset = 'https://cdn.shopify.com/s/files/1/2786/4584/files/high-profile.svg?v=1592521548' %}
+  {% elsif product.metafields.meta.hat-profile == 'mid' %}
+    {% assign profileAsset = 'https://cdn.shopify.com/s/files/1/2786/4584/files/mid-profile.svg?v=1592521548' %}
+  {% elsif product.metafields.meta.hat-profile == 'low' %}
+    {% assign profileAsset = 'https://cdn.shopify.com/s/files/1/2786/4584/files/low-profile.svg?v=1592521548' %}
+  {% else %}
+    {% assign profileAsset = 'check' %}
+  {% endif %}{% endcomment %}
+
+  {% if profileAsset != 'check' %}
+    <div class="hat-profile">
+      <img src="{{ profileAsset }}">
+    </div>
+  {% endif %}
+
+{% endif %}

@@ -1,0 +1,128 @@
+{% include 'mtnops_tag_checker' %}
+
+{% comment %}{% if customer.email == 'jake.shaw@me.com' or customer.email == 'chris@mtnops.com' %}
+{% else %}
+  <p>{{product.title}} page is coming. Check back soon!</p>
+{% endif %}
+{% endcomment %}
+
+{% if product.metafields.meta.slim_title != blank %}
+  <div class="mtnops-slim-page-title"><h1>{{ product.metafields.meta.slim_title }}</h1></div>
+{% else %}
+  <div class="mtnops-slim-page-title"><h1>{{ product.title }}! BACK FOR A LIMITED TIME.</h1></div>
+{% endif %}
+<div class="main-page-wrapper">
+  <!-- MAIN CONTENT AREA -->
+
+  {% comment %}{% if product.metafields.meta.product_image != blank %}
+    <header class="product-header" style="background-image: url('{{ product.metafields.meta.product_image }}');">
+      <div class="product-header-inner">
+        {% if product.metafields.meta.product_logo != blank %}
+          <img src="{{ product.metafields.meta.product_logo }}">
+        {% endif %}
+      </div>
+    </header>
+  {% else %}
+
+    {% if product.metafields.meta.product_lineup != blank %}
+      <div class="product-lineup">
+        <img src="{{ product.metafields.meta.product_lineup }}">
+      </div>
+    {% elsif product.featured_image != blank %}
+      <div class="product-lineup">
+        <img src="{{ product.featured_image.src | img_url: 'master' }}">
+      </div>
+    {% endif %}
+
+  {% endif %}{% endcomment %}
+
+
+  <section class="soda-series-wrap soda-series-section">
+    <img src="https://i.shgcdn.com/6f4f78bc-6268-419b-9ac6-4574f016f306/-/format/auto/-/preview/3000x3000/-/quality/lighter/">
+    <div class="soda-series-overlay">
+      <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/ignite-soda-series-summer-title.svg?v=1623677240">
+    </div>
+
+  <div class="bubbles">
+    <div class="bubble"><span></span></div>
+    <div class="bubble"><span></span></div>
+    <div class="bubble"><span></span></div>
+    <div class="bubble"><span></span></div>
+    <div class="bubble"><span></span></div>
+    <div class="bubble"><span></span></div>
+    <div class="bubble"><span></span></div>
+    <div class="bubble"><span></span></div>
+    <div class="bubble"><span></span></div>
+    <div class="bubble"><span></span></div>
+  </div>
+
+  </section>
+
+  {% comment %}<img class="sodalicious-text floating" src="https://cdn.shopify.com/s/files/1/2786/4584/files/sodalicious-text.png?11644" alt="Sodalicious">
+      <p style="margin-bottom: 20px">Our <b>IGNITE™</b> Soda Series is off the hook! Each Soda Series contains 5 single servings of our 3 soda flavors; Red Cream Soda, Rootbeer and Orange Soda. That's 15 single servings of IGNITE Sodalicous Flavors to quench your summer thirst.</p>
+      <a class="btn soda-btn" href="/products/ignite-soda-series">BUY NOW</a>{% endcomment %}
+
+  <div class="container-fluid">
+     <div class="row">
+        <div class="site-content col-sm-12" role="main">
+          {% comment %}{%- include 'product_page_area' -%}{% endcomment %}
+          {% comment %}<h1>{{ product.title }}</h1>{% endcomment %}
+
+          <div class="product-heading">
+            <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/sodalicious-text.png?11644">
+            <p>{{ product.metafields.meta.description_excerpt }}</p>
+          </div>
+
+        </div> <!-- .site-content -->
+    </div> <!-- end row -->
+  </div> <!-- end container -->
+  <!-- end container -->
+
+  <div class="product-variations-wrap">
+  {% for v in product.variants %}
+    
+      <div class="outer-product-section bugle-berry-{{ v.title | handleize }}">
+        <div class="product-section">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="product-inner-wrap">
+                  <div class="featured-image-wrap">
+                    <img class="product-featured" src="{{ v.image.src | img_url: 'master' }}">
+                  </div>
+                  <div class="product-meta-wrap">
+                    {% if v.id == 39442952159274 %}
+                      <img class="product-benefits" src="https://cdn.shopify.com/s/files/1/2786/4584/files/ignite-soda-series-os.svg?v=1623647928">
+                    {% elsif v.id == 39442952192042 %}
+                      <img class="product-benefits" src="https://cdn.shopify.com/s/files/1/2786/4584/files/ignite-soda-series-rcs.svg?v=1623647928">
+                    {% elsif v.id == 39442952224810 %}
+                      <img class="product-benefits" src="https://cdn.shopify.com/s/files/1/2786/4584/files/ignite-soda-series-rb.svg?v=1623647928">
+                    {% endif %}
+                    <div>
+                      <span class="product-price">{{v.price | money}}</span>
+                      {% if v.available %}
+                      <a class="ajax_add_to_cart add_to_cart_button add-to-cart-cta" href="#" data-pid="{{ v.id }}">Add to Cart</a>
+                      {% else %}
+                      <p class="stock-message">OUT OF STOCK</p>
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% if v.metafields.meta.lifestyle != blank %}
+          <div class="lifestyle-section">
+            <img src="{{ v.metafields.meta.lifestyle }}">
+          </div>
+        {% endif %}
+      </div>
+    
+  {% endfor %}
+  </div>
+
+  <div id="shopify-product-reviews" data-id="{{product.id}}">{{ product.metafields.spr.reviews }}</div>
+
+</div><!-- .main-page-wrapper -->
+

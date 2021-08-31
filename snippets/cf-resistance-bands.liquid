@@ -1,0 +1,637 @@
+<div class="cf-inner-wrap {{ programClass }}">
+	<div class="program-overview">
+		<img class="program-section-title" src="https://cdn.shopify.com/s/files/1/2786/4584/files/lets-get-started.svg?v=1611853788">
+		<p>Aspiring Learnings, Home Gymers, Road-Warriors, and Fitness fanatics alike can all benefit from resistance band training. Whether you’re starting out, need to mix things up, or are looking to rehabilitate certain muscle groups, resistance bands can work wonders!</p>
+		<p>When you boil it down, building strong, lean muscle is all about constantly applying tension to the targeted muscle(s) during specific movements or exercises. Time under tension drives growth. If you think about it, a resistance band is truthfully no different than free weights, when used properly. They apply a constant resistance throughout the entire movement and have no ‘dead zone’ at the top of the bottom of each rep. All said and done, resistance bands work.</p>
+		<p>Grab a resistance band, shake up some YETI or IGNITE and let’s roll.</p>
+
+		<img class="program-icons" src="https://cdn.shopify.com/s/files/1/2786/4584/files/resistance-bands-program-icons.svg?v=1614036481">
+
+	</div>
+
+
+	<div class="row">
+		<div class="col-xs-12">
+
+			<div id="week" class="week-wrap">
+
+				<div class="week-title-section">
+					<ul class="program-section-buttons">
+						<li><a class="button active" href="#" data-week="1" data-sets="5" data-reps="20">WEEK 1</a></li>
+						<li><a class="button" href="#" data-week="2" data-sets="4" data-reps="25">WEEK 2</a></li>
+						<li><a class="button" href="#" data-week="3" data-sets="3" data-reps="35">WEEK 3</a></li>
+					</ul>
+					<h2>Week 1</h2>
+					<div class="week-intro"></div>
+				</div>
+				<div class="weekday-wrap">
+					
+					<div id="week-day1" class="day-wrap">
+						<div class="day-title-section launch-workout">
+							<div class="day-title">
+								<h3>Day 1</h3>
+								<span>CHEST &AMP; TRICEPS</span>
+							</div>
+							<div class="day-intro">
+								WARM UP: Start with 10 minutes of cardio and stretching
+							</div>
+						</div>
+						<div class="week-day1-movements daily-movements-wrap">
+							<ul class="week-day1 daily-movements owl-carousel"></ul>
+						</div>
+					</div>
+
+					<div id="week-day2" class="day-wrap">
+						<div class="day-title-section launch-workout">
+							<div class="day-title">
+								<h3>Day 2</h3>
+								<span class="day-meta">LEGS &AMP; ABS</span>
+							</div>
+							<div class="day-intro">
+								WARM UP: Start with 10 minutes of cardio and stretching
+							</div>
+						</div>
+						<div class="week-day2-movements daily-movements-wrap">
+							<ul class="week-day2 daily-movements owl-carousel"></ul>
+						</div>
+					</div>
+					<div id="week-day3" class="day-wrap">
+						<div class="day-title-section launch-workout">
+							<div class="day-title">
+								<h3>Day 3</h3>
+								<span class="day-meta">BACK &AMP; BICEPS</span>
+							</div>
+							<div class="day-intro">
+								WARM UP: Start with 10 minutes of cardio and stretching
+							</div>
+						</div>
+						<div class="week-day3-movements daily-movements-wrap">
+							<ul class="week-day3 daily-movements owl-carousel"></ul>
+						</div>
+					</div>
+					<div id="week-day4" class="day-wrap">
+						<div class="day-title-section launch-workout">
+							<div class="day-title">
+								<h3>Day 4</h3>
+								<span class="day-meta">SHOULDERS &AMP; ABS</span>
+							</div>
+							<div class="day-intro">
+								WARM UP: Start with 10 minutes of cardio and stretching
+							</div>
+						</div>
+						<div class="week-day4-movements daily-movements-wrap">
+							<ul class="week-day4 daily-movements owl-carousel"></ul>
+						</div>
+					</div>
+
+
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<section class="mtnops-samplers-section mtnops-section">
+		<header>
+	    <h2>{{ collections['matts-go-to-products'].title }}</h2>
+	    <span class="h2-subtitle">PRODUCTS TO SUPPORT YOUR CONQUERING!</span>
+	  </header>
+
+	  <div class="owl-carousel owl-theme product-carousel" id="suggested-products">
+	    {% for product in collections['matts-go-to-products'].products %}
+	      <div class="item">
+	        <a href="{{product.url}}" target="_blank">
+	          <img src="{{ product | img_url: '600x' }}">
+	          <h3>{{ product.title }}</h3>
+	          <span>{{ product.metafields.meta.subtitle }}</span>
+	          {% comment %}<div>{{ product.price  | money }}</div>
+	          {% if product.compare_at_price != blank %}
+	            <div>{{ product.compare_at_price  | money }}</div>
+	          {% endif %}{% endcomment %}
+	          <div class="swatches-wrap">
+	            {% for color in product.options_by_name['Flavor'].values %}
+	              <div class="bg_color bg_color_{{ color | handleize }}"></div>
+	            {% endfor %}
+	          </div>
+	          <button class="mtnops-btn-sm">BUY NOW</button>
+	        </a> 
+	      </div>
+	    {% endfor %}
+	  </div>
+	</section>
+</div>
+
+<script type="text/javascript">
+
+var movements = [
+ {
+   title: "Floor Press",
+   sets: 5,
+   reps: 20,
+   video: "https://cdn.shopify.com/s/files/1/2786/4584/files/FloorPress.mp4?v=1614030493",
+   day: 1
+ },
+ {
+   title: "Chest Fly",
+   sets: 5,
+   reps: 20,
+   video: "https://cdn.shopify.com/s/files/1/2786/4584/files/ChestFly.mp4?v=1614030493",
+   day: 1
+ },
+ {
+   title: "Push Ups",
+   sets: 5,
+   reps: 20,
+   video: "https://cdn.shopify.com/s/files/1/2786/4584/files/PushUp.mp4?v=1614030493",
+   day: 1
+ },
+ {
+   title: "Single Arm Kickback",
+   sets: 5,
+   reps: 20,
+   video: "https://cdn.shopify.com/s/files/1/2786/4584/files/SingleArmTricepKickback.mp4?v=1614030492",
+   day: 1
+ },
+ {
+   title: "Standing Tricep Extension",
+   sets: 5,
+   reps: 20,
+   video: "https://cdn.shopify.com/s/files/1/2786/4584/files/StandingTricepExtension.mp4?v=1614030493",
+   day: 1
+ },
+ {
+   title: "Double Arm Tricep Push Down",
+   sets: 5,
+   reps: 20,
+   video: "https://cdn.shopify.com/s/files/1/2786/4584/files/DoubleArmTricepPushdown.mp4?v=1614030492",
+   day: 1
+ },
+ {
+   title: "Squat",
+   sets: 5,
+   reps: 20,
+   video: "https://cdn.shopify.com/s/files/1/2786/4584/files/Squat.mp4?v=1614030493",
+   day: 2
+ },
+ {
+   title: "Lunges",
+   sets: 5,
+   reps: 20,
+   video: "https://cdn.shopify.com/s/files/1/2786/4584/files/Lunge.mp4?v=1614030494",
+   day: 2
+ },
+ {
+   title: "Stiff Leg Dead Lift",
+   sets: 5,
+   reps: 20,
+   video: "https://cdn.shopify.com/s/files/1/2786/4584/files/StiffLegDeadLift.mp4?v=1614030493",
+   day: 2
+ },
+ {
+   title: "Leg Kickback",
+   sets: 5,
+   reps: 20,
+   video: "https://cdn.shopify.com/s/files/1/2786/4584/files/LegKickback.mp4?v=1614030493",
+   day: 2
+ },
+ {
+   title: "Hamstring Curl",
+   sets: 5,
+   reps: 20,
+   video: "https://cdn.shopify.com/s/files/1/2786/4584/files/HamstringCurl.mp4?v=1614030493",
+   day: 2
+ },
+ {
+   title: "Leg Press",
+   sets: 5,
+   reps: 20,
+   video: "https://cdn.shopify.com/s/files/1/2786/4584/files/LegPress.mp4?v=1614030494",
+   day: 2
+ },
+ {
+   title: "Dead Lift",
+   sets: 5,
+   reps: 20,
+   video: "https://cdn.shopify.com/s/files/1/2786/4584/files/DeadLift.mp4?v=1614030493",
+   day: 2
+ },
+ {
+   title: "Calf Raises",
+   sets: 5,
+   reps: 20,
+   video: "https://cdn.shopify.com/s/files/1/2786/4584/files/CalfRaises.mp4?v=1614030493",
+   day: 2
+ },
+ {
+   title: "Good Morning",
+   sets: 5,
+   reps: 20,
+   video: "https://cdn.shopify.com/s/files/1/2786/4584/files/GoodMorning.mp4?v=1614030493",
+   day: 3
+ },
+ {
+   title: "Assisted Pull Ups",
+   sets: 5,
+   reps: 20,
+   video: "https://cdn.shopify.com/s/files/1/2786/4584/files/AssistedPullup.mp4?v=1614030492",
+   day: 3
+ },
+ {
+   title: "Double Arm Curl",
+   sets: 5,
+   reps: 20,
+   video: "https://cdn.shopify.com/s/files/1/2786/4584/files/DoubleArmCurl.mp4?v=1614030493",
+   day: 3
+ },
+ {
+   title: "High Row",
+   sets: 5,
+   reps: 20,
+   video: "https://cdn.shopify.com/s/files/1/2786/4584/files/HighRow.mp4?v=1614030493",
+   day: 3
+ },
+ {
+   title: "Seated Row",
+   sets: 5,
+   reps: 20,
+   video: "https://cdn.shopify.com/s/files/1/2786/4584/files/SeatedRow.mp4?v=1614030493",
+   day: 3
+ },
+ {
+   title: "Lat Pull Down",
+   sets: 5,
+   reps: 20,
+   video: "https://cdn.shopify.com/s/files/1/2786/4584/files/LatPulldown.mp4?v=1614030493",
+   day: 3
+ },
+ {
+   title: "Single Arm Curls (each arm)",
+   sets: 5,
+   reps: 20,
+   video: "https://cdn.shopify.com/s/files/1/2786/4584/files/SingleArmCurl.mp4?v=1614030492",
+   day: 3
+ },
+ {
+   title: "Double Arm High Curl",
+   sets: 5,
+   reps: 20,
+   video: "https://cdn.shopify.com/s/files/1/2786/4584/files/DoubleArmCurl.mp4?v=1614030493",
+   day: 3
+ },
+ {
+   title: "Upright Row",
+   sets: 5,
+   reps: 20,
+   video: "https://cdn.shopify.com/s/files/1/2786/4584/files/UprightRow.mp4?v=1614030493",
+   day: 4
+ },
+ {
+   title: "Single Arm Shoulder Press",
+   sets: 5,
+   reps: 20,
+   video: "https://cdn.shopify.com/s/files/1/2786/4584/files/SingleArmShoulderPress.mp4?v=1614030494",
+   day: 4
+ },
+ {
+   title: "Side Raise",
+   sets: 5,
+   reps: 20,
+   video: "https://cdn.shopify.com/s/files/1/2786/4584/files/SideRaise.mp4?v=1614030494",
+   day: 4
+ },
+ {
+   title: "Front Raise",
+   sets: 5,
+   reps: 20,
+   video: "https://cdn.shopify.com/s/files/1/2786/4584/files/FrontRaise.mp4?v=1614030493",
+   day: 4
+ },
+ {
+   title: "Pull Apart",
+   sets: 5,
+   reps: 20,
+   video: "https://cdn.shopify.com/s/files/1/2786/4584/files/PullApart.mp4?v=1614030492",
+   day: 4
+ },
+ {
+   title: "Side Crunch",
+   sets: 5,
+   reps: 20,
+   video: "https://cdn.shopify.com/s/files/1/2786/4584/files/SideCrunch.mp4?v=1614030493",
+   day: 4
+ },
+ {
+   title: "Crunch",
+   sets: 5,
+   reps: 20,
+   video: "https://cdn.shopify.com/s/files/1/2786/4584/files/Crunch.mp4?v=1614030492",
+   day: 4
+ },
+ {
+   title: "Oblique Twist",
+   sets: 5,
+   reps: 20,
+   video: "https://cdn.shopify.com/s/files/1/2786/4584/files/ObliqueTwist.mp4?v=1614030494",
+   day: 4
+ },
+ {
+   title: "Overhead Crunch",
+   sets: 5,
+   reps: 20,
+   video: "https://cdn.shopify.com/s/files/1/2786/4584/files/OverheadCrunch.mp4?v=1614030494",
+   day: 4
+ },
+ {
+   title: "Bicycles",
+   sets: 5,
+   reps: 20,
+   video: "https://cdn.shopify.com/s/files/1/2786/4584/files/Bicyles.mp4?v=1614030492",
+   day: 4
+ },
+ {
+   title: "High Arm Crunch",
+   sets: 5,
+   reps: 20,
+   video: "https://cdn.shopify.com/s/files/1/2786/4584/files/HighArmCrunch.mp4?v=1614030493",
+   day: 4
+ },
+ {
+   title: "Knee Tuck",
+   sets: 5,
+   reps: 20,
+   video: "https://cdn.shopify.com/s/files/1/2786/4584/files/KneeTuck.mp4?v=1614030493",
+   day: 4
+ }
+]
+
+	count = 0;
+
+	for (i = 0; i < movements.length; i++) {
+		count++;
+		if(movements[i].title != '') {
+			var movement = '<li class="cf-movement',
+			sets = movements[i].sets,
+			reps = movements[i].reps,
+			day = movements[i].day;
+
+			//if(movements[i].display != undefined && movements[i].display.length > 0) {}
+			//console.log(movements[i].display.length);
+			//for (m = 0; m < movements[i].display.length; m++) {
+					//week = movements[i].display[m].week,
+					//
+					//console.log('Week: '+week, 'Day: '+day);
+				//}
+
+			if(movements[i].video == '') {
+				movement += ' no-video';
+			}
+			movement += '">';
+			
+			
+			movement += '<h3 class="movement-title">' + movements[i].title + '</h3><div class="movement-meta">';
+
+
+			if(sets) {
+				movement += '<div class="sets"><span>' + sets + '</span> SETS</div>';
+			}
+			if($.isNumeric(reps)) {
+				movement += '<div class="reps"><span>' + reps + '</span> REPS</div>';
+			} else {
+				movement += '<div class="reps-blurp">' + reps + '</div>';
+			}
+
+			//<div class="rest">REST 20 SEC. BETWEEN</div>
+			movement += '</div>';
+
+
+			if(movements[i].video != '') {
+				movement += '<video playsinline loop muted class="video-'+count+'" preload="none"><source src="'+movements[i].video+'" type="video/mp4"></video>';
+			}
+			
+			movement += '</li>';
+	
+
+
+			
+
+			//if (week != 0) {
+			document.querySelector('.week-day'+day).innerHTML += movement;
+			//}
+
+			
+
+		}
+	}
+	count = 0;
+
+	//<span class="movement-counter">Movement '+count+'</span><div class="video-controls"><a class="pause-control" href="#" data-video="video-'+count+'"><i class="fal fa-pause-circle"></i></a><a class="play-control" href="#" data-video="video-'+count+'"><i class="fal fa-play-circle"></i></a></div>
+	//movement += '<div class=""><a class="play-movement-video" href="#" data-play-video="'+count+'">Play Video</a></div>';
+
+	
+	var intro = $('.week-intro'),
+	week1 = 'Ah snap! It\'s time to get to work with your new resistance bands! Week 1 is laid out below and ready for you to get started. Each week consists of the same movements, however we will change the number of sets and reps you will do.',
+	week2 = 'Week 2 consists of the same workouts as before. The only differences are the sets and reps change on your resistance band movements. Take a look below for your <b>week 2</b> movements.',
+	week3 = 'Week 3 consists of the same workouts as before. The only differences are the sets and reps change on your resistance band movements. Take a look below for your <b>week 3</b> movements.';
+
+
+	intro.html(week1);
+
+	var chev = '<i class="fas fa-chevron-down"></i>';
+	$('.day-title-section').append(chev);
+	// Play Individual Videos
+	// $('.play-movement-video').on('click', function(e) {
+	// 	e.preventDefault();
+	// 	var vid = $(this).data('play-video');
+	// 	$('.video-'+vid).get(0).play();
+	// });
+
+	function loadVideos(elem) {
+		elem.addClass('loaded');
+		elem.each(function(){
+			$(this)[0].play();
+	  });
+	}
+
+	// LOAD DAY VIDEOS SECTION
+	$('.launch-workout').on('click', function(e) {
+		e.preventDefault();
+		var esto = $(this),
+		videos = esto.parent('.day-wrap').find('.cf-movement video');
+
+		if (!esto.parent().hasClass('active')) {
+			$('.day-wrap.active .daily-movements-wrap').slideUp();
+			$('.day-wrap.active').removeClass('active');
+		}
+
+		loadVideos(videos);
+		esto.parent('.day-wrap').toggleClass('active');
+		//setTimeout(function() {
+		esto.next().slideToggle("slow");
+		//}, 100);
+	});
+
+	$('.tab-trigger').on('click', function(e) {
+		e.preventDefault();
+		var tab = $(this).data('tab');
+		if($('#'+tab).hasClass('active')) {
+			$('.tab-panel').removeClass('active').slideUp();	
+		} else {
+			$('#'+tab).addClass('active').slideToggle();
+		}
+	});
+
+	//document.querySelector('#day-1 .day-title-section span').innerHTML =  day1Counter + " Total Movements";
+
+	// var playButtons = document.querySelectorAll(".play-control");
+	// var pauseButtons = document.querySelectorAll(".pause-control");
+
+	// for ( var counter = 0; counter < playButtons.length; counter++) {
+ //  	playButtons[counter].addEventListener("click", function(e){
+ //  		e.preventDefault();
+ //      var videoId = this.dataset.video,
+	// 		vid = document.querySelector('.'+videoId);
+	//   	playVid(vid);
+ //  	});
+	// }
+	// for ( var counter = 0; counter < pauseButtons.length; counter++) {
+ //    pauseButtons[counter].addEventListener("click", function(e){
+ //    	e.preventDefault();
+ //      var videoId = this.dataset.video,
+	// 		vid = document.querySelector('.'+videoId);
+	//   	pauseVid(vid);
+ //   });
+	// }
+		
+
+	// function playVid(vid) {
+	// 	vid.play();
+	// }
+
+	// function pauseVid(vid) {
+	// 	vid.pause();
+	// }
+
+  jQuery(document).ready(function($) {
+
+  	$('.program-section-buttons li a').on('click', function(e) {
+			e.preventDefault();
+
+			var week = $(this).data('week'),
+			sets = $(this).data('sets')
+			reps = $(this).data('reps');
+
+			$('.program-section-buttons li a').removeClass('active');
+			$(this).addClass('active');
+			$('.week-title-section h2').html('Week '+week);
+			$('.movement-meta .sets span').html(sets);
+			$('.movement-meta .reps span').html(reps);
+
+			if(week == 1) {
+				intro.html(week1);
+			} else if (week == 2) {
+				intro.html(week2);
+			} else if (week == 3) {
+				intro.html(week3);
+			}
+
+			//if(week == 1) {
+				
+			// 
+			//var scroller = $(this).attr('href');
+			//$("html, body").animate({scrollTop: $(scroller).offset().top -100}, 500);
+		});
+
+	  $(".daily-movements").owlCarousel({
+			responsive:{
+				0:{
+					items:2
+				},
+				700:{
+					items:3
+				},
+				1000:{
+					items:4
+				}
+			},
+			nav: true,
+			//center:true,
+			dots: true,
+			navText: ['<i class="far fa-chevron-left"></i>', '<i class="far fa-chevron-right"></i>'],
+			navElement: 'div',
+			margin: 5,
+	  });
+
+	  $("#suggested-products").owlCarousel({
+	    loop: true,
+	    nav: false,
+	    dots: false,
+	    autoplay: true,
+	    autoplayTimeout: 6000,
+	    autoplayHoverPause: true,
+	    responsive: {
+	      0: {
+	        items: 2
+	      },
+	      600: {
+	        items: 3
+	      },
+	      800: {
+	        items: 4
+	      },
+	      1000: {
+	        items: 5
+	      }
+	    }
+	  });
+	 //  $(window).scroll(function(e) {
+		// 	$('.day-wrap').each(function(e) {
+		// 		if(!$(this).hasClass("loaded") && $(this).has('video').length) {
+		// 			isOnScreen('.'+$(this).attr('id'));	
+		// 		}
+		// 	});
+			
+		// 	//if(scrollCheck == false) {
+				
+		// 	//}
+		// });
+
+
+		var scrollCheck = false;
+		
+		function isOnScreen(elem) {
+			if( elem.length == 0 ) {
+				return;
+			}
+			$window = $(window),
+			top_of_screen = $window.scrollTop(),
+			screen_height = $window.innerHeight(),
+			bottom_of_screen = top_of_screen + screen_height,
+			$elem = $(elem),
+			top_of_element = $elem.offset().top,
+			height = $elem.height(),
+			bottom_of_element = top_of_element + height;
+
+			if(bottom_of_screen > top_of_element) {
+				scrollCheck = true;
+				console.log($elem);
+				loadVideos($elem);
+			}
+		}
+
+
+		// $( window ).on('load', function() {
+  //   	loadVideos($('.day-movements'));
+		// });
+
+
+		// $('.play-videos-btn').on('click', function(e){
+		// 	e.preventDefault();
+		// 	var daysVids = $(this).data('day');
+		// 	$('#day-'+daysVids+' video').each( function(){
+		// 		$(this)[0].play();
+		//   });
+		// });
+		
+	});
+
+</script>

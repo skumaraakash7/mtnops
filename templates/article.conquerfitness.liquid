@@ -1,0 +1,106 @@
+
+{% comment %}
+** Conquer Fitness (blog post) - default view **
+- Template section
+- Uses blocks
+{% endcomment %}
+
+<script src="https://kit.fontawesome.com/87fe852ab0.js" crossorigin="anonymous"></script>
+
+
+<div class="main-page-wrapper">
+  <header class="video_hero_wrap">
+
+    {% if article.metafields.program.teaser %}
+      <video poster="{{ article.image | img_url }}" class="vid_trailer" playsinline="" autoplay="" muted="" loop="">
+          <source src="{{ article.metafields.program.teaser }}" type="video/mp4">
+        <source src="{{ article.metafields.program.teaser }}" type="video/webm">
+        {% if article.metafields.program.ogv %}
+          <source src="{{ article.metafields.program.ogv }}" type="video/ogg">
+        {% endif %}
+      </video>
+    {% else %}
+      <img  src="{{ article.image | img_url: '100x' }}"
+          alt="{% if article.image.alt != blank %}{{ article.image.alt }}{% else %}{{ article.title | escape }}{% endif %}"
+          data-src="{{ article.image | img_url: '1400x', format: 'pjpg' }}"
+          class="video_hero_banner"
+          sizes="100vw"
+          srcset="{{ article.image | img_url: '480x', format: 'pjpg' }} 480w,
+                  {{ article.image | img_url: '765x', format: 'pjpg' }} 765w,
+                  {{ article.image | img_url: '1400x', format: 'pjpg' }} 1400w,
+                  {{ article.image | img_url: '2048x', format: 'pjpg' }} 2048w"
+          />
+    {% endif %}
+    
+    <div class="video_hero">
+      
+      {% if article.metafields.program.logo %}
+        <img class="hero-logo" src="{{ article.metafields.program.logo }}"/>
+      {% else %}
+        <h1>{{ article.title }}</h1>
+        {% if article.metafields.program.subtitle %}
+          <span class="subtitle">{{ article.metafields.program.subtitle }}</span>
+        {% endif %}
+      {% endif %}
+      
+      {% if article.metafields.youtube.video %}
+        <a id="play-button" class="play_trigger watch_video2" href="#"><i class="fa fa-play-circle" aria-hidden="true"></i>Play</a>
+      {% endif %}
+    </div>
+
+    {% if article.metafields.youtube.video %}
+      {% include 'hero-video' %}
+    {% endif %}
+
+    {% if article.metafields.program.pdf or article.metafields.program.pdf2 %}
+      <div class="program-pdfs">
+      {% if article.metafields.program.pdf %}
+        <a class="program-pdf" href="{{ article.metafields.program.pdf }}" target="_blank"><i class="fa fa-arrow-circle-o-down" aria-hidden="true"></i> PROGRAM PDF</a>
+      {% endif %}
+      {% if article.metafields.program.pdf2 %}
+        <a class="program-pdf" href="{{ article.metafields.program.pdf2 }}" target="_blank"><i class="fa fa-arrow-circle-o-down" aria-hidden="true"></i> CONQUER CHART</a>
+      {% endif %}
+      </div>
+    {% endif %}
+
+  </header>
+  <div class="container">
+    <div class="row">
+      <div class="site-content col-sm-12" role="main">
+        <article id="post-{{article.id}}" class="blog-post-loop post-single-page post-{{article.id}} post type-post" itemscope itemtype="http://schema.org/Article">
+
+          <div class="entry-content">
+
+            {{ article.content }}
+
+            {% if article.id == 13526269994 %}
+              {% include 'cf-weight-loss' %}
+            {% elsif article.id == 13526237226 %}
+              {% include 'cf-strength' %}
+            {% elsif article.id == 13526204458 %}
+              {% include 'cf-zac-griffith' %}
+            {% elsif article.id == 13519618090 %}
+              {% include 'cf-eric-chesser' %}
+            {% elsif article.id == 13528891434 %}
+              {% include 'cf-elk-fit' %}
+            {% elsif article.id == 383361318954 %}
+              {% include 'cf-circuit' %}
+            {% elsif article.id == 385399390250 %}
+              {% include 'cf-women-who-conquer', programClass: 'conquer-fitness-program-v1' %}
+            {% elsif article.id == 385450115114 %}
+              {% include 'cf-resistance-bands', programClass: 'conquer-fitness-program-v1' %}
+            {% elsif article.id == 555410849834 %}
+              {% include 'cf-eric-mccormack', programClass: 'conquer-fitness-program-v1' %}
+            {% else %}
+              <p class="text-center">The Conquer Fitness Template requires Jakey Poo. Check with about using this template :)</p>
+            {% endif %}
+
+
+          </div>
+        </article>
+      </div>
+
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,95 @@
+{% comment %}
+  FREE BLAZE
+{% endcomment %}
+{% assign immuneInCart = false %}
+{% assign immuneVariantId = 31159202775082 %}
+
+
+
+{% comment %}
+  GIFT CARD VARIABLES
+{% endcomment %}
+{% assign giftCard = false %}
+{% assign onlyGiftCardInCart = false %}
+
+
+{% comment %}
+  TRIGGERING PRODUCT ID's
+{% endcomment %}
+{% assign triggerProductInCart = false %}
+{% assign weightLossSystemId = 3943687094314 %}
+{% assign strenghtSystemId = 3946358374442 %}
+{% assign keepHammeringSystemId = 4329165193258 %}
+{% assign evaSystemId = 1928556380202 %}
+
+
+{% for item in cart.items %}
+
+  {% if item.gift_card %}
+    {% assign giftCard = true %}
+
+    {% if cart.items.size == 1 %}
+      {% assign onlyGiftCardInCart = true %}
+    {% endif %}
+  {% endif %}
+
+
+  {% if item.variant_id == immuneVariantId %}
+    {% assign immuneInCart = true %}
+
+  {% elsif item.product_id == weightLossSystemId or item.product_id == strenghtSystemId or item.product_id == keepHammeringSystemId or item.product_id == evaSystemId %}
+    {% assign triggerProductInCart = true %}
+  {% endif %}
+
+{% endfor %}
+
+{% if triggerProductInCart %}
+	<div class="free-promo-message">
+	  <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/free-immune-image.png?v=1585862885">
+	</div>
+{% endif %}
+
+{% if onlyGiftCardInCart == false and immuneInCart == false and triggerProductInCart %}
+
+
+	<script type="text/javascript">
+			//console.log('Free Ignite Sampler Kit in cart?','{{freeIgniteSamplerInCart}}');
+
+			addBlazeToCart('{{immuneVariantId}}', 1);
+
+		  // $('.add-blaze-to-cart').on('click', function(e) {
+		  // 	e.preventDefault();
+		  // 	addBlazeToCart('{{blazeId}}', 1);
+		  // });
+
+		  function addBlazeToCart(product_id, quantity) {
+		    data = {
+		      "quantity": quantity,
+		      "id": product_id
+		    //   properties: {
+						// 'freeDecal': 'Received'
+				  // }
+		    }
+		    jQuery.ajax({
+		      type: 'POST',
+		      url: '/cart/add.js',
+		      data: data,
+		      dataType: 'json',
+		      success: function() { 
+		        //Cookies.set('freegift', true);
+		        $('.update-cart').trigger('click');
+		      },
+		      error: function (request, status, error) {
+		        console.log(request.responseText);
+		        var code = request.responseJSON.status;
+		        //if (code == 422 ) {
+		          //$('.message').text();
+		        //}
+		        console.log("<p>" + request.responseJSON.description + "</p>");
+		      }
+		    });
+		  }
+	</script>
+
+{% endif %}
+

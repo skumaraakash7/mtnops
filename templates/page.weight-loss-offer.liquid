@@ -1,0 +1,153 @@
+{% if customer.email == 'jake.shaw@me.com' %}{% endif %}
+
+{% assign fullSystem = all_products['weight-loss-system'] %}
+{% assign sampler = all_products['weight-loss-sampler'] %}
+
+<div class="main-page-wrapper">
+	{% comment %}<div><p>Under development. Only visible to you, {{customer.first_name}}</p></div>{% endcomment %}
+	<div class="weight-loss-landing-wrap">
+		<div class="mtnops-slim-page-title"><h1>WEIGHT LOSS FOR THE WIN</h1></div>
+		<div class="landing-hero">
+			
+			<div class="hero-overlay">
+				{% comment %}<h1 class="pros-label">CALLING ALL <span>INDUSTRY PROFESSIONALS</span></h1>{% endcomment %}
+				<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/sample-weight-loss.svg?v=1609477693">	
+
+			</div>
+			<div class="mo-badges">
+				<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/MoneyBackGuarantee-Blackout.png?v=1586474113">
+				<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/MadeinUSA-Dark.png?v=1586474062">
+			</div>
+		</div>
+
+		<div class="landing-main-wrap">
+
+			<section class="mtnops-section">
+				<div class="container">
+				  <div class="row">
+				    <div class="col-sm-12">
+				    	<div class="flex-split-half">
+					    	<div class="product-featured">
+			    				<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/Weight-Loss-System-Sampler-Lifestyle-1000w.png?v=1608084860">
+			    			</div>
+								<div class="landing-cta-wrap">
+									<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/wls-benefits.svg?v=1608094435">
+									<p>The <b>MTN OPS Weight Loss Sampler</b> provides an easy and convenient way for people to try out our weight loss products for 3 days before purchasing the full Weight Loss System. Although we are for sure biased about our own products, we truly feel you will enjoy them and actually feel and taste the MTN OPS difference.</p>
+									<div class="cta-wrap cta-sampler">
+										<span>{{sampler.price | money }} + FREE SHIPPING!</span>
+					    			<a href="#" class="button mtnops-btn add-product-to-cart" data-variant-id="{{ sampler.variants[0].id }}">ADD TO CART</a>
+					    		</div>
+								</div>
+							</div>
+						</div>
+			  	</div>
+				</div>
+			</section>
+			<section class="sliver-section">
+				<div class="container">
+				  <div class="row">
+				  	<div class="col-sm-12">
+				  		<div class="sliver-offer-wrap">
+					  		<div class="offer-message">
+					  			<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/free-consulation.svg?v=1608229173">
+						  		<span>WITH PURCHASE OF FULL WEIGHT LOSS SYSTEM</span>
+						  	</div>
+						  	<div class="offer-cta">
+					  			<a href="#" class="button mtnops-btn add-product-to-cart" data-variant-id="{{ fullSystem.variants[0].id }}">PURCHASE SYSTEM</a>
+					  		</div>
+					  	</div>
+				  	</div>
+				  </div>
+				</div>
+			</section>
+			
+
+			<section class="mtnops-section dark-section">
+				<div class="container">
+				  <div class="row">
+				  	<div class="col-sm-12">
+				    	<div class="weight-loss-benefits">
+			    			<h2>WHAT COMES IN THE SAMPLER BOX?</h2>
+			    			<span class="h2-subtitle">THREE DAY SUPPLY OF WEIGHT-LOSS</span>
+
+								<p><b>AMMO™</b> – a grab-n-go Meal Replacement Protein packed full with 19g of protein, 10g of flaxseed and 4.5 servings of real fruits and vegetables like; broccoli, cranberries, oranges and apples. Overflowing with vitamins and other essential nutrients, AMMO was made to keep your body firing on all cylinders and performing to its fullest potential.</p>
+
+								<p><b>ENDURO™</b> – a non-stimulated, non-caffeinated energy booster formulated to help increase blood flow and deliver oxygen to your body for improved circulation and a natural boost to your daily energy.</p>
+
+								<p><b>BLAZE™</b> – Packed with natural, nutritional, and phytonutrients, BLAZE™ at Burner and Energy Pills help manage your weight in a healthy way, while also increasing energy and curbing your appetite.</p>
+
+								<p><b>RENU™</b> – created to help your body through a gentle cleanse process. The result is a flush of harmful toxins, cleansing the body of waste, to boost your metabolism naturally, and ultimately allowing your body’s digestive system to perform at its peak.</p>
+					    </div>
+						</div>
+			  	</div>
+			  	
+				</div>
+				
+			</section>
+
+			{% include 'mtnops-free-consultation-wls-section' %}
+
+			<section class="lifestyle-section">
+				<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/ammo-ammo_smoothie-051019_AMMO_Choc_mint-08062_6ef34c03-1e73-41e7-a393-c0afd17ef9e8.jpg?v=1608096999">
+			</section>
+
+			{% comment %}<section class="mtnops-section dark-section">
+				<div class="container">
+				  <div class="row">
+				    <div class="col-sm-12">
+				    	<div class="landing-benefits-list">
+					    	<div>
+					    		<i class="fas fa-check-double"></i>
+					    		<h3>Meal Replacement</h3>
+					    	</div>
+					    	<div>
+					    		<i class="fas fa-check-double"></i>
+					    		<h3>Meal Replacement</h3>
+					    	</div>
+					    	<div>
+					    		<i class="fas fa-check-double"></i>
+					    		<h3>Meal Replacement</h3>
+					    	</div>
+					    	<div>
+					    		<i class="fas fa-check-double"></i>
+					    		<h3>Meal Replacement</h3>
+					    	</div>
+					    	<div>
+					    		<i class="fas fa-check-double"></i>
+					    		<h3>Meal Replacement</h3>
+					    	</div>
+					    	<div>
+					    		<i class="fas fa-check-double"></i>
+					    		<h3>Meal Replacement</h3>
+					    	</div>
+							</div>
+				    </div>
+				  </div>
+				</div>
+			</section>{% endcomment %}
+
+			{%- include 'mtnops-reviews-weight-loss' -%}		
+
+			{%- include 'mtnops_collection_sampler' -%}
+
+		  <section class="mtnops-section dark-section">
+		  	<h2>MTN OPS CORE VALUES</h2>
+				<span class="h2-subtitle">OUR MISSION &amp; PURPOSE</span>
+				<p>In everything we do, we improve the lives of individuals and families by inspiring them to achieve their ultimate level of performance through the highest quality energy and nutritional products, backed by science and a community that is both united and supportive of each other, to Conquer More each day.</p>
+				<a class="mtnops-btn" href="https://mtnops.com/pages/core-values" target="_blank">LEARN MORE</a>
+		  </section>
+
+			{%- include 'mtnops_collection_topsellers' -%}
+
+	  </div>
+	</div>
+</div>
+
+<script src="https://kit.fontawesome.com/87fe852ab0.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha256-pTxD+DSzIwmwhOqTFN+DB+nHjO4iAsbgfyFq5K5bcE0=" crossorigin="anonymous"></script>
+{% comment %}<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.4/gsap.min.js"></script>{% endcomment %}
+
+
+{% include 'mtnops-landing-scripts' %}
+{% comment %}<script src="{{ 'mtnops-landing-scripts.js' | asset_url }}" defer="defer"></script>{% endcomment %}
+

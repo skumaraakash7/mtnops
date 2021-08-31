@@ -1,0 +1,126 @@
+{% for collection in product.collections %}
+	{% if collection.title == 'MENS TEES' %}
+		<ul class="sizing-chart-wrap">
+			<li>
+				<a class="sizing-chart-trigger">MENS TEE SIZING CHART <i class="fa fa-plus" aria-hidden="true"></i></a>
+				<div class="table-responsive">
+					<table class="table">
+						<thead>
+							<tr>
+								<th scope="col">BODY</th>
+								<th scope="col">XS</th>
+								<th scope="col">S</th>
+								<th scope="col">M</th>
+								<th scope="col">L</th>
+								<th scope="col">XL</th>
+								<th scope="col">XXL</th>
+								<th scope="col">XXXL</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th scope="row">Length</th>
+								<td>27"</td>
+								<td>28"</td>
+								<td>29"</td>
+								<td>30"</td>
+								<td>31"</td>
+								<td>32"</td>
+								<td>33"</td>
+							</tr>
+							<tr>
+								<th scope="row">Width</th>
+								<td>17 1/2"</td>
+								<td>19"</td>
+								<td>20 1/2"</td>
+								<td>22"</td>
+								<td>24"</td>
+								<td>26"</td>
+								<td>28"</td>
+							</tr>
+							<tr>
+								<th scope="row">Tolerance</th>
+								<td>1/2"</td>
+								<td>1/2"</td>
+								<td>1/2"</td>
+								<td>1/2"</td>
+								<td>1/2"</td>
+								<td>1/2"</td>
+								<td>1/2"</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</li>
+			<li>
+				<a class="sizing-chart-trigger">MEASUREMENT GUIDE <i class="fa fa-plus" aria-hidden="true"></i></a>
+				<div class="measurement-guide-wrap">
+					<img src="https://s7d2.scene7.com/is/image/ColumbiaSportswear2/m-shirts?wid=711&hei=1074">
+					<ul>
+						<li><b>Arm Length:</b> With your arms slightly bent, measure the center of your back neck, across your shoulder and down the outside of your arm to the wrist bone.</li>
+						<li><b>Chest:</b> Place the tape measure under the arms and around the fullest part of your chest.</li>
+					</ul>
+				</div>
+			</li>
+		</div>
+	{% elsif collection.title == 'WOMENS TEES' %}
+		This is womens tees
+	{% endif %}
+	<style type="text/css">
+		.sizing-chart-wrap > li {
+			border-top: 1px solid #d2d2d2;
+		}
+		.sizing-chart-wrap > li:last-child {
+			border-bottom: 1px solid #d2d2d2;
+		}
+		.sizing-chart-wrap li a {
+			display: block;
+			padding: 15px 0;
+		}
+		.sizing-chart-wrap li a:hover {
+			text-decoration: none;
+			opacity: .7;
+			cursor: pointer;
+		}
+		.sizing-chart-wrap li a i {
+			float: right;
+		}
+		.sizing-chart-wrap div {
+			display: none;
+		}
+		.sizing-chart-wrap .table {
+			margin: 15px 0 25px;
+		}
+		.measurement-guide-wrap {
+			margin: 15px 0;
+		}
+		.measurement-guide-wrap ul {
+			list-style-type: upper-alpha;
+		    margin-left: 20px;
+		    margin: 20px;
+		}
+		.measurement-guide-wrap ul li {
+			padding-left: 10px;
+    		padding-bottom: 15px;
+		}
+		.measurement-guide-wrap ul li:last-child {
+    		padding-bottom: 0;
+		}
+		.single-product-content .product_meta, .single-product-content .product_meta.product_meta_external {
+			border-top: none;
+		}
+	</style>
+
+	<script type="text/javascript">
+		$('.sizing-chart-trigger').on('click', function(e) {
+			var trigger = $(this);
+			var parent = $(this).parent();
+			var icon = $("i", this);
+			//var prize = $(this).attr('id');
+			var table = trigger.next();
+			table.slideToggle();
+			icon.toggleClass('fa-plus fa-minus');
+			parent.toggleClass('active collapsed');
+		});
+	</script>
+{% endfor %}

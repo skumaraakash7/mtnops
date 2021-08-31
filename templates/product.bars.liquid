@@ -1,0 +1,475 @@
+{% include 'mtnops_tag_checker' %}
+
+{% assign singleBars = all_products['performance-bar-sampler'] %}
+
+
+<div id="pbb-bar-supp-facts" class="iziModal supp-modal custom-modal" data-izimodal-transitionin="fadeInDown">
+  <a data-izimodal-close="" class="icon-close"><i class="fa fa-times" aria-hidden="true"></i></a>
+  <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/pbb-supp-facts.jpg?v=1593453215" />
+</div>
+<div id="tcm-bar-supp-facts" class="iziModal supp-modal custom-modal" data-izimodal-transitionin="fadeInDown">
+  <a data-izimodal-close="" class="icon-close"><i class="fa fa-times" aria-hidden="true"></i></a>
+  <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/ttm-supp-facts.jpg?v=1593453215" />
+</div>
+<div id="ccc-bar-supp-facts" class="iziModal supp-modal custom-modal" data-izimodal-transitionin="fadeInDown">
+  <a data-izimodal-close="" class="icon-close"><i class="fa fa-times" aria-hidden="true"></i></a>
+  <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/ccc-supp-facts.jpg?v=1593453215" />
+</div>
+
+<div class="mtnops-slim-page-title"><h1>ALL-NEW MTN OPS {{product.title}}</h1></div>
+<div class="product-custom-page-wrap bars-product-wrap">
+  
+  <header class="product-header-wrap">
+    <div class="container-fluid">
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="product-intro">
+            <img class="product-intro-image" src="https://cdn.shopify.com/s/files/1/2786/4584/files/introducing-performance-bars.svg?v=1590003485">
+        
+            <p><b>Performance</b> - not something we take lightly at MTN OPS. Developed and tested for over 2 years, at home and on the mountain, our All-New Performance Protein bars deliver the perfect solution for everyday health and outdoor performance. Slow baked with multiple layers of our signature whey protein blend, dusted with flavored crunch-crisps and drizzled in low sugar icing, these nutrient dense bars provide a simple, convenient and delicious meal, perfect for anytime and anywhere.</p>
+            <p><b>MTN OPS Performance Bars</b> are built to Conquer More, featuring 20 grams of our 5 Star rated whey protein isolate, whey protein concentrate and collagen. Including only the most proven and effective proteins for your body to utilize in reaching its optimum level of performance. Low in sugar, but not in flavor, our bars are gluten free and adventure ready.</p>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+
+{% for variant in product.variants %}
+
+  {% if variant.id == 31630615019562 %}
+    {% comment %}
+      PEANUT BUTTER BLISS
+
+      Sampler variant: 32200317501482
+    {% endcomment %}
+    <section id="pbb" class="variant-section-wrap peanut-butter-bliss">
+      <div class="variant-section-inner-wrap">
+        <div class="variant-meta-wrap">
+          <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/peanut-butter-bliss.svg?v=1590003485">
+         
+          {% if variant.available %}
+            <div class="add-to-cart-buttons">
+
+              {% for single in singleBars.variants %}
+                {% if single.id == 32200317501482 and single.available %}
+                  <a class="this_to_cart single_add_to_cart_button button add-to-cart-bars" href="#" data-pid="32200317501482">Add Bar - $3</a>
+                {% endif %}
+              {% endfor %}
+
+              {% comment %}{% if isTagged %}
+                <div class="special-pricing">
+                  <span id="product-price">{{ variant.price | times: discountPercentage | round: 2 | money }}</span> <del id="old-product-price">{{variant.price | money }}</del>
+                </div>
+              {% else %}
+                <span class="product-price">{{variant.price | money}}</span>
+              {% endif %}{% endcomment %}
+              <a class="this_to_cart single_add_to_cart_button button add-to-cart-bars" href="#" data-pid="{{variant.id}}">Add Box - {{variant.price | money_without_trailing_zeros }}</a>
+              <small>Each box comes with 10 individual bars</small>
+            </div>
+
+            {% if isNotTagged %}
+
+              {% include 'mtnops_bars_subscription_snippet', discount_variant_id: variant.metafields.subscriptions.discount_variant_id %}
+              
+            {% endif %}
+          {% else %}
+            <p class="bummer-dude-message">Bummer dude. {{variant.title}} Bars are currently out of stock.<br>
+            ETA - a little faster than melting peanut butter.</p>
+          {% endif %}
+
+          <div class="supp-facts-btn-wrap">
+            <a class="btn-link pbb-supp-btn" data-izimodal-open="#pbb-supp-facts" data-izimodal-transitionin="fadeInDown">SUPP FACTS</a>
+          </div>
+        </div>
+
+        <div class="variant-image-wrap">
+          <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/PerformanceProteinBars-PeanutButterBliss-Splash-Web.png?v=1590005329">
+
+          <div class="product-benefits-overlay">
+            <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/peanut-butter-and-chocolate-mudslide-benefits.svg?v=1591654809">
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <section class="lifestyle-banner-section">
+      <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/PerformanceBarsLaunch-LandingPage-Support-2000-3.jpg?v=1590087327">
+    </section>
+
+  {% elsif variant.id == 31630615085098 %}
+    {% comment %}
+      TRIPLE CHOCOLATE MUDSLIDE
+
+      Sampler variant: 32200317468714
+    {% endcomment %}
+
+    <section id="tcm" class="variant-section-wrap triple-chocolate-mudslide reverse-section">
+      <div class="variant-section-inner-wrap">
+
+        <div class="variant-meta-wrap">
+          <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/triple-chocolate-mudslide.svg?v=1590003485">
+          
+          {% if variant.available %}
+            <div class="add-to-cart-buttons">
+              
+              {% for single in singleBars.variants %}
+                {% if single.id == 32200317468714 and single.available %}
+                  <a class="this_to_cart single_add_to_cart_button button add-to-cart-bars" href="#" data-pid="32200317468714">Add Bar - $3</a>
+                {% endif %}
+              {% endfor %}
+              
+              {% comment %}{% if isTagged %}
+                <div class="special-pricing">
+                  <span id="product-price">{{ variant.price | times: discountPercentage | round: 2 | money }}</span> <del id="old-product-price">{{variant.price | money }}</del>
+                </div>
+              {% else %}
+                <span class="product-price">{{variant.price | money}}</span>
+              {% endif %}{% endcomment %}
+              <a class="this_to_cart single_add_to_cart_button button add-to-cart-bars" href="#" data-pid="{{variant.id}}">Add Box - {{variant.price | money_without_trailing_zeros }}</a>
+              <small>Each box comes with 10 individual bars</small>
+            </div>
+
+            {% if isNotTagged %}
+
+              {% include 'mtnops_bars_subscription_snippet', discount_variant_id: variant.metafields.subscriptions.discount_variant_id %}
+              
+            {% endif %}
+
+          {% else %}
+            <p class="bummer-dude-message">Bummer dude. {{variant.title}} Bars are currently out of stock.<br>
+            ETA - way faster than melting chocolate.</p>
+          {% endif %}
+
+          <div class="supp-facts-btn-wrap">
+            <a class="btn-link tcm-supp-btn" data-izimodal-open="#tcm-supp-facts" data-izimodal-transitionin="fadeInDown">SUPP FACTS</a>
+          </div>
+        </div>
+        <div class="variant-image-wrap">
+          <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/PerformanceProteinBars-TripleChocolateMudslide-Splash-Web.png?v=1590005329">
+
+          <div class="product-benefits-overlay">
+            <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/peanut-butter-and-chocolate-mudslide-benefits.svg?v=1591654809">
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="lifestyle-banner-section">
+      {% comment %}<div class="product-benefits-overlay">
+        <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/peanut-butter-and-chocolate-mudslide-benefits.svg?v=1591654809">
+      </div>{% endcomment %}
+      <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/PerformanceBarsLaunch-LandingPage-Support-2000-2.jpg?v=1590087326">
+    </section>
+
+  {% elsif variant.id == 31630615150634 %}
+    {% comment %}
+      CONQUER CARAMEL CRUNCH
+
+      Sampler variant: 32200317534250
+    {% endcomment %}
+
+    <section id="ccc" class="variant-section-wrap conquer-caramel-crunch">
+      <div class="variant-section-inner-wrap">
+
+        <div class="variant-meta-wrap">
+          <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/conquer-caramel-crunch.svg?v=1590003485">
+          
+          {% if variant.available %}
+            <div class="add-to-cart-buttons">
+
+              {% for single in singleBars.variants %}
+                {% if single.id == 32200317534250 and single.available %}
+                  <a class="this_to_cart single_add_to_cart_button button add-to-cart-bars" href="#" data-pid="32200317534250">Add Bar - $3</a>
+                {% endif %}
+              {% endfor %}
+              
+              {% comment %}{% if isTagged %}
+                <div class="special-pricing">
+                  <span id="product-price">{{ variant.price | times: discountPercentage | round: 2 | money }}</span> <del id="old-product-price">{{variant.price | money }}</del>
+                </div>
+              {% else %}
+                <span class="product-price">{{variant.price | money}}</span>
+              {% endif %}{% endcomment %}
+              <a class="this_to_cart single_add_to_cart_button button add-to-cart-bars" href="#" data-pid="{{variant.id}}">Add Box - {{variant.price | money_without_trailing_zeros }}</a>
+              <small>Each box comes with 10 individual bars</small>
+            </div>
+            
+            {% if isNotTagged %}
+
+              {% include 'mtnops_bars_subscription_snippet', discount_variant_id: variant.metafields.subscriptions.discount_variant_id %}
+              
+            {% endif %}
+          {% else %}
+            <p class="bummer-dude-message">Bummer dude. {{variant.title}} Bars are currently out of stock.<br>
+            ETA - a lot faster than melting caramel.</p>
+          {% endif %}
+
+          <div class="supp-facts-btn-wrap">
+            <a class="btn-link ccc-supp-btn" data-izimodal-open="#ccc-supp-facts" data-izimodal-transitionin="fadeInDown">SUPP FACTS</a>
+          </div>
+        </div>
+        <div class="variant-image-wrap">
+          <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/PerformanceProteinBars-ConquerCaramelCrunch-Splash-Web.png?v=1590005329">
+
+          <div class="product-benefits-overlay">
+            <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/conquer-caramel-benefits.svg?v=1591654809">
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="lifestyle-banner-section">
+      {% comment %}<div class="product-benefits-overlay">
+        <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/conquer-caramel-benefits.svg?v=1591654809">
+      </div>{% endcomment %}
+      <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/PerformanceBarsLaunch-LandingPage-Support-2000-5.jpg?v=1590087327">
+    </section>
+  
+
+  {% endif %}
+
+{% endfor %}
+
+  <div id="expertvoice-recommendations"></div>
+
+  <div id="shopify-product-reviews" data-id="{{product.id}}">{{ product.metafields.spr.reviews }}</div>
+  
+
+
+  {% comment %}<section>
+    <div>
+      {% unless product.metafields.global.supfacts == blank %}
+      {% assign images = product.metafields.global.supfacts | split: ','  %}
+      
+        <div id="supp-facts" class="iziModal supp-modal custom-modal" data-izimodal-transitionin="fadeInDown">
+          <a data-izimodal-close="" class="icon-close"><i class="fa fa-times" aria-hidden="true"></i></a>
+          <div class="supp-facts-gallery">
+            {% for url in images %}
+                {% assign clean url = url | strip %}
+                <div class="item">
+              <img src="{{url}}" />
+                </div>
+            {% endfor %}
+          </div>
+          
+        </div>
+        <a class="btn-link" data-izimodal-open="#supp-facts" data-izimodal-transitionin="fadeInDown">SUPP FACTS</a>
+      
+      {% endunless %}
+
+      {% unless product.metafields.global.science == blank %}
+        <a class="btn-link" href="{{ product.metafields.global.science }}" target="_blank" >SCIENCE RULES</a>
+      {% endunless %}
+    </div>
+  </section>{% endcomment %}
+
+</div>
+
+
+
+<script type="text/javascript">
+
+  $('#pbb-bar-supp-facts, #ccc-bar-supp-facts, #tcm-bar-supp-facts').iziModal({
+    padding: 15,
+    overlayColor: 'rgba(0, 0, 0, 0.9)',
+    width: 450,
+    closeButton: false,
+    autoOpen: false
+  });
+
+  $(document).on('click', '.peanut-butter-bliss .pbb-supp-btn', function (event) {
+    event.preventDefault();
+    $('#pbb-bar-supp-facts').iziModal('open');
+  });
+  $(document).on('click', '.conquer-caramel-crunch .ccc-supp-btn', function (event) {
+    event.preventDefault();
+    $('#ccc-bar-supp-facts').iziModal('open');
+  });
+  $(document).on('click', '.triple-chocolate-mudslide .tcm-supp-btn', function (event) {
+    event.preventDefault();
+    $('#tcm-bar-supp-facts').iziModal('open');
+  });
+
+
+  $( document ).on('click', '.this_to_cart', function(e) {
+    e.preventDefault();
+    var $this = $(this),
+        variant_id = $this.data('pid');
+    $(this).attr('disabled', 'disabled').css('pointer-events', 'none').addClass('loading');
+    $.ajax({
+        type: 'POST',
+        url: '/cart/add.js',
+        data: {quantity: 1, id:variant_id},
+        dataType: 'json',
+        success:function( cart ) {
+            if (theme.use_ajax_add_to_cart) {
+              $.get('/cart?view=json', function(data) {
+                   /*optional stuff to do after success */
+                   $('.widget_shopping_cart_content').html(data);
+                 }).always(function() {
+                  baselThemeModule.gl_currency();
+                    if (window.Shopify && Shopify.StorefrontExpressButtons && nathan_settings.use_additional_checkout_buttons) {Shopify.StorefrontExpressButtons.initialize()}
+              });
+              $.getJSON('/cart.js', function(cart) {
+                $(".cartCount").html(cart.item_count);
+                $(".basel-cart-subtotal >span").html(Shopify.formatMoney(cart.total_price, theme.moneyFormat));
+              }).always(function() {baselThemeModule.gl_currency() });
+             // baselThemeModule.gl_currency();
+              if( $this.hasClass('add_compare') === false ){
+                 baselThemeModule.addToCart();
+                  // setTimeout(function(){
+                  //   if (window.Shopify && Shopify.StorefrontExpressButtons) {
+                  //     Shopify.StorefrontExpressButtons.initialize();
+                  //   }
+                  // }, 500);
+              }
+              $this.removeAttr("disabled").css('pointer-events', 'auto').removeClass("loading");
+            }else{
+              window.location.href = '/cart';  
+            }
+        },
+        error: function(XMLHttpRequest, textStatus) {
+          $this.removeAttr("disabled").css('pointer-events', 'auto').removeClass("loading");
+          baselThemeModule.onError(XMLHttpRequest, textStatus);
+        }
+    });
+  });
+
+
+  // Subscriptions Interactions
+
+  var $freq = 30; // default
+
+  $('.subscribe-step-1').on('click', function(e) {
+    e.preventDefault();
+    $(this).next().slideToggle();
+    $(this).slideUp();
+    $(this).closest('.variant-meta-wrap').find('.add-to-cart-buttons').slideUp();
+  });
+
+  //data-discount-variant-id="31689451438122"
+  $('.frequency-option').on('click', function(e) {
+    e.preventDefault();
+    $(this).closest('.bars-subscriptions-wrap').find('.subscribe-step-last').slideDown();
+    $('.frequency-option').removeClass('active');
+    $(this).addClass('active');
+    $freq = $(this).data('frequency');
+    $(this).closest('.add-subscription-to-cart').data('frequency-selected', $freq);
+  });
+
+
+  $( document ).on('click', '.add-subscription-to-cart', function(e) {
+    e.preventDefault();
+    var $this = $(this),
+        variant_id = $this.data('discount-variant-id');
+    $(this).attr('disabled', 'disabled').css('pointer-events', 'none').addClass('loading');
+    $.ajax({
+        type: 'POST',
+        url: '/cart/add.js',
+        data: {
+          quantity: 1,
+          id:variant_id,
+          properties: {
+            "shipping_interval_frequency": $freq,
+            "shipping_interval_unit_type": "Days"
+          }
+        },
+        dataType: 'json',
+        success:function( cart ) {
+            if (theme.use_ajax_add_to_cart) {
+              $.get('/cart?view=json', function(data) {
+                   /*optional stuff to do after success */
+                   $('.widget_shopping_cart_content').html(data);
+                 }).always(function() {
+                  baselThemeModule.gl_currency();
+                    if (window.Shopify && Shopify.StorefrontExpressButtons && nathan_settings.use_additional_checkout_buttons) {Shopify.StorefrontExpressButtons.initialize()}
+              });
+              $.getJSON('/cart.js', function(cart) {
+                $(".cartCount").html(cart.item_count);
+                $(".basel-cart-subtotal >span").html(Shopify.formatMoney(cart.total_price, theme.moneyFormat));
+              }).always(function() {baselThemeModule.gl_currency() });
+             // baselThemeModule.gl_currency();
+              if( $this.hasClass('add_compare') === false ){
+                 baselThemeModule.addToCart();
+                  // setTimeout(function(){
+                  //   if (window.Shopify && Shopify.StorefrontExpressButtons) {
+                  //     Shopify.StorefrontExpressButtons.initialize();
+                  //   }
+                  // }, 500);
+              }
+              $this.removeAttr("disabled").css('pointer-events', 'auto').removeClass("loading");
+            }else{
+              window.location.href = '/cart';  
+            }
+        },
+        error: function(XMLHttpRequest, textStatus) {
+          $this.removeAttr("disabled").css('pointer-events', 'auto').removeClass("loading");
+          baselThemeModule.onError(XMLHttpRequest, textStatus);
+        }
+    });
+  });
+
+  
+
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.4/gsap.min.js"></script>
+<script type="text/javascript">
+  
+  //gsap.fromTo('.product-intro-image', 2, {scale: 1}, {scale: 1.04, transformOrigin:"center center", repeat: -1, yoyo: true, ease: Power1.easeInOut});
+
+  gsap.fromTo('.variant-image-wrap > img', 1.5, {scale: 1}, {scale: 1.04, transformOrigin:"center center", repeat: -1, yoyo: true, ease: Power1.easeInOut});
+</script>
+{% comment %}
+
+<section class="product-custom-section">
+  <div class="container-fluid">
+
+    <div class="row">
+      <div class="col-xs-12">
+
+        This is a new section
+      </div>
+
+    </div>
+</section>
+
+<div class="container-fluid">
+   <div class="row">
+      <div class="site-content col-sm-12" role="main">
+        {%- include 'product_page_area' -%}
+      </div> <!-- .site-content -->
+  </div> <!-- end row -->
+</div> <!-- end container -->
+
+{% endcomment %}
+
+
+<script>
+  (function(e,x,p) {
+    e.EV = e.EV || {};
+    e.EV.recoSettings = {
+      apiKey: '51c88bc6de0a624bfda747b41607e0d4',
+      productCode: '{{product.id}}',
+      target: '#expertvoice-recommendations',
+      headerBackgroundColor: 'rgb(255, 81, 0)',
+    };
+
+  var s = x.createElement('script');
+    s.src = p;
+    s.async = true;
+
+  var h = x.getElementsByTagName('head')[0];
+    h.appendChild(s);
+  })(window, document,
+'//cdn.expertvoice.com/widget/js/recommendations/v1/plugin.js');
+</script>
+
+

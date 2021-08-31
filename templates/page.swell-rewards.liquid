@@ -1,0 +1,235 @@
+{% comment %}{% if customer.email == 'jake.shaw@me.com' %}{% else %}
+	{{ page.content }}
+{% endif %}{% endcomment %}
+	<div class="main-page-wrapper">
+	   <!-- MAIN CONTENT AREA -->
+	   {% comment %}{%- include 'page_heading', page_title:page.title -%}{% endcomment %}
+
+	  <div class="site-content" role="main">
+	  	{% comment %}{{ page.content }}{% endcomment %}
+<div class="swell-rewards">
+
+  	<div class="mtnops-banner" style="background-image: url('https://cdn.shopify.com/s/files/1/2786/4584/files/Vanquish_Hoodie_-_Gym_Lifestyle-14.jpg?v=1608581852');">
+		  <div class="swell-container">
+		    <div class="banner-caption">
+		    	<img class="image-show-mobile" src="https://cdn.shopify.com/s/files/1/2786/4584/files/ConquerRewardsLogo-Mobile.svg?v=1609268026">
+		    	<img class="image-show-desktop" src="https://cdn.shopify.com/s/files/1/2786/4584/files/ConquerRewards-Logo.svg?v=1608064092">
+		      <p class="caption-detail">As a rewards member you’ll get closer to<br> earning exclusive rewards every time you shop.</p>
+		      {% unless customer %}
+		      <!-- Logout Section Sart -->
+		      <ul class="swell-link-list">
+		        <li class="swell-link">
+		          <a href="/account/register" class="sign-up-btn mtnops-btn">Sign Up</a>
+		        </li>
+		        <li class="swell-link">
+		          <a href="/account/login" class="sign-in-btn mtnops-btn">Sign In</a>
+		        </li>
+		      </ul>
+		      {% comment %}<p class="caption-detail">Join our rewards program and get 25 Points!</p>{% endcomment %}
+		      <!-- Logout Section End -->
+		      {% endunless %}
+		    </div>
+		  </div>
+		</div>
+
+		<div class="yotpo-widget-instance" data-yotpo-instance-id="18179"></div>
+		<div class="yotpo-widget-instance" data-yotpo-instance-id="18180"></div>
+		<div class="yotpo-widget-instance" data-yotpo-instance-id="18178"></div>
+
+		<div class="vip-table-section">
+			<div class="swell-heading-section">
+		    <h2 class="swell-heading">Earn as you go</h2>
+		    <p class="swell-detail">The more you spend, the more exclusive perks you unlock!</p>
+		  </div>
+			<div class="swell-container">
+				<div class="swell-tier-table-outer-holder"> 
+					<div class="swell-tier-table">
+						<ul class="swell-tier-table-header">
+							<li class="swell-tier-list">
+								<div class="tier-list tier-name">Benefits</div>
+								<div class="tier-list tier-multiplier">Points multiplier</div>
+								<div class="tier-list">Free shipping*</div>
+								{% comment %}<div class="tier-list">Birthday Gift (100 points)</div>{% endcomment %}
+								<div class="tier-list">Early access to sales &amp; new gear</div>
+								<div class="tier-list">Tier exclusive promotions</div>
+								<div class="tier-list">Tier entry Points</div>
+							</li>
+						</ul>
+						<ul class="swell-tier-table-body">
+							<li data-tier-id="" class="swell-tier-list tier-0 tier-list-item">
+								<div class="tier-list tier-name">
+									Green Horn
+									<span class="tier-value dummy-tier">Free to join</span>
+								</div>
+								<div class="tier-list tier-multiplier">1x</div>
+								<div class="tier-list">Free Shipping on orders $99+</div>
+								{% comment %}<div class="tier-list">
+									<i class="fa fa-check"></i>
+								</div>{% endcomment %}
+								<div class="tier-list"></div>
+								<div class="tier-list"></div>
+								<div class="tier-list"></div>
+							</li>
+							<li data-tier-id="" class="swell-tier-list tier-1 tier-list-item">
+								<div class="tier-list tier-name">
+									Militia
+									<span class="tier-value">Spend $250 - $499</span>
+								</div>
+								
+								<div class="tier-list tier-multiplier">1.5x</div>
+								<div class="tier-list">Free Shipping on orders $15+</div>
+								{% comment %}<div class="tier-list">
+									<i class="fa fa-check"></i>
+								</div>{% endcomment %}
+								<div class="tier-list">
+									<i class="fa fa-check"></i>
+								</div>
+								<div class="tier-list">
+									<i class="fa fa-check"></i>
+								</div>
+								<div class="tier-list">100 points</div>
+							</li>
+							<li data-tier-id="" class="swell-tier-list tier-2 tier-list-item">
+								<div class="tier-list tier-name">
+									Insider
+									<span class="tier-value">Spend $500+</span>
+								</div>
+
+								<div class="tier-list tier-multiplier">2x</div>
+								<div class="tier-list">Free Shipping on orders $15+</div>
+								{% comment %}<div class="tier-list">
+									<i class="fa fa-check"></i>
+								</div>{% endcomment %}
+								<div class="tier-list">
+									<i class="fa fa-check"></i>
+								</div>
+								<div class="tier-list">
+									<i class="fa fa-check"></i>
+								</div>
+								<div class="tier-list">200 points</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		{% comment %}<div class="yotpo-widget-instance" data-yotpo-instance-id="18182"></div>{% endcomment %}
+		<div class="yotpo-widget-instance" data-yotpo-instance-id="18181"></div>
+
+
+  	{% comment %}<div class="how-it-work">
+		  <div class="swell-heading-section {% if customer %}logged-in{% endif %}">
+		    <h2 class="swell-heading">HOW IT WORKS</h2>
+		  </div>
+		  <div class="swell-container">
+		    <div class="how-it-work-holder">
+		      <div class="hiw-image">
+		        <img src="{{ 'swell-hiw.png' | asset_url }}" class="banner-image">
+		      </div>
+		      <div class="hiw-content">
+		        {% if customer %}
+		        <!-- Login Section Start -->
+		        <div class="swell-login-section">
+		          <h3 class="swell-login-user">Hi {{customer.first_name}}! <br> You have <span class="swell-point-balance">X</span> Points.</h3>
+		          <ul class="swell-link-list">
+		            <li class="swell-link">
+		              <a class="swell-link-redeem" href="#redeem-section">Redeem Now</a>
+		            </li>
+		            <li class="swell-link">
+		              <div class="swell-link-history swell-history-link">Rewards History</div>
+		            </li>
+		          </ul>
+		          <div class="list-icon">
+		            <i class="swell-icon-create-an-account swell-list-icon"></i>
+		          </div>
+		        </div>
+		        <!-- Login Section End -->
+		        {% endif %}
+		        {% unless customer %}
+		        <ul class="hiw-list">
+		          <li class="list-items">
+		            <div class="list-holder">
+		              <h3 class="list-title"><span class="list-count">1-</span>Create an account</h3>
+		              <p class="list-detail">Join rewards program and start earning.</p>
+		            </div>
+		            <div class="list-icon">
+		              <i class="swell-icon-create-an-account swell-list-icon"></i>
+		            </div>
+		          </li>
+		          <li class="list-items">
+		            <div class="list-holder">
+		              <h3 class="list-title"><span class="list-count">2-</span>Earn points</h3>
+		              <p class="list-detail">Earn points every time you shop.</p>
+		            </div>
+		            <div class="list-icon">
+		              <i class="swell-icon-earn-points swell-list-icon"></i>
+		            </div>
+		          </li>
+		          <li class="list-items">
+		            <div class="list-holder">
+		              <h3 class="list-title"><span class="list-count">3-</span>Redeem points</h3>
+		              <p class="list-detail">Redeem points for exclusive discounts.</p>
+		            </div>
+		            <div class="list-icon">
+		              <i class="swell-icon-redeem swell-list-icon"></i>
+		            </div>
+		          </li>
+		        </ul>
+		        {% endunless %}
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		
+		<div class="campaign-section">
+		  <div class="swell-heading-section">
+		    <h2 class="swell-heading">Ways to Earn Points</h2>
+		  </div>
+		  <div class="swell-container">
+		    <div class="swell-referral-loader">
+		      <img src="{{ 'swell-loader.svg' | asset_url }}"/>
+		    </div>
+		    <ul class="swell-campaign-list"></ul>
+		    
+		  </div>
+		</div>
+
+
+
+
+		<div class="vip-table-section">
+		  <div class="swell-heading-section">
+		    <h2 class="swell-heading">EARN MORE AS A VIP</h2>
+		    <p class="swell-detail">The more you spend, the more exclusive perks you unlock!</p>
+		  </div>
+		  <div class="swell-container">
+		    <div class="swell-referral-loader">
+		      <img src="{{ 'swell-loader.svg' | asset_url }}">
+		    </div>
+		    <div class="swell-tier-table">
+		      
+		    </div>
+		  </div>
+		</div>
+
+
+		<div id="redeem-section" class="redeem-section">
+		  <div class="swell-heading-section">
+		    <h2 class="swell-heading">Redeem for Discounts</h2>
+		    <p class="swell-detail">Redeeming your hard-earned points is easy!<br>Simply apply your points for a discount at cart!</p>
+		  </div>
+		  <div class="swell-container">
+		    <div class="every-point">Every 100 Points = $10</div>
+		    <div class="swell-referral-loader">
+		      <img src="{{ 'swell-loader.svg' | asset_url }}">
+		    </div>
+		    <ul class="swell-redemptions-list"></ul>
+		  </div>
+		</div>{% endcomment %}
+
+</div>
+
+		</div>
+
+	</div>

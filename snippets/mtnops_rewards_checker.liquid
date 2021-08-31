@@ -1,0 +1,71 @@
+{% comment %}
+
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  !!!! MTN OPS SPEND REWARDS !!!!
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+  ==================
+  ===== TIERS ======
+  ==================
+
+  spend over $50
+  spend over $100
+  spend over $125
+  spend over $150-175
+  spend over $200
+  spend over $250
+  spend over $300
+  spend over $400
+  spend over $500
+
+{% endcomment %}
+
+{% assign rewardCollection = collections.rewards.products %}
+{% assign rewardInCart = false %}
+{% assign addedFromCart = false %}
+{% assign disqualifyCart = false %}
+
+
+{% comment %}
+  CART LOOP CHECK
+{% endcomment %}
+{% for item in cart.items %}
+
+  {% unless item.properties == empty %}
+    {% for property in item.properties %}
+      {% if property.first == "reward" %}
+        {% assign addedFromCart = true %}
+        {% assign rewardInCart = true %}
+        {% assign freeProductQty = item.quantity %}
+        {% if rewardInCart %}
+          {% assign rewardProductId = item.product_id %}
+          {% assign rewardUnlockAmount = item.product.metafields.meta.unlock_reward %}
+          {% assign rewardVariantId = item.variant_id %}
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+  {% endunless %}
+
+  {% comment %}
+    CHECKING FOR RANK COINS // CONQUER FITNESS CHALLENGE
+    ALPHA, ELITE, OPERATIVE RANK ADVANCEMENT 
+  {% endcomment %}
+  {% if item.product_id == 4628297515050 or item.product_id == 4413898457130 or item.product_id == 4375829643306 %}
+    {% assign disqualifyCart = true %}
+  {% endif %}
+
+  {% comment %}
+    CHECKING FOR ELK SUMMIT PACKAGE
+  {% endcomment %}
+  {% if item.product_id == 6564371300394 %}
+    {% assign disqualifyCart = true %}
+  {% endif %}
+{% endfor %}
+      
+{% if rewardInCart and disqualifyCart %}
+  <script type="text/javascript">
+    $.post('/cart/update.js', {updates: {'{{rewardVariantId}}': 0}});
+    console.log('Reward will be removed from cart. Rank items will not be allowed with cart spend rewards.');
+    location.reload(true);
+  </script>
+{% endif %}

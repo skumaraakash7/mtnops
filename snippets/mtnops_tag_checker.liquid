@@ -1,0 +1,245 @@
+	
+{% assign showRewardsForTagged = false %}
+{% assign isTagged = false %}
+{% assign siteWideDiscount = false %}
+{% assign isNotTagged = true %}
+{% assign discountMessage = '' %}
+{% assign discountPercent = 0 %}
+{% assign isInsider = false %}
+
+
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+<script type="text/javascript">
+	const queryString = window.location.search;
+	const urlParams = new URLSearchParams(queryString);
+	//const tag = urlParams.get('tag');
+	var $expertVoiceGateKeeper = false;
+	var cookieSet = Cookies.get('site_referer');
+	if(cookieSet == 'expertvoice') {
+		$expertVoiceGateKeeper = true;
+	}
+	//console.log($expertVoiceGateKeeper);
+</script>
+
+
+{% comment %}
+######################################################
+	SITE-WIDE DISCOUNT SETTINGS
+######################################################
+
+	This is a temporary fix to show the site-wide discount via the isTagged variable. It is a hack for now to get us by. 
+
+	TO DO: create a site-wide variable to display a discount for everyone like we need for black friday. 
+
+######################################################
+	STATUS: Production
+######################################################
+{% endcomment %}
+
+
+	{% comment %}
+
+	This was an override for displaying the price with a slash SITEWIDE... Needs to be improved.
+
+	{% assign isTagged = true %}
+	{% assign isNotTagged = false %}
+	{% assign customerTag = "Black Friday" %}
+	{% assign discountPercent = 30 %}
+
+	{% if customer.tags contains "ExpertVoice" %}
+
+		{% assign customerTag = "ExpertVoice" %}
+		{% assign discountPercent = 30 %}
+
+	{% endif %}
+
+	{% endcomment %}
+
+
+	{% comment %}
+	######################################################
+		DISCOUNT PRESENTATION
+	######################################################
+	{% endcomment %}
+	{% capture discountMessage %}
+		Your {{ customerTag }} {{discountPercent}}% Discount has been applied!
+	{% endcapture %}
+
+	{% assign discountPercentage = discountPercent | divided_by: 100.00 %}
+	{% assign discountPercentage = 1 | minus: discountPercentage %}
+
+
+{% comment %}
+	Everything beyond here is turned off for now. This check will fail
+
+	{% if 1 == 2 %}
+
+	{% endif %}
+
+{% endcomment %}
+
+
+
+
+	{% if customer.tags contains "Family" or customer.tags contains "Industry" or customer.tags contains "Guide/Outfitter" or customer.tags contains "Military" or customer.tags contains "Law Enforcement" or customer.tags contains "Serviceman" or customer.tags contains "First Responder" or customer.tags contains "Firefighter" or customer.tags contains "Government" or customer.tags contains "Medical" or customer.tags contains "Teacher" or customer.tags contains "Ambassador" or customer.tags contains "ExpertVoice" %}
+
+	{% assign showRewardsForTagged = true %}
+
+	{% comment %}
+	######################################################
+		EXPERT VOICE ASSIGNING
+	######################################################
+	{% endcomment %}
+
+		{% if customer.tags contains "ExpertVoice" %}
+
+			{% assign isTagged = true %}
+			{% assign isNotTagged = false %}
+
+			{% assign customerTag = "ExpertVoice" %}
+			{% assign discountPercent = 30 %}
+
+		{% endif %}
+
+
+		{% comment %}
+		######################################################
+			JAKE TESTING PRO CODE STUFF STUFF
+		######################################################
+		{% endcomment %}
+		{% comment %}{% if customer and customer.email == "jake.shaw/@me.com" %}
+
+			{% assign isTagged = true %}
+			{% assign isNotTagged = false %}
+
+			{% if customer.tags contains "Family" %}
+				{% assign customerTag = "Family" %}
+				{% assign discountPercent = 50 %}
+
+			{% elsif customer.tags contains "Industry" %}
+				{% assign customerTag = "Industry" %}
+				{% assign discountPercent = 40 %}
+
+			{% elsif customer.tags contains "Guide/Outfitter" %}
+				{% assign customerTag = "Guide/Outfitter" %}
+				{% assign discountPercent = 40 %}
+
+			{% elsif customer.tags contains "Military" %}
+				{% assign customerTag = "Military" %}
+				{% assign discountPercent = 30 %}
+
+			{% elsif customer.tags contains "Law Enforcement" %}
+				{% assign customerTag = "Law Enforcement" %}
+				{% assign discountPercent = 30 %}
+
+			{% elsif customer.tags contains "Serviceman" %}
+				{% assign customerTag = "Serviceman" %}
+				{% assign discountPercent = 30 %}
+
+			{% elsif customer.tags contains "First Responder" %}
+				{% assign customerTag = "First Responder" %}
+				{% assign discountPercent = 30 %}
+
+			{% elsif customer.tags contains "Firefighter" %}
+				{% assign customerTag = "Firefighter" %}
+				{% assign discountPercent = 30 %}
+
+			{% elsif customer.tags contains "Government" %}
+				{% assign customerTag = "Government" %}
+				{% assign discountPercent = 30 %}
+
+			{% elsif customer.tags contains "Medical" %}
+				{% assign customerTag = "Medical" %}
+				{% assign discountPercent = 30 %}
+
+			{% elsif customer.tags contains "Teacher" %}
+				{% assign customerTag = "Teacher" %}
+				{% assign discountPercent = 30 %}
+
+			{% elsif customer.tags contains "Ambassador" %}
+				{% assign customerTag = "Ambassador" %}
+				{% assign discountPercent = 20 %}
+			{% endif %}
+
+		{% endif %}{% endcomment %}
+
+
+		{% comment %}
+		######################################################
+			DISCOUNT PRESENTATION
+		######################################################
+		{% endcomment %}
+		{% capture discountMessage %}
+			Your {{discountPercent}}% {{ customerTag }} Discount has been applied!
+		{% endcapture %}
+
+		{% assign discountPercentage = discountPercent | divided_by: 100.00 %}
+		{% assign discountPercentage = 1 | minus: discountPercentage %}
+
+
+
+		{% comment %}
+		######################################################
+			IGNITE SAMPLER KIT FOR EXPERTVOICE CUSTOMERS
+		######################################################
+		{% endcomment %}
+
+		{% comment %}{% if customer.email == 'jake.shaw/@me.com' and product.id == 4381879664682 %} 
+	  	{% capture discountMessage %}
+				Free Ignite Sampler for ExpertVoice Customers!
+			{% endcapture %}
+	  {% endif %}{% endcomment %}
+
+	{% endif %}
+
+
+
+
+{% comment %}
+
+	{% if customer.tags contains "Active Subscriber" %}
+		{% assign isInsider = true %}
+	{% endif %}
+
+
+	// or customer and customer.email == "jake@mtnops.com" or customer.email == "mlloyd@mtnops.com" or customer.email == "matt@mtnops.com" or customer.email == "nick@mtnops.com" or customer.email == "trevor@mtnops.com" or customer.email == "ryan@mtnops.com" or customer.email == "rihana@mtnops.com" or customer.email == "daren@mtnops.com"
+
+	// FOR EXPERT VOICE PEEPS 
+
+	  {{ collectionTitle }} 
+
+	{% if customerTag == "ExpertVoice" %}
+
+	  {% for collection in product.collections %}
+	    
+	    PROTEINS
+	    {% if collection.id == 67864756266 %}
+	      {% assign discountPercent = 20 %}
+	      {% assign collectionTitle = collection.title %}
+
+	    ENERGY
+	    {% elsif collection.id == 67464265770 %}
+	      {% assign discountPercent = 30 %}
+	      {% assign collectionTitle = collection.title %}
+
+	    {% endif %}
+	  {% endfor %}
+
+	  {% capture discountMessage %}
+			Your {{ discountPercent }}% {{ customerTag }} Discount has been applied!
+	  {% endcapture %}
+
+	  {% assign discountPercentage = discountPercent | divided_by: 100.00 %}
+	  {% assign discountPercentage = 1 | minus: discountPercentage %}
+
+	{% else %}
+
+
+	{% endif %}
+
+
+{% endcomment %}
+	
+
+
+	

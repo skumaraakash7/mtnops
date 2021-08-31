@@ -1,0 +1,254 @@
+
+<script type="text/javascript">
+   //target = '.bg_color_hush-lemonade, .bg_color_soda-series, .bg_color_bugle-berry, .bg_color_pumpkin-spice, .bg_color_berries-and-cream, .bg_color_lemon-poppyseed';
+   //if($(target).length) {
+      
+      var target_swatches = [
+         {
+            flavor: '.bg_color_mint-chocolate',
+            line: 'limited'
+         },
+         {
+            flavor: '.bg_color_bugle-berry',
+            line: 'limited'
+         },
+         {
+            flavor: '.bg_color_hush-lemonade',
+            line: 'limited'
+         },
+         {
+            flavor: '.bg_color_soda-series',
+            line: 'limited'
+         },
+         {
+            flavor: '.bg_color_eggnog',
+            line: 'limited'
+         },
+         {
+            flavor: '.bg_color_pumpkin-spice',
+            line: 'limited'
+         },
+         // {
+         //    flavor: '.bg_color_raspberry',
+         //    line: 'sale',
+         //    product: 1402268614698 // enduro trail
+         // },
+         // {
+         //    flavor: '.bg_color_peach',
+         //    line: 'sale',
+         //    product: 1402268614698 // enduro trail
+         // },
+         // {
+         //    flavor: '.bg_color_pina-colada',
+         //    line: 'sale',
+         //    product: 1402268647466 // ignite trail
+         // },
+         // {
+         //    flavor: '.bg_color_citrus-bliss',
+         //    line: 'sale',
+         //    product: 1402268647466 // ignite trail
+         // },
+         // {
+         //    flavor: '.bg_color_green-apple',
+         //    line: 'sale',
+         //    product: 1402268647466 // ignite trail
+         // },
+         // {
+         //    flavor: '.bg_color_grape',
+         //    line: 'sale',
+         //    product: 1402268647466 // ignite trail
+         // },
+         // {
+         //    flavor: '.bg_color_peach',
+         //    line: 'sale',
+         //    product: 1402268713002 // yeti trail
+         // },
+         // {
+         //    flavor: '.bg_color_green-apple',
+         //    line: 'sale',
+         //    product: 1402268713002 // yeti trail
+         // },
+         // {
+         //    flavor: '.bg_color_strawberry-banana',
+         //    line: 'sale',
+         //    product: 1402268713002 // yeti trail
+         // },
+         // {
+         //    flavor: '.bg_color_vanilla',
+         //    line: 'sale',
+         //    product: 1948708634666 // ammo trail
+         // },
+         // {
+         //    flavor: '.bg_color_lemon-poppyseed',
+         //    line: 'sale'
+         // },
+         // {
+         //    flavor: '.bg_color_banana-cream',
+         //    line: 'sale',
+         //    product: 1402268680234 // magnum
+         // },
+         // {
+         //    flavor: '.bg_color_birthday-cake',
+         //    line: 'sale',
+         //    product: 1402268680234 // magnum
+         // },
+         // {
+         //    flavor: '.bg_color_cookies-and-cream',
+         //    line: 'sale',
+         //    product: 1402268680234 // magnum
+         // },
+         // {
+         //    flavor: '.bg_color_berries-and-cream',
+         //    line: 'sale',
+         //    product: 1402268680234 // magnum
+         // },
+         {
+            flavor: '.bg_color_apple-pie',
+            line: 'limited'
+         },
+         {
+            flavor: '.bg_color_gingerbread',
+            line: 'limited'
+         }
+      ];
+
+      var swatches_exist = false;
+
+      var active_swatches = [];
+      var swatches_sale = [];
+      var swatches_limited = [];
+      var swatch_target;
+
+      $.each(target_swatches, function(index, value) {
+
+         if(value.product) {
+            swatch_target = '#product-' + value.product + ' ' + value.flavor;
+         } else {
+            swatch_target = value.flavor;
+         }
+         if($(swatch_target).length) {
+            swatches_exist = true;
+            active_swatches.push(value);
+
+            if(value.line == 'sale') {
+               swatches_sale.push(value);   
+            }
+            if(value.line == 'limited') {
+               swatches_limited.push(value);   
+            }
+         }
+      });
+
+      //console.log(active_swatches);
+      
+
+      // if (swatches_exist) {
+
+      //    var container = '.variations tbody tr:first-child';
+
+      //    if(swatches_limited.length) {
+
+      //       console.log(swatches_limited);
+
+      //       var clonedForLimitedRow = $(container).clone();
+      //       clonedForLimitedRow.addClass('cloned-for-limited-edition');
+         
+      //       clonedForLimitedRow.insertAfter(container);
+      //       var limitedTarget = '.cloned-for-limited-edition';
+      //       {% if product.id == 1402268680234 or product.id == 1402268483626 or product.id == 1948708634666 or product.id == 1402234142762 %}
+      //          var productLabel = "Seasonal Flavors";
+      //       {% else %}
+      //          var productLabel = "Limited Edition";
+      //       {% endif %}
+      //       $(limitedTarget + ' td label').text(productLabel);
+      //       var limitedRow = limitedTarget + ' .with-swatches .swatches-select';
+      //       $(limitedRow).empty();
+            
+      //       $.each(swatches_limited, function(index, limited) {
+      //          $(limited.flavor).appendTo(limitedRow);
+      //       });
+
+      //    }
+
+      //    if(swatches_sale.length) {
+
+      //       console.log(swatches_sale);
+
+      //       var clonedForSaleRow = $(container).clone();
+      //       clonedForSaleRow.addClass('cloned-for-on-sale');
+            
+      //       clonedForSaleRow.insertAfter(container);
+      //       var saleTarget = '.cloned-for-on-sale';
+      //       $(saleTarget + ' td label').text("On Sale");
+      //       var saleRow = saleTarget + ' .with-swatches .swatches-select';
+      //       $(saleRow).empty();
+            
+      //       $.each(swatches_sale, function(index, sale) {
+      //          $(sale.flavor).appendTo(saleRow);
+      //       });
+
+      //    }
+
+
+
+      //    $('.basel-swatch').on('click', function(e) {
+      //       $('.basel-swatch').removeClass('active-swatch');
+      //       $(this).addClass('active-swatch');
+      //    });
+      // }
+         
+      {%if customer.email == 'jake.shaw@me.com' %}
+
+         var clickEventType = document.ontouchstart !== null ? 'click':'touchstart';
+
+         // if(clickEventType == "touchstart") {
+         //    $('body').addClass('no-touch');
+         // }
+
+         if($('.cloned-for-limited-edition').length) {
+            $('.basel-swatch').on('click', function(e) {
+            var tr = $(this).closest('tr'),
+               rcWidget = $('#rc_container');
+               if(tr.hasClass('cloned-for-limited-edition')) {
+                  rcWidget.hide();
+               } else {
+                  rcWidget.show();
+               }
+            });
+            $('#rc_radio_options .rc_block').on(clickEventType, function(e) {
+               if($(this).hasClass('rc_block__type__autodeliver')) {
+                  $('.cloned-for-limited-edition').hide();
+               } else {
+                  $('.cloned-for-limited-edition').show();
+               }
+            }); 
+         }
+      {% endif %}
+   
+    // IGNITE CHARLIE SPORTSMANS EXCLUSIVE
+      // {% if product.id == 798593777706 and 10 == 11 %}
+
+      //    $('#dealer-exclusives').iziModal( {
+      //       padding: 25,
+      //       overlayColor: 'rgba(0, 0, 0, 0.9)',
+      //       width: 650,
+      //       closeButton: true,
+      //       autoOpen: false
+      //    });
+      //    //$('<tr class="dealer-exclusives"><td class="label"><label for="0">Dealer Exclusives</label></td><td class="value with-swatches"><div class="swatches-select"><div class="bg_color basel-tooltip swatch-size-small colored-swatch bg_color_liberty-pop bg_liberty-pop swatch-enabled" data-value="liberty-pop" data-image-id="13280904151082"><span class="basel-tooltip-label">Liberty Pop</span>Liberty Pop</div></div></td></tr>').insertAfter('.variations tr:last-child');
+
+      //    $('<div class="basel-swatch bg_color basel-tooltip swatch-size-small colored-swatch bg_color_liberty-pop bg_liberty-pop swatch-enabled" data-value="liberty-pop" data-image-id="13280904151082"><span class="basel-tooltip-label">Liberty Pop</span>Liberty Pop</div>').insertAfter('.swatches-select .basel-swatch:last-child');
+         
+
+      //    $('.bg_color_liberty-pop').on('click', function(e) {
+      //       //$('.basel-swatch').removeClass('active-swatch');
+      //       //$('.images .thumbnails').find('img[data-image-id="13280904151082"]:not(.active-thumb)').trigger('click');
+      //       $('#dealer-exclusives').iziModal('open');
+      //    });
+
+      // {% endif %}
+      
+   //}
+   //var swatchContainerEmpty = swatchContainer.empty();
+   //$('.cloned-for-limited-edition td.with-swatches .swatches-select ')
+</script>

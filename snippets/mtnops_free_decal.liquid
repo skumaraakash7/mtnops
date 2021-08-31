@@ -1,0 +1,95 @@
+{% assign subscriptionCheckout = false %}
+
+{% comment %}
+  FREE DECAL
+{% endcomment %}
+{% assign freeDecal = false %}
+{% assign freeDecalId = 31047324565546 %}
+
+{% comment %}
+  GIFT CARD VARIABLES
+{% endcomment %}
+{% assign giftCard = false %}
+{% assign onlyGiftCardInCart = false %}
+
+
+{% comment %}
+  OTHER PRODUCTS
+{% endcomment %}
+{% assign otherProductsInCart = false %}
+
+
+{% for item in cart.items %}
+	{% unless item.properties == empty %}
+      {% for property in item.properties %}
+        {% if property.first == "subscription_id" %}
+          {% assign subscriptionCheckout = true %}
+        {% endif %}
+      {% endfor %}
+  {% endunless %}
+
+  {% if item.gift_card %}
+    {% assign giftCard = true %}
+
+    {% if cart.items.size == 1 %}
+      {% assign onlyGiftCardInCart = true %}
+    {% endif %}
+  {% endif %}
+
+  {% if item.variant_id == freeDecalId %}
+    {% assign freeDecal = true %}
+
+  {% else %}
+    {% assign otherProductsInCart = true %}
+
+  {% endif %}
+
+{% endfor %}
+
+
+
+{% if subscriptionCheckout == false and otherProductsInCart and onlyGiftCardInCart == false and cart.total_price > 1000 and freeDecal == false %}
+	<div class="free-decal-prompt">
+	  <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/free-decal-with-order.png?v=1578331852">
+	  <span>Want a FREE MTN OPS Decal?</span>
+	  <a href="" class="mtnops-btn-sm add-decal-to-cart">Add Free Decal</a>
+	</div>
+
+	<script type="text/javascript">
+			console.log('Free Decal in cart?','{{freeDecal}}');
+
+		  $('.add-decal-to-cart').on('click', function(e) {
+		  	e.preventDefault();
+		  	addDecalToCart('{{freeDecalId}}', 1);
+		  });
+		  function addDecalToCart(product_id, quantity) {
+		    data = {
+		      "quantity": quantity,
+		      "id": product_id
+		    //   properties: {
+						// 'freeDecal': 'Received'
+				  // }
+		    }
+		    jQuery.ajax({
+		      type: 'POST',
+		      url: '/cart/add.js',
+		      data: data,
+		      dataType: 'json',
+		      success: function() { 
+		        //Cookies.set('freegift', true);
+		        $('.update-cart').trigger('click');
+		      },
+		      error: function (request, status, error) {
+		        console.log(request.responseText);
+		        var code = request.responseJSON.status;
+		        //if (code == 422 ) {
+		          //$('.message').text();
+		        //}
+		        console.log("<p>" + request.responseJSON.description + "</p>");
+		      }
+		    });
+		  }
+	</script>
+
+{% endif %}
+

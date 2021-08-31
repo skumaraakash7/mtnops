@@ -1,0 +1,22 @@
+{% unless product.metafields.global.supfacts == blank %}
+	{% assign images = product.metafields.global.supfacts | split: ','  %}
+	
+    <div id="supp-facts" class="iziModal supp-modal custom-modal" data-izimodal-transitionin="fadeInDown">
+      <a data-izimodal-close="" class="icon-close"><i class="fa fa-times" aria-hidden="true"></i></a>
+      <div class="supp-facts-gallery">
+        {% for url in images %}
+            {% assign clean url = url | strip %}
+            <div class="item">
+			    <img src="{{url}}" />
+            </div>
+        {% endfor %}
+      </div>
+      
+    </div>
+	<button class="btn btn-color-black" data-izimodal-open="#supp-facts" data-izimodal-transitionin="fadeInDown">SUPPLEMENT FACTS</button>
+  
+{% endunless %}
+
+{% comment %}{% unless product.metafields.global.science == blank %}
+	<a class="button btn btn-color-black" href="{{ product.metafields.global.science }}" target="_blank" >THE SCIENCE</a>
+{% endunless %}{% endcomment %}

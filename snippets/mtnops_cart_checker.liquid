@@ -1,0 +1,14 @@
+{% assign samplerOffer = false %}
+{% assign igniteOffer = false %}
+{% assign yetiOffer = false %}
+
+
+{% comment %}{% assign orderNumber = 0 %}
+{% for order in customer.orders %}
+  {% for line in order.line_items %}
+    {% if line.product_id == productOffer.id %}
+      {% assign hasPurchased = true %}
+      {% assign orderNumber = order.order_number %}
+    {% endif %}
+  {% endfor %}
+{% endfor %}{% endcomment %}

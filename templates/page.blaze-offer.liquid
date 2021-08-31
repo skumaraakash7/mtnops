@@ -1,0 +1,169 @@
+{% comment %}BLAZE VAR ID{% endcomment %}
+{% assign productOfferId = 12612054122538 %}
+
+<div class="main-page-wrapper">
+
+	<div class="offer-landing-wrap blaze-offer-landing">
+		<div class="mtnops-slim-page-title"><h1>BURN FAT AND STAY ENERGIZED</h1></div>
+		<div class="landing-hero">
+			
+			<div class="hero-overlay">
+				<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/free-blaze-offer.png?v=1588886645">	
+
+			</div>
+			<div class="mo-badges">
+				<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/MoneyBackGuarantee-Blackout.png?v=1586474113">
+				<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/MadeinUSA-Dark.png?v=1586474062">
+			</div>
+		</div>
+
+		<div class="landing-main-wrap">
+
+			<div class="container">
+			  <div class="row">
+			    <div class="col-sm-12" role="main">
+			    	<div class="landing-main-content">
+
+			    		<div class="layout-switcher">
+			    			<div class="product-featured">
+			    				<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/blaze-offer-image.png?v=1588875837">
+			    			</div>
+				    		<div>
+					    		<img class="product-benefits" src="https://cdn.shopify.com/s/files/1/2786/4584/files/blaze-benefits.png?v=1588885067">
+					    		<div class="cta-wrap">
+					    			<a href="#" class="button mtnops-btn add-sampler-to-cart" data-variant-id="{{ productOfferId }}">ADD TO CART</a>
+					    			<div>
+					    				<small>*Shipping price may vary based on total products added to cart or if you ship outside the lower 48.</small>
+					    			</div>
+					    		</div>
+					    	</div>
+			    		</div>
+						</div>
+					</div>
+		  	</div>
+			</div>
+
+			<section class="ignite-graph-bg mtnops-section dark-section">
+				<div class="container">
+				  <div class="row">
+				    <div class="col-sm-12">
+				    	<div class="audience-message">
+					    	<h2>What is BLAZE?</h2>
+					    	<span class="h2-subtitle">ONE OF MTN OPS' TOP SELLING PRODUCTS</span>
+
+								<p style="margin-bottom: 50px;">Kickstart your metabolism and start burn more fat with MTN OPS <b>BLAZE</b>. Each capsule is packed with healthy natural ingredients that have been used for centuries. African Mango, Green Tea Extract, Caralluma Fimbriata, Raspberry Ketone and more create a unique and powerful thermogenic fat burning result to help reduce body fat and weight. If you’re looking to curb your appetite and starting losing weight, look no further than BLAZE.</p>
+
+							</div>
+
+				    </div>
+				  </div>
+				</div>
+			</section>
+
+			<section class="pro-signup-section mtnops-section">
+				<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/ProProgramSignup-Dark.png?v=1586296264">
+
+				<p>Our Pro Program is a membership program for qualified first responders, outdoor industry professionals, industry partners, to receive special pricing ranging from 20-40% off MSRP. Membership is by application, is not guaranteed and can be revoked at any time. If you are interested in applying, please sign in with an existing account to start the application or create a new account below.</p>
+				<a href="https://mtnops.com/pages/pro" target="_blank" class="mtnops-btn">SIGN UP TODAY</a>
+			</section>
+
+			{%- include 'mtnops_collection_sampler' -%}
+
+		  <section class="mtnops-section dark-section">
+		  	<h2>MTN OPS CORE VALUES</h2>
+				<span class="h2-subtitle">OUR MISSION &amp; PURPOSE</span>
+				<p>In everything we do, we improve the lives of individuals and families by inspiring them to achieve their ultimate level of performance through the highest quality energy and nutritional products, backed by science and a community that is both united and supportive of each other, to Conquer More each day.</p>
+				<a class="mtnops-btn" href="https://mtnops.com/pages/core-values" target="_blank">LEARN MORE</a>
+		  </section>
+
+			{%- include 'mtnops_collection_topsellers' -%}
+
+	  </div>
+	</div>
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha256-pTxD+DSzIwmwhOqTFN+DB+nHjO4iAsbgfyFq5K5bcE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.4/gsap.min.js"></script>
+
+<script type="text/javascript">
+
+	const queryString = window.location.search;
+	const urlParams = new URLSearchParams(queryString);
+	const audience = urlParams.get('utm_term');
+	
+	const audienceBg = $('.landing-hero');
+	//const proLabel = $('.pros-label span');
+	//const audienceImage = $('.main-push-message img');
+
+	if( audience == 'optional' ) {
+		//proLabel.html('MEDICAL PROFESSIONALS');
+		audienceBg.css("background-image", "url('https://cdn.shopify.com/s/files/1/2786/4584/files/medical-bg.jpg?v=1586214718')");
+		$('.audience-message h2').html('From the NOC shifts to doubles');
+		$('.audience-message span.h2-subtitle').html('Ignite is here to help, here is how:');
+		$('.medical-block').show();
+
+	} else {
+		audienceBg.css("background-image", "url('https://cdn.shopify.com/s/files/1/2786/4584/files/LIFESTYLE-IN_HOME-06-04.10.20.jpg?v=1588619474')");
+		console.log('No specific audience.');
+	}
+
+	//setTimeout(function() {
+		// $( ".pros-label" ).animate({
+	 //    opacity: 1,
+	 //  }, 2000, function() {
+	    
+	 //  });
+	//}, 50);
+
+	gsap.fromTo('.product-featured', 1, {rotation: -3}, {rotation: 3, repeat: -1, yoyo: true, ease: Power1.easeInOut});
+
+
+  var cta = $('.add-sampler-to-cart');
+  var clicked = false;
+  cta.on('click', function(e) {
+  	var varId = $(this).data('variant-id');
+  	e.preventDefault();
+  	if(clicked == false) {
+  		$(this).html('Adding...');
+  		clicked = true;
+  		addSamplerToCart(varId, 1);
+  	}
+  });
+
+  function addSamplerToCart(product_id, quantity) {
+    data = {
+      "quantity": quantity,
+      "id": product_id,
+			properties: {
+				'offer': 'blaze'
+			}
+    }
+    jQuery.ajax({
+      type: 'POST',
+      url: '/cart/add.js',
+      data: data,
+      dataType: 'json',
+      success: function() { 
+        //Cookies.set('freegift', true);
+        //$('.update-cart').trigger('click');
+        console.log('Blaze added to your cart!');
+
+        setTimeout(function() {
+        	cta.hide();
+        	$('<a href="https://mtnops.com/cart" class="mtnops-btn">VIEW CART</a>').prependTo('.cta-wrap');
+        }, 1000);
+      },
+      error: function (request, status, error) {
+        console.log(request.responseText);
+        var code = request.responseJSON.status;
+
+        console.log("<p>" + request.responseJSON.description + "</p>");
+      }
+    });
+  }
+
+</script>
+
+
+

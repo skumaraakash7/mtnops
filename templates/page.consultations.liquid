@@ -1,0 +1,200 @@
+
+{% assign fullSystem = all_products['weight-loss-system'] %}
+
+<div class="main-page-wrapper">
+	<div class="consultation-landing-wrap">
+		<div class="landing-main-wrap">
+			<div class="mtnops-slim-page-title"><h1>MTN OPS HEALTH CONSULTATIONS</h1></div>
+
+			<header class="video_hero_wrap">
+
+		    <img class="video_hero_banner" src="https://cdn.shopify.com/s/files/1/2786/4584/files/Apollo-jogger-Lifestyle.jpg?v=1606798962">
+		    
+		    <div class="video_hero">
+
+		        <img class="hero-logo" src="https://cdn.shopify.com/s/files/1/2786/4584/files/consult-logo.svg?v=1608233036">
+						{% comment %}<span class="subtitle">OVER $1500 VALUE IN CAMP CHEF GEAR</span>{% endcomment %}
+
+		        {% comment %}<a id="play-button" class="play_trigger watch_video2" href="#"><i class="fa fa-play-circle" aria-hidden="true"></i>Play</a>{% endcomment %}
+		    </div>
+		    
+				<a id="pause-button" class="close_trigger"><i class="fa fa-times" aria-hidden="true"></i>Close</a>
+
+				<div class="video_screen">
+				    <div id="featured_video"></div>
+				</div>
+
+		  </header>
+		  <section class="sliver-section">
+				<div class="container">
+				  <div class="row">
+				  	<div class="col-sm-12">
+				  		<div class="sliver-offer-wrap">
+					  		<div class="offer-message">
+					  			<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/free-consulation.svg?v=1608229173">
+						  		<span>WITH PURCHASE OF FULL WEIGHT LOSS SYSTEM</span>
+						  	</div>
+						  	<div class="offer-cta">
+					  			<a href="#" class="button mtnops-btn add-product-to-cart" data-variant-id="{{ fullSystem.variants[0].id }}">PURCHASE SYSTEM</a>
+					  		</div>
+					  	</div>
+				  	</div>
+				  </div>
+				</div>
+			</section>
+
+		  <section class="mtnops-section">
+				<div class="container">
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="section-content-wrap">
+								<img class="section-title" src="https://cdn.shopify.com/s/files/1/2786/4584/files/consult-talk-with-pro.svg?v=1608233036">
+								<p>You’re probably asking yourself –– <i>"Where do I start?"</i> or <i>"What products should I take?"</i> Lucky for you, we have a team of <b>Certified Fitness Specialists</b> who are here to help. Starting on the right path can save you time and a ton of frustration. No matter what fitness level you are, our Health Consultations are packed full of incredible and insightful information. When you schedule your consultation you’ll get a one on one experience with a knowledgable and friendly fitness specialist who will cover everything from A-Z to support you on your health and fitness journey.</p>
+								<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/consult-icons.svg?v=1608233036">
+			    			<a href="https://mtnops-coaching.youcanbook.me/" class="button mtnops-btn" target="_blank">SCHEDULE CONSULTATION</a>
+			    		</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<section class="mtnops-section dark-section section-lg-padding">
+				<div class="container">
+				  <div class="row">
+				    <div class="col-sm-12">
+
+				    	<div class="review-content-wrap">
+				    		<div class="quote-icon quote-left"><i class="far fa-quote-left"></i></div>
+						    <div class="quote-icon quote-right"><i class="far fa-quote-right"></i></div>
+
+								<div class="owl-carousel reviews-carousel" id="reviews-carousel">
+							    <div class="review-item">
+						    		<p>I highly suggest the fitness and nutrition consultation! It was very helpful and informative! Definitely something to sign up for!</p>
+						    		<div class="reviewer-meta">
+							    		<div class="reviewer">Paige M.</div>
+							    		<div>
+							    			<i class="fas fa-shield-check"></i> Verified
+							    		</div>
+							    		<div class="review-date">Nov 7th</div>
+							    	</div>
+									</div>
+									<div class="review-item">
+						    		<p>Make a phone appointment with Keyanu. He will get you pointed in the right direction. You won't reget it! He knows what he is doing!</p>
+						    		<div class="reviewer-meta">
+							    		<div class="reviewer">Mike S.</div>
+							    		<div>
+							    			<i class="fas fa-shield-check"></i> Verified
+							    		</div>
+							    		<div class="review-date">Nov 14th</div>
+							    	</div>
+									</div>
+
+							  </div>
+							</div>
+
+				    </div>
+				  </div>
+				</div>
+			</section>
+
+			<section class="lifestyle-section">
+				<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/Weight_Loss_System-Lifestyle-Trevor--8.jpg?v=1608236665">
+			</section>
+
+			{% include 'mtnops-free-consultation-wls-section' %}
+			
+
+		</div>
+	</div>
+
+</div>
+
+
+{% comment %}<script type="text/javascript">
+
+  var tag = document.createElement('script');
+
+  tag.src = "https://www.youtube.com/iframe_api";
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+  var player;
+  function onYouTubeIframeAPIReady() {
+      player = new YT.Player('featured_video', {
+          height: '100%',
+          width: '100%',
+          videoId: 'dtt_3bgW7x4',
+          playerVars: { 'showinfo': 0, 'controls': 1, rel: 0 },
+          events: {
+              'onReady': onPlayerReady,
+              'onStateChange': onPlayerStateChange
+          }
+      });
+  }
+  function onPlayerReady(event) {
+      // bind events
+      var playButton =document.querySelector('.play_trigger'); // document.getElementById("play-button"); 
+
+     //  setTimeout( function() {
+     //  	player.playVideo();
+     //    document.querySelector('.video_hero_wrap').className = "video_hero_wrap user_watching";
+    	// }, 3500);
+
+      playButton.addEventListener("click", function(e) {
+          e.preventDefault();
+          player.playVideo();
+          document.querySelector('.video_hero_wrap').className = "video_hero_wrap user_watching";
+      });
+
+      var pauseButton = document.querySelector(".close_trigger");
+      pauseButton.addEventListener("click", function(e) {
+          e.preventDefault();
+          document.querySelector('.video_hero_wrap').className = "video_hero_wrap user_paused";
+          player.pauseVideo();
+          //player.stopVideo();
+      });
+
+
+      document.onkeyup = function keyPress(e) {
+          if (e.keyCode == 27) { // escape key maps to keycode `27`
+              document.querySelector('.video_hero_wrap').className = "video_hero_wrap";
+              player.pauseVideo();
+              //player.stopVideo();
+          }
+      }
+
+  }
+  // 5. The API calls this function when the player's state changes.
+  //    The function indicates that when playing a video (state=1),
+  //    the player should play for six seconds and then stop.
+  var done = false;
+  function onPlayerStateChange(event) {
+      if (event.data == YT.PlayerState.PLAYING && !done) {
+      // setTimeout(stopVideo, 6000);
+      // done = true;
+
+ 		//  var specifiedElement = document.querySelector(".video__wrap");
+
+		// document.addEventListener('click', function(event) {
+		//   var isClickInside = specifiedElement.contains(event.target);
+
+		//   if (!isClickInside) {
+		//   	document.querySelector(".video__wrap").className = "video__wrap";
+	 //        document.querySelector('.banner').className = "banner center page_banner rally-hero dark-overlay-false";
+	 //        player.pauseVideo();
+		//   }
+		// });
+      }
+      if(event.data === 0){
+          document.querySelector('.video_hero_wrap').className = "video_hero_wrap";
+      }
+  }
+  function stopVideo() {
+      player.stopVideo();
+  }
+
+</script>{% endcomment %}
+<script src="https://kit.fontawesome.com/87fe852ab0.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha256-pTxD+DSzIwmwhOqTFN+DB+nHjO4iAsbgfyFq5K5bcE0=" crossorigin="anonymous"></script>
+
+
+{% include 'mtnops-landing-scripts' %}

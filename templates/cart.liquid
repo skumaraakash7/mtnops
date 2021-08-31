@@ -1,0 +1,486 @@
+{% comment %}
+////////////////////////////
+  CHECK FOR TAGGED ACCOUNTS
+////////////////////////////
+{% endcomment %}
+
+{% include 'mtnops_tag_checker' %}
+
+
+{% comment %}{% include 'mtnops_cart_checker' %}{% endcomment %}
+
+<!-- Begin ReCharge code -->
+{% include 'subscription-cart-footer' %}
+<!-- End ReCharge code -->
+
+{%- assign cart_title = 'cart.general.title' | t -%}
+{% assign prop65_in_cart = false %}
+
+<div class="main-page-wrapper">
+  {%- include 'page_heading', page_title:cart_title -%}
+  <!-- MAIN CONTENT AREA -->
+
+  {% comment %}<a class="cart-banner spend-reward-banner" href="/product/hot-ignite">
+    <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/8-13-21-HotIgniteBogoLaunch-CartBanner.jpg?v=1628826801">
+  </a>{% endcomment %}
+
+  {% if customer.email == 'jake.shaw@me.com' %}
+    {% comment %}<div class="absolute-message">This is visible for you only, {{customer.first_name}}!</div>{% endcomment %}
+
+        
+    
+    {% comment %}
+      SPEND REWARD -> ORDER OVER $100
+    {% endcomment %}
+    {% comment %}{% include 'mtnops_cart_spend_rewards' %}{% endcomment %}
+
+  {% comment %}{% if showRewardsForTagged %}
+    
+  {% endif %}{% endcomment %}
+
+  {% endif %}
+
+  {% comment %}
+    SPEND OVER $100 -> GET ANY FREE PRODUCT FROM FREE COLLECTION
+  {% endcomment %}
+  {% comment %}{% include 'mtnops_cart_spend_reward_collection', spend: 10000 %}{% endcomment %}
+
+  {% comment %}
+    FREE BLAZE OVER $20
+    {% include 'mtnops_cart_spend_simple_free_product' %}
+  {% endcomment %}
+
+  
+
+  {% comment %}<div class="product-banner">
+    <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/AnniversarySale-ProductPageBanner.jpg?v=1626712300">
+  </div>{% endcomment %}
+
+
+    {% comment %}{% include 'mtnops_cart_purchase_reward' %}{% endcomment %}
+
+  
+
+  {% comment %}{% include 'mtnops_cart_spend_simple_free_product' %}{% endcomment %}
+
+  {% comment %}{% include 'mtnops_cart_mothers_day_offer' %}{% endcomment %}
+
+  {% comment %}
+      Key Lime Flavor Energy Products
+    {% endcomment %}
+    
+  {% comment %}{% include 'mtnops_cart_new_flavor_drop_reward' %}{% endcomment %}
+
+  
+
+
+  {% comment %}
+    MTN OPS CART REWARDS WIDGET
+  {% endcomment %}
+  {% include 'mtnops_rewards', widgetClass: 'cart-rewards-widget' %}
+  
+
+
+  {% comment %}{% if customer.email == 'jake.shaw@me.com'%}
+    {% assign hasPurchased = false %}
+    {% assign orderNumber = 0 %}
+    {% for order in customer.orders %}
+      {% for line in order.line_items %}
+        {% if line.product_id == 4537219022890 %}
+          {% assign hasPurchased = true %}
+          {% assign orderNumber = order.order_number %}
+        {% endif %}
+      {% endfor %}  
+    {% endfor %}
+    {% if hasPurchased %}
+      {{customer.first_name}} has purchased this item before on {{orderNumber}} and no longer can do so.
+    {% endif %}
+  {% endif %}{% endcomment %}
+  
+
+  <div class="container">
+    <div class="row">
+      <div class="site-content col-sm-12" role="main">
+        <article id="post-7" class="post-7 page type-page status-publish hentry">
+          <div class="entry-content">
+            <div class="shopify">
+
+              {% if isTagged and cart.items.size > 0 %}
+                <div class="discount-notice-cart-label">{{ discountMessage }}</div>
+              {% endif %}
+              {% comment %}{% include 'mtnops_systems_immune' %}{% endcomment %}
+
+              {% if otherProductsInCart %}
+              
+                {% comment %}<img id="imgBanner" class="rotating-image-banner" src="">{% endcomment %}
+
+                <style type="text/css">
+                  .cart_item_{{freeProduct.variants[0].id}} .quantity {
+                    display: none;
+                  }
+                </style>
+
+                {% comment %}<script type="text/javascript">
+                  var picPaths = ['https://cdn.shopify.com/s/files/1/2786/4584/files/Opstober-CartSliderBanner-1.png?v=1601493760','https://cdn.shopify.com/s/files/1/2786/4584/files/Opstober-CartSliderBanner-2.png?v=1601493760'];
+                  var curPic = -1;
+                  var imgO = new Array();
+                  for(i=0; i < picPaths.length; i++) {
+                      imgO[i] = new Image();
+                      imgO[i].src = picPaths[i];
+                  }
+
+                  function swapImage() {
+                      curPic = (++curPic > picPaths.length-1)? 0 : curPic;
+                      imgCont.src = imgO[curPic].src;
+                      setTimeout(swapImage, 5000);
+                  }
+
+                  window.onload=function() {
+                      imgCont = document.getElementById('imgBanner');
+                      swapImage();
+                  }
+                </script>{% endcomment %}
+
+              {% endif %}
+
+
+
+              {% comment %}
+                <div class="appreciation-sale-cart-message">
+                  <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/appreciation-sale-cart-message.svg?v=1595445757">
+                </div> 
+              {% endcomment %}
+
+              {% comment %}{% include 'mtnops_free_hat' %}{% endcomment %}
+              {% comment %}{% include 'mtnops_free_travelbag' %}{% endcomment %}
+              
+
+
+              {%- if cart.item_count > 0 -%}
+              <form class="shopify-cart-form" action="/cart" method="post">
+                <div class="responsive-table">
+                  <div class="responsive-table">
+                    <table class="shop_table shop_table_responsive cart shopify-cart-form__contents" cellspacing="0">
+                      <thead>
+                        <tr>
+                          <th class="product-remove">&nbsp;</th>
+                          <th class="product-thumbnail">&nbsp;</th>
+                          <th class="product-name">{{ 'cart.page.product' | t }}</th>
+                          <th class="product-price">{{ 'cart.page.price' | t }}</th>
+                          <th class="product-quantity">{{ 'cart.page.quantity' | t }}</th>
+                          <th class="product-subtotal">{{ 'cart.page.total' | t }}</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {%- for item in cart.items -%}
+                        {% if item.product.type == 'Supplements' or item.product.type == 'SAMPLER' or item.product.type == 'HIDDEN' %}
+                          {% assign prop65_in_cart = true %}
+                        {% endif %}
+                        <tr class="shopify-cart-form__cart-item cart_item cart_item_{{ item.id }}">
+                          <td class="product-remove">
+                            <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0" class="remove" aria-label="Remove this item" data-product_id="{{ item.id }}" data-product_sku="{{ item.sku }}">×</a>						
+                          </td>
+                          <td class="product-thumbnail">
+                            <a href="{{ item.url | within: item.product.collections.last }}">
+                              {%- if item.image -%}
+                              {%- assign check_break = false -%}
+                              {%- assign check_not_img_one = false -%}
+                              {%- if item.variant.featured_image != null or item.product.has_only_default_variant -%}
+                              <img width="219" height="280" class="attachment-shop_thumbnail size-shop_thumbnail sp-post-image" alt="{{ item.title | escape }}" 
+                                   src="{%-include 'gl_image_format',cache:true,src:item, size: '219x' -%}">                    
+                              {%- else -%}
+                              {%- if settings.color_name_check != blank -%}{%- assign _gl_color_name = settings.color_name_check | replace: ' ,', ',' | replace: ', ', ',' | split: ',' -%}{%- assign gl_color_name = _gl_color_name | downcase -%}{%-else-%}{%- assign gl_color_name = '\nathan_dt\' -%}{%-endif-%}
+                              {%- assign check_break = false -%}
+                              {%- assign check_not_img_one = false -%}
+                              {%- for option in item.product.options -%}
+                              {%- assign downcased_option = option | downcase -%}
+                              {%- if downcased_option == 'color' or downcased_option == 'colour' or gl_color_name contains downcased_option_check -%}
+                              {%- assign item_title_variant = item.variant.options[forloop.index0] -%}
+                              {%- for image in item.product.images -%}
+                              {%- if image.attached_to_variant? -%}
+                              {% for variant in image.variants %}
+                              {%- if variant.title contains item_title_variant and variant.image.src != blank -%}
+                              <img width="219" height="280" class="img_no_feature attachment-shop_thumbnail size-shop_thumbnail sp-post-image" alt="{{ image.alt | escape }}" 
+                                   src="{%-include 'gl_image_format',cache:true,src:image.src, size: '219x' -%}">
+                              {%- assign check_not_img_one = false -%}
+                              {%- assign check_break = true -%}
+                              {%- break -%}
+                              {%- else -%}
+                              {%- assign check_not_img_one = true -%}
+                              {%- endif-%}
+                              {% endfor %}
+                              {%- if check_break -%}{%- break -%}{%- endif-%}
+                              {%- else -%}
+                              {%- assign check_not_img_one = true -%}
+                              {%- endif-%}
+                              {%- endfor -%}
+                              {%- else -%}
+                              {%- assign check_not_img_one = true -%}
+                              {%- endif -%}
+                              {%- endfor -%}
+                              {%- endif -%}
+                              {%- if check_not_img_one and check_break == false -%}
+                              <img width="219" height="280" class="gl_b attachment-shop_thumbnail size-shop_thumbnail sp-post-image" alt="{{ item.title | escape }}" 
+                                   src="{%-include 'gl_image_format',cache:true,src:item, size: '219x' -%}"> 
+                              {%- endif -%}
+                              {%- else-%}
+                              <img width="219" height="280" src="{{ 'noimage.gif' | asset_img_url: '219x' }}" alt="no image">
+                              {%- endif -%}
+                            </a>						
+                          </td>
+                          <td class="product-name" data-title="{{ 'cart.page.product' | t }}">
+                            <a href="{{ item.url | within: item.product.collections.last }}">{% comment %}{% if item.properties.product %}{{ all_products[item.properties.product].title }} → {% endif %}{% endcomment %}{{ item.product.title }}</a>
+                            {%- if item.product.has_only_default_variant == false -%}
+                            <dl class="variation">
+                              {%- for option in item.product.options -%}
+                              <dt class="variation-Color">{{ option | capitalize }}:</dt>
+                              <dd class="variation-Color"><p>{{ item.variant.options[forloop.index0] | capitalize }}</p></dd>
+                              {%- endfor -%}
+                            </dl>
+                            {%- endif -%}
+
+                            {%- assign property_size = item.properties | size -%}
+                            {% if property_size > 0 %}
+
+                              <div class="cart_item_meta">
+                                {% assign recurringchecked = "false" %} 
+                                {% for p in item.properties %}
+                                {% if p.first == 'shipping_interval_frequency' %}
+                                  {% assign frequency = p.last %}
+                                  {% assign recurringchecked = "true" %} 
+                                {% endif %}
+                                {% if p.first == 'shipping_interval_unit_type' %}
+                                  {% if frequency == '1'%}
+                                    {% if p.last == 'Days' %}
+                                      {% assign frequency_unit = 'Day' %}
+                                    {% elsif p.last == 'Months'%}
+                                      {% assign frequency_unit = 'Month' %}
+                                    {% elsif p.last == 'Weeks'%}
+                                      {% assign frequency_unit = 'Week' %}
+                                    {% endif %}
+                                  {% else %}
+                                    {% assign frequency_unit = p.last %}
+                                  {% endif %}
+                                {% elsif p.first == 'promo' %}
+                                  <small>Free Product added. Thanks for your support!</small>
+                                {% elsif p.first == 'sampler' %}
+                                  <small>Free Sampler added. We have a feeling that your gonna love it!</small>
+                                {% endif %}
+                                {% endfor %}
+
+                                {% if recurringchecked == "true" %}
+                                  Subscription will be delivered every <b>{{frequency}} {{frequency_unit}}</b>
+                                {% endif %}
+
+                              </div>
+                            {% endif %}
+
+                          </td>
+                          <td class="product-price" data-title="{{ 'cart.page.price' | t }}">
+                            {% if isTagged %}
+                              <span class="shopify-Price-amount amount">
+                                {{ item.original_price | money }}
+                              </span>
+                            {% else %}
+                              <span class="shopify-Price-amount amount">{{ item.price | money }}</span>
+                            {% endif %}
+                            	
+                          </td>
+                          <td class="product-quantity" data-title="{{ 'cart.page.quantity' | t }}">
+                            {% comment %}
+                              NOT ALLOWING BARS TO BE ADDED IN ADDITION TO THE ONE FREE SAMPLE
+                            {% endcomment %}
+                            {% if item.id == 31630615117866 or item.id == 31630614986794 or item.id == 31630615052330 %}
+                            {% else %}
+                            {% endif %}
+
+                            <div class="quantity">
+                              {% comment %}<input type="button" value="-" class="minus">
+                              <input type="number" data-price="{{item.price}}" data-format='{{shop.money_format}}' data-vid="{{item.id}}" required="required" step="1" min="0" {%- if item.variant.inventory_management == blank or item.variant.inventory_policy == 'continue' %} max="999"{%- else %} max="{{ item.variant.inventory_quantity }}"{%- endif %} name="updates[]" id="updates_{{ item.key }}"  value="" title="Qty" class="input-text qty text custom-qty" size="4" pattern="[0-9]*" inputmode="numeric">
+                              <input type="button" value="+" class="plus">{% endcomment %}
+                              {{ item.quantity }}
+                            </div>
+                            
+                          </td>
+                          <td class="product-subtotal" data-title="{{ 'cart.page.total' | t }}">
+                            <span class="shopify-Price-amount amount">{%- if item.original_line_price != item.line_price -%}<s>{{ item.original_line_price | money }}</s> {% endif -%}{{ item.line_price | money }}</span>						
+                          </td>
+                        </tr>
+                        {%- endfor -%}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+
+                {% comment %}
+                  FREE MTN OPS DECAL
+                {% endcomment %}
+                {% comment %}{% include 'mtnops_free_decal' %}{% endcomment %}
+
+
+                <div class="row cart-actions">
+                  {%- if settings.cart_clear_enable -%}
+                  <div class="col">
+                    <div class="coupon">
+                      <a href="/cart/clear" class="clear-button button alt">{{ 'cart.general.clear' | t }}</a>
+                    </div>
+                  </div>
+                  {%- endif -%}
+                  <div class="col-md-6">
+                    <input type="submit" name="update" class="button update-cart" value="{{ 'cart.general.update' | t }}">	
+                  </div>
+                </div>
+
+
+                {% comment %}
+                  FREE SAMPLER ADDED TO ORDERS
+                {% endcomment %}
+
+                {% if customer.email == 'jake.shaw@me.com' %}
+                  
+                {% endif %}
+                {% include 'mtnops_cart_insert_and_sampler' %}
+                
+
+                {% if prop65_in_cart %}
+                  {% include 'prop65-warning' %}                  
+                {% endif %}
+
+                {% comment %}{% include 'mtnops_conquer-hunger-tiers', widgetClass: 'cart-view' %}{% endcomment %}
+
+                <div class="cart-collaterals{%- if settings.cart_notes_enable %} gl_cart_note{%- endif -%}">
+                  {%- if settings.cart_notes_enable -%}
+                  <div class="cart_totals note">
+                    <h2>{{ 'cart.general.note' | t }}</h2>
+                    <textarea name="note" class="cart-note__input" colspan="6">{{ cart.note }}</textarea>
+                    <div class="wc-proceed-to-checkout invisible">
+                      <a href="javascript:void(0)" class="checkout-button button alt wc-forward">{{ 'cart.general.proceed_checkout' | t }}</a>
+                    </div>
+                  </div>
+                  {%- endif -%}
+                  <div class="cart_totals{%- if settings.use_agree_checkbox_page %} form_nt_agree nt_checkout pe_none{%- endif -%}">
+                    <h2>{{ 'cart.general.total_title' | t }}</h2>
+                    <div class="responsive-table">
+                      <div class="responsive-table">
+                        <table cellspacing="0" class="shop_table shop_table_responsive">
+                          <tbody>
+                            <tr class="cart-subtotal">
+                              <th>{{ 'cart.general.subtotal' | t }}</th>
+                              <td data-title="{{ 'cart.general.subtotal' | t }}"><span class="shopify-Price-amount amount">{{ cart.total_price | money }}</span></td>
+                            </tr>
+                            {%- if settings.use_threshold_page  == false -%}
+                            <tr class="shipping">
+                              <th>{{ 'cart.general.shipping' | t }}</th>
+                              <td data-title="{{ 'cart.general.shipping' | t }}">
+                                <ul id="shipping_method">
+                                  <li>
+                                    <input type="radio" name="shipping_method[0]" data-index="0" id="shipping_method_0_legacy_free_shipping" value="legacy_free_shipping" class="shipping_method hide hidden" checked="checked">
+                                    <label for="shipping_method_0_legacy_free_shipping">{{ 'cart.general.shipping_at_checkout' | t }}</label>					
+                                  </li>
+                                </ul>
+                              </td>
+                            </tr>
+                            {%- endif -%}
+                            <tr class="order-total">
+                              <th>{{ 'cart.general.total' | t }}</th>
+                              <td data-title="{{ 'cart.general.total' | t }}"><strong><span class="shopify-Price-amount amount">{{ cart.total_price | money }}</span></strong></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+
+                    
+                      {% comment %}<p><b>Shipping Notice:</b> Due to high demand, shipping times may be 2-3 days behind normal. Your order will ship as soon as possible. Thank you for your understanding and support.</p>{% endcomment %}
+                    
+
+                    {% comment %}{%- if settings.use_threshold_page -%}<div class="ship_nt_wrap">{%- assign settings_free_shipping_above = settings.free_shipping_above -%}{%- include 'shipping-threshold' -%}</div>{%- endif -%}
+                    <table cellspacing="0" class="shop_table shop_table_responsive">
+                      <tbody>
+                        <tr class="shipping">
+                          <th>{{ 'cart.general.coupon' | t }}</th>
+                          <td data-title="Shipping" class="coupon_Shipping"><input type="text" name="discount" class="input-text w__100" id="coupon_code" value="" placeholder="{{ 'cart.general.placeholder_coupon' | t }}"></td>
+                        </tr>
+                      </tbody>
+                    </table>{% endcomment %}
+                  {%- if settings.use_agree_checkbox_page -%}
+                       {%- assign page_url = pages[settings.link_conditions].url -%}
+                       <p class="agree_checkbox content_threshold">
+                           <label class="label-for-checkbox">
+                           <input type="checkbox" class="input-checkbox nt_agree">
+                           {%- if settings.link_conditions != blank -%}{{ 'cart.general.link_conditions_html' | t:link: page_url }}{%- else -%}{{ 'cart.general.link_conditions_emty' | t }}{%- endif -%}
+                           </label>
+                        </p>
+                  {%- endif -%}
+
+
+                  {% include 'mtnops_bars_notice' %}
+                    
+                    {% comment %}<p><b>NOTICE:</b> Due to an inventory count in our warehouse earlier this month, orders are taking a few extra days to ship out 🙄 No bueno... we know. But be assured we are working round the clock to get caught up and ship your items out ASAP! We are super sorry for the inconvenience. We appreciate you and your patience.</b></p>{% endcomment %}
+
+                    <div class="wc-proceed-to-checkout">
+                      <button class="checkout-button button alt" name="checkout">{{ 'cart.general.proceed_checkout' | t }}</button>
+                      {% if settings.use_additional_checkout_buttons and additional_checkout_buttons %}
+                        <span class="additional-checkout-buttons">
+                          <div class="additional-checkout-buttons">{{ content_for_additional_checkout_buttons }}</div>
+                        </span>
+                      {% endif %}
+                    </div>
+
+
+                  </div>
+                </div>
+                {%comment%}
+                <table cellspacing="0" class="shop_table shop_table_responsive">
+                  <tbody>
+                    <tr class="shipping">
+                      <th>{{ 'cart.general.coupon' | t }}</th>
+                      <td data-title="Shipping"><input type="text" name="discount" class="input-text w__100" id="coupon_code" value="" placeholder="{{ 'cart.general.placeholder_coupon' | t }}"></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="wc-proceed-to-checkout tr">
+                  <button class="checkout-button button alt" name="checkout">{{ 'cart.general.proceed_checkout' | t }}</button>
+                </div>
+                {%endcomment%}
+              </form>
+              {%- else -%}
+              <p class="cart-empty">{{ 'cart.general.empty_page' | t }}</p>
+              <div class="basel-empty-cart-text">{{ 'cart.general.guest_note_html' | t }}</div>
+              <p class="return-to-shop"><a href="collections/all" class="button wc-backward">{{ 'cart.general.continue_shopping' | t }}</a></p>
+              {%- endif -%}
+            </div>
+          </div>
+        </article>
+        <!-- #post -->
+      </div>
+      <!-- .site-content -->
+    </div>
+  </div>
+  <!-- end container -->
+</div><!-- .main-page-wrapper -->
+
+{% if isTagged and customerTag == "ExpertVoice" %}
+  <script type="text/javascript">
+    if($expertVoiceGateKeeper == false) {
+      var $checkout = '.wc-proceed-to-checkout';
+      $($checkout + ' .checkout-button').remove();
+      $($checkout).prepend('<div class="expertvoice-gatekeeper"><p>Please log in to your Expert Voice account before checking out.</p><a href="https://www.expertvoice.com/brand/mtnops" class="btn mtnops-btn">Log In Here</a></div>');
+
+      console.log('hijack the checkout button and redirect people to expertvoice login');
+      
+      //window.onbeforeunload = function() {
+        // if (window.location.href.indexOf("checkout") > -1) {
+        //   return "checking out so soon";
+        // } else {
+        //   return "Go ahead";
+        // }
+        //return "yeah yeah";
+      //}
+
+    }
+  </script>
+{% endif %}
+
+

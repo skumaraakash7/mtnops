@@ -1,0 +1,157 @@
+<div class="main-page-wrapper">
+
+	<div class="main-content">
+		<div class="bars-landing-wrap">
+
+			<div class="bars-header">
+				{% comment %}<div class="initial-message">
+					<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/YouAskedMessage.png?v=1585692416">
+					<p>The MTN OPS 20g Protein Bar will help you reach your fitness goals inside the gym, and keep your muscles fueled while conquering the mountains. What are you waiting for?</p>
+					<a href="#" class="btn mtnops-btn buy-now-cta">BUY NOW</a>
+				</div>{% endcomment %}
+				<div class="final-message">
+					<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/PerformanceBarSignupText.png?v=1591034333">
+					<p>Enter your email below and we will let you know once our Performance Bars have arrived. It won't be long...</p>
+					<div class="klaviyo-form-MyRP6L"></div>
+				</div>
+			</div>
+
+			<div class="bars-peek-wrapper-mobile">
+				<div>
+					<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/peanut-butter-bliss.png?v=1585714435">
+				</div>
+				<div>
+					<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/conquer-caramel-crunch.png?v=1585714435">
+				</div>
+				<div>
+					<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/triple-chocolate-mudslide.png?v=1585714435">
+				</div>
+			</div>
+			<div class="bars-peek-wrapper">
+				<div class="bar-layers">
+					<img class="animate1" src="https://cdn.shopify.com/s/files/1/2786/4584/files/PeanutButterBliss-Bar.png?v=1585672364">
+					<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/PeanutButterBliss-Ingredients.png?v=1585672363">
+					<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/PeanutButterBliss-Splash.png?v=1585672364">
+				</div>
+
+				<div class="bar-layers">
+					<img class="animate2" src="https://cdn.shopify.com/s/files/1/2786/4584/files/ConquerCaramelCrunch-Bar.png?v=1585674398">
+					<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/ConquerCaramelCrunch-Ingredients.png?v=1585674399">
+					<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/ConquerCaramelCrunch-Splash.png?v=1585674399">
+				</div>
+
+				<div class="bar-layers">
+					<img class="animate1" src="https://cdn.shopify.com/s/files/1/2786/4584/files/TripleChocolateMudslide-Bar.png?v=1585674386">
+					<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/TripleChocolateMudslide-Ingredients.png?v=1585674385">
+					<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/TripleChocolateMudslide-Splash.png?v=1585674386">
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.4/gsap.min.js"></script>
+<script type="text/javascript">
+	$( window ).bind("load", function() {
+		$('.buy-now-cta').addClass('loaded-btn');
+	});
+
+	if($(window).width() > 992) {
+
+		$(document).mousemove(function(event) {
+	  
+		  $(".bar-layers img.animate1").each(function(index, element) {
+		    
+		    var xPos = (event.clientX/$(window).width())-0.5,
+		      yPos = (event.clientY/$(window).height())-0.5,
+		      bars = element;
+		  
+			  gsap.to(bars, {
+			  	duration: 2,
+			    x: xPos * 100, 
+			    y: yPos * 100,
+			    ease: Power1.easeOut
+			  });
+
+		    
+		  });
+		  $(".bar-layers img.animate2").each(function(index, element) {
+		    
+		    var xPos = (event.clientX/$(window).width())-0.5,
+		      yPos = (event.clientY/$(window).height())-0.5,
+		      bars = element;
+		  
+			  gsap.to(bars, {
+			  	duration: 1,
+			    x: xPos * 200, 
+			    y: yPos * 200,
+			    ease: Power1.easeOut
+			  });
+		  });
+
+
+		  $(".bar-layers img:nth-child(2)").each(function(index, element) {
+		    
+		    var xPos = (event.clientX/$(window).width())-0.5,
+		      yPos = (event.clientY/$(window).height())-0.5,
+		      ingredients = element;
+		  
+			  gsap.to(ingredients, {
+			  	duration: 2,
+			    x: xPos * 50, 
+			    y: yPos * 50,
+			    ease: Power1.easeOut,
+			  });
+		    
+		  });
+		  $(".bar-layers img:nth-child(3)").each(function(index, element) {
+		    
+		    var xPos = (event.clientX/$(window).width())-0.5,
+		      yPos = (event.clientY/$(window).height())-0.5,
+		      splash = element;
+		  
+			  gsap.to(splash, 1, {
+			  	duration: 2,
+			    x: xPos * 75, 
+			    y: yPos * 75,
+			    ease: Power1.easeOut,
+			  });
+		    
+		  });
+
+		});
+
+	}
+
+	function actionTaken() {
+		//$('.initial-message, .intial-image').hide();
+		//$('.final-message, .final-image').show();
+	}
+
+	var clickedBtn = false;
+
+	$('.buy-now-cta').on('click', function(e) {
+		e.preventDefault();
+		clickedBtn = true;
+		actionTaken();
+	});
+
+	setTimeout(function() {
+		if(clickedBtn == false) {
+			actionTaken();
+		}
+	}, 10000);
+	//var scrolled = false;
+
+	// $(window).scroll(function() {
+ //    if($(window).scrollTop() > 250 && scrolled == false){
+			
+			
+	// 		scrolled = true;
+	// 	}
+	// });
+</script>
+

@@ -1,0 +1,9 @@
+{%- assign view_not_default = false -%}
+
+{%- include 'mtnops_womens_collection_grid' -%}
+
+{% comment %}{%- if customer.email == 'jake.shaw@me.com' -%}
+{%- else -%}
+ {%- include 'collection_grid' -%}
+
+{%- endif -%}{% endcomment %}

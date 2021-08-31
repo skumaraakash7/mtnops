@@ -1,0 +1,181 @@
+
+
+{% comment %}
+  SPEND REWARDS
+
+  spend over $50, get a decal
+  spend over $100, get a free hat (1 of 3)
+{% endcomment %}
+
+{% assign spendTotal = 0 %}
+{% assign productOneHandle = '' %}
+{% assign productTwoHandle = 'primal-banner' %}
+
+{% comment %}{% assign freeProductOne = all_products['straight-six-decal'] %}
+{% assign freeProductTwo = all_products['carbon-hat'] %}{% endcomment %}
+{% assign freeProductOne = all_products[productOneHandle] %}
+{% assign freeProductTwo = all_products[productTwoHandle] %}
+{% assign tierOne = false %}
+{% assign tierTwo = true %}
+{% assign cartQualifies = false %}
+{% assign freeProductInCart = false %}
+{% assign addedFromCart = false %}
+
+{% if cart.total_price > 12500 and tierTwo %}
+
+  {% assign freeProduct = freeProductTwo %}
+  {% assign cartQualifies = true %}
+
+{% elsif cart.total_price > 5000 and tierOne %}
+
+  {% assign freeProduct = freeProductOne %}
+  {% assign cartQualifies = true %}
+
+{% endif %}
+
+{% comment %}
+  CART LOOP
+{% endcomment %}
+{% for item in cart.items %}
+
+  {% if item.product_id == freeProduct.id %}
+    {% assign freeProductInCart = true %}
+    {% assign freeProductQty = item.quantity %}
+  {% endif %}
+
+  {% unless item.properties == empty %}
+    {% for property in item.properties %}
+      {% if property.first == "reward" %}
+        {% assign addedFromCart = true %} 
+      {% endif %}
+    {% endfor %}
+  {% endunless %}
+
+{% endfor %}
+
+
+{% if freeProduct != empty and cartQualifies and freeProduct.available and freeProductInCart == false and addedFromCart == false %}
+  
+  <div class="spend-reward-wrap">
+    <h3><span>You Qualify for a</span><br>FREE {{freeProduct.title}}!</h3>
+      
+    {% if freeProduct.variants.size > 1 %}
+      <p>Thank you for supporting us. Select your free {{freeProduct.title}} below.</p>
+      <ul class="rewards-list">
+        {% for var in freeProduct.variants %}
+          {% if var.available %}
+            <li><a class="add-free-product-to-cart freeProduct-add-to-cart" data-product-id="{{var.id}}" href="#"><img class="promo-item-image" src="{{ var.featured_media | img_url: '150x' }}"><span>{{var.title}}</span></a></li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    {% else %}
+      <a class="add-free-product-to-cart freeProduct-add-to-cart" data-product-id="{{freeProduct.variants[0].id}}" href="#">
+        <img class="promo-item-image" src="{{ freeProduct.images[0].src | img_url: 'master' }}">
+        <span>ADD TO CART</span>
+      </a>
+    {% endif %}
+    {% if cart.total_price > 5000 and cart.total_price < 12500 %}
+      <div class="tier-upsell-wrap">
+        <p>Or spend {{ 12500 | minus: cart.total_price | money }} more and get a free hat!</p>
+        <img class="promo-item-image" src="{{ freeProductTwo.images[0].src | img_url: '150x' }}">
+      </div>
+    {% endif %}
+  </div>
+  
+  <script type="text/javascript">
+
+      console.log('reward: ','{{freeProduct.available}}');
+
+
+      //add item to cart
+      function addfreeProductToCart(product_id, quantity) {
+        data = {
+          "quantity": quantity,
+          "id": product_id,
+          properties: {
+            'reward': 'Thank you!'
+          }
+        }
+        jQuery.ajax({
+          type: 'POST',
+          url: '/cart/add.js',
+          data: data,
+          dataType: 'json',
+          success: function() { 
+            console.log('{{freeProduct.title}} has been added to cart.');
+
+
+            $('#promo-cart-popup img, #promo-cart-popup .add-promo-item-to-cart, #promo-cart-popup p, #promo-cart-popup .cart-upsell-tier, #promo-cart-popup .prize-clause, .no-thanks, .promo-product-add-to-cart-wrap').hide();
+            $('#promo-cart-popup h3').replaceWith('<h3>AWESOME!<br>WE ARE ADDING IT TO YOUR CART.</h3><br><h4>JUST A SEC.</h4>');
+            //setTimeout(function(){
+            $('.update-cart').trigger('click');  
+            //}, 1000);
+            
+          },
+          error: function (request, status, error) {
+            console.log(request.responseText);
+            var code = request.responseJSON.status;
+            //if (code == 422 ) {
+              //$('.message').text();
+            //}
+            console.log("<p>" + request.responseJSON.description + "</p>");
+            alert('error on adding product to cart.');
+          }
+        });
+      }
+
+
+
+      //promo item add to cart
+      $('.add-free-product-to-cart').on('click', function(e) {
+        var promoItemId = $(this).data('product-id');
+        e.preventDefault();
+        addfreeProductToCart(promoItemId, 1);
+        $(this).addClass('active');
+      });
+      
+
+      //reset when promo item is removed from cart
+      // $('.cart_item_{{freeMug}} .product-remove a.remove, .clear-button').on('click', function(e){
+      //  console.log('remove promo line item from cart');
+      // });
+
+
+      // {% if triggerProductInCart and freeProductInCart == false %}
+      //   setTimeout(function(){
+      //     $('#promo-cart-popup').iziModal('open');  
+      //   }, 800);
+      // {% endif %}
+
+  </script>
+
+{% endif %}
+
+{% if freeProductTwo != empty and freeProductTwo.available and cartQualifies == false %}
+  <div class="cart-banner spend-reward-banner">
+    <img class="image-show-mobile" src="https://cdn.shopify.com/s/files/1/2786/4584/files/primal-banner-mobile.png?v=1604444815">
+    <img class="image-show-desktop" src="https://cdn.shopify.com/s/files/1/2786/4584/files/primal-banner-dt.png?v=1604444815">
+    {% comment %}<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/Opstober-CartUpsell-Banner-MASTER-02.jpg?v=1603411526">{% endcomment %}
+  </div>
+{% endif %}
+
+
+{% comment %}{% if addedFromCart and freeProductQty > 1 %}
+  <script type="text/javascript">
+    $.post('/cart/update.js', {
+      updates: {
+        '{{freeProduct.variants[0].id}}': 1
+      }
+    });
+
+  </script>
+  
+{% endif %}{% endcomment %}
+
+{% comment %}<style type="text/css">
+  .cart_item_{{freeProduct.variants[0].id}} .quantity {
+    display: none;
+  }
+</style>
+{% endcomment %}
+

@@ -1,0 +1,59 @@
+{% comment %}{% if customer.email == "jake.shaw@me.com" %}{% endif %}{% endcomment %}
+
+<div class="appendPropMessage"></div>
+
+
+<script type="text/javascript">
+	// PROP 65 MESSAGE
+
+  $('#prop65-modal').iziModal( {
+      // title: 'PROP65 WARNING',
+      // headerColor: '#000000',
+      padding: 25,
+      overlayColor: 'rgba(0, 0, 0, 0.8)',
+      width: 450,
+      closeButton: true,
+      autoOpen: false
+  });
+
+  var state = Cookies.get('visitorState');
+  var ip = null
+  var appendMessage = $('.appendPropMessage');
+  var warning = $('#prop65-modal p');
+
+  function prop65Message(state) {
+      if(state == 'CA') {
+        console.log("Hey there California resident. Make sure you take a look at the prop65 website and warnings we show on our website about our products.");
+        if(appendMessage.length) {
+          warning.clone().appendTo(appendMessage);
+        }
+        $('#shopify_add_to_cart, .shopify-cart-form').one('mouseover touchstart', function(event) {
+          $('#prop65-modal').iziModal('open');
+        });
+      } else {
+        console.log("User region code set to " + state);
+      }
+  }
+
+  if(state == undefined) {
+
+  var akey = '345dd8efebca59ba61215b2bbb97e1c1';
+  $.ajax({
+    url: 'http://api.ipstack.com/check?access_key=' + akey,   
+    dataType: 'jsonp',
+    success: function(json) {
+      console.log(json);
+      Cookies.set('visitorState', json.region_code, { expires: 1, path: '/', domain: '.mtnops.com' });
+      var state = Cookies.get('visitorState');
+      prop65Message(state);
+    }
+  });
+
+  } else {
+      prop65Message(state);
+  }
+
+  {%- if customer && customer.email == 'jake.shaw@me.com' -%}
+    console.log('hey there Jake. This is the prop65 warning snippet doing work.');
+  {%- endif -%}
+</script>

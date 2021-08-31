@@ -1,0 +1,135 @@
+{% assign purchasedTeeAlready = false %}
+
+{% comment %}
+  FREE TEE SHIRT
+{% endcomment %}
+{% assign subscriptionCheckout = false %}
+{% assign insiderTeeInCart = false %}
+{% assign insiderTeeId = 4352776536106 %}
+
+
+{% comment %}
+	CHECK ORDER HISTORY FOR TEE PURCHASE
+{% endcomment %}
+{% for order in customer.orders %}
+	{% for item in order.line_items %}
+		{% if item.product.id == insiderTeeId %} {% comment %} INSIDER TEE {% endcomment %}
+			{% assign purchasedTeeAlready = true %}
+		{% endif %}
+	{% endfor %}
+{% endfor %}
+
+{% if purchasedTeeAlready == false %}
+
+	{%- for item in cart.items -%}
+	  {% unless item.properties == empty %}
+	      {% for property in item.properties %}
+	        {% if property.first == "subscription_id" %}
+	          {% assign subscriptionCheckout = true %}
+	        {% endif %}
+	      {% endfor %}
+	  {% endunless %}
+	  {% if item.product_id == insiderTeeId %}
+		  {% assign insiderTeeInCart = true %}
+		{% endif %}
+	{% endfor %}
+
+	{% if subscriptionCheckout == true and cart.total_price > 1000 and insiderTeeInCart == false %}
+		
+		<div class="free-tee-prompt">
+		  <img src="https://cdn.shopify.com/s/files/1/2786/4584/products/InsiderTee-Black-Front-Web.png?v=1577119446">
+		  <span>YOU QUALIFY FOR A FREE INSIDER TEE!</span>
+		  <a href="" class="mtnops-btn-sm open-tee-modal">ADD TEE</a>
+		</div>
+
+
+		<div id="choose-insider-tee-size" class="iziModal custom-modal">
+			<a data-izimodal-close="" class="icon-close"><i class="fa fa-times" aria-hidden="true"></i></a>
+			<h3>CHOOSE YOUR TEE SIZE</h3>
+		    <img class="promo-item-image" src="https://cdn.shopify.com/s/files/1/2786/4584/products/InsiderTee-Black-Front-Web.png?v=1577119446">
+
+		    <ul class="insider-tee-size-selection"></ul>
+
+		    <p class="insider-code">Apply code <span>JANINSIDER</span> at checkout!</p>
+	    	<a class="add-promo-item-to-cart mtnops-btn" href="#">ADD TO CART</a>
+		</div>
+		<script type="text/javascript">
+			// console.log('Free Decal in cart?','{{freeDecal}}');
+
+			var insiderTeeSizes = "";
+			$.getJSON('/products/insider-tee.js', function(product) {
+				if(product.available) {
+					$.each(product.variants, function(index,variant) {
+						if (variant.available) {
+							insiderTeeSizes += '<li class="tee-size"><a class="size-selection" data-tee-id="'+variant.id+'" data-size="'+variant.option1+'">'+variant.option1+'</a></li>';
+						}
+					});
+					$('.insider-tee-size-selection').append(insiderTeeSizes);
+				}
+			});
+
+
+			$('#choose-insider-tee-size').iziModal( {
+		    padding: 25,
+		    overlayColor: 'rgba(0, 0, 0, 0.8)',
+		    width: 500,
+		    closeButton: true,
+		    autoOpen: false
+		  });	
+
+		  $('.open-tee-modal').on('click', function(e) {
+		  	e.preventDefault();
+		  	$('#choose-insider-tee-size').iziModal('open');  
+		  });
+		  $('.add-promo-item-to-cart').on('click', function(e) {
+		  	e.preventDefault();
+		  	var teeIdToAdd = $(this).data('tee-id');
+		  	if (typeof teeIdToAdd !== typeof undefined && teeIdToAdd !== false) {
+		  		addTeeToCart(teeIdToAdd, 1);
+		  	} else {
+		  		alert('Please select size');
+		  	}
+		  });
+		  setTimeout(function(){
+				$('.size-selection').on('click', function(e) {
+			  	e.preventDefault();
+			  	var id = $(this).data('tee-id');
+			  	$('.size-selection').removeClass('selection-active');
+			  	$(this).addClass('selection-active');
+			  	$('.add-promo-item-to-cart').attr('data-tee-id', id);
+			  });
+			}, 1000);
+
+
+		  
+		  function addTeeToCart(product_id, quantity) {
+		    data = {
+		      "quantity": quantity,
+		      "id": product_id
+		    }
+		    jQuery.ajax({
+		      type: 'POST',
+		      url: '/cart/add.js',
+		      data: data,
+		      dataType: 'json',
+		      success: function() {
+		        //Cookies.set('freegift', true);
+		        $('.update-cart').trigger('click');
+		      },
+		      error: function (request, status, error) {
+		        console.log(request.responseText);
+		        var code = request.responseJSON.status;
+		        //if (code == 422 ) {
+		          //$('.message').text();
+		        //}
+		        console.log("<p>" + request.responseJSON.description + "</p>");
+		      }
+		    });
+		  }
+
+		</script>
+
+	{% endif %}
+
+{% endif %} {% comment %}INSIDER CHECK{% endcomment %}
+

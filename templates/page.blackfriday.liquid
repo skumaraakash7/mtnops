@@ -1,0 +1,175 @@
+{% assign rewardCollection = collections.rewards.products %}
+
+{% comment %}<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha256-pTxD+DSzIwmwhOqTFN+DB+nHjO4iAsbgfyFq5K5bcE0=" crossorigin="anonymous"></script>{% endcomment %}
+
+<div class="rewards-page-wrap">
+	<div class="blackfriday-page-hero has-page-image" style="background-image: url('https://cdn.shopify.com/s/files/1/2786/4584/files/bf-bg.jpg?v=1605235135');">
+		<div class="page-hero-text">
+			<img src="https://cdn.shopify.com/s/files/1/2786/4584/files/bf-logo-simple.svg?v=1605569567">
+		</div>
+	</div>
+
+	<div class="main-page-wrapper">
+   <!-- MAIN CONTENT AREA -->
+   <div class="container">
+      <div class="row">
+         <div class="site-content col-sm-12" role="main">
+         		
+         		<header class="blackfriday-rewards-intro">
+	         		<img class="intro-image" src="https://cdn.shopify.com/s/files/1/2786/4584/files/win-as-you-save.svg?v=1605236294">
+
+	         		<p>Not only is this our BIGGEST and BADDEST SALE of the year, but we wanted to take it up a notch and offer some Free Product that you can unlock as you shop through our BLACK FRIDAY SALE. Ready for the best part? Once you hit over that dollar amount you get to choose from any (1) of the products you’ve unlocked up to that point.</p>
+
+	         		<img class="section-intro" src="https://cdn.shopify.com/s/files/1/2786/4584/files/what-you-can-get.svg?v=1605235712">
+	         	</header>
+				    <ul class="rewards-list">
+				    {% for product in rewardCollection %}
+
+				    	{% if product.available %}
+					      {% capture rewardMessage %}
+					        <i class="fas fa-lock reward--icon"></i>
+					        <div class="reward-message">
+					          REWARD LOCKED
+					          <span>{{product.title}}</span>
+					        </div>
+					      {% endcapture %}
+
+					      {% capture spend %}
+					        <div class="reward-spend"><b>SPEND {{ product.metafields.meta.unlock_reward | money_without_trailing_zeros }}+</b><br>TO UNLOCK THIS REWARD</div>
+					      {% endcapture %}
+
+					      <li class="reward-item">
+				          <div class="reward-inner-wrap">
+				            <div class="reward-meta">
+				              {{ rewardMessage }}
+				              <div class="reward-value">
+				                <span>{{product.price_max | money_without_trailing_zeros }}</span> Value
+				              </div>
+				              <img class="reward-image" src="{{ product.images[0].src | img_url: 'master' }}">
+				              <div class="reward-actions">
+					              
+					              {% if product.metafields.meta.description_excerpt != blank or product.images.size > 1 %}
+					              	<a class="view-details" data-product-id="{{product.id}}">VIEW DETAILS</a>
+					              {% endif %}
+					            </div>
+				            </div>
+				            
+				            {{ spend }}
+				          </div>
+
+				          <div class="reward-details-{{product.id}} blackfriday-reward-popup mfp-hide">
+				          	<div class="reward-inner-popup">
+					          	{% if product.images.size > 1 %}
+					          		<div class="gallery-wrap">
+					          			<ul class="reward-gallery">
+					                  {% for image in product.images %}
+					                  	<li><img src="{{ image.src | img_url: 'master' }}"></li>
+					                  {% endfor %}
+			                  	</ul>
+			                	</div>
+			                {% else %}
+			                	{% if product.variants > 1 %}
+			                		<img class="featured-image" src="{{ image.src | img_url: 'master' }}">
+			                	{% else %}
+			                		<img class="featured-image" src="{{ product.images[0].src | img_url: 'master' }}">
+			                	{% endif %}
+			                	
+			                {% endif %}
+		                  
+			                <div class="reward-meta">
+			                	<span class="free-when">FREE WHEN YOU SPEND OVER {{ product.metafields.meta.unlock_reward | money_without_trailing_zeros }}</span>
+			                	<h3>{{product.title}}</h3>
+			                	<div class="reward-value">
+					                <span>{{product.price_max | money_without_trailing_zeros }}</span> Value
+					              </div>
+					              {% if product.metafields.meta.description_excerpt != blank %}
+					              	<p>{{product.metafields.meta.description_excerpt}}</p>
+					              {% endif %}
+			                </div>
+			                
+			              </div>
+	                </div>
+				        </li>
+				      {% endif %}
+
+				    {% endfor %}
+				    </ul>
+
+					</div>
+        </div>
+      </div>
+   </div>
+</div>
+
+<script type="text/javascript">
+	//////////////////////////////////////////////////////
+  ///////// FOR POPUPS
+  //////////////////////////////////////////////////////
+
+  $('.view-details').on('click', function(e) {
+    e.preventDefault();
+    btn = $(this);
+    let productId = $(this).data('product-id');
+    $.magnificPopup.open({
+      items: {
+        src: '.reward-details-'+productId,
+        type: 'inline'
+      }
+    });
+    $('.reward-gallery').slick('setPosition');
+  });
+
+  // $(".").owlCarousel({
+  //   nav: false,
+  //   dots: false,
+  //   stagePadding: 0,
+  //   margin: 0,
+  //   //autoplay: true,
+  //   //autoplayTimeout: 8000,
+  //   items: 1
+  // });
+  $(window).load(function(){
+	  $('.reward-gallery').each(function(i){
+  		$(this).slick({
+  			prevArrow: '<i class="far fa-arrow-square-left slick-nav slick-prev"></i>',
+  			nextArrow: '<i class="far fa-arrow-square-right slick-nav slick-next"></i>'
+  		});
+  	});
+  });
+
+</script>
+
+
+
+{% if customer.email == 'jake.shaw@me.com' %}
+	<a class="click-test" data-ajax-url="https://mtnops.com/collections/rewards?view=test">Click</a>
+  <div class="append-here"></div>
+  <script type="text/javascript">
+    $('.click-test').on('click', function(e) {
+      var $this = $(this),
+      $content = $('.append-here'),
+      ajaxurl = $this.data('ajax-url');
+
+
+      $.ajax({
+        url: ajaxurl,
+        dataType: 'html',
+        type: 'GET',
+        success: function(data) {
+          //console.log(data);
+          // insert variations form
+          $content.append(data);
+          
+        },
+        complete: function() {
+          alert('success');
+        },
+        error: function() {
+          alert('errorr');
+        },
+      });
+    });
+  </script>
+
+{% endif %}
+

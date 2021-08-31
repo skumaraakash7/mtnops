@@ -1,0 +1,252 @@
+{% include 'mtnops_tag_checker' %}
+
+{% comment %}{% if customer.email == 'jake.shaw@me.com' or customer.email == 'chris@mtnops.com' %}
+{% else %}
+
+  <p>{{product.title}} page is coming. Check back soon!</p>
+  
+{% endif %}{% endcomment %}
+
+
+
+<div class="main-page-wrapper">
+
+{% if product.metafields.meta.slim_title != blank %}
+  <div class="mtnops-slim-page-title"><h1>{{ product.metafields.meta.slim_title }}</h1></div>
+{% else %}
+  <div class="mtnops-slim-page-title"><h1>ALL-NEW {{ product.title }} On-The-Go Packs!</h1></div>
+{% endif %}
+
+
+  <header class="product-header">
+    <div class="product-header-inner">
+      <div class="product-featured-image">
+        <img class="display-on-mobile-only" src="https://cdn.shopify.com/s/files/1/2786/4584/files/collagen-on-the-go.svg?v=1624280545">
+        <img class="featured_image" src="{{ product.featured_image.src | img_url: 'master' }}">
+      </div>
+
+      <div class="product-intro">
+        <img class="display-on-desktop-only" src="https://cdn.shopify.com/s/files/1/2786/4584/files/collagen-on-the-go.svg?v=1624280545">
+        <p>MTN OPS Collagen on-the-go packs are the perfect way to improve your diet with highly digestible protein. The flavorless collagen protein powder is perfect to mix into your favorite beverage or smoothie for instant nutritional improvement. Additionally, collagen is known to support healthy bones, tendons, ligaments, and other connective tissue throughout your body. Each pack contains 9 grams of protein that promotes a healthy complexion, body and diet. MTN OPS Collagen will help you function and feel better.</p>
+        <div>
+          {% if isTagged %}
+            <div class="special-pricing">
+              <span id="product-price">{{ product.variants[0].price | times: discountPercentage | round: 2 | money }}</span> <del id="old-product-price">{{product.variants[0].price | money }}</del>
+            </div>
+          {% else %}
+            <span class="product-price">{{product.variants[0].price | money}}</span>
+          {% endif %}
+
+          {% if product.available %}
+            <a class="ajax_add_to_cart add-to-cart-cta add-collagen" href="#" data-pid="{{ product.variants[0].id }}">Add to Cart</a>
+          {% else %}
+            <p class="coming-soon"><b>{{product.title}} IS CURRENTLY OUT OF STOCK</b></p>
+          {% endif %}
+        </div>
+      </div>
+      
+    </div>
+  </header>
+
+  <div class="product-section">
+    <header>
+      <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/collagen-look-good.svg?v=1624280545">
+    </header>
+    <div class="product-benefits-wrap">
+      <ul>
+        <li>
+          <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/collagen-icon-10g.svg?v=1624280545">
+          <p>10 grams of unflavored Collagen Peptides to add to any beverage of your choosing.</p>
+        </li>
+        <li>
+          <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/collagen-icon-on-go.svg?v=1624280544">
+          <p>Each serving is conveniently ready to go whenever you need it. Tear, take, and Conquer.</p>
+        </li>
+        <li>
+          <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/collagen-icon-paleo.svg?v=1624280544">
+          <p>If you are on a paleo lifestyle, no need to worry. These packs fit right in.</p>
+        </li>
+        <li>
+          <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/collagen-icon-ligament-joint.svg?v=1624280545">
+          <p>Along with hair and nails, Collagen is an excellent way to support healthy ligament and joint repair.</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="video-section">
+    <video poster="https://cdn.shopify.com/s/files/1/2786/4584/files/collagen-bg.jpg?v=1624280163" class="vid_trailer" playsinline autoplay muted loop>
+      <source src="https://cdn.shopify.com/s/files/1/2786/4584/files/collagen-bg-vid.mp4?v=1624280108" type="video/mp4">
+    </video>
+    {% comment %}<div class="section-overlay">
+      <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/greens-mean-go.svg?v=1621370351">
+    </div>{% endcomment %}
+  </div>
+  <div class="gallery-section">
+    <div class="owl-carousel owl-theme" id="product-gallery">
+      
+      <div class="item">
+        <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/collagen-lifestyle-1.jpg?v=1624281638">
+      </div>
+      <div class="item">
+        <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/collagen-lifestyle-2.jpg?v=1624281638">
+      </div>
+      <div class="item">
+        <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/collagen-lifestyle-3.jpg?v=1624281638">
+      </div>
+      <div class="item">
+        <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/collagen-lifestyle-4.jpg?v=1624281638">
+      </div>
+      <div class="item">
+        <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/collagen-lifestyle-6.jpg?v=1624281638">
+      </div>
+      <div class="item">
+        <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/collagen-lifestyle-7.jpg?v=1624281638">
+      </div>
+      <div class="item">
+        <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/collagen-lifestyle-9.jpg?v=1624281638">
+      </div>
+      <div class="item">
+        <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/collagen-lifestyle-10.jpg?v=1624281638">
+      </div>
+
+    </div>
+  </div>
+
+  <div class="container-fluid">
+     <div class="row">
+        <div class="site-content col-sm-12" role="main">
+          {%- include 'product_page_area' -%}
+          {% comment %}<h1>{{ product.title }}</h1>{% endcomment %}
+
+          {% comment %}<div class="product-heading">
+            {% if product.metafields.meta.product_intro != blank %}
+              <img src="{{ product.metafields.meta.product_intro }}">
+            {% endif %}
+            <p>{{ product.metafields.meta.description_excerpt }}</p>
+          </div>{% endcomment %}
+
+        </div> <!-- .site-content -->
+    </div> <!-- end row -->
+  </div> <!-- end container -->
+
+  <!-- end container -->
+
+{% comment %}  <div class="product-variations-wrap">
+  {% for v in product.variants %}
+    
+      <div class="outer-product-section product-{{ v.title | handleize }}">
+        {% if v.metafields.meta.lifestyle != blank %}
+          <div class="lifestyle-section">
+            <img src="{{ v.metafields.meta.lifestyle }}">
+          </div>
+        {% endif %}
+        <div id="buy-{{ v.title | handleize }}" class="product-section{% if v.metafields.meta.section_color == 'light' %} section-light{% endif %}">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="product-inner-wrap">
+                  <div class="featured-image-wrap">
+                    <img class="product-featured" src="{{ v.image.src | img_url: 'master' }}">
+                  </div>
+                  <div class="product-meta-wrap">
+                    {% if v.title == "IGNITE" %}
+                      {% if v.metafields.meta.section_color == 'light' %}
+                        {% assign igniteurl = 'https://cdn.shopify.com/s/files/1/2786/4584/files/IGNITE-ProductHighlight-White-Web.svg?v=1617556293' %}
+                      {% else %}
+                        {% assign igniteurl = 'https://cdn.shopify.com/s/files/1/2786/4584/files/IGNITE-ProductHighlight-Grey-Web.svg?v=1617556293' %}
+                      {% endif %}
+                      
+                      <img class="product-benefits" src="{{igniteurl}}">
+                    {% elsif v.title == "YETI" %}
+                      {% if v.metafields.meta.section_color == 'light' %}
+                        {% assign yetiurl = 'https://cdn.shopify.com/s/files/1/2786/4584/files/YETI-ProductHighlight-White-Web.svg?v=1617556294' %}
+                      {% else %}
+                        {% assign yetiurl = 'https://cdn.shopify.com/s/files/1/2786/4584/files/YETI-ProductHighlight-Grey-Web.svg?v=1617556293' %}
+                      {% endif %}
+                      <img class="product-benefits" src="{{yetiurl}}">
+                    {% elsif v.title == "ENDURO" %}
+                      {% if v.metafields.meta.section_color == 'light' %}
+                        {% assign endurourl = 'https://cdn.shopify.com/s/files/1/2786/4584/files/ENDURO-ProductHighlight-White-Web.svg?v=1617556293' %}
+                      {% else %}
+                        {% assign endurourl = 'https://cdn.shopify.com/s/files/1/2786/4584/files/ENDURO-ProductHighlight-Grey-Web.svg?v=1617556293' %}
+                      {% endif %}
+                      <img class="product-benefits" src="{{endurourl}}">
+                      
+                    {% endif %}
+                    <div>
+                      {% if isTagged %}
+                        <div class="special-pricing">
+                          <span id="product-price">{{ v.price | times: discountPercentage | round: 2 | money }}</span> <del id="old-product-price">{{v.price | money }}</del>
+                        </div>
+                      {% else %}
+                        <span class="product-price">{{v.price | money}}</span>
+                      {% endif %}
+                      {% if v.available %}
+                      <a class="ajax_add_to_cart add_to_cart_button add-to-cart-cta" href="#" data-pid="{{ v.id }}">Add to Cart</a>
+                      {% else %}
+                      <p class="coming-soon"><b>{{v.title}} IS CURRENTLY OUT OF STOCK</b></p>
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    
+  {% endfor %}
+  </div>{% endcomment %}
+
+
+  {% comment %}<div id="shopify-product-reviews" data-id="{{product.id}}">{{ product.metafields.spr.reviews }}</div>{% endcomment %}
+
+  {% comment %}<div class="extra-entries-wrap">
+    <div class="container">
+      <div class="col-xs-12">
+        <div class="bonus-entry-wrap">
+          <h3>PICK UP AN ENTRY!</h3>
+          <h4>FILL OUT THE FORM BELOW AND SIGN UP FOR OUR EMAILS</h4>
+          <div style="margin:0 auto;" class="pxFormGenerator" id="4FAmtAOPNCl-I9XhnIxYTQ"></div>
+        </div>
+      </div>
+    </div>
+  </div>{% endcomment %}
+</div><!-- .main-page-wrapper -->
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("#product-gallery").owlCarousel({
+      loop: true,
+      nav: false,
+      dots: false,
+      stagePadding: 5,
+      margin: 5,
+      autoplay: true,
+      autoplayTimeout: 4000,
+      responsive: {
+        0: {
+          items: 1
+        },
+        900: {
+          items: 3
+        },
+      }
+    });
+  }); 
+
+</script>
+
+{% comment %}<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.4/gsap.min.js"></script>
+<script type="text/javascript">
+  gsap.fromTo('.floating-fruit', 4, {scale: 1, rotation: -5}, {scale: 1.12, rotation: 5, transformOrigin:"center center", repeat: -1, yoyo: true, ease: Power1.easeInOut});
+  gsap.fromTo('.product-intro-image', 2, {scale: 1}, {scale: 1.04, transformOrigin:"center center", repeat: -1, yoyo: true, ease: Power1.easeInOut});
+  gsap.fromTo('.product-featured', 2.5, {scale: 1}, {scale: 1.02, transformOrigin:"center center", repeat: -1, yoyo: true, ease: Power1.easeInOut});
+</script>
+{% endcomment %}
+
+
+
+
+
