@@ -73,7 +73,7 @@
                         {%- if image.width > 600 -%}
                         {%- assign image_width = '600x' -%}
                         {%- endif -%}
-                        <p style="text-align:center; margin-bottom:0px;"><img src="{%-include 'gl_image_format',src: image , size: image_width -%}" alt="{{ image.alt | default: shop.name }}" title="{{shop.name}}" style="max-width:{{ block.settings.logo_max_width | escape | default: '300' | remove: 'px' | append: 'px' }}"></p>
+                        <p style="text-align:center; margin-bottom:0px;"><img class="lazy2" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-src="{%-include 'gl_image_format',src: image , size: image_width -%}" alt="{{ image.alt | default: shop.name }}" title="{{shop.name}}" style="max-width:{{ block.settings.logo_max_width | escape | default: '300' | remove: 'px' | append: 'px' }}"></p>
                      {%-endif-%}
                         {%- if block.settings.share_type == '1' -%}
                            {%- assign gl_follow_social = false -%}
@@ -113,7 +113,7 @@
                         {%- assign image = block.settings.footer_payment_image -%}
                         {%- assign image_width = image.width | append:'x' -%}
                         <br>
-                        <p><img src="{%-include 'gl_image_format',src: image , size: image_width -%}" alt="{{ image.alt | default: shop.name }}"></p>
+                        <p><img class="lazy2" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-src="{%-include 'gl_image_format',src: image , size: image_width -%}" alt="{{ image.alt | default: shop.name }}"></p>
                         {%- endif -%}
                      </div>
                   </div>

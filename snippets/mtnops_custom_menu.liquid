@@ -1,11 +1,10 @@
 <div class="mtnops-custom-menus-wrap">
-
   <div class="sampler-menu-wrap mtnops-custom-menu">
   	<ul class="mtnops-samplers-menu-list">
   	{% for product in collections['mtn-ops-samplers'].products %}
       <li>
       	<a href="{{product.url}}">
-      		<img src="{{ product | img_url: '300x' }}">
+      		<img class="lazy2" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-src="{{ product | img_url: '600x' }}">
       		<h3>{{ product.title | remove: "SAMPLER" }}</h3>
           <span>{{ product.metafields.meta.subtitle }}</span>
           {% comment %}<div>{{ product.price  | money }}</div>
@@ -22,8 +21,6 @@
     {% endfor %}
     </ul>
   </div>
-
-
   <div class="mtnops-supps-menu-wrap mtnops-custom-menu">
     <ul class="mtnops-menu-list">
     {% for link in linklists.shop.links %}
@@ -47,7 +44,6 @@
     {% endfor %}
     </ul>
   </div>
-
   <div class="mtnops-gear-menu-wrap mtnops-custom-menu">
     <ul class="mtnops-menu-list">
     {% for link in linklists.gear-menu.links %}
@@ -71,7 +67,6 @@
     {% endfor %}
     </ul>
   </div>
-
   <div class="mtnops-more-menu-wrap mtnops-custom-menu">
     <ul class="mtnops-menu-list">
     {% for link in linklists.who-we-are.links %}
@@ -95,5 +90,4 @@
     {% endfor %}
     </ul>
   </div>
-
 </div>

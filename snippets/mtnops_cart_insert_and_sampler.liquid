@@ -20,7 +20,7 @@
   YETI MANGO MAYAN SAMPLER
 {% endcomment %}
 {% assign addSampler = true %}
-{% assign sampler = all_products['ammo-sampler'] %}
+{% assign sampler = all_products['tiki-island-punch-ignite-sampler'] %}
 {% assign samplerInCart = false %}
 {% assign samplerQty = 0 %}
 
@@ -87,7 +87,7 @@
                 quantity: 1,
                 id: '{{sampler.variants[0].id}}',
                 properties: {
-                  'sampler': 'FREE SAMPLE!',
+                  'sampler': 'SAMPLE OF OUR LATEST FLAVOR!',
                 }
               }
             {% endif %}
@@ -206,15 +206,15 @@
 
   {% endcomment %}
 
-  {% if onlyGiftCardInCart == false and sampler != empty and sampler.available and cart.item_count > 0 and cart.total_price > 400 %}
+  {% if onlyGiftCardInCart == false and sampler != empty and sampler.available and cart.item_count > 0 and cart.total_price > 200 %}
 
     {% if insertInCart == false and samplerInCart == false %}
 
     <a class="new--product-sampler add-new-sampler" href="#">
       <img class="product-featured" src="{{ sampler.featured_image.src | img_url: '600x' }}">
       <div class="add--new-product">
-        <h3>FREE {{sampler.title }}!</h3>
-        <p>Try our <b>{{sampler.title | remove: 'SAMPLER' }} Sampler</b>! Add your <b>Free</b> Sampler to your order!</p>
+        <h3>NEW FLAVOR COMING SOON!</h3>
+        <p>Try our All-New flavor of IGNITE... <b>{{sampler.title | remove: 'SAMPLER' }}</b>! Get your <b>Free</b> Sampler with your order!</p>
         <button>Add To Cart</button>
       </div>
     </a>

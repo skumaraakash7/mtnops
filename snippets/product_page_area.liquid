@@ -177,9 +177,9 @@
     <h2>THIS PRODUCT PAGE IS HIDDEN TO OTHERS</h2>
   </div>
 {% endif %}
-  {% comment %}<div class="product-banner">
+  <div class="product-banner">
     <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/AnniversarySale-ProductPageBanner.jpg?v=1626712300">
-  </div>{% endcomment %}
+  </div>
 
 
 <div class="container"></div>
@@ -408,9 +408,9 @@
                                 
                               {% endif %}{% endcomment %}
 
-                              {% comment %}<div class="appreciation-sale-product-price">
+                              <div class="appreciation-sale-product-price">
                                 <p class="sale-price"><b class="discounted-price">{{ current_variant.price | times: 0.7 | round: 2 | money }}</b> when you use code <span>[ BIG7 ]</span> at checkout!</p>
-                              </div>{% endcomment %}
+                              </div>
 
                             {% comment %}
                               REMOVE AFTER SALE
@@ -436,9 +436,9 @@
                             {% comment %}
                               APPRECIATION SALE WITH DISCOUNT CODE [BIG 7]
                             {% endcomment %}
-                            {% comment %}<script type="text/javascript">
+                            <script type="text/javascript">
                               $('#productPrice').addClass('sale-slash');
-                            </script>{% endcomment %}
+                            </script>
 
                             {% comment %}
                               REMOVE AFTER SALE

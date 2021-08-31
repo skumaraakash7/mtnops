@@ -20,46 +20,48 @@
   {%- include 'page_heading', page_title:cart_title -%}
   <!-- MAIN CONTENT AREA -->
 
-  {% comment %}<a class="cart-banner spend-reward-banner" href="/product/hot-ignite">
-    <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/8-13-21-HotIgniteBogoLaunch-CartBanner.jpg?v=1628826801">
-  </a>{% endcomment %}
 
   {% if customer.email == 'jake.shaw@me.com' %}
     {% comment %}<div class="absolute-message">This is visible for you only, {{customer.first_name}}!</div>{% endcomment %}
 
-        
+
     
     {% comment %}
-      SPEND REWARD -> ORDER OVER $100
+      SPEND REWARD -> ORDER OVER $125
     {% endcomment %}
     {% comment %}{% include 'mtnops_cart_spend_rewards' %}{% endcomment %}
 
+    {% comment %}
+      SPEND OVER $100 > FREE GENERAL HAT
+    {% endcomment %}
+
+    
+
+    
+    
   {% comment %}{% if showRewardsForTagged %}
     
   {% endif %}{% endcomment %}
 
   {% endif %}
 
+  <div class="product-banner">
+    <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/AnniversarySale-ProductPageBanner.jpg?v=1626712300">
+  </div>
+
+  {% include 'mtnops_conquer-hunger-tiers', widgetClass: 'cart-view' %}
+
+  
   {% comment %}
-    SPEND OVER $100 -> GET ANY FREE PRODUCT FROM FREE COLLECTION
+    BUY TIKI ISLAND PUNCH -> GET A IGNITE PROMO SAMPLER (FEDERAL)
   {% endcomment %}
-  {% comment %}{% include 'mtnops_cart_spend_reward_collection', spend: 10000 %}{% endcomment %}
+  {% include 'mtnops_cart_purchase_reward' %}
+
 
   {% comment %}
-    FREE BLAZE OVER $20
+    FREE TRAVEL BAG OVER $75
     {% include 'mtnops_cart_spend_simple_free_product' %}
   {% endcomment %}
-
-  
-
-  {% comment %}<div class="product-banner">
-    <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/AnniversarySale-ProductPageBanner.jpg?v=1626712300">
-  </div>{% endcomment %}
-
-
-    {% comment %}{% include 'mtnops_cart_purchase_reward' %}{% endcomment %}
-
-  
 
   {% comment %}{% include 'mtnops_cart_spend_simple_free_product' %}{% endcomment %}
 
@@ -72,6 +74,8 @@
   {% comment %}{% include 'mtnops_cart_new_flavor_drop_reward' %}{% endcomment %}
 
   
+
+  {% comment %}{% include 'mtnops_cart_purchase_reward_2_products' %}{% endcomment %}
 
 
   {% comment %}
@@ -261,10 +265,6 @@
                                   {% else %}
                                     {% assign frequency_unit = p.last %}
                                   {% endif %}
-                                {% elsif p.first == 'promo' %}
-                                  <small>Free Product added. Thanks for your support!</small>
-                                {% elsif p.first == 'sampler' %}
-                                  <small>Free Sampler added. We have a feeling that your gonna love it!</small>
                                 {% endif %}
                                 {% endfor %}
 
@@ -333,21 +333,20 @@
                 </div>
 
 
+                
+                
+
                 {% comment %}
                   FREE SAMPLER ADDED TO ORDERS
                 {% endcomment %}
 
-                {% if customer.email == 'jake.shaw@me.com' %}
-                  
-                {% endif %}
                 {% include 'mtnops_cart_insert_and_sampler' %}
+                
                 
 
                 {% if prop65_in_cart %}
                   {% include 'prop65-warning' %}                  
                 {% endif %}
-
-                {% comment %}{% include 'mtnops_conquer-hunger-tiers', widgetClass: 'cart-view' %}{% endcomment %}
 
                 <div class="cart-collaterals{%- if settings.cart_notes_enable %} gl_cart_note{%- endif -%}">
                   {%- if settings.cart_notes_enable -%}

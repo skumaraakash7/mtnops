@@ -206,9 +206,9 @@
       <div class="row">
          <div class="site-content {{class_gl}}" role="main">
 
-          {% comment %}<div class="product-banner">
+          <div class="product-banner">
             <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/AnniversarySale-ProductPageBanner.jpg?v=1626712300">
-          </div>{% endcomment %}
+          </div>
 
          {%- paginate collection.products by limit -%}
             {%- if settings.use_promo_banner_collection -%}{%- section 'promo_banner_collection' -%}{%- endif -%}

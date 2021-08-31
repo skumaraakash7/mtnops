@@ -1,3 +1,10 @@
-{{ 'gl_vendor.css' | asset_url | stylesheet_tag }}
-{{ 'main.min.css' | asset_url | stylesheet_tag }}
-
+{% include "gl_vendor-css" %}
+<link rel="stylesheet" data-href="{{ 'gl_vendor.css' | asset_url }}">
+{% if template contains "collection" %}
+    {% include "collection-main-css" %}
+{% elsif template contains "product" %}
+    {% include "product-main-css" %}
+{% else %}
+    {% include "main-css" %}
+{% endif %}
+<link rel="stylesheet" data-href="{{ 'main.min.css' | asset_url }}">

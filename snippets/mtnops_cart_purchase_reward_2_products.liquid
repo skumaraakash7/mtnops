@@ -7,20 +7,20 @@
 {% endcomment %}
 
 {% assign spendTotal = 0 %}
-{% assign triggerProductOneHandle = 'ignite' %}
-{% assign triggerProductTwoHandle = 'enduro' %}
+{% assign triggerProductOneHandle = 'slumber' %}
+{% assign triggerProductTwoHandle = 'slumber-trail-packs' %}
 {% comment %}{% assign triggerProductThreeHandle = 'slumber-trail-packs' %}{% endcomment %}
 {% assign triggerProductOne = all_products[triggerProductOneHandle] %}
 {% assign triggerProductTwo = all_products[triggerProductTwoHandle] %}
 {% comment %}{% assign triggerProductThree = all_products[triggerProductThreeHandle] %}{% endcomment %}
 
 
-{% assign freeProductOneHandle = 'neff-hat' %}
-{% assign freeProductTwoHandle = 'the-general-hat' %}
+{% assign freeProductOneHandle = 'apex-mug' %}
+{% assign freeProductTwoHandle = '' %}
 {% assign freeProductOne = all_products[freeProductOneHandle] %}
 {% assign freeProductTwo = all_products[freeProductTwoHandle] %}
 {% assign freeProductOneSwitch = true %}
-{% assign freeProductTwoSwitch = true %}
+{% assign freeProductTwoSwitch = false %}
 
 {% assign cartQualifies = false %}
 {% assign triggerProductOneInCart = false %}

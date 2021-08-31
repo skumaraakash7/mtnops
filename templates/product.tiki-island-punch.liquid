@@ -42,7 +42,13 @@
               <img class="product-featured" src="{{ v.image.src | img_url: '1000x1000' }}">
             </div>
             <div class="product-meta-wrap">
-              {% include 'mtnops_product_callout_svgs' %}
+              {% if v.id == 39463292370986 %}
+                <img class="product-benefits" src="https://cdn.shopify.com/s/files/1/2786/4584/files/ignite-pina-colada-callouts.svg?v=1590688818">
+              {% elsif v.id == 39463292403754 %}
+                <img class="product-benefits" src="https://cdn.shopify.com/s/files/1/2786/4584/files/yeti-callout.png?v=1585763250">
+              {% elsif v.id == 39463292436522 %}
+                <img class="product-benefits" src="https://cdn.shopify.com/s/files/1/2786/4584/files/enduro-pina-colada-callouts-v2.svg?v=1594071948">
+              {% endif %}
               <div>
                 <span class="product-price">{{v.price | money}}</span>
                 {% if v.available %}

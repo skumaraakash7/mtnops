@@ -2,17 +2,18 @@
 
 {% comment %}
   PURCHASE REWARDS
+
+  // BUY SLUMBER
+  // GET SLUMBER TRAIL
   
 {% endcomment %}
 
 {% assign spendTotal = 0 %}
-{% assign triggerProductHandle = 'mayan-mango' %}
-{% assign triggerProductTwoHandle = 'liberty-pop' %}
+{% assign triggerProductHandle = 'tiki-island-punch' %}
 
-{% assign freeProductHandle = 'ignite-energy-sampler' %}
+{% assign freeProductHandle = 'ignite-promo-sampler' %}
 
 {% assign triggerProduct = all_products[triggerProductHandle] %}
-{% assign triggerProductTwo = all_products[triggerProductTwoHandle] %}
 
 {% assign freeProduct = all_products[freeProductHandle] %}
 
@@ -33,11 +34,6 @@
     {% assign cartQualifies = true %}
   {% endif %}
 
-  {% if item.product_id == triggerProductTwo.id %}
-    {% assign triggerProductTwoInCart = true %}
-    {% assign cartQualifies = true %}
-  {% endif %}
-
   {% if item.product_id == freeProduct.id %}
     {% assign freeProductInCart = true %}
     {% assign freeProductQty = item.quantity %}
@@ -48,7 +44,7 @@
 
   {% unless item.properties == empty %}
     {% for property in item.properties %}
-      {% if property.first == "promo" %}
+      {% if property.first == "reward" %}
         {% assign addedFromCart = true %} 
       {% endif %}
     {% endfor %}
@@ -57,13 +53,12 @@
 {% endfor %}
 
 
-
 {% if cartQualifies and freeProduct != empty and freeProduct.available and freeProductInCart == false and addedFromCart == false %}
   
   <div class="spend-reward-wrap">
-    <h3><span>You Qualify for a </span><br>FREE {{freeProduct.title}}!</h3>
+    <h3><span>You Qualify for </span><br>FREE {{freeProduct.title}}!</h3>
       
-      {% comment %}<p>Thank you for supporting us. Select your free product below.</p>{% endcomment %}
+      <p>Thank you for supporting us. Select your free product below.</p>
       <ul class="rewards-list">
         {% if freeProduct.available %}
           {% if freeProduct.variants.size > 1 %}
@@ -120,7 +115,7 @@
               //$('.message').text();
             //}
             console.log("<p>" + request.responseJSON.description + "</p>");
-            alert('error with adding product to cart.');
+            alert('error on adding product to cart.');
           }
         });
       }

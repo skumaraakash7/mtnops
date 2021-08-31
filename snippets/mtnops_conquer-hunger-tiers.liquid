@@ -3,7 +3,7 @@
 
   <div class="conquer-hunger-widget {{widgetClass}}">
 
-    <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/ch-logo-square-white-icon-white.svg?v=1626726476">
+    <img class="lazy2" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-src="https://cdn.shopify.com/s/files/1/2786/4584/files/ch-logo-square-white-icon-white.svg?v=1626726476">
 
     {% if widgetClass == 'mini-cart-view' %}
 
@@ -50,7 +50,7 @@
 
       <div class="mealsWidget">
         Your order will donate <b><span></span> meals</b> to children in need!
-        <img class="ch-thankyou" src="https://cdn.shopify.com/s/files/1/2786/4584/files/thankyou.svg?v=1626375019">
+        <img class="ch-thankyou lazy2" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-src="https://cdn.shopify.com/s/files/1/2786/4584/files/thankyou.svg?v=1626375019">
       </div>
 
     {% endif %}
@@ -119,7 +119,7 @@
 
 
         $('.conquer-hunger-tiers li').eq(index).addClass('active-tier');
-        $('<img class="ch-thankyou" src="https://cdn.shopify.com/s/files/1/2786/4584/files/thankyou.svg?v=1626375019">').appendTo('.active-tier');
+        $('<img class="ch-thankyou lazy2" data-src="https://cdn.shopify.com/s/files/1/2786/4584/files/thankyou.svg?v=1626375019">').appendTo('.active-tier');
         
       });
 

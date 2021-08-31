@@ -1,19 +1,19 @@
 
 
 {% comment %}
-  SPEND OVER $20
+  SPEND OVER $75
 {% endcomment %}
 
 {% assign spendTotal = 0 %}
-{% assign productHandle = 'blaze' %}
-{% assign freeProduct2 = all_products[productHandle] %}
-{% assign cartQualifies2 = false %}
-{% assign freeProductInCart2 = false %}
+{% assign productHandle = 'travel-bag' %}
+{% assign freeProduct = all_products[productHandle] %}
+{% assign cartQualifies = false %}
+{% assign freeProductInCart = false %}
 {% assign otherProductsInCart = false %}
-{% assign addedFromCart2 = false %}
+{% assign addedFromCart = false %}
 
-{% if cart.total_price > 2000 %}
-  {% assign cartQualifies2 = true %}
+{% if cart.total_price > 7500 %}
+  {% assign cartQualifies = true %}
 {% endif %}
 
 {% comment %}
@@ -21,8 +21,8 @@
 {% endcomment %}
 {% for item in cart.items %}
 
-  {% if item.product_id == freeProduct2.id %}
-    {% assign freeProductInCart2 = true %}
+  {% if item.product_id == freeProduct.id %}
+    {% assign freeProductInCart = true %}
     {% assign freeProductQty = item.quantity %}
   {% else %}
     {% assign otherProductsInCart = true %}
@@ -31,7 +31,7 @@
   {% unless item.properties == empty %}
     {% for property in item.properties %}
       {% if property.first == "reward" %}
-        {% assign addedFromCart2 = true %} 
+        {% assign addedFromCart = true %} 
       {% endif %}
     {% endfor %}
   {% endunless %}
@@ -39,23 +39,23 @@
 {% endfor %}
 
 
-{% if freeProduct2 != empty and freeProduct2.available and cartQualifies2 and freeProductInCart2 == false and addedFromCart2 == false %}
+{% if freeProduct != empty and freeProduct.available and cartQualifies and freeProductInCart == false and addedFromCart == false %}
   
   <div class="spend-reward-wrap">
-    <h3><span>You Qualify for a</span><br>FREE {{freeProduct2.title}} for spending over $20!</h3>
+    <h3><span>You Qualify for a</span><br>FREE {{freeProduct.title}}!</h3>
       
-    {% if freeProduct2.variants.size > 1 %}
-      <p>Thank you for supporting us. Select your free {{freeProduct2.title}} below.</p>
+    {% if freeProduct.variants.size > 1 %}
+      <p>Thank you for supporting us. Select your free {{freeProduct.title}} below.</p>
       <ul class="rewards-list">
-        {% for var in freeProduct2.variants %}
+        {% for var in freeProduct.variants %}
           {% if var.available %}
             <li><a class="add-free-product-to-cart freeProduct-add-to-cart" data-product-id="{{var.id}}" href="#"><img class="promo-item-image" src="{{ var.featured_media | img_url: '250x' }}"><span>{{var.title}}</span></a></li>
           {% endif %}
         {% endfor %}
       </ul>
     {% else %}
-      <a class="add-free-product-to-cart freeProduct-add-to-cart" data-product-id="{{freeProduct2.variants[0].id}}" href="#">
-        <img class="promo-item-image" src="{{ freeProduct2.images[0].src | img_url: 'master' }}">
+      <a class="add-free-product-to-cart freeProduct-add-to-cart" data-product-id="{{freeProduct.variants[0].id}}" href="#">
+        <img class="promo-item-image" src="{{ freeProduct.images[0].src | img_url: 'master' }}">
         <span>ADD TO CART</span>
       </a>
     {% endif %}
@@ -64,7 +64,7 @@
   
   <script type="text/javascript">
 
-      console.log('reward: ','{{freeProduct2.available}}');
+      console.log('reward: ','{{freeProduct.available}}');
 
 
       //add item to cart
@@ -82,7 +82,7 @@
           data: data,
           dataType: 'json',
           success: function() { 
-            console.log('{{freeProduct2.title}} has been added to cart.');
+            console.log('{{freeProduct.title}} has been added to cart.');
 
 
             $('#promo-cart-popup img, #promo-cart-popup .add-promo-item-to-cart, #promo-cart-popup p, #promo-cart-popup .cart-upsell-tier, #promo-cart-popup .prize-clause, .no-thanks, .promo-product-add-to-cart-wrap').hide();
@@ -116,20 +116,20 @@
 
 {% endif %}
 
-{% comment %}{% if freeProduct != empty and freeProduct.available and cartQualifies == false %}
+{% if freeProduct != empty and freeProduct.available and cartQualifies == false %}
   <div class="cart-banner spend-reward-banner">
     <img src="https://cdn.shopify.com/s/files/1/2786/4584/files/6-11-21---FathersDayPromoLaunch-CartBanner.jpg?v=1623346289">
-    <img class="image-show-mobile" src="https://cdn.shopify.com/s/files/1/2786/4584/files/primal-banner-mobile.png?v=1604444815">
-    <img class="image-show-desktop" src="https://cdn.shopify.com/s/files/1/2786/4584/files/primal-banner-dt.png?v=1604444815">
+    {% comment %}<img class="image-show-mobile" src="https://cdn.shopify.com/s/files/1/2786/4584/files/primal-banner-mobile.png?v=1604444815">
+    <img class="image-show-desktop" src="https://cdn.shopify.com/s/files/1/2786/4584/files/primal-banner-dt.png?v=1604444815">{% endcomment %}
   </div>
-{% endif %}{% endcomment %}
+{% endif %}
 
 
-{% if freeProductInCart2 and cart.total_price < 2000 %}
+{% if freeProductInCart and cart.total_price < 7500 %}
   <script type="text/javascript">
     $.post('/cart/update.js', {
       updates: {
-        '{{freeProduct2.variants[0].id}}': 0
+        '{{freeProduct.variants[0].id}}': 0
       }
     });
     setTimeout(function(){

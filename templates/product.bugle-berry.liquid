@@ -45,7 +45,13 @@
                     <img class="product-featured" src="{{ v.image.src | img_url: 'master' }}">
                   </div>
                   <div class="product-meta-wrap">
-                    {% include 'mtnops_product_callout_svgs' %}
+                    {% if v.id == 31913185050666 %}
+                      <img class="product-benefits" src="https://cdn.shopify.com/s/files/1/2786/4584/files/yeti-callout.png?v=1585763250">
+                    {% elsif v.id == 31913185017898 or v.id == 31917722992682 %}
+                      <img class="product-benefits" src="https://cdn.shopify.com/s/files/1/2786/4584/files/ignite-callout.png?v=1585763250">
+                    {% elsif v.id == 31913185083434 %}
+                      <img class="product-benefits" src="https://cdn.shopify.com/s/files/1/2786/4584/files/enduro-callout.png?v=1585763249">
+                    {% endif %}
                     <div>
                       <span class="product-price">{{v.price | money}}</span>
                       {% if v.available %}

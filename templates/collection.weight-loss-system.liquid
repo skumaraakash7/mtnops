@@ -4,7 +4,6 @@
 <script src="https://kit.fontawesome.com/87fe852ab0.js" crossorigin="anonymous"></script>
 
 {% assign crusherId = 1933082918954 %}
-{% assign crusherAvailable = false %}
 {% assign booklet = all_products['weight-loss-booklet'] %}
 
 <div class="collection-page-wrapper">
@@ -137,7 +136,6 @@
 
 								  {% if product.id == crusherId and product.available %}
 									  {% assign crusherVarId = 14768306946090 %}
-									  {% assign crusherAvailable = true %}
 
 										<li class="base-product" data-variant-id="{{ crusherVarId }}">
 								  		<img src="{{ product.images[0] | img_url: '100x' }}">
@@ -147,8 +145,7 @@
 								     	</div>
 								     	<i class="fas fa-check-circle toggle-icon"></i>
 										</li>
-									{% else %}
-										{% assign allSystemsGo = false %}
+
 									{% endif %}
 
 									{% comment %}
@@ -235,7 +232,7 @@
 
 						{% else %}
 							<div class="out-of-stock-message">
-								<span>{% if crusherAvailable == false %}Crusher Bottle not available.{% else %}Insufficient Stock available.{% endif %} Check back soon!</span>
+								<span>Insufficient Stock available. Check back soon!</span>
 							</div>
 						{% endif %}
 						

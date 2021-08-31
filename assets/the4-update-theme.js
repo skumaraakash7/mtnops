@@ -1,6 +1,6 @@
 (function($) {
     window.teaUpdate = {};
-    // window.teaUpdate.settings_data_json_url = '//cdn.shopify.com/s/files/1/2786/4584/t/13/assets///%20settings_presets.json?39593';
+    // window.teaUpdate.settings_data_json_url = '//cdn.shopify.com/s/files/1/2786/4584/t/17/assets///%20settings_presets.json?39498';
     var $data = {};
 
     function BindEvent() {}
